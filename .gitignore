@@ -1,0 +1,30 @@
+# Laravel / Composer
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+/.env
+/.env.*
+/composer.phar
+/phpunit.xml
+/phpunit.xml.dist
+/.vscode
+/.idea
+.DS_Store
+
+# IDE and editor folders
+/.vscode/
+/.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+/storage/logs/*.log
+
+# Environment files
+.env.local
+.env.testing
