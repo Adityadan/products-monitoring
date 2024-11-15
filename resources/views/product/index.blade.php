@@ -19,11 +19,11 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-auto pe-0">
+                        {{-- <div class="col-auto pe-0">
                             <a class="text-600 px-1" href="../../../app/e-commerce/product/product-list.html"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Product List"><span
                                     class="fas fa-list-ul"></span></a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

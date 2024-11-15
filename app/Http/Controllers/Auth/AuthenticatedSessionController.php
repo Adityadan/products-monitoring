@@ -14,8 +14,11 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        if (Auth::check()) {
+            return redirect()->route('product.index');
+        }
         return view('auth.login');
     }
 
@@ -28,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('list-product'));
+        return redirect()->intended(route('product.index'));
     }
 
     /**

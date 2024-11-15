@@ -1,20 +1,25 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    // Jika sudah login, arahkan ke halaman 'list-product'
-    if (Auth::check()) {
-        return redirect()->route('product.index');
-    }
-    return view('auth.login');
-})->name('login');
+// Route::get('/', function () {
+//     // if (Auth::check()) {
+//     //     return redirect()->route('product.index');
+//     // }
+//     return view('auth.login');
+// })->name('login');
+// Route::get('/', function () {
+//     return redirect()->route('login');
+// });
+
+Route::get('/', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
 
 Route::middleware('auth')->group(function () {
-    // Route::get('/list-product', [ProductsController::class, 'index'])->name('list-product');
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
     });
