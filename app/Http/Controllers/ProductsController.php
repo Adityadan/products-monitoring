@@ -2,39 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductImport;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil query string untuk sorting dan filtering
-        $sort = $request->get('sort', 'best_match');  // Default sorting 'best_match'
-        $category = $request->get('category');
-
-        // Query builder untuk mengambil data produk dengan kondisi tertentu
-        $query = Product::query();
-
-        // Filtering berdasarkan kategori jika ada
-        if ($category) {
-            $query->where('category', $category);
-        }
-
-        // Sorting berdasarkan parameter yang diterima (contoh: price, newest)
-        if ($sort == 'price') {
-            $query->orderBy('price', 'asc');
-        } elseif ($sort == 'newest') {
-            $query->orderBy('created_at', 'desc');
-        } else {
-            $query->orderBy('name'); // Default sorting: name
-        }
-
-        // Ambil data produk dengan pagination (misalnya, 20 per halaman)
-        $products = Product::paginate(12);
-
-        // Kirim data produk ke view
-        return view('product.index', compact('products'));
+        return view('product.index');
     }
 
+    public function productList(Request $request)
+    {
+        $products = Product::all();
+        return view('product.list', compact('products'));
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        try {
+            Excel::import(new ProductImport, $request->file('file'));
+            // return back()->with('success', 'Data imported successfully.');
+            return redirect()->route('product.index')->with('success', 'Data imported successfully.');
+        } catch (\Exception $e) {
+            // return back()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->route('product.index')->withErrors(['error' => $e->getMessage()]);
+        }
+    }
 }

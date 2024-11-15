@@ -3,19 +3,22 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h6 class="mb-0">Showing {{ $products->count() }} of {{ $products->total() }} Products</h6>
+                    <h6 class="mb-0">Showing {{-- {{ $products->count() }} of {{ $products->total() }} --}} Products</h6>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
                         <div class="col-auto">
                             <form class="row gx-2">
-                                <div class="col-auto"><small>Sort by:</small></div>
+                                {{-- <div class="col-auto"><small>Sort by:</small></div> --}}
                                 <div class="col-auto">
-                                    <select class="form-select form-select-sm" aria-label="Bulk actions">
+                                    {{-- <select class="form-select form-select-sm" aria-label="Bulk actions">
                                         <option selected="">Best Match</option>
                                         <option value="Refund">Newest</option>
                                         <option value="Delete">Price</option>
-                                    </select>
+                                    </select> --}}
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#import-excel-modal">Import Data</button>
+
                                 </div>
                             </form>
                         </div>
@@ -31,63 +34,48 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="row">
-                @foreach ($products as $product)
-                    <div class="mb-4 col-md-6 col-lg-4">
-                        <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
-                            <div class="overflow-hidden">
-                                <div class="position-relative rounded-top overflow-hidden">
-                                    <a class="d-block" href="../../../app/e-commerce/product/product-details.html"><img
-                                            class="img-fluid rounded-top" src="../../../assets/img/products/2.jpg"
-                                            alt="" /></a>{{-- <span
-                                    class="badge rounded-pill bg-success position-absolute mt-2 me-2 z-2 top-0 end-0">New</span> --}}
-                                </div>
-                                <div class="p-3">
-                                    <h5 class="fs-9">
-                                        <a class="text-1100"
-                                            href="../../../app/e-commerce/product/product-details.html">{{ $product->name }}
-                                        </a>
-                                    </h5>
-                                    <p class="fs-10 mb-3">
-                                        <a class="text-500" href="#!">Computer &amp; Accessories</a>
-                                    </p>
-                                    <h5 class="fs-md-1 text-warning mb-0 d-flex align-items-center mb-3">
-                                        ${{ number_format($product->price, 2) }}
-                                    </h5>
-                                    <p class="fs-10 mb-1">
-                                        Shipping Cost: <strong>$50</strong>
-                                    </p>
-                                    <p class="fs-10 mb-1">
-                                        Stock: <strong class="text-success">Available</strong>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-between-center px-3">
-                                <div>
-                                    <span class="fa fa-star text-warning"></span><span
-                                        class="fa fa-star text-warning"></span><span
-                                        class="fa fa-star text-warning"></span><span
-                                        class="fa fa-star text-warning"></span><span
-                                        class="fa fa-star text-300"></span><span class="ms-1">(8)</span>
-                                </div>
-                                <div>
-                                    <a class="btn btn-sm btn-falcon-default me-2" href="#!"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wish List"><span
-                                            class="far fa-heart"></span></a><a class="btn btn-sm btn-falcon-default"
-                                        href="#!" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Add to Cart"><span class="fas fa-cart-plus"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+            <div class="row" id="product-list">
+
             </div>
         </div>
         <div class="card-footer bg-body-tertiary d-flex justify-content-center">
             <div>
-                {{ $products->appends(request()->query())->links('vendor.pagination.custom') }}
-
+                {{-- {{ $products->appends(request()->query())->links('vendor.pagination.custom') }} --}}
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+            <div class="modal-content position-relative">
+                <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
+                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
+                        <h4 class="mb-1" id="modalExampleDemoLabel">Add a new illustration </h4>
+                    </div>
+                    <div class="p-4 pb-0">
+                        <form action="{{ route('product.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="col-form-label" for="recipient-name">Data Excel</label>
+                                <input class="form-control" type="file" name="file" />
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit">Import Data</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    @push('scripts')
+        <script></script>
+    @endpush
 </x-templates.default>

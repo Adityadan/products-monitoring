@@ -9,6 +9,9 @@
 <!-- <script src="{{ asset('dist/vendors/list.js/list.min.js') }}"></script> -->
 <script src="{{ asset('dist/assets/js/theme.js') }}"></script>
 <script src="{{asset('dist/vendors/swiper/swiper-bundle.min.js')}}"></script>
+{{-- notyf --}}
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
 
 
 @stack('scripts')

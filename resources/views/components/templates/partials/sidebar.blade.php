@@ -89,7 +89,7 @@
                 </li>
 
                 <!-- Extend list li bisa langsung dari sini -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <!-- label-->
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">Modul</div>
@@ -112,7 +112,7 @@
                                 Manajemen Permission</span>
                         </div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
             <!-- <div class="settings mb-3">
                 <div class="card alert p-0 shadow-none" role="alert">

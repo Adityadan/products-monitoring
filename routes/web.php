@@ -22,6 +22,7 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])
 Route::middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
+        Route::post('/import', [ProductsController::class, 'import'])->name('import');
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
