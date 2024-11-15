@@ -81,7 +81,7 @@
                                 showConfirmButton: false
                             }).then(() => {
                                 // Redirect atau reload setelah notifikasi
-                                window.location.href = '/home';
+                                window.location.href = '{{ route('login') }}';
                             });
                         },
                         error: function(xhr) {

@@ -87,7 +87,7 @@
                                 showConfirmButton: false
                             }).then(() => {
                                 // Redirect setelah notifikasi
-                                window.location.href = '{{ route('list-product') }}'; // Ganti dengan halaman tujuan setelah login
+                                window.location.href = '{{ route('product.index') }}'; // Ganti dengan halaman tujuan setelah login
                             });
                         },
                         error: function(xhr) {

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // Jika sudah login, arahkan ke halaman 'list-product'
     if (Auth::check()) {
-        return redirect()->route('list-product');
+        return redirect()->route('product.index');
     }
     return view('auth.login');
 })->name('login');
