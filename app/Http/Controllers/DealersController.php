@@ -19,6 +19,7 @@ class DealersController extends Controller
 
     public function datatable(Request $request)
     {
+        // Check if the request is an AJAX request
         if ($request->ajax()) {
             $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group' ]);
 
