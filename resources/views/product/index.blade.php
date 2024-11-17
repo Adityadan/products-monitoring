@@ -54,28 +54,95 @@
                 </div>
                 <div class="modal-body p-0">
                     <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
-                        <h4 class="mb-1" id="modalExampleDemoLabel">Add a new illustration </h4>
+                        <h4 class="mb-1" id="modalExampleDemoLabel">Import Data Product</h4>
                     </div>
                     <div class="p-4 pb-0">
-                        <form action="{{ route('product.import') }}" method="POST" enctype="multipart/form-data">
+                        <!-- Form for file upload -->
+                        <form id="import-form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label class="col-form-label" for="recipient-name">Data Excel</label>
-                                <input class="form-control" type="file" name="file" />
+                                <input class="form-control" type="file" name="file" id="file-input" />
                             </div>
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Import Data</button>
+                    <button class="btn btn-primary" type="button" id="import-btn">Import Data</button>
                 </div>
-                </form>
             </div>
         </div>
     </div>
 
 
     @push('scripts')
-        <script></script>
+        <script>
+            $(document).ready(function() {
+                // Handle the import button click
+                $('#import-btn').click(function() {
+                    var formData = new FormData($('#import-form')[0]); // Get form data including file input
+
+                    // Make sure file is selected
+                    if ($('#file-input').val() === '') {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'No file selected',
+                            text: 'Please select a file to upload.'
+                        });
+                        return;
+                    }
+
+                    // Show SweetAlert loading spinner
+                    Swal.fire({
+                        title: 'Importing Data...',
+                        text: 'Please wait while we process your file.',
+                        allowOutsideClick: false, // Disable click outside to close
+                        showConfirmButton: false, // Hide confirm button
+                        didOpen: () => {
+                            Swal.showLoading(); // Show loading animation
+                        }
+                    });
+
+                    // Send AJAX request to import Excel
+                    $.ajax({
+                        url: "{{ route('product.import') }}", // Route to handle the import
+                        type: 'POST',
+                        data: formData,
+                        contentType: false, // Don't set content type
+                        processData: false, // Don't process data
+                        success: function(response) {
+                            // Success - Show SweetAlert notification
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Import Successful!',
+                                text: response.message ||
+                                    'Data has been imported successfully.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                // Optionally, reload the page or close the modal after success
+                                location.reload(); // To reload the page
+                                // $('#import-excel-modal').modal('hide'); // Hide modal (if using Bootstrap modal)
+                            });
+                        },
+                        error: function(xhr) {
+                            // Error - Show SweetAlert notification
+                            let errorMessage = xhr.responseJSON.message ||
+                                'There was an error during the import process.';
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Import Failed!',
+                                text: errorMessage,
+                            });
+                        },
+                        complete: function() {
+                            // Close the SweetAlert loading spinner after AJAX is done
+                            Swal.close();
+                        }
+                    });
+                });
+            });
+        </script>
     @endpush
 </x-templates.default>

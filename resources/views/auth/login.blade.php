@@ -62,7 +62,7 @@
         <script>
             $(document).ready(function() {
                 $('#loginBtn').click(function(e) {
-                    e.preventDefault();
+                    e.preventDefault(); // Mencegah form untuk dikirim
                     console.log('Login button clicked');
 
                     // Ambil data dari form
@@ -71,6 +71,13 @@
                         password: $("input[name=password]").val(),
                         _token: "{{ csrf_token() }}"
                     };
+
+                    // Menambahkan spinner ke tombol login dan menonaktifkan tombol
+                    var $loginBtn = $(this);
+                    $loginBtn.html(
+                        '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div> Logging in...'
+                        );
+                    $loginBtn.prop("disabled", true); // Menonaktifkan tombol selama proses login
 
                     // Kirim data dengan AJAX
                     $.ajax({
@@ -87,7 +94,8 @@
                                 showConfirmButton: false
                             }).then(() => {
                                 // Redirect setelah notifikasi
-                                window.location.href = '{{ route('product.index') }}'; // Ganti dengan halaman tujuan setelah login
+                                window.location.href =
+                                '{{ route('product.index') }}'; // Ganti dengan halaman tujuan setelah login
                             });
                         },
                         error: function(xhr) {
@@ -99,6 +107,10 @@
                                 title: 'Gagal!',
                                 text: errorMessage,
                             });
+
+                            // Mengembalikan tombol login dan teks setelah error
+                            $loginBtn.html('Log in');
+                            $loginBtn.prop("disabled", false);
                         }
                     });
                 });

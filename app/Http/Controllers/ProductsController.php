@@ -27,11 +27,16 @@ class ProductsController extends Controller
 
         try {
             Excel::import(new ProductImport, $request->file('file'));
-            // return back()->with('success', 'Data imported successfully.');
-            return redirect()->route('product.index')->with('success', 'Data imported successfully.');
+            return response()->json([
+                'success' => true,
+                'message' => 'Data imported successfully.',
+            ]);
         } catch (\Exception $e) {
-            // return back()->withErrors(['error' => $e->getMessage()]);
-            return redirect()->route('product.index')->withErrors(['error' => $e->getMessage()]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to import data.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 }
