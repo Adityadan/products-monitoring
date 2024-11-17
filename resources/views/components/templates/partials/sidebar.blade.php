@@ -82,8 +82,13 @@
                     <!-- Membuat div coming soon -->
                     <!-- <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fas-tools"></span></span><span class="nav-link-text ps-1">Dalam Perbaikan</span></div> -->
                     <a class="nav-link {{ request()->is('product') ? 'active' : ''}} " href="{{ route('product.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-calendar-check"></span></span><span class="nav-link-text ps-1">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-solid fa-boxes"></span></span><span class="nav-link-text ps-1">
                                 List Product</span>
+                        </div>
+                    </a>
+                    <a class="nav-link {{ request()->is('dealer') ? 'active' : ''}} " href="{{ route('dealer.index') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-solid fa-store"></span></span><span class="nav-link-text ps-1">
+                                List Dealer</span>
                         </div>
                     </a>
                 </li>

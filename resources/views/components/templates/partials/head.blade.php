@@ -2,6 +2,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title -->
     <title>{{ $title ?? 'Login' }} | {{ config('app.name') }}</title>
@@ -56,6 +57,9 @@
     <link href="{{ asset('dist/assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
     <link href="{{ asset('dist/assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
     <link href="{{ asset('dist/assets/css/custom-style.css') }}" rel="stylesheet" id="user-style-default">
+
+    {{-- DATATABLE --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
     <!-- Script untuk mengubah arah tampilan dari kanan ke kiri -->
     <script>
