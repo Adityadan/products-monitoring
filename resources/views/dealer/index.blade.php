@@ -110,6 +110,7 @@
                 $('#dealer-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    responsive: true,
                     ajax: "{{ route('dealer.datatable') }}",
                     columns: [{
                             data: 'DT_RowIndex',
