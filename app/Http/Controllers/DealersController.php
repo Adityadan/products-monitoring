@@ -20,7 +20,7 @@ class DealersController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group', 'created_at', 'updated_at']);
+            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group' ]);
 
             return DataTables::of($dealers)
                 ->addIndexColumn()
