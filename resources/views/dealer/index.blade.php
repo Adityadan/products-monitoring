@@ -224,6 +224,37 @@
                     $('#edit-dealer-form #group').val(data.group);
                 });
             });
+
+            $('#edit-dealer-form').on('submit', function(e) {
+                e.preventDefault(); // Mencegah form submit normal
+
+                var formData = $(this).serialize(); // Ambil semua data form
+                let url = `{{ route('dealer.update', ':id') }}`.replace(':id', $('#edit-dealer-id').val());
+
+                $.ajax({
+                    url: url,
+                    method: 'PUT',
+                    data: formData, // Data yang dikirimkan
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: response.message, // Menampilkan pesan sukses dari server
+                        }).then(() => {
+                            // Tutup modal dan reload halaman
+                            $('#edit-dealer-modal').modal('hide');
+                            location.reload(); // Jika Anda ingin reload halaman setelah update
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Terjadi kesalahan saat memperbarui data.',
+                        });
+                    }
+                });
+            });
         </script>
     @endpush
 </x-templates.default>

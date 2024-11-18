@@ -28,7 +28,7 @@
     </div>
 </div>
 <!-- Modal Tambah Dealer -->
-<div class="modal fade" id="add-dealer-modal" tabindex="-1" aria-hidden="true">
+{{-- <div class="modal fade" id="add-dealer-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form id="add-dealer-form">
@@ -74,7 +74,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Modal Edit Dealer -->
 <div class="modal fade" id="edit-dealer-modal" tabindex="-1" aria-hidden="true">

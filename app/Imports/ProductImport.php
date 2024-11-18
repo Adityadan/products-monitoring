@@ -10,7 +10,7 @@ class ProductImport implements ToModel, WithStartRow
 {
     public function startRow(): int
     {
-        return 2; // Mulai dari baris ke-3
+        return 13; // Mulai dari baris ke-3
     }
 
     /**
@@ -39,7 +39,7 @@ class ProductImport implements ToModel, WithStartRow
         }
 
         // Debugging untuk melihat nilai-nilai yang ada setelah filter
-        // dd($filteredRow[0], $filteredRow[1], $filteredRow[2]);
+        // dd($filteredRow[0], $filteredRow[1], $filteredRow[2],$filteredRow);
 
         $row = $filteredRow;
         return new Product([

@@ -138,7 +138,6 @@
                         },
                         complete: function() {
                             // Close the SweetAlert loading spinner after AJAX is done
-                            Swal.close();
                         }
                     });
                 });

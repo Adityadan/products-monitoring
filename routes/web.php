@@ -23,6 +23,7 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])
 Route::middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
+        Route::get('/list', [ProductsController::class, 'productList'])->name('list');
         Route::post('/import', [ProductsController::class, 'import'])->name('import');
     });
     Route::prefix('dealer')->name('dealer.')->group(function () {
