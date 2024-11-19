@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ProductsController extends Controller
 {
+    private $previewData = [];
     public function index(Request $request)
     {
         return view('product.index');
@@ -17,22 +18,17 @@ class ProductsController extends Controller
 
     public function productList(Request $request)
     {
-        // dd('masok');
         $products = Product::with('dealer')->get();
-        // $products = Dealer::with('products')->where('kode', '00762')->get();
-        // $products = Dealer::with(['products' => function ($query) {
-        //     $query->where('kode', '00762'); // Ganti 'your_value' dengan nilai yang Anda inginkan
-        // }])->get();
         return view('product.list', compact('products'));
     }
-    public function import(Request $request)
+    public function import(Request $request, ProductImport $import)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
         ]);
 
         try {
-            Excel::import(new ProductImport, $request->file('file'));
+            Excel::import($import, $request->file('file'));
             return response()->json([
                 'success' => true,
                 'message' => 'Data imported successfully.',
@@ -45,4 +41,24 @@ class ProductsController extends Controller
             ], 500);
         }
     }
+
+    public function uploadFile(Request $request, ProductImport $import)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        // Proses file untuk pratinjau
+        $import('priview');
+        Excel::import($import, $request->file('file'));
+
+        // Ambil data pratinjau dari import
+        $this->previewData = $import->getPreviewData();
+        // Tampilkan pratinjau dalam tabel
+        return response()->json([
+            'success' => true,
+            'data' => $this->previewData,
+        ]);
+    }
+
 }
