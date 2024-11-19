@@ -25,13 +25,13 @@
 
     <!-- Modal -->
     <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 1500px">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90%;">
             <div class="modal-content position-relative">
                 <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
                     <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-0">
+                <div class="modal-body p-0" style="overflow-y: auto;">
                     <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
                         <h4 class="mb-1" id="modalExampleDemoLabel">Import Data Product</h4>
                     </div>
@@ -48,7 +48,7 @@
                         <!-- Preview Table -->
                         <div id="preview-container" style="display: none;">
                             <h5 class="mt-4">Preview Data</h5>
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="max-height: 50vh; overflow-y: auto;">
                                 <table class="table table-striped" id="preview-table">
                                     <thead>
                                         <tr>
@@ -118,7 +118,7 @@
 
                     // Send AJAX request to upload file and get preview data
                     $.ajax({
-                        url: "{{ route('product.upload') }}", // Endpoint untuk preview
+                        url: "{{ route('product.preview') }}", // Endpoint untuk preview
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -185,13 +185,26 @@
                 $('#save-btn').click(function() {
                     var formData = new FormData($('#import-form')[0]);
 
+                    // Show loading screen
+                    Swal.fire({
+                        title: 'Saving...',
+                        text: 'Please wait while we save your data.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
                     $.ajax({
-                        url: "{{ route('product.save') }}", // Endpoint untuk menyimpan data
+                        url: "{{ route('product.import') }}", // Endpoint untuk menyimpan data
                         type: 'POST',
                         data: formData,
                         contentType: false, // Don't set content type
                         processData: false, // Don't process data
                         success: function(response) {
+                            // Close the loading screen
+                            Swal.close();
+
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Data Saved!',
@@ -204,6 +217,9 @@
                             });
                         },
                         error: function(xhr) {
+                            // Close the loading screen
+                            Swal.close();
+
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Save Failed!',

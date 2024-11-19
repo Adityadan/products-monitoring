@@ -21,14 +21,17 @@ class ProductsController extends Controller
         $products = Product::with('dealer')->get();
         return view('product.list', compact('products'));
     }
-    public function import(Request $request, ProductImport $import)
+    public function import(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
         ]);
 
         try {
+            // Buat instance ProductImport dengan tipe 'import'
+            $import = new ProductImport('import');
             Excel::import($import, $request->file('file'));
+
             return response()->json([
                 'success' => true,
                 'message' => 'Data imported successfully.',
@@ -42,23 +45,30 @@ class ProductsController extends Controller
         }
     }
 
-    public function uploadFile(Request $request, ProductImport $import)
+    public function preview(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:xlsx,csv',
+            'file' => 'required|mimes:xlsx,xls,csv',
         ]);
 
-        // Proses file untuk pratinjau
-        $import('priview');
-        Excel::import($import, $request->file('file'));
+        try {
+            // Buat instance ProductImport dengan tipe 'preview'
+            $import = new ProductImport('preview');
+            Excel::import($import, $request->file('file'));
 
-        // Ambil data pratinjau dari import
-        $this->previewData = $import->getPreviewData();
-        // Tampilkan pratinjau dalam tabel
-        return response()->json([
-            'success' => true,
-            'data' => $this->previewData,
-        ]);
+            // Ambil data pratinjau dari import
+            $previewData = $import->getPreviewData();
+
+            return response()->json([
+                'success' => true,
+                'data' => $previewData,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to upload file for preview.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-
 }

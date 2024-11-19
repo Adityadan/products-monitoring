@@ -25,8 +25,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::get('/list', [ProductsController::class, 'productList'])->name('list');
         // Route::post('/import', [ProductsController::class, 'import'])->name('import');
-        Route::post('/upload', [ProductsController::class, 'uploadFile'])->name('upload');
-        Route::post('/save', [ProductsController::class, 'saveData'])->name('save');
+        Route::post('/preview', [ProductsController::class, 'preview'])->name('preview');
+        Route::post('/import', [ProductsController::class, 'import'])->name('import');
     });
     Route::prefix('dealer')->name('dealer.')->group(function () {
         Route::get('/', [DealersController::class, 'index'])->name('index');
