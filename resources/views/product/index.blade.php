@@ -229,6 +229,14 @@
                         }
                     });
                 });
+
+                // Reset form and preview table when the modal is closed
+                $('#import-excel-modal').on('hidden.bs.modal', function() {
+                    $('#import-form')[0].reset();
+                    $('#preview-table tbody').empty();
+                    $('#preview-container').hide();
+                    $('#save-btn').hide();
+                });
             });
         </script>
     @endpush
