@@ -19,7 +19,17 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row" id="product-list"></div>
+            <div class="table table-responsive">
+                <table class="table table-bordered font-sans-serif" id="dealer-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Guard Name</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 

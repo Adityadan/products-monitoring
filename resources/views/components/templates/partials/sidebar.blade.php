@@ -94,7 +94,7 @@
                 </li>
 
                 <!-- Extend list li bisa langsung dari sini -->
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <!-- label-->
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">Modul</div>
@@ -102,22 +102,22 @@
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
                     </div>
-                    <a class="nav-link " href="" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-people-arrows"></span></span><span class="nav-link-text ps-1">
+                    <a class="nav-link {{ request()->is('user') ? 'active' : ''}}" href="{{-- {{ route('user.index') }} --}}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">
                                 Manajemen User</span>
                         </div>
                     </a>
-                    <a class="nav-link " href="" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-registered"></span></span><span class="nav-link-text ps-1">
+                    <a class="nav-link {{ request()->is('roles') ? 'active' : ''}}" href="{{ route('roles.index') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">
                                 Manajemen Role</span>
                         </div>
                     </a>
-                    <a class="nav-link " href="" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-unlock-alt"></span></span><span class="nav-link-text ps-1">
+                    <a class="nav-link {{ request()->is('permissions') ? 'active' : ''}}" href="{{ route('permissions.index') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-lock"></span></span><span class="nav-link-text ps-1">
                                 Manajemen Permission</span>
                         </div>
                     </a>
-                </li> --}}
+                </li>
             </ul>
             <!-- <div class="settings mb-3">
                 <div class="card alert p-0 shadow-none" role="alert">
