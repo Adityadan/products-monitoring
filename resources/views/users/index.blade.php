@@ -86,12 +86,13 @@
 
             // Open modal for Add User
             $('#add-user-button').on('click', function() {
-                console.log(table);
-
+                // Reset form modal
                 $('#users-modal .modal-title').text('Add User');
-                $('#users-form')[0].reset();
                 $('#edit-dealer-id').val('');
-                $('#password').prop('required', true); // Require password when adding
+                $('#name').val('');
+                $('#email').val('');
+                $('#username').val('');
+                $('#password').val('').parent().show(); // Show the password input and its label
                 $('#users-modal').modal('show');
             });
 
@@ -111,7 +112,7 @@
                     $('#name').val(data.name);
                     $('#email').val(data.email);
                     $('#username').val(data.username);
-                    $('#password').prop('required', false); // Optional untuk editing
+                    $('#password').parent().hide(); // Hide the password input and its label
                     $('#users-modal').modal('show');
                 }).fail(function(xhr) {
                     Swal.fire({

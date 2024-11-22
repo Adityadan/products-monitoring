@@ -1,10 +1,17 @@
 <x-templates.default>
     <div class="card mb-3">
-        <div class="bg-holder d-none d-lg-block bg-card" {{-- style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);" --}}></div>
-        <div class="card-body position-relative">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Roles</h3>
+        <div class="card-body">
+            <div class="row flex-between-center">
+                <div class="col-sm-auto mb-2 mb-sm-0">
+                    <h5 class="mb-0">List Roles</h5>
+                </div>
+                <div class="col-sm-auto">
+                    <div class="row gx-2 align-items-center">
+                        <div class="col-auto">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" id="add-user-button"
+                                data-bs-target="#users-modal">Add Roles</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

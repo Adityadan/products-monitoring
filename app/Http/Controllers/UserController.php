@@ -71,34 +71,34 @@ class UserController extends Controller
     }
 
     // Update the specified user in storage
-   public function update(Request $request, $id)
-   {
-       $user = User::find($id);
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
 
-       if (!$user) {
-           return response()->json(['message' => 'User not found'], 404);
-       }
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
-       $validator = Validator::make($request->all(), [
-           'name' => 'sometimes|required|string|max:255',
-           'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
-           'password' => 'sometimes|required|string|min:8',
-           'username' => 'sometimes|required|string',
-       ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|nullable|string|max:255',
+            'email' => 'sometimes|nullable|string|email|max:255|unique:users,email,' . $id,
+            // 'password' => 'sometimes|nullable|string|min:8',
+            'username' => 'sometimes|nullable|string|min:8',
+        ]);
 
-       if ($validator->fails()) {
-           return response()->json(['errors' => $validator->errors()], 422);
-       }
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
-       $updateFields = $request->only(['name', 'email', 'password', 'username']);
-       if (array_key_exists('password', $updateFields)) {
-           $updateFields['password'] = bcrypt($updateFields['password']);
-       }
+        $updateFields = $request->only(['name', 'email', /* 'password', */ 'username']);
+        // if (isset($updateFields['password'])) {
+        //     $updateFields['password'] = bcrypt($updateFields['password']);
+        // }
 
-       $user->update($updateFields);
+        $user->update($updateFields);
 
-       return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
-   }
+        return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
+    }
 
     // Remove the specified user from storage
     public function destroy($id)
