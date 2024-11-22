@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h6 class="mb-0">Showing {{-- {{ $products->count() }} of {{ $products->total() }} --}} Products</h6>
+                    <h5 class="mb-0">List Dealer</h5>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">

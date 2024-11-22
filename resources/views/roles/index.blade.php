@@ -1,15 +1,16 @@
 <x-templates.default>
-    <div class="card">
-        <div class="card-header">
-            <div class="row flex-between-center">
-                <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                    <h5 class="fs-9 mb-0 text-nowrap py-2 py-xl-0">Customers</h5>
-                </div>
-                <div class="col-8 col-sm-auto text-end ps-2">
-                    <button class="btn btn-primary me-1 mb-1" type="button">Primary</button>
-
+    <div class="card mb-3">
+        <div class="bg-holder d-none d-lg-block bg-card" {{-- style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);" --}}></div>
+        <div class="card-body position-relative">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Roles</h3>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
             <div class="card-body">
                 <div class="table table-responsive">
                     <table class="table table-bordered font-sans-serif" id="dealer-table">

@@ -25,21 +25,20 @@
                             class="font-sans-serif text-primary fw-bolder fs-4 d-inline-block">NDASMU PIYE</span></a>
                     <div class="card">
                         <div class="card-body p-4 p-sm-5">
-                            <div class="row flex-between-center mb-2">
+                            <div class="row flex-center mb-3">
                                 <div class="col-auto">
                                     <h5>Log in</h5>
                                 </div>
-                                <div class="col-auto fs-10 text-600"><span class="mb-0 undefined">or</span> <span><a
-                                            href="{{ route('register') }}">Create an
-                                            account</a></span></div>
                             </div>
                             <form id="loginForm">
                                 @csrf
                                 <div class="mb-3">
-                                    <input class="form-control" type="email" name="email"
-                                        placeholder="Email address" required />
+                                    <label class="form-label" for="username">Username</label>
+                                    <input class="form-control" type="username" name="username"
+                                        placeholder="username" required />
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label" for="password">Password</label>
                                     <input class="form-control" type="password" name="password" placeholder="Password"
                                         required />
                                 </div>
@@ -67,7 +66,7 @@
 
                     // Ambil data dari form
                     let formData = {
-                        email: $("input[name=email]").val(),
+                        username: $("input[name=username]").val(),
                         password: $("input[name=password]").val(),
                         _token: "{{ csrf_token() }}"
                     };
@@ -101,7 +100,7 @@
                         error: function(xhr) {
                             // Jika gagal, tampilkan notifikasi error
                             let errorMessage = xhr.responseJSON.message ||
-                                "Login gagal. Periksa kembali email atau password Anda!";
+                                "Login gagal. Periksa kembali username atau password Anda!";
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal!',

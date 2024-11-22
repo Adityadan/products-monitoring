@@ -102,7 +102,7 @@
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
                     </div>
-                    <a class="nav-link {{ request()->is('user') ? 'active' : ''}}" href="{{-- {{ route('user.index') }} --}}" role="button" aria-expanded="false">
+                    <a class="nav-link {{ request()->is('users') ? 'active' : ''}}" href="{{ route('users.index') }}" role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">
                                 Manajemen User</span>
                         </div>

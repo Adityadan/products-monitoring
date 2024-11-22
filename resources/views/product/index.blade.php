@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h6 class="mb-0">Showing Products</h6>
+                    <h5 class="mb-0">List Product</h5>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
@@ -20,15 +20,6 @@
     <div class="card">
         <div class="card-body">
             <div class="table table-responsive">
-                <table class="table table-bordered font-sans-serif" id="dealer-table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>Guard Name</th>
-                        </tr>
-                    </thead>
-                </table>
             </div>
         </div>
     </div>
