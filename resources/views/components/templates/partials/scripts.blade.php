@@ -5,12 +5,14 @@
 <script src="{{ asset('dist/vendors/echarts/echarts.min.js') }}"></script>
 <script src="{{ asset('dist/vendors/fontawesome/all.min.js') }}"></script>
 <script src="{{ asset('dist/vendors/lodash/lodash.min.js') }}"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+{{-- <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script> --}}
 <!-- <script src="{{ asset('dist/vendors/list.js/list.min.js') }}"></script> -->
 <script src="{{ asset('dist/assets/js/theme.js') }}"></script>
 <script src="{{asset('dist/vendors/swiper/swiper-bundle.min.js')}}"></script>
 {{-- notyf --}}
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+{{-- SELECT 2 FALCON TEMPLATE --}}
+<script src="{{ asset('dist/vendors/choices/choices.min.js') }}"></script>
 
 
 

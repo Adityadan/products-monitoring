@@ -11,12 +11,14 @@
     <div class="d-flex align-items-center">
         <div class="toggle-icon-wrapper">
 
-            <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+            <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip"
+                data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span
+                        class="toggle-line"></span></span></button>
 
         </div>
-         <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.html">
             <div class="d-flex align-items-center py-3">{{-- <img class="me-2" src="{{ asset('dist/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /> --}}<span class="font-sans-serif">NDASMU</span>
-        </div>
+            </div>
         </a>
         {{-- <div class="navbar-brand">
             <div class="d-flex align-items-center py-3 fs-1 text-danger text-uppercase">
@@ -81,13 +83,17 @@
                     </div> --}}
                     <!-- Membuat div coming soon -->
                     <!-- <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fas-tools"></span></span><span class="nav-link-text ps-1">Dalam Perbaikan</span></div> -->
-                    <a class="nav-link {{ request()->is('product') ? 'active' : ''}} " href="{{ route('product.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-solid fa-boxes"></span></span><span class="nav-link-text ps-1">
+                    <a class="nav-link {{ request()->is('product') ? 'active' : '' }} "
+                        href="{{ route('product.index') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-solid fa-boxes"></span></span><span class="nav-link-text ps-1">
                                 List Product</span>
                         </div>
                     </a>
-                    <a class="nav-link {{ request()->is('dealer') ? 'active' : ''}} " href="{{ route('dealer.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-solid fa-store"></span></span><span class="nav-link-text ps-1">
+                    <a class="nav-link {{ request()->is('dealer') ? 'active' : '' }} "
+                        href="{{ route('dealer.index') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-solid fa-store"></span></span><span class="nav-link-text ps-1">
                                 List Dealer</span>
                         </div>
                     </a>
@@ -102,21 +108,46 @@
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
                     </div>
-                    <a class="nav-link {{ request()->is('users') ? 'active' : ''}}" href="{{ route('users.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">
-                                Manajemen User</span>
+                    <a class="nav-link {{ request()->is('users') ? 'active' : '' }}" href="{{ route('users.index') }}"
+                        role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-users"></span></span><span class="nav-link-text ps-1">
+                                Management User</span>
                         </div>
                     </a>
-                    <a class="nav-link {{ request()->is('roles') ? 'active' : ''}}" href="{{ route('roles.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">
-                                Manajemen Role</span>
+                    {{-- <a class="nav-link {{ request()->is('roles') ? 'active' : '' }}" href="{{ route('roles.index') }}"
+                        role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">
+                                Management Role</span>
                         </div>
+                    </a> --}}
+                    </a><a class="nav-link dropdown-indicator" href="#email" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="email">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-user-cog"></span></span><span
+                                class="nav-link-text ps-1">Roles</span></div>
                     </a>
-                    <a class="nav-link {{ request()->is('permissions') ? 'active' : ''}}" href="{{ route('permissions.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-lock"></span></span><span class="nav-link-text ps-1">
-                                Manajemen Permission</span>
-                        </div>
-                    </a>
+                    <ul class="nav collapse" id="email">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Master
+                                        Roles</span>
+                                </div>
+                            </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('roles.assign') }}">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Assign Roles
+                                        to User
+                                        detail</span></div>
+                            </a></li>
+                    </ul>
+                </li>
+                <a class="nav-link {{ request()->is('permissions') ? 'active' : '' }}"
+                    href="{{ route('permissions.index') }}" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                class="fas fa-lock"></span></span><span class="nav-link-text ps-1">
+                            Management Permission</span>
+                    </div>
+                </a>
                 </li>
             </ul>
             <!-- <div class="settings mb-3">

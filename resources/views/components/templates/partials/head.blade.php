@@ -8,7 +8,8 @@
     <title>{{ $title ?? 'Login' }} | {{ config('app.name') }}</title>
 
     <!-- Jquery CDN -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
     <script src="{{ asset('dist/assets/js/jquery-3.6.1.min.js') }}"></script>
 
     <script>
@@ -30,10 +31,12 @@
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('dist/assets/img/icons/logo-sby.svg') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('dist/assets/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('dist/assets/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dist/assets/img/favicons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('dist/assets/img/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('dist/assets/img/favicons/favicon-16x16.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/img/favicons/favicon.ico') }}">
-    <link rel="manifest" href="{{ asset('dist/assets/img/favicons/manifest.json') }}">
+    {{-- <link rel="manifest" href="{{ asset('dist/assets/img/favicons/manifest.json') }}"> --}}
     <meta name="msapplication-TileImage" content="{{ asset('dist/assets/img/icons/logo-sby.svg') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('dist/assets/js/config.js') }}"></script>
@@ -45,12 +48,15 @@
     {{-- notyf --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <!-- Or for RTL support -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 
     <!-- Load CSS -->
     <!-- IF current routes is survei.* -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap"
+        rel="stylesheet">
     <link href="{{ asset('dist/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/assets/css/theme-rtl.min.css') }}" rel="stylesheet" id="style-rtl">
     <link href="{{ asset('dist/assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
@@ -60,6 +66,9 @@
 
     {{-- DATATABLE --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    {{-- SELECT 2 FALCON TEMPLATE --}}
+    <link href="{{ asset('dist/vendors/choices/choices.min.css') }}" rel="stylesheet" />
 
     <!-- Script untuk mengubah arah tampilan dari kanan ke kiri -->
     <script>

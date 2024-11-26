@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Yajra\DataTables\Facades\DataTables;
 
 class PermissionController extends Controller
 {
@@ -13,20 +14,39 @@ class PermissionController extends Controller
         return view('permissions.index');
     }
 
+    public function datatable(Request $request)
+    {
+        if ($request->ajax()) {
+            $dealers = Permission::select(['id', 'name', 'guard_name']);
+
+            return DataTables::of($dealers)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($row) {
+                    $editBtn = '<button class="btn btn-sm btn-primary edit-dealer" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-dealer-modal">Edit</button>';
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-dealer" data-id="' . $row->id . '">Delete</button>';
+                    return $editBtn . ' ' . $deleteBtn;
+                })
+                ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
+                ->make(true);
+        }
+    }
+
     public function store(Request $request)
     {
         $request->validate(['name' => 'required|unique:permissions,name']);
-        Permission::create(['name' => $request->name]);
+        $permission = Permission::create(['name' => $request->name]);
 
-        return redirect()->back()->with('success', 'Permission berhasil dibuat!');
+        return response()->json(['message' => 'Permission successfully created!', 'permission' => $permission], 201);
     }
+
 
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
 
-        return view('permissions.edit', compact('permission'));
+        return response()->json(['permission' => $permission], 200);
     }
+
 
     public function update(Request $request, $id)
     {
@@ -34,8 +54,9 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->update(['name' => $request->name]);
 
-        return redirect()->route('permissions.index')->with('success', 'Permission berhasil diupdate!');
+        return response()->json(['message' => 'Permission successfully updated!', 'permission' => $permission], 200);
     }
+
 
     public function destroy($id)
     {

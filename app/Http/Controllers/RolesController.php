@@ -17,34 +17,37 @@ class RolesController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $dealers = Role::select(['id', 'name', 'guard_name' ]);
+            $roles = Role::select(['id', 'name', 'guard_name']);
 
-            return DataTables::of($dealers)
-                ->addIndexColumn()
-                ->addColumn('actions', function ($row) {
-                    $editBtn = '<button class="btn btn-sm btn-primary edit-dealer" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-dealer-modal">Edit</button>';
-                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-dealer" data-id="' . $row->id . '">Delete</button>';
+            return DataTables::of($roles)
+                ->addIndexColumn() // Automatically add row numbering
+                ->addColumn('actions', function ($role) {
+                    $editBtn = '<button class="btn btn-sm btn-primary edit-roles" data-id="' . $role->id . '" data-bs-toggle="modal" data-bs-target="#role-modal">Edit</button>';
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-roles" data-id="' . $role->id . '">Delete</button>';
                     return $editBtn . ' ' . $deleteBtn;
                 })
-                ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
+                ->rawColumns(['actions']) // Prevent escaping of action buttons' HTML
                 ->make(true);
         }
     }
 
+
     public function store(Request $request)
     {
         $request->validate(['name' => 'required|unique:roles,name']);
-        Role::create(['name' => $request->name]);
+        $role = Role::create(['name' => $request->name]);
 
-        return redirect()->back()->with('success', 'Role berhasil dibuat!');
+        return response()->json(['message' => 'Role successfully created!', 'role' => $role], 201);
     }
+
 
     public function edit($id)
     {
         $role = Role::findOrFail($id);
 
-        return view('roles.edit', compact('role'));
+        return response()->json(['role' => $role], 200);
     }
+
 
     public function update(Request $request, $id)
     {
@@ -52,16 +55,18 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update(['name' => $request->name]);
 
-        return redirect()->route('roles.index')->with('success', 'Role berhasil diupdate!');
+        return response()->json(['message' => 'Role successfully updated!', 'role' => $role], 200);
     }
+
 
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('roles.index')->with('success', 'Role berhasil dihapus!');
+        return response()->json(['message' => 'Role successfully deleted!'], 200);
     }
+
 
     public function assignRoleToUser(Request $request, User $user)
     {
