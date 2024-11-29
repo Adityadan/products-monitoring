@@ -27,9 +27,9 @@ class DealerProductsController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {
-                    $editBtn = '<button class="btn btn-sm btn-primary edit-product" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-product-modal">Edit</button>';
+                    // $editBtn = '<button class="btn btn-sm btn-primary edit-product" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-product-modal">Edit</button>';
                     $deleteBtn = '<button class="btn btn-sm btn-danger delete-product" data-id="' . $row->id . '">Delete</button>';
-                    return $editBtn . ' ' . $deleteBtn;
+                    return /* $editBtn . ' ' . */ $deleteBtn;
                 })
                 ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
                 ->make(true);
