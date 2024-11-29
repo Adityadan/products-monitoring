@@ -19,10 +19,10 @@
             </script>
             <div class="row flex-center min-vh-100 py-6">
                 <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4"><a class="d-flex flex-center mb-4"
-                        href="../../../index.html">{{-- <img class="me-2"
+                        href="{{ url('/') }}">{{-- <img class="me-2"
                             src="../../../assets/img/icons/spot-illustrations/falcon.png" alt=""
                             width="58" /> --}}<span
-                            class="font-sans-serif text-primary fw-bolder fs-4 d-inline-block">NDASMU PIYE</span></a>
+                            class="font-sans-serif text-primary fw-bolder fs-4 d-inline-block">{{ env('APP_NAME') }}</span></a>
                     <div class="card">
                         <div class="card-body p-4 p-sm-5">
                             <div class="row flex-center mb-3">

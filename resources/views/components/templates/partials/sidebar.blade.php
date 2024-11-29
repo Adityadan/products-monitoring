@@ -16,8 +16,8 @@
                         class="toggle-line"></span></span></button>
 
         </div>
-        <a class="navbar-brand" href="index.html">
-            <div class="d-flex align-items-center py-3">{{-- <img class="me-2" src="{{ asset('dist/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /> --}}<span class="font-sans-serif">NDASMU</span>
+        <a class="navbar-brand" href="{{ route('product.index') }}">
+            <div class="d-flex align-items-center py-3">{{-- <img class="me-2" src="{{ asset('dist/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /> --}}<span class="font-sans-serif">{{ env('APP_NAME') }}</span>
             </div>
         </a>
         {{-- <div class="navbar-brand">
