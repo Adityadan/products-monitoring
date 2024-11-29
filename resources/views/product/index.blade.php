@@ -3,14 +3,27 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h5 class="mb-0">List Product</h5>
+                    <h6 class="mb-0">Showing 1-24 of 205 Products</h6>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
                         <div class="col-auto">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                data-bs-target="#import-excel-modal">Import Data</button>
+                            <form class="row gx-2">
+                                <div class="col-auto"><small>Sort by:</small></div>
+                                <div class="col-auto">
+                                    <select class="form-select form-select-sm" aria-label="Bulk actions">
+                                        <option selected="">Best Match</option>
+                                        <option value="Refund">Newest</option>
+                                        <option value="Delete">Price</option>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
+                        {{-- <div class="col-auto pe-0">
+                            <a class="text-600 px-1" href="../../../app/e-commerce/product/product-list.html"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Product List"><span
+                                    class="fas fa-list-ul"></span></a>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -19,225 +32,181 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="table table-responsive">
+            <div class="row" id="product-container">
+                <!-- Produk akan dirender di sini oleh jQuery -->
             </div>
         </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90%;">
-            <div class="modal-content position-relative">
-                <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
-                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0" style="overflow-y: auto;">
-                    <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
-                        <h4 class="mb-1" id="modalExampleDemoLabel">Import Data Product</h4>
-                    </div>
-                    <div class="p-4">
-                        <!-- Form for file upload -->
-                        <form id="import-form" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label class="col-form-label" for="file-input">Data Excel</label>
-                                <input class="form-control" type="file" name="file" id="file-input" />
-                            </div>
-                        </form>
-
-                        <!-- Preview Table -->
-                        <div id="preview-container" style="display: none;">
-                            <h5 class="mt-4">Preview Data</h5>
-                            <div class="table-responsive" style="max-height: 50vh; overflow-y: auto;">
-                                <table class="table table-striped" id="preview-table">
-                                    <thead>
-                                        <tr>
-                                            <td>no</td>
-                                            <td>kode dealer</td>
-                                            <td>kode ba</td>
-                                            <td>customer master sap</td>
-                                            <td>group material</td>
-                                            <td>group tobpm</td>
-                                            <td>no part</td>
-                                            <td>nama part</td>
-                                            <td>rank part</td>
-                                            <td>discontinue</td>
-                                            <td>kode gudang</td>
-                                            <td>nama gudang</td>
-                                            <td>kode lokasi</td>
-                                            <td>int</td>
-                                            <td>oh</td>
-                                            <td>rsv</td>
-                                            <td>blk</td>
-                                            <td>wip</td>
-                                            <td>bok</td>
-                                            <td>total exc int</td>
-                                            <td>stock days month</td>
-                                            <td>avg demand qty</td>
-                                            <td>avg demand amt</td>
-                                            <td>avg sales monthly qty</td>
-                                            <td>avg sales monthly amt</td>
-                                            <td>standard price moving avg price</td>
-                                            <td>invt amt exc int</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-success" type="button" id="save-btn" style="display: none;">Save
-                        Data</button>
-                </div>
-            </div>
+        <div class="card-footer bg-body-tertiary d-flex justify-content-center">
+            {{-- <div>
+                <button class="btn btn-falcon-default btn-sm me-2" type="button" disabled="disabled"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Prev">
+                    <span class="fas fa-chevron-left"></span></button><a
+                    class="btn btn-sm btn-falcon-default text-primary me-2" href="#!">1</a><a
+                    class="btn btn-sm btn-falcon-default me-2" href="#!">2</a><a
+                    class="btn btn-sm btn-falcon-default me-2" href="#!">
+                    <span class="fas fa-ellipsis-h"></span></a><a class="btn btn-sm btn-falcon-default me-2"
+                    href="#!">35</a><button class="btn btn-falcon-default btn-sm" type="button"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Next">
+                    <span class="fas fa-chevron-right"> </span>
+                </button>
+            </div> --}}
+            <nav>
+                <ul class="pagination justify-content-center" id="pagination">
+                    <!-- Kontrol pagination akan dirender di sini -->
+                </ul>
+            </nav>
         </div>
     </div>
 
     @push('scripts')
         <script>
             $(document).ready(function() {
-                // Handle file upload and preview
-                $('#file-input').change(function() {
-                    var formData = new FormData($('#import-form')[0]);
+                // Format angka ke Rupiah
+                function formatRupiah(angka) {
+                    return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                }
 
-                    // Clear previous preview data
-                    $('#preview-table tbody').empty();
-
-                    // Show loading screen
-                    Swal.fire({
-                        title: 'Loading...',
-                        text: 'Please wait while we process your file.',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-
-                    // Send AJAX request to upload file and get preview data
-                    $.ajax({
-                        url: "{{ route('product.preview') }}", // Endpoint untuk preview
-                        type: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
-                            // Close the loading screen
-                            Swal.close();
-
-                            // Show preview container
-                            $('#preview-container').show();
-                            $('#save-btn').show();
-
-                            // Populate table with preview data
-                            var rows = response.data;
-                            $.each(rows, function(index, row) {
-                                $('#preview-table tbody').append(`
-                                    <tr>
-                                        <td>${index + 1}</td>
-                                        <td>${row.kode_dealer}</td>
-                                        <td>${row.kode_ba}</td>
-                                        <td>${row.customer_master_sap}</td>
-                                        <td>${row.group_material}</td>
-                                        <td>${row.group_tobpm}</td>
-                                        <td>${row.no_part}</td>
-                                        <td>${row.nama_part}</td>
-                                        <td>${row.rank_part}</td>
-                                        <td>${row.discontinue}</td>
-                                        <td>${row.kode_gudang}</td>
-                                        <td>${row.nama_gudang}</td>
-                                        <td>${row.kode_lokasi}</td>
-                                        <td>${row.int}</td>
-                                        <td>${row.oh}</td>
-                                        <td>${row.rsv}</td>
-                                        <td>${row.blk}</td>
-                                        <td>${row.wip}</td>
-                                        <td>${row.bok}</td>
-                                        <td>${row.total_exc_int}</td>
-                                        <td>${row.stock_days_month}</td>
-                                        <td>${row.avg_demand_qty}</td>
-                                        <td>${row.avg_demand_amt}</td>
-                                        <td>${row.avg_sales_monthly_qty}</td>
-                                        <td>${row.avg_sales_monthly_amt}</td>
-                                        <td>${row.standard_price_moving_avg_price}</td>
-                                        <td>${row.invt_amt_exc_int}</td>
-                                    </tr>
-                                `);
-                            });
-                        },
-                        error: function(xhr) {
-                            // Close the loading screen
-                            Swal.close();
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Preview Failed!',
-                                text: xhr.responseJSON.message ||
-                                    'An error occurred while processing the file.',
-                            });
-                        }
-                    });
-                });
-
-                // Handle save data
-                $('#save-btn').click(function() {
-                    var formData = new FormData($('#import-form')[0]);
-
-                    // Show loading screen
-                    Swal.fire({
-                        title: 'Saving...',
-                        text: 'Please wait while we save your data.',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
+                // Fungsi untuk memuat produk dengan paginasi yang lebih baik
+                function loadProducts(page = 1, itemsPerPage = 9) {
+                    let url = '{{ route('product.list') }}';
 
                     $.ajax({
-                        url: "{{ route('product.import') }}", // Endpoint untuk menyimpan data
-                        type: 'POST',
-                        data: formData,
-                        contentType: false, // Don't set content type
-                        processData: false, // Don't process data
+                        url: `${url}?page=${page}&per_page=${itemsPerPage}`,
+                        method: 'GET',
                         success: function(response) {
-                            // Close the loading screen
-                            Swal.close();
+                            if (response.success) {
+                                let products = response.data;
+                                let productContainer = $('#product-container');
+                                const paginationContainer = $('#pagination');
 
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Data Saved!',
-                                text: response.message ||
-                                    'Your data has been successfully saved.',
-                                timer: 2000,
-                                showConfirmButton: false
-                            }).then(() => {
-                                location.reload();
-                            });
+                                // Kosongkan kontainer
+                                productContainer.empty();
+                                paginationContainer.empty();
+
+                                // Render produk
+                                products.forEach(function(product) {
+                                    let productHtml = `
+                        <div class="mb-4 col-md-6 col-lg-4">
+                            <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
+                                <div class="overflow-hidden">
+                                    <div class="position-relative rounded-top overflow-hidden">
+                                        <a class="d-block" href="#">
+                                            <img class="img-fluid rounded-top" src="${product.image || '{{ asset('no-image.jpg') }}'}" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="p-3">
+                                        <h5 class="fs-9">
+                                            <a class="text-1100" href="#">${product.nama_part}</a>
+                                        </h5>
+                                        <p class="fs-10 mb-3">
+                                            <a class="text-500" href="#!">${product.group_tobpm || 'Unknown Category'}</a>
+                                        </p>
+                                        <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-3">
+                                            ${formatRupiah(product.standard_price_moving_avg_price)}
+                                        </h5>
+                                        <p class="fs-10 mb-1">
+                                            Dealers: <strong>${product.dealer.ahass || 'Unknown Dealers'}</strong>
+                                        </p>
+                                        <p class="fs-10 mb-1">
+                                            Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">${product.oh > 0 ? product.oh : 'Out of Stock'}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-between-center px-3">
+                                    <div>
+                                        <a class="btn btn-sm btn-falcon-default me-2" href="#!" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Add to Wish List"><span class="far fa-heart"></span></a>
+                                        <a class="btn btn-sm btn-falcon-default" href="#!" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Add to Cart"><span class="fas fa-cart-plus"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                                    productContainer.append(productHtml);
+                                });
+
+                                // Render kontrol paginasi dengan navigasi yang lebih baik
+                                renderPagination(response.current_page, response.last_page);
+                            }
                         },
-                        error: function(xhr) {
-                            // Close the loading screen
-                            Swal.close();
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Save Failed!',
-                                text: xhr.responseJSON.message ||
-                                    'An error occurred while saving the data.',
-                            });
+                        error: function(xhr, status, error) {
+                            console.error('Error fetching products:', error);
+                            $('#product-container').html(
+                                '<div class="alert alert-danger">Gagal memuat produk. Silakan coba lagi.</div>'
+                                );
                         }
                     });
-                });
+                }
 
-                // Reset form and preview table when the modal is closed
-                $('#import-excel-modal').on('hidden.bs.modal', function() {
-                    $('#import-form')[0].reset();
-                    $('#preview-table tbody').empty();
-                    $('#preview-container').hide();
-                    $('#save-btn').hide();
-                });
+                // Fungsi untuk merender kontrol paginasi dengan navigasi yang lebih canggih
+                function renderPagination(currentPage, totalPages) {
+                    const paginationContainer = $('#pagination');
+                    paginationContainer.empty();
+
+                    // Tombol Previous
+                    if (currentPage > 1) {
+                        paginationContainer.append(`
+                <li class="page-item">
+                    <a class="page-link" href="#" data-page="${currentPage - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            `);
+                    }
+
+                    // Logika untuk menampilkan nomor halaman secara cerdas
+                    const range = 2; // Jumlah halaman di sekitar halaman saat ini
+                    let start = Math.max(1, currentPage - range);
+                    let end = Math.min(totalPages, currentPage + range);
+
+                    // Tampilkan titik-titik jika ada halaman yang terlewat
+                    if (start > 1) {
+                        paginationContainer.append(`
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            `);
+                    }
+
+                    // Render nomor halaman
+                    for (let i = start; i <= end; i++) {
+                        const activeClass = i === currentPage ? 'active' : '';
+                        paginationContainer.append(`
+                <li class="page-item ${activeClass}">
+                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                </li>
+            `);
+                    }
+
+                    // Tampilkan titik-titik jika ada halaman yang terlewat di akhir
+                    if (end < totalPages) {
+                        paginationContainer.append(`
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            `);
+                    }
+
+                    // Tombol Next
+                    if (currentPage < totalPages) {
+                        paginationContainer.append(`
+                <li class="page-item">
+                    <a class="page-link" href="#" data-page="${currentPage + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            `);
+                    }
+
+                    // Tambahkan event listener pada tombol pagination
+                    $('.page-link').click(function(e) {
+                        e.preventDefault();
+                        const selectedPage = $(this).data('page');
+                        if (selectedPage && !$(this).parent().hasClass('disabled')) {
+                            loadProducts(selectedPage);
+                        }
+                    });
+                }
+
+                // Inisialisasi pemuatan produk
+                loadProducts();
             });
         </script>
     @endpush

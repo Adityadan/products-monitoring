@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductsController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\RoleAssignmentController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
+use App\Models\Dealer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::get('/list', [ProductsController::class, 'productList'])->name('list');
-        // Route::post('/import', [ProductsController::class, 'import'])->name('import');
-        Route::post('/preview', [ProductsController::class, 'preview'])->name('preview');
-        Route::post('/import', [ProductsController::class, 'import'])->name('import');
+        Route::get('/datatable', [ProductsController::class, 'datatable'])->name('datatable');
+    });
+    Route::prefix('dealer-product')->name('dealer-product.')->group(function () {
+        Route::get('/', [DealerProductsController::class, 'index'])->name('index');
+        Route::get('/datatable', [DealerProductsController::class, 'datatable'])->name('datatable');
+        Route::post('/preview', [DealerProductsController::class, 'preview'])->name('preview');
+        Route::post('/import', [DealerProductsController::class, 'import'])->name('import');
     });
     Route::prefix('dealer')->name('dealer.')->group(function () {
         Route::get('/', [DealersController::class, 'index'])->name('index');
