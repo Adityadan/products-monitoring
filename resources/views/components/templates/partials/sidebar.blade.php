@@ -90,13 +90,13 @@
                                 List Product</span>
                         </div>
                     </a> --}}
-                    </a><a class="nav-link dropdown-indicator" href="#email" role="button" data-bs-toggle="collapse"
-                        aria-expanded="false" aria-controls="email">
+                    </a><a class="nav-link dropdown-indicator" href="#product" role="button" data-bs-toggle="collapse"
+                        aria-expanded="false" aria-controls="product">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">Products</span>
                         </div>
                     </a>
-                    <ul class="nav collapse" id="email">
+                    <ul class="nav collapse" id="product">
                         <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Products</span>
                                 </div>
@@ -137,13 +137,13 @@
                                 Management Role</span>
                         </div>
                     </a> --}}
-                    </a><a class="nav-link dropdown-indicator" href="#email" role="button"
-                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="email">
+                    </a><a class="nav-link dropdown-indicator" href="#roles" role="button"
+                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="roles">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-user-cog"></span></span><span
                                 class="nav-link-text ps-1">Roles</span></div>
                     </a>
-                    <ul class="nav collapse" id="email">
+                    <ul class="nav collapse" id="roles">
                         <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Master
                                         Roles</span>
