@@ -19,7 +19,7 @@
                                 <th>No.</th>
                                 <th>User</th>
                                 @foreach ($roles as $role)
-                                    <th>{{ $role->name }}</th>
+                                    <th>{{ ucwords(str_replace('_', ' ', $role->name)) }}</th>
                                 @endforeach
                             </tr>
                         </thead>
@@ -31,8 +31,7 @@
                                     @foreach ($roles as $role)
                                         <td class="text-center">
                                             <input type="checkbox" class="role-checkbox"
-                                                data-user-id="{{ $user->id }}"
-                                                data-role-name="{{ $role->name }}"
+                                                data-user-id="{{ $user->id }}" data-role-name="{{ $role->name }}"
                                                 {{ $user->hasRole($role->name) ? 'checked' : '' }}>
                                         </td>
                                     @endforeach
@@ -47,16 +46,16 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 // Handle checkbox state changes
-                $('.role-checkbox').on('change', function () {
+                $('.role-checkbox').on('change', function() {
                     const userId = $(this).data('user-id');
                     const roleName = $(this).data('role-name');
                     const isChecked = $(this).is(':checked');
 
-                    const url = isChecked
-                        ? '{{ route('roles.assign.store') }}'
-                        : '{{ route('roles.remove') }}';
+                    const url = isChecked ?
+                        '{{ route('roles.assign.store') }}' :
+                        '{{ route('roles.remove') }}';
 
                     const data = {
                         _token: '{{ csrf_token() }}',
@@ -68,14 +67,14 @@
                         url: url,
                         type: 'POST',
                         data: data,
-                        success: function (response) {
+                        success: function(response) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
                                 text: response.message,
                             });
                         },
-                        error: function (xhr) {
+                        error: function(xhr) {
                             let errorMessage = 'An error occurred.';
                             if (xhr.responseJSON && xhr.responseJSON.errors) {
                                 errorMessage = Object.values(xhr.responseJSON.errors).join(', ');
