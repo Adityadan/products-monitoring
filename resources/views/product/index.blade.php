@@ -175,8 +175,13 @@
                         },
                         error: function(xhr, status, error) {
                             Swal.close(); // Tutup SweetAlert loading
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Failed to load products. Please reload the page.',
+                            });
                             $('#product-container').html(
-                                '<div class="alert alert-danger">Failed to load products. Please try again later.</div>'
+                                '<div class="alert alert-danger text-center">Failed to load products. Please Reload the Page.</div>'
                             );
                         }
                     });
@@ -251,7 +256,8 @@
                 // Debounce untuk pencarian
                 const debouncedSearch = debounce(function() {
                     let searchQuery = $('#search').val();
-                    loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
+                    // loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
+                    loadProducts(1);
                 }, 800); // Delay 300ms
 
                 // Event untuk pencarian dengan debounce
