@@ -26,20 +26,20 @@ return new class extends Migration
             $table->string('kode_gudang')->nullable(); // Kode Gudang
             $table->string('nama_gudang')->nullable(); // Nama Gudang
             $table->string('kode_lokasi')->nullable(); // Kode Lokasi
-            $table->string('int')->nullable(); // INT
-            $table->string('oh')->nullable(); // OH
-            $table->string('rsv')->nullable(); // RSV
-            $table->string('blk')->nullable(); // BLK
-            $table->string('wip')->nullable(); // WIP
-            $table->string('bok')->nullable(); // BOK
-            $table->string('total_exc_int')->nullable(); // Total Exc INT
-            $table->string('stock_days_month')->nullable(); // Stock Days (Month)
-            $table->string('avg_demand_qty')->nullable(); // Avg Demand Qty
-            $table->string('avg_demand_amt')->nullable(); // Avg Demand Amt
-            $table->string('avg_sales_monthly_qty')->nullable(); // Avg Sales Monthly Qty
-            $table->string('avg_sales_monthly_amt')->nullable(); // Avg Sales Monthly Amt
-            $table->string('standard_price_moving_avg_price')->nullable(); // Standard Price/Moving Average Price
-            $table->string('invt_amt_exc_int')->nullable(); // Invt Amt Exc INT
+            $table->integer('int')->nullable(); // INT
+            $table->integer('oh')->nullable(); // OH
+            $table->integer('rsv')->nullable(); // RSV
+            $table->integer('blk')->nullable(); // BLK
+            $table->integer('wip')->nullable(); // WIP
+            $table->integer('bok')->nullable(); // BOK
+            $table->integer('total_exc_int')->nullable(); // Total Exc INT
+            $table->integer('stock_days_month')->nullable(); // Stock Days (Month)
+            $table->integer('avg_demand_qty')->nullable(); // Avg Demand Qty
+            $table->integer('avg_demand_amt')->nullable(); // Avg Demand Amt
+            $table->integer('avg_sales_monthly_qty')->nullable(); // Avg Sales Monthly Qty
+            $table->double('avg_sales_monthly_amt')->nullable(); // Avg Sales Monthly Amt
+            $table->double('standard_price_moving_avg_price')->nullable(); // Standard Price/Moving Average Price
+            $table->double('invt_amt_exc_int')->nullable(); // Invt Amt Exc INT
             $table->timestamps();
         });
     }

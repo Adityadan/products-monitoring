@@ -30,7 +30,7 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])
 Route::middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
-        Route::get('/list', [ProductsController::class, 'productList'])->name('list');
+        Route::post('/list', [ProductsController::class, 'productList'])->name('list');
         Route::get('/datatable', [ProductsController::class, 'datatable'])->name('datatable');
     });
     Route::prefix('dealer-product')->name('dealer-product.')->group(function () {

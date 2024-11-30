@@ -1,36 +1,50 @@
 <x-templates.default>
     <div class="card mb-3">
         <div class="card-body">
-            <div class="row flex-between-center">
-                <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h6 class="mb-0">Showing 1-24 of 205 Products</h6>
+            <div class="row justify-content-between align-items-center mb-3">
+                <!-- Informasi Produk -->
+                <div class="col-md-6 col-sm-12 mb-2 mb-md-0">
+                    <h6 class="mb-0">
+                        Showing <span id="current-range">1-24</span> of <span id="total-products">205</span> Products
+                    </h6>
                 </div>
-                <div class="col-sm-auto">
-                    <div class="row gx-2 align-items-center">
-                        <div class="col-auto">
-                            <form class="row gx-2">
-                                <div class="col-auto"><small>Sort by:</small></div>
-                                <div class="col-auto">
-                                    <select class="form-select form-select-sm" aria-label="Bulk actions">
-                                        <option selected="">Best Match</option>
-                                        <option value="Refund">Newest</option>
-                                        <option value="Delete">Price</option>
-                                    </select>
-                                </div>
-                            </form>
+
+                <!-- Filter & Sort -->
+                <div class="col-md-6 col-sm-12">
+                    <div class="d-flex flex-wrap justify-content-md-end justify-content-start gap-2 align-items-center">
+                        <!-- Sort by -->
+                        <div class="d-flex align-items-center">
+                            <small class="me-2">Sort by:</small>
+                            <select class="form-select form-select-sm" aria-label="Sort by" id="sort">
+                                @foreach ($filters as $item)
+                                    <option value="{{ $item['value'] }}">{{ $item['text'] }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        {{-- <div class="col-auto pe-0">
-                            <a class="text-600 px-1" href="../../../app/e-commerce/product/product-list.html"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Product List"><span
-                                    class="fas fa-list-ul"></span></a>
-                        </div> --}}
+
+                        <!-- Filter Stock -->
+                        <div class="d-flex align-items-center">
+                            <small class="me-2">Stock:</small>
+                            <select class="form-select form-select-sm" aria-label="Stock Filter" id="stock">
+                                @foreach ($stock_filter as $item)
+                                    <option value="{{ $item['value'] }}">{{ $item['text'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="card">
+        <div class="card-header d-flex justify-content-center">
+            <div class="input-group mt-2">
+                <input class="form-control border rounded-pill" type="search" value="" id="search"
+                    placeholder="Search Product Here ...">
+            </div>
+        </div>
         <div class="card-body">
             <div class="row" id="product-container">
                 <!-- Produk akan dirender di sini oleh jQuery -->
@@ -66,146 +80,195 @@
                     return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                 }
 
-                // Fungsi untuk memuat produk dengan paginasi yang lebih baik
-                function loadProducts(page = 1, itemsPerPage = 9) {
+                // Fungsi untuk memuat produk dengan filter
+                function loadProducts(page = 1, itemsPerPage = 9, searchQuery = '', sort = '', stock = '') {
+                    // Ambil nilai filter jika tidak diberikan
+                    searchQuery = searchQuery || $('#search').val();
+                    sort = sort || $('#sort').val();
+                    stock = stock || $('#stock').val();
+
                     let url = '{{ route('product.list') }}';
 
+                    // Tampilkan loading SweetAlert
+                    Swal.fire({
+                        title: 'Loading...',
+                        html: 'Please wait while we load the products.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
                     $.ajax({
-                        url: `${url}?page=${page}&per_page=${itemsPerPage}`,
-                        method: 'GET',
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            page: page,
+                            per_page: itemsPerPage,
+                            search: searchQuery,
+                            sort: sort,
+                            stock: stock,
+                            _token: '{{ csrf_token() }}' // CSRF token
+                        },
                         success: function(response) {
-                            if (response.success) {
-                                let products = response.data;
-                                let productContainer = $('#product-container');
-                                const paginationContainer = $('#pagination');
+                            Swal.close(); // Tutup SweetAlert loading
 
-                                // Kosongkan kontainer
-                                productContainer.empty();
-                                paginationContainer.empty();
+                            $('#current-range').html(response.current_range);
+                            $('#total-products').html(response.total);
 
-                                // Render produk
-                                products.forEach(function(product) {
-                                    let productHtml = `
-                        <div class="mb-4 col-md-6 col-lg-4">
-                            <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
-                                <div class="overflow-hidden">
-                                    <div class="position-relative rounded-top overflow-hidden">
-                                        <a class="d-block" href="#">
-                                            <img class="img-fluid rounded-top" src="${product.image || '{{ asset('no-image.jpg') }}'}" alt="" />
-                                        </a>
-                                    </div>
-                                    <div class="p-3">
-                                        <h5 class="fs-9">
-                                            <a class="text-1100" href="#">${product.nama_part}</a>
-                                        </h5>
-                                        <p class="fs-10 mb-3">
-                                            <a class="text-500" href="#!">${product.group_tobpm || 'Unknown Category'}</a>
-                                        </p>
-                                        <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-3">
-                                            ${formatRupiah(product.standard_price_moving_avg_price)}
-                                        </h5>
-                                        <p class="fs-10 mb-1">
-                                            Dealers: <strong>${product.dealer.ahass || 'Unknown Dealers'}</strong>
-                                        </p>
-                                        <p class="fs-10 mb-1">
-                                            Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">${product.oh > 0 ? product.oh : 'Out of Stock'}</strong>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-between-center px-3">
-                                    <div>
-                                        <a class="btn btn-sm btn-falcon-default me-2" href="#!" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Add to Wish List"><span class="far fa-heart"></span></a>
-                                        <a class="btn btn-sm btn-falcon-default" href="#!" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="Add to Cart"><span class="fas fa-cart-plus"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        `;
-                                    productContainer.append(productHtml);
-                                });
+                            let productContainer = $('#product-container');
+                            const paginationContainer = $('#pagination');
 
-                                // Render kontrol paginasi dengan navigasi yang lebih baik
-                                renderPagination(response.current_page, response.last_page);
+                            // Kosongkan kontainer
+                            productContainer.empty();
+                            paginationContainer.empty();
+
+                            // Jika tidak ada produk, tampilkan pesan
+                            if (response.success && response.data.length === 0) {
+                                productContainer.html(
+                                    '<div class="text-center">No products found.</div>'
+                                );
+                                return;
                             }
+
+                            // Render produk
+                            response.data.forEach(function(product) {
+                                let productHtml = `
+                                <div class="mb-4 col-md-6 col-lg-4">
+                                    <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
+                                        <div class="overflow-hidden">
+                                            <div class="position-relative rounded-top overflow-hidden">
+                                                <a class="d-block" href="#">
+                                                    <img class="img-fluid rounded-top" src="${product.image || '{{ asset('no-image.jpg') }}'}" alt="" />
+                                                </a>
+                                            </div>
+                                            <div class="p-3">
+                                                <h5 class="fs-9">
+                                                    <a class="text-1100" href="#">${product.nama_part}</a>
+                                                </h5>
+                                                <p class="fs-10 mb-3">
+                                                    <a class="text-500" href="#!">${product.group_tobpm || 'Unknown Category'}</a>
+                                                </p>
+                                                <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-3">
+                                                    ${formatRupiah(product.standard_price_moving_avg_price)}
+                                                </h5>
+                                                <p class="fs-10 mb-1">
+                                                    Code Part: <strong>${product.no_part || 'Unknown Code Part'}</strong>
+                                                </p>
+                                                <p class="fs-10 mb-1">
+                                                    Dealers: <strong>${product.dealer.ahass || 'Unknown Dealers'}</strong>
+                                                </p>
+                                                <p class="fs-10 mb-1">
+                                                    Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">${product.oh > 0 ? product.oh : 'Out of Stock'}</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                                productContainer.append(productHtml);
+                            });
+
+                            // Render kontrol paginasi
+                            renderPagination(response.current_page, response.last_page, searchQuery, sort,
+                                stock);
                         },
                         error: function(xhr, status, error) {
-                            console.error('Error fetching products:', error);
+                            Swal.close(); // Tutup SweetAlert loading
                             $('#product-container').html(
-                                '<div class="alert alert-danger">Gagal memuat produk. Silakan coba lagi.</div>'
-                                );
+                                '<div class="alert alert-danger">Failed to load products. Please try again later.</div>'
+                            );
                         }
                     });
                 }
 
-                // Fungsi untuk merender kontrol paginasi dengan navigasi yang lebih canggih
-                function renderPagination(currentPage, totalPages) {
+                // Fungsi untuk merender kontrol paginasi
+                function renderPagination(currentPage, totalPages, searchQuery, sort, stock) {
                     const paginationContainer = $('#pagination');
                     paginationContainer.empty();
 
-                    // Tombol Previous
                     if (currentPage > 1) {
                         paginationContainer.append(`
-                <li class="page-item">
-                    <a class="page-link" href="#" data-page="${currentPage - 1}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            `);
+                        <li class="page-item">
+                            <a class="page-link" href="#" data-page="${currentPage - 1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    `);
                     }
 
-                    // Logika untuk menampilkan nomor halaman secara cerdas
-                    const range = 2; // Jumlah halaman di sekitar halaman saat ini
+                    const range = 2;
                     let start = Math.max(1, currentPage - range);
                     let end = Math.min(totalPages, currentPage + range);
 
-                    // Tampilkan titik-titik jika ada halaman yang terlewat
                     if (start > 1) {
-                        paginationContainer.append(`
-                <li class="page-item disabled"><span class="page-link">...</span></li>
-            `);
+                        paginationContainer.append(
+                            '<li class="page-item disabled"><span class="page-link">...</span></li>');
                     }
 
-                    // Render nomor halaman
                     for (let i = start; i <= end; i++) {
                         const activeClass = i === currentPage ? 'active' : '';
                         paginationContainer.append(`
-                <li class="page-item ${activeClass}">
-                    <a class="page-link" href="#" data-page="${i}">${i}</a>
-                </li>
-            `);
+                        <li class="page-item ${activeClass}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                        </li>
+                    `);
                     }
 
-                    // Tampilkan titik-titik jika ada halaman yang terlewat di akhir
                     if (end < totalPages) {
-                        paginationContainer.append(`
-                <li class="page-item disabled"><span class="page-link">...</span></li>
-            `);
+                        paginationContainer.append(
+                            '<li class="page-item disabled"><span class="page-link">...</span></li>');
                     }
 
-                    // Tombol Next
                     if (currentPage < totalPages) {
                         paginationContainer.append(`
-                <li class="page-item">
-                    <a class="page-link" href="#" data-page="${currentPage + 1}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            `);
+                        <li class="page-item">
+                            <a class="page-link" href="#" data-page="${currentPage + 1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    `);
                     }
 
-                    // Tambahkan event listener pada tombol pagination
                     $('.page-link').click(function(e) {
                         e.preventDefault();
                         const selectedPage = $(this).data('page');
                         if (selectedPage && !$(this).parent().hasClass('disabled')) {
-                            loadProducts(selectedPage);
+                            loadProducts(selectedPage, 9, searchQuery, sort, stock);
                         }
                     });
                 }
 
-                // Inisialisasi pemuatan produk
+                // Event untuk pencarian dan pengurutan
+                function debounce(func, delay) {
+                    let timer;
+                    return function(...args) {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => func.apply(this, args), delay);
+                    };
+                }
+
+                // Debounce untuk pencarian
+                const debouncedSearch = debounce(function() {
+                    let searchQuery = $('#search').val();
+                    loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
+                }, 800); // Delay 300ms
+
+                // Event untuk pencarian dengan debounce
+                $('#search').keyup(function(e) {
+                    e.preventDefault();
+                    debouncedSearch();
+                });
+
+                $('#sort').change(function() {
+                    loadProducts(1);
+                });
+
+                $('#stock').change(function() {
+                    loadProducts(1);
+                });
+
+                // Inisialisasi
                 loadProducts();
             });
         </script>

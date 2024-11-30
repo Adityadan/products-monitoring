@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        /* User::create([
             'name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@gmail.com',
@@ -24,15 +24,14 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::factory(5)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        // $this->call([
-        //     ProductSeeder::class,
-        //     UserSeeder::class, // Menambahkan UserSeeder
-        // ]);
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]); */
+        $this->call([
+            UserSeeder::class,
+            RolesSeeder::class,
+        ]);
 
     }
 }
