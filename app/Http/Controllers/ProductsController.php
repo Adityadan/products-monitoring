@@ -17,8 +17,10 @@ class ProductsController extends Controller
             ['value' => null, 'text' => 'None'],
             ['value' => 'name_asc', 'text' => 'Sort by Name (A-Z)'],
             ['value' => 'name_desc', 'text' => 'Sort by Name (Z-A)'],
-            ['value' => 'price_asc', 'text' => 'Sort by Price (0-9)'],
-            ['value' => 'price_desc', 'text' => 'Sort by Price (9-0)']
+            // ['value' => 'price_asc', 'text' => 'Sort by Price (0-9)'],
+            // ['value' => 'price_desc', 'text' => 'Sort by Price (9-0)']
+            ['value' => 'price_asc', 'text' => 'Lowest Price'],
+            ['value' => 'price_desc', 'text' => 'Highest Price']
         ];
 
         $stock_filter = [
