@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
+use App\Http\Controllers\MenusController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -78,6 +79,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
+    Route::prefix('menus')->name('menus.')->group(function () {
+        Route::resource('/', MenusController::class);
     });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
