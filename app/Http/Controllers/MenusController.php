@@ -4,62 +4,67 @@ namespace App\Http\Controllers;
 
 use App\Models\Menus;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class MenusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $parent_menu = Menus::where(['parent_id' => null, 'route' => null])->get();
+        return view('menus.index',compact('parent_menu'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function datatable(Request $request)
     {
-        //
+        // Check if the request is an AJAX request
+        if ($request->ajax()) {
+            $data = Menus::with('parent')->select(['id', 'name', 'route', 'parent_id', 'icon', 'is_active','order']);
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('parent_name', function ($row) {
+                    return $row->parent ? $row->parent->name : '';
+                })
+                ->editColumn('is_active', function ($row) {
+                    return $row->is_active ? 'Active' : 'Inactive';
+                })
+                ->addColumn('actions', function ($row) {
+                    $editBtn = '<button class="btn btn-sm btn-primary edit-menus" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#menus-modal">Edit</button>';
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-menus" data-id="' . $row->id . '">Delete</button>';
+                    return $editBtn . ' ' . $deleteBtn;
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        Menus::create($request->all());
+        return response()->json(['message' => 'Menu created successfully']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Menus $menus)
+    public function edit($id)
     {
-        //
+        $menu = Menus::findOrFail($id);
+        return response()->json($menu);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Menus $menus)
+    public function show($id)
     {
-        //
+        $menu = Menus::findOrFail($id);
+        return response()->json($menu);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Menus $menus)
+    public function update(Request $request, $id)
     {
-        //
+        $menu = Menus::findOrFail($id);
+        $menu->update($request->all());
+        return response()->json(['message' => 'Menu updated successfully']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Menus $menus)
+    public function destroy($id)
     {
-        //
+        $menu = Menus::findOrFail($id);
+        $menu->delete();
+        return response()->json(['message' => 'Menu deleted successfully']);
     }
 }

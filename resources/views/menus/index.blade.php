@@ -16,4 +16,208 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="table table-responsive">
+                <table class="table table-bordered font-sans-serif" id="menuTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Route</th>
+                            <th>Parent</th>
+                            <th>Icon</th>
+                            <th>Status</th>
+                            <th>Order</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+        <div class="card-footer bg-body-tertiary d-flex justify-content-center">
+        </div>
+    </div>
+    {{-- @include('menus.modals') --}}
+    @includeIf('menus.modals', ['parent_menu' => $parent_menu])
+    @push('scripts')
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                var table = $('#menuTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    responsive: true,
+                    ajax: "{{ route('menus.datatable') }}", // Sesuaikan route data table dengan resource routes
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'route',
+                            name: 'route'
+                        },
+                        {
+                            data: 'parent_name',
+                            name: 'parent_name'
+                        },
+                        {
+                            data: 'icon',
+                            name: 'icon'
+                        },
+                        {
+                            data: 'is_active',
+                            name: 'is_active'
+                        },
+                        {
+                            data: 'order',
+                            name: 'order'
+                        },
+                        {
+                            data: 'actions',
+                            name: 'actions',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ]
+                });
+
+                // Modal untuk Tambah/Edit Menu
+                $('#add-menus-button').click(function() {
+                    $('#menuForm')[0].reset();
+                    $('#menuModalLabel').text('Tambah Menu');
+                    $('#menuId').val('');
+                    $('#menuModal').modal('show');
+                });
+
+                // Submit form untuk menambah atau mengupdate menu
+                $('#menuForm').submit(function(e) {
+                    e.preventDefault();
+                    var formData = $(this).serialize();
+                    var menuId = $('#menuId').val();
+                    var url = menuId ? '{{ route('menus.update', ':id') }}'.replace(':id', menuId) :
+                        '{{ route('menus.store') }}';
+                    var method = menuId ? 'PUT' : 'POST';
+
+                    // Jika menuId tersedia, override method dengan '_method=PUT' untuk mengirim request PUT ke server
+                    if (menuId) {
+                        formData += '&_method=PUT';
+                    }
+
+                    $.ajax({
+                        url: url,
+                        method: method, // Menggunakan method yang sesuai
+                        data: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            $('#menuModal').modal('hide');
+                            // table.ajax.reload(); // Reload data table setelah operasi selesai
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Menu berhasil disimpan!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function(error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Terjadi kesalahan!',
+                                text: 'Gagal menyimpan data menu.',
+                            });
+                        }
+                    });
+                });
+
+                // Edit menu
+                $(document).on('click', '.edit-menus', function() {
+                    var id = $(this).data('id');
+                    let url = '{{ route('menus.edit', ':id') }}'.replace(':id', id);
+
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        success: function(data) {
+                            // Set value untuk setiap field form
+                            $('#menuId').val(data.id);
+                            $('#name').val(data.name);
+                            $('#route').val(data.route);
+                            $('#parent_id').val(data.parent_id).trigger('change');
+                            $('#icon').val(data.icon);
+                            $('#color').val(data.color);
+                            var is_active = data.is_active ? '1' : '0';
+                            $('#is_active').val(is_active).trigger(
+                            'change'); // Set dropdown value
+                            $('#menuModalLabel').text('Edit Menu');
+                            $('#menuModal').modal('show'); // Tampilkan modal
+                        },
+                        error: function() {
+                            Swal.fire('Error', 'Gagal memuat data menu.',
+                            'error'); // Menampilkan SweetAlert jika error
+                        }
+                    });
+                });
+
+
+                // Hapus menu dengan SweetAlert
+                $(document).on('click', '.delete-menus', function() {
+                    var id = $(this).data('id');
+                    let url = '{{ route('menus.destroy', ':id') }}'.replace(':id', id);
+
+                    // SweetAlert konfirmasi penghapusan
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Data menu ini akan dihapus secara permanen!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, Hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: url,
+                                method: 'DELETE', // Menggunakan method DELETE untuk penghapusan
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function(data) {
+                                    // table.ajax
+                                    //     .reload(); // Reload data table setelah penghapusan
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Menu berhasil dihapus!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then(() => {
+                                        location.reload();
+                                    })
+                                },
+                                error: function(error) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Terjadi kesalahan saat menghapus menu!',
+                                        text: 'Gagal menghapus data menu.',
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
 </x-templates.default>

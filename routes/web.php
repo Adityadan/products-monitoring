@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
 use App\Http\Controllers\MenusController;
@@ -15,20 +16,14 @@ use App\Models\Dealer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     // if (Auth::check()) {
-//     //     return redirect()->route('product.index');
-//     // }
-//     return view('auth.login');
-// })->name('login');
-// Route::get('/', function () {
-//     return redirect()->route('login');
-// });
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
 
 Route::middleware('auth')->group(function () {
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+    });
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::post('/list', [ProductsController::class, 'productList'])->name('list');
@@ -81,8 +76,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
     Route::prefix('menus')->name('menus.')->group(function () {
-        Route::resource('/', MenusController::class);
+        // Route::resource('/', MenusController::class);
+        Route::get('/datatable', [MenusController::class, 'datatable'])->name('datatable');
     });
+    Route::resource('menus', MenusController::class);
+    // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -21,9 +21,8 @@
                         container.classList.add('container-fluid');
                     }
                 </script>
-
                 <!-- Sidebar -->
-                @includeIf('components.templates.partials.sidebar')
+                @includeIf('components.templates.partials.sidebar',['menus' => $menus])
 
                 <div class="content">
 

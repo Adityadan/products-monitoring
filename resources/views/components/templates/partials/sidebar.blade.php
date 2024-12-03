@@ -16,93 +16,40 @@
                         class="toggle-line"></span></span></button>
 
         </div>
-        <a class="navbar-brand" href="{{ route('product.index') }}">
-            <div class="d-flex align-items-center py-3">{{-- <img class="me-2" src="{{ asset('dist/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /> --}}<span class="font-sans-serif">{{ env('APP_NAME') }}</span>
+        <a class="navbar-brand" href="{{ route('dashboard.index') }}">
+            <div class="d-flex align-items-center py-3">{{-- <img class="me-2" src="{{ asset('dist/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /> --}}<span
+                    class="font-sans-serif">{{ env('APP_NAME') }}</span>
             </div>
         </a>
-        {{-- <div class="navbar-brand">
-            <div class="d-flex align-items-center py-3 fs-1 text-danger text-uppercase">
-
-            </div>
-        </div> --}}
     </div>
 
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
         <div class="navbar-vertical-content scrollbar">
-            <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+            {{-- <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
-                    {{-- <a class="nav-link"  aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-home"></span></span><span class="nav-link-text ps-1">Beranda</span>
-                        </div>
-                    </a> --}}
-                    <!-- <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
+                    <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
+                        href="{{ route('dashboard.index') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">
+                                Dashboard</span>
                         </div>
                     </a>
-                    <ul class="nav collapse show" id="dashboard">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="dashboard/analytics.html" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="dashboard/crm.html" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="dashboard/e-commerce.html" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="dashboard/project-management.html" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="dashboard/saas.html" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul> -->
-                </li>
-                <li class="nav-item">
-                    <!-- label-->
-                    {{-- <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                        <div class="col-auto navbar-vertical-label">Rekapitulasi</div>
-                        <div class="col ps-0">
-                            <hr class="mb-0 navbar-vertical-divider" />
-                        </div>
-                    </div> --}}
-                    <!-- Membuat div coming soon -->
-                    <!-- <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fas-tools"></span></span><span class="nav-link-text ps-1">Dalam Perbaikan</span></div> -->
-                    {{-- <a class="nav-link {{ request()->is('product') ? 'active' : '' }} "
-                        href="{{ route('product.index') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-solid fa-boxes"></span></span><span class="nav-link-text ps-1">
-                                List Product</span>
-                        </div>
-                    </a> --}}
                     </a><a class="nav-link dropdown-indicator" href="#product" role="button" data-bs-toggle="collapse"
                         aria-expanded="false" aria-controls="product">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">Products</span>
+                                    class="fas fa-user-cog"></span></span><span
+                                class="nav-link-text ps-1">Products</span>
                         </div>
                     </a>
                     <ul class="nav collapse" id="product">
                         <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List Products</span>
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List
+                                        Products</span>
                                 </div>
                             </a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('dealer-product.index') }}">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Dealer Products</span></div>
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Dealer
+                                        Products</span></div>
                             </a></li>
                     </ul>
                     <a class="nav-link {{ request()->is('dealer') ? 'active' : '' }} "
@@ -113,16 +60,7 @@
                         </div>
                     </a>
                 </li>
-
-                <!-- Extend list li bisa langsung dari sini -->
                 <li class="nav-item">
-                    <!-- label-->
-                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                        <div class="col-auto navbar-vertical-label">Modul</div>
-                        <div class="col ps-0">
-                            <hr class="mb-0 navbar-vertical-divider" />
-                        </div>
-                    </div>
                     <a class="nav-link {{ request()->is('users') ? 'active' : '' }}" href="{{ route('users.index') }}"
                         role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
@@ -130,18 +68,11 @@
                                 Management User</span>
                         </div>
                     </a>
-                    {{-- <a class="nav-link {{ request()->is('roles') ? 'active' : '' }}" href="{{ route('roles.index') }}"
-                        role="button" aria-expanded="false">
+                    </a><a class="nav-link dropdown-indicator" href="#roles" role="button" data-bs-toggle="collapse"
+                        aria-expanded="false" aria-controls="roles">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">
-                                Management Role</span>
+                                    class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">Roles</span>
                         </div>
-                    </a> --}}
-                    </a><a class="nav-link dropdown-indicator" href="#roles" role="button"
-                        data-bs-toggle="collapse" aria-expanded="false" aria-controls="roles">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-user-cog"></span></span><span
-                                class="nav-link-text ps-1">Roles</span></div>
                     </a>
                     <ul class="nav collapse" id="roles">
                         <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">
@@ -151,8 +82,7 @@
                             </a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('roles.assign') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Assign Roles
-                                        to User
-                                        detail</span></div>
+                                        to User</span></div>
                             </a></li>
                     </ul>
                 </li>
@@ -164,18 +94,63 @@
                     </div>
                 </a>
                 </li>
+            </ul> --}}
+            <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+                @foreach ($menus->where('parent_id', null) as $menu)
+                    <!-- Menu Utama -->
+                    <li class="nav-item">
+                        @if ($menus->where('parent_id', $menu->id)->isNotEmpty())
+                            <!-- Menu Utama dengan Submenu -->
+                            <a class="nav-link dropdown-indicator" href="#submenu-{{ $menu->id }}" role="button"
+                                data-bs-toggle="collapse" aria-expanded="false"
+                                aria-controls="submenu-{{ $menu->id }}">
+                                <div class="d-flex align-items-center">
+                                    @if ($menu->icon)
+                                        <span class="nav-link-icon">
+                                            <span class="{{ $menu->icon }}" style="color: {{ $menu->color }}"></span>
+                                        </span>
+                                    @endif
+                                    <span class="nav-link-text ps-1">{{ $menu->name }}</span>
+                                </div>
+                            </a>
+                            <ul class="nav collapse" id="submenu-{{ $menu->id }}">
+                                @foreach ($menus->where('parent_id', $menu->id) as $submenu)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->routeIs($submenu->route) ? 'active' : '' }}"
+                                            href="{{ route($submenu->route) }}">
+                                            <div class="d-flex align-items-center">
+                                                @if ($submenu->icon)
+                                                    <span class="nav-link-icon">
+                                                        <span class="{{ $submenu->icon }}"
+                                                            style="color: {{ $submenu->color }}"></span>
+                                                    </span>
+                                                @endif
+                                                <span class="nav-link-text ps-1">{{ $submenu->name }}</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <!-- Menu Utama Tanpa Submenu -->
+                            <a class="nav-link {{ request()->routeIs($menu->route) ? 'active' : '' }}"
+                                href="{{ route($menu->route) }}" role="button" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    @if ($menu->icon)
+                                        <span class="nav-link-icon">
+                                            <span class="{{ $menu->icon }}"
+                                                style="color: {{ $menu->color }}"></span>
+                                        </span>
+                                    @endif
+                                    <span class="nav-link-text ps-1">{{ $menu->name }}</span>
+                                </div>
+                            </a>
+                        @endif
+                    </li>
+                @endforeach
             </ul>
-            <!-- <div class="settings mb-3">
-                <div class="card alert p-0 shadow-none" role="alert">
-                    <div class="btn-close-falcon-container">
-                        <div class="btn-close-falcon" aria-label="Close" data-bs-dismiss="alert"></div>
-                    </div>
-                    <div class="card-body text-center"><img src="assets/img/icons/spot-illustrations/navbar-vertical.png" alt="" width="80" />
-                        <p class="fs--2 mt-2">Loving what you see? <br />Get your copy of <a href="#!">Falcon</a></p>
-                        <div class="d-grid"><a class="btn btn-sm btn-purchase" href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/" target="_blank">Purchase</a></div>
-                    </div>
-                </div>
-            </div> -->
+
+
         </div>
     </div>
 

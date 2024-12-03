@@ -94,7 +94,7 @@
                             }).then(() => {
                                 // Redirect setelah notifikasi
                                 window.location.href =
-                                '{{ route('product.index') }}'; // Ganti dengan halaman tujuan setelah login
+                                '{{ route('dashboard.index') }}'; // Ganti dengan halaman tujuan setelah login
                             });
                         },
                         error: function(xhr) {
