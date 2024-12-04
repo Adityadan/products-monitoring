@@ -24,15 +24,18 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-        ],[
+        ]);
+
+        User::create([
             'name' => 'Main Dealer',
             'username' => 'maindealer',
             'email' => 'maindealer@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-        ],
-        [
+        ]);
+
+        User::create([
             'name' => 'Sub Dealer',
             'username' => 'subdealer',
             'email' => 'subdealer@gmail.com',

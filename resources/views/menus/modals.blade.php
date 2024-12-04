@@ -20,9 +20,6 @@
                         <label for="parent_id" class="form-label">Parent Menu</label>
                         <select class="form-select" name="parent_id" id="parent_id">
                             <option value="">Tidak Ada</option>
-                            @foreach ($parent_menu as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">

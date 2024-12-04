@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
 use App\Http\Controllers\MenusController;
+use App\Http\Controllers\PermissionAssignmentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -59,12 +60,18 @@ Route::middleware('auth')->group(function () {
         Route::post('/remove', [RoleAssignmentController::class, 'removeRole'])->name('remove');
     });
     Route::prefix('permissions')->name('permissions.')->group(function () {
+        Route::get('/datatable', [PermissionController::class, 'datatable'])->name('datatable');
         Route::get('/', [PermissionController::class, 'index'])->name('index');
         Route::get('/create', [PermissionController::class, 'create'])->name('create');
         Route::post('/store', [PermissionController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [PermissionController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PermissionController::class, 'destroy'])->name('destroy');
+
+        Route::get('/assign', [PermissionAssignmentController::class, 'index'])->name('assign');
+        Route::post('/assign', [PermissionAssignmentController::class, 'assign'])->name('assign.store');
+        Route::get('/edit/{role}', [PermissionAssignmentController::class, 'editAssignedPermissions'])->name('edit');
+        Route::post('/remove', [PermissionAssignmentController::class, 'removePermission'])->name('remove');
     });
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');

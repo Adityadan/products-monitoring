@@ -40,7 +40,7 @@
         </div>
     </div>
     {{-- @include('menus.modals') --}}
-    @includeIf('menus.modals', ['parent_menu' => $parent_menu])
+    @includeIf('menus.modals')
     @push('scripts')
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
@@ -120,7 +120,6 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(data) {
-                            $('#menuModal').modal('hide');
                             // table.ajax.reload(); // Reload data table setelah operasi selesai
                             Swal.fire({
                                 icon: 'success',
@@ -128,7 +127,9 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
-                                location.reload();
+                                // location.reload();
+                                table.ajax.reload();
+                                $('#menus-modal').modal('hide');
                             });
                         },
                         error: function(error) {
@@ -142,33 +143,40 @@
                 });
 
                 // Edit menu
-                $(document).on('click', '.edit-menus', function() {
-                    var id = $(this).data('id');
-                    let url = '{{ route('menus.edit', ':id') }}'.replace(':id', id);
+               $(document).on('click', '.edit-menus', function() {
+                   const id = $(this).data('id');
+                   const url = '{{ route('menus.edit', ':id') }}'.replace(':id', id);
 
-                    $.ajax({
-                        url: url,
-                        method: 'GET',
-                        success: function(data) {
-                            // Set value untuk setiap field form
-                            $('#menuId').val(data.id);
-                            $('#name').val(data.name);
-                            $('#route').val(data.route);
-                            $('#parent_id').val(data.parent_id).trigger('change');
-                            $('#icon').val(data.icon);
-                            $('#color').val(data.color);
-                            var is_active = data.is_active ? '1' : '0';
-                            $('#is_active').val(is_active).trigger(
-                            'change'); // Set dropdown value
-                            $('#menuModalLabel').text('Edit Menu');
-                            $('#menuModal').modal('show'); // Tampilkan modal
-                        },
-                        error: function() {
-                            Swal.fire('Error', 'Gagal memuat data menu.',
-                            'error'); // Menampilkan SweetAlert jika error
-                        }
-                    });
-                });
+                   $.ajax({
+                       url: url,
+                       method: 'GET',
+                       success: function(response) {
+                           const data = response.menu;
+                           const parent_menu = response.parent_menu;
+                           let parent_menu_html = '<option value="" selected>Pilih Parent Menu</option>';
+
+                           if (parent_menu && parent_menu.length) {
+                               parent_menu_html += parent_menu.map(valueOfElement =>
+                                   `<option value="${valueOfElement.id}" ${data.parent_id == valueOfElement.id ? 'selected' : ''}>${valueOfElement.name}</option>`
+                               ).join('');
+                           }
+
+                           // Set value untuk setiap field form
+                           $('#menuId').val(data.id);
+                           $('#name').val(data.name);
+                           $('#route').val(data.route);
+                           $('#parent_id').html(parent_menu_html);
+                           $('#icon').val(data.icon);
+                           $('#color').val(data.color);
+                           $('#is_active').val(data.is_active ? '1' : '0').trigger('change');
+                           $('#menuModalLabel').text('Edit Menu');
+                           $('#menuModal').modal('show'); // Tampilkan modal
+                       },
+                       error: function() {
+                           Swal.fire('Error', 'Gagal memuat data menu.', 'error'); // Menampilkan SweetAlert jika error
+                       }
+                   });
+               });
 
 
                 // Hapus menu dengan SweetAlert
@@ -203,7 +211,8 @@
                                         showConfirmButton: false,
                                         timer: 1500
                                     }).then(() => {
-                                        location.reload();
+                                        // location.reload();
+                                        table.ajax.reload();
                                     })
                                 },
                                 error: function(error) {

@@ -10,8 +10,7 @@ class MenusController extends Controller
 {
     public function index()
     {
-        $parent_menu = Menus::where(['parent_id' => null, 'route' => null])->get();
-        return view('menus.index',compact('parent_menu'));
+        return view('menus.index');
     }
     public function datatable(Request $request)
     {
@@ -38,14 +37,17 @@ class MenusController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         Menus::create($request->all());
         return response()->json(['message' => 'Menu created successfully']);
     }
 
     public function edit($id)
     {
+        $parent_menu = Menus::where(['parent_id' => null, 'route' => null])->get();
+
         $menu = Menus::findOrFail($id);
-        return response()->json($menu);
+        return response()->json(['menu' => $menu, 'parent_menu'=>$parent_menu]);
     }
 
     public function show($id)

@@ -17,13 +17,13 @@ class PermissionController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $dealers = Permission::select(['id', 'name', 'guard_name']);
+            $data = Permission::select(['id', 'name', 'guard_name']);
 
-            return DataTables::of($dealers)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {
-                    $editBtn = '<button class="btn btn-sm btn-primary edit-dealer" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-dealer-modal">Edit</button>';
-                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-dealer" data-id="' . $row->id . '">Delete</button>';
+                    $editBtn = '<button class="btn btn-sm btn-primary edit-permission-button" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#permission-modal">Edit</button>';
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-permission-button" data-id="' . $row->id . '">Delete</button>';
                     return $editBtn . ' ' . $deleteBtn;
                 })
                 ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
@@ -63,7 +63,7 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->delete();
 
-        return redirect()->route('permissions.index')->with('success', 'Permission berhasil dihapus!');
+        return response()->json(['message' => 'Permission successfully deleted!'], 200);
     }
 
     public function assignPermissionToUser(Request $request, User $user)
