@@ -37,7 +37,6 @@ class MenusController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         Menus::create($request->all());
         return response()->json(['message' => 'Menu created successfully']);
     }

@@ -127,8 +127,8 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
-                                // location.reload();
-                                table.ajax.reload();
+                                location.reload();
+                                // table.ajax.reload();
                                 $('#menus-modal').modal('hide');
                             });
                         },
@@ -211,8 +211,8 @@
                                         showConfirmButton: false,
                                         timer: 1500
                                     }).then(() => {
-                                        // location.reload();
-                                        table.ajax.reload();
+                                        location.reload();
+                                        // table.ajax.reload();
                                     })
                                 },
                                 error: function(error) {

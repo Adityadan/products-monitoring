@@ -117,7 +117,7 @@
                                 @foreach ($menus->where('parent_id', $menu->id) as $submenu)
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->routeIs($submenu->route) ? 'active' : '' }}"
-                                            href="{{ route($submenu->route) }}">
+                                            href="{{ $submenu->route ? route($submenu->route) : '#' }}">
                                             <div class="d-flex align-items-center">
                                                 @if ($submenu->icon)
                                                     <span class="nav-link-icon">
@@ -134,7 +134,8 @@
                         @else
                             <!-- Menu Utama Tanpa Submenu -->
                             <a class="nav-link {{ request()->routeIs($menu->route) ? 'active' : '' }}"
-                                href="{{ route($menu->route) }}" role="button" aria-expanded="false">
+                                href="{{ $menu->route ? route($menu->route) : '#' }}" role="button"
+                                aria-expanded="false">
                                 <div class="d-flex align-items-center">
                                     @if ($menu->icon)
                                         <span class="nav-link-icon">
@@ -149,8 +150,6 @@
                     </li>
                 @endforeach
             </ul>
-
-
         </div>
     </div>
 
