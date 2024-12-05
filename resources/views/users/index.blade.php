@@ -166,7 +166,7 @@
                 // Ambil ID dari tombol yang diklik
                 let id = $(this).data('id');
                 let url = '{{ route('users.assign-role.edit', ':id') }}'.replace(':id', id);
-
+                $('#roles').html('');
                 // Kirim request GET untuk mengambil data
                 $.get(url, function(response) {
                     let user = response.user; // Data pengguna

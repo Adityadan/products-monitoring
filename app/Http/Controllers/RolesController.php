@@ -88,7 +88,6 @@ class RolesController extends Controller
         if (empty($permissions)) {
             return response()->json(['message' => 'No valid permissions provided'], 400);
         }
-
         // Temukan role berdasarkan roles_id
         $role = Role::findOrFail($validatedData['roles_id']);
 

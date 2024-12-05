@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->string('permission_name')->nullable();
             $table->timestamps();
         });
     }

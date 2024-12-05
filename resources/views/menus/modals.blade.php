@@ -37,11 +37,15 @@
                         <label for="color" class="form-label">Order</label>
                         <input type="number" class="form-control" name="order" id="order">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Permission</label>
+                        <select class="form-select" name="permission_name" id="permission_name">
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
             </form>
         </div>
     </div>

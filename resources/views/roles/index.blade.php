@@ -183,14 +183,14 @@
                     // Ambil ID dari tombol yang diklik
                     let id = $(this).data('id');
                     let url = '{{ route('roles.assign-permission.edit', ':id') }}'.replace(':id', id);
-
                     // Kirim request GET untuk mengambil data
+                    $('#permissions').html('');
                     $.get(url, function(response) {
 
                         let roles = response.roles;
                         let permissions = response.allPermissions;
                         let assignedPermissions = response.assignedPermissions;
-                        console.log(permissions);
+                        console.log(`roles: ${JSON.stringify(roles)} permissions: ${JSON.stringify(permissions)} assignedPermissions: ${JSON.stringify(assignedPermissions)}`);
 
                         let htmlOptions = permissions.map(function(permission) {
 
@@ -207,7 +207,7 @@
                         $('.modal-title').text('Assign Role');
                         $('#permission-label').text(
                             `Assign Permission to ${roles.name.replace(/_/g, ' ').toUpperCase()} Role`
-                            );
+                        );
                         $('#assign-permission-modal').modal('show');
                     }).fail(function(xhr) {
                         // Tangani error jika request gagal
@@ -221,46 +221,46 @@
                     });
                 });
                 $('#assign-permission-form').submit(function(e) {
-                e.preventDefault();
+                    e.preventDefault();
 
-                let rolesId = $('#role-id').val();
-                let selectedPermission = $('#permissions').val();
-                let url = '{{ route('roles.assign-permission', ':id') }}'.replace(':id', rolesId);
+                    let rolesId = $('#role-id').val();
+                    let selectedPermission = $('#permissions').val();
+                    let url = '{{ route('roles.assign-permission', ':id') }}'.replace(':id', rolesId);
 
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: {
-                        roles_id: rolesId,
-                        permissions: selectedPermission
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: response.message
-                        }).then(() => {
-                            $('#assign-permission-modal').modal('hide');
-                            table.ajax.reload(); // Refresh DataTable
-                            // location.reload();
-                        });
-                    },
-                    error: function(xhr) {
-                        let errorMessage = xhr.responseJSON?.errors ?
-                            Object.values(xhr.responseJSON.errors).flat().join(', ') :
-                            'An error occurred while saving the data.';
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: errorMessage,
-                        });
-                        console.error(xhr.responseJSON);
-                    }
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            roles_id: rolesId,
+                            permissions: selectedPermission
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: response.message
+                            }).then(() => {
+                                $('#assign-permission-modal').modal('hide');
+                                table.ajax.reload(); // Refresh DataTable
+                                // location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            let errorMessage = xhr.responseJSON?.errors ?
+                                Object.values(xhr.responseJSON.errors).flat().join(', ') :
+                                'An error occurred while saving the data.';
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: errorMessage,
+                            });
+                            console.error(xhr.responseJSON);
+                        }
+                    });
                 });
-            });
             });
         </script>
     @endpush

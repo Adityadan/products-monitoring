@@ -97,59 +97,65 @@
             </ul> --}}
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 @foreach ($menus->where('parent_id', null) as $menu)
-                    <!-- Menu Utama -->
-                    <li class="nav-item">
-                        @if ($menus->where('parent_id', $menu->id)->isNotEmpty())
-                            <!-- Menu Utama dengan Submenu -->
-                            <a class="nav-link dropdown-indicator" href="#submenu-{{ $menu->id }}" role="button"
-                                data-bs-toggle="collapse" aria-expanded="false"
-                                aria-controls="submenu-{{ $menu->id }}">
-                                <div class="d-flex align-items-center">
-                                    @if ($menu->icon)
-                                        <span class="nav-link-icon">
-                                            <span class="{{ $menu->icon }}" style="color: {{ $menu->color }}"></span>
-                                        </span>
-                                    @endif
-                                    <span class="nav-link-text ps-1">{{ $menu->name }}</span>
-                                </div>
-                            </a>
-                            <ul class="nav collapse" id="submenu-{{ $menu->id }}">
-                                @foreach ($menus->where('parent_id', $menu->id) as $submenu)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ request()->routeIs($submenu->route) ? 'active' : '' }}"
-                                            href="{{ $submenu->route ? route($submenu->route) : '#' }}">
-                                            <div class="d-flex align-items-center">
-                                                @if ($submenu->icon)
-                                                    <span class="nav-link-icon">
-                                                        <span class="{{ $submenu->icon }}"
-                                                            style="color: {{ $submenu->color }}"></span>
-                                                    </span>
-                                                @endif
-                                                <span class="nav-link-text ps-1">{{ $submenu->name }}</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <!-- Menu Utama Tanpa Submenu -->
-                            <a class="nav-link {{ request()->routeIs($menu->route) ? 'active' : '' }}"
-                                href="{{ $menu->route ? route($menu->route) : '#' }}" role="button"
-                                aria-expanded="false">
-                                <div class="d-flex align-items-center">
-                                    @if ($menu->icon)
-                                        <span class="nav-link-icon">
-                                            <span class="{{ $menu->icon }}"
-                                                style="color: {{ $menu->color }}"></span>
-                                        </span>
-                                    @endif
-                                    <span class="nav-link-text ps-1">{{ $menu->name }}</span>
-                                </div>
-                            </a>
-                        @endif
-                    </li>
+                    <!-- Cek Permission untuk Menu Utama -->
+                    @can($menu->permission_name)
+                        <li class="nav-item">
+                            @if ($menus->where('parent_id', $menu->id)->isNotEmpty())
+                                <!-- Menu Utama dengan Submenu -->
+                                <a class="nav-link dropdown-indicator" href="#submenu-{{ $menu->id }}" role="button"
+                                    data-bs-toggle="collapse" aria-expanded="false"
+                                    aria-controls="submenu-{{ $menu->id }}">
+                                    <div class="d-flex align-items-center">
+                                        @if ($menu->icon)
+                                            <span class="nav-link-icon">
+                                                <span class="{{ $menu->icon }}" style="color: {{ $menu->color }}"></span>
+                                            </span>
+                                        @endif
+                                        <span class="nav-link-text ps-1">{{ $menu->name }}</span>
+                                    </div>
+                                </a>
+                                <ul class="nav collapse" id="submenu-{{ $menu->id }}">
+                                    @foreach ($menus->where('parent_id', $menu->id) as $submenu)
+                                        <!-- Cek Permission untuk Submenu -->
+                                        @can($submenu->permission_name)
+                                            <li class="nav-item">
+                                                <a class="nav-link {{ request()->routeIs($submenu->route) ? 'active' : '' }}"
+                                                    href="{{ $submenu->route ? route($submenu->route) : '#' }}">
+                                                    <div class="d-flex align-items-center">
+                                                        @if ($submenu->icon)
+                                                            <span class="nav-link-icon">
+                                                                <span class="{{ $submenu->icon }}"
+                                                                    style="color: {{ $submenu->color }}"></span>
+                                                            </span>
+                                                        @endif
+                                                        <span class="nav-link-text ps-1">{{ $submenu->name }}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    @endforeach
+                                </ul>
+                            @else
+                                <!-- Menu Utama Tanpa Submenu -->
+                                <a class="nav-link {{ request()->routeIs($menu->route) ? 'active' : '' }}"
+                                    href="{{ $menu->route ? route($menu->route) : '#' }}" role="button"
+                                    aria-expanded="false">
+                                    <div class="d-flex align-items-center">
+                                        @if ($menu->icon)
+                                            <span class="nav-link-icon">
+                                                <span class="{{ $menu->icon }}"
+                                                    style="color: {{ $menu->color }}"></span>
+                                            </span>
+                                        @endif
+                                        <span class="nav-link-text ps-1">{{ $menu->name }}</span>
+                                    </div>
+                                </a>
+                            @endif
+                        </li>
+                    @endcan
                 @endforeach
             </ul>
+
         </div>
     </div>
 

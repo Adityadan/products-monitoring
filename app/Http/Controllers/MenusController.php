@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menus;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Facades\DataTables;
 
 class MenusController extends Controller
@@ -46,7 +47,8 @@ class MenusController extends Controller
         $parent_menu = Menus::where(['parent_id' => null, 'route' => null])->get();
 
         $menu = Menus::findOrFail($id);
-        return response()->json(['menu' => $menu, 'parent_menu'=>$parent_menu]);
+        $permission = Permission::all();
+        return response()->json(['menu' => $menu, 'parent_menu'=>$parent_menu, 'permission' => $permission]);
     }
 
     public function show($id)
