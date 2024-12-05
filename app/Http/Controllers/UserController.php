@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -28,6 +29,7 @@ class UserController extends Controller
             })
             ->addColumn('action', function ($user) {
                 return '
+                <button class="btn btn-sm btn-warning assign-role-button" data-id="' . $user->id . '"><i class="fas fa-user-cog"></i></button>
                 <button class="btn btn-sm btn-primary edit-user-button" data-id="' . $user->id . '">Edit</button>
                 <button class="btn btn-sm btn-danger delete-user-button" data-id="' . $user->id . '">Delete</button>
             ';
@@ -112,5 +114,44 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'User deleted successfully'], 200);
+    }
+
+    public function assignRole(Request $request)
+    {
+        // Debugging Input
+        // dd($request->all());
+
+        // Validasi request
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'roles' => 'required|array',
+            'roles.*' => 'nullable|string|exists:roles,name', // Pastikan setiap role ada
+        ]);
+
+        // Hapus nilai null dari roles
+        $roles = array_filter($validatedData['roles']);
+
+        if (empty($roles)) {
+            return response()->json(['message' => 'No valid roles provided'], 400);
+        }
+
+        // Temukan pengguna
+        $user = User::findOrFail($validatedData['user_id']);
+
+        // Sinkronisasi peran pengguna
+        $user->syncRoles($roles);
+
+        return response()->json(['message' => 'Roles assigned successfully', 'roles' => $roles], 200);
+    }
+    public function editAssignedRoles($userId)
+    {
+        $user = User::with('roles')->findOrFail($userId);
+        $allRoles = Role::pluck('name'); // Fetch all roles
+
+        return response()->json([
+            'user' => $user,
+            'assignedRoles' => $user->roles->pluck('name'),
+            'allRoles' => $allRoles,
+        ]);
     }
 }

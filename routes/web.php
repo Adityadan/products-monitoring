@@ -54,10 +54,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{id}', [RolesController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [RolesController::class, 'destroy'])->name('destroy');
 
-        Route::get('/assign', [RoleAssignmentController::class, 'index'])->name('assign');
-        Route::post('/assign', [RoleAssignmentController::class, 'assign'])->name('assign.store');
-        Route::get('/edit/{user}', [RoleAssignmentController::class, 'editAssignedRoles'])->name('edit');
-        Route::post('/remove', [RoleAssignmentController::class, 'removeRole'])->name('remove');
+
+        Route::post('/assign-permission', [RolesController::class, 'assignPermission'])->name('assign-permission');
+        Route::get('/assign-permission/edit/{roles}', [RolesController::class, 'editAssignedPermission'])->name('assign-permission.edit');
+        // Route::get('/assign', [RoleAssignmentController::class, 'index'])->name('assign');
+        // Route::post('/assign', [RoleAssignmentController::class, 'assign'])->name('assign.store');
+        // Route::get('/assign/edit/{user}', [RoleAssignmentController::class, 'editAssignedRoles'])->name('assign.edit');
+        // Route::post('/assign/remove', [RoleAssignmentController::class, 'removeRole'])->name('assign.remove');
     });
     Route::prefix('permissions')->name('permissions.')->group(function () {
         Route::get('/datatable', [PermissionController::class, 'datatable'])->name('datatable');
@@ -68,10 +71,10 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{id}', [PermissionController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PermissionController::class, 'destroy'])->name('destroy');
 
-        Route::get('/assign', [PermissionAssignmentController::class, 'index'])->name('assign');
-        Route::post('/assign', [PermissionAssignmentController::class, 'assign'])->name('assign.store');
-        Route::get('/edit/{role}', [PermissionAssignmentController::class, 'editAssignedPermissions'])->name('edit');
-        Route::post('/remove', [PermissionAssignmentController::class, 'removePermission'])->name('remove');
+        // Route::get('/assign', [PermissionAssignmentController::class, 'index'])->name('assign');
+        // Route::post('/assign', [PermissionAssignmentController::class, 'assign'])->name('assign.store');
+        // Route::get('/assign/edit/{role}', [PermissionAssignmentController::class, 'editAssignedPermissions'])->name('assign.edit');
+        // Route::post('/remove', [PermissionAssignmentController::class, 'removePermission'])->name('assign.remove');
     });
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
@@ -81,6 +84,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
+
+        Route::post('/assign-role', [UserController::class, 'assignRole'])->name('assign-role');
+        Route::get('/assign-role/edit/{user}', [UserController::class, 'editAssignedRoles'])->name('assign-role.edit');
     });
     Route::prefix('menus')->name('menus.')->group(function () {
         // Route::resource('/', MenusController::class);

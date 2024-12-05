@@ -44,6 +44,12 @@
 
         <script>
             $(document).ready(function() {
+                $('.js-example-basic-multiple').select2({
+                    theme: "bootstrap-5",
+                    width: "100%",
+                    dropdownParent: $('#assign-role-modal')
+                });
+
                 table = $('#users-table').DataTable({
                     processing: true,
                     serverSide: true,
@@ -149,12 +155,93 @@
                                 table.ajax.reload(); // Refresh DataTable
                             },
                             error: function(xhr) {
-                                Swal.fire('Error', xhr.responseJSON.message || 'Failed to delete.', 'error');
+                                Swal.fire('Error', xhr.responseJSON.message || 'Failed to delete.',
+                                    'error');
                             }
                         });
                     }
                 });
             });
+            $('#users-table').on('click', '.assign-role-button', function() {
+                // Ambil ID dari tombol yang diklik
+                let id = $(this).data('id');
+                let url = '{{ route('users.assign-role.edit', ':id') }}'.replace(':id', id);
+
+                // Kirim request GET untuk mengambil data
+                $.get(url, function(response) {
+                    let user = response.user; // Data pengguna
+                    let roles = response.allRoles; // Semua peran yang tersedia
+                    let assignedRoles = response.assignedRoles; // Peran yang telah diberikan
+
+                    // Buat opsi untuk semua peran
+                    let htmlOptions = roles.map(function(role) {
+                        return `<option value="${role}" ${assignedRoles.includes(role) ? 'selected' : ''}>${role.replace(/_/g, ' ').toUpperCase()}</option>`;
+                    }).join('');
+
+                    // Render opsi ke elemen select
+                    $('#roles').html(htmlOptions);
+
+                    // Perbarui ID pengguna di input hidden
+                    $('#user-id').val(user.id);
+
+                    // Perbarui teks modal dan buka modal
+                    $('.modal-title').text('Assign Role');
+                    $('#role-label').text(`Assign Role to ${user.name}`);
+                    $('#assign-role-modal').modal('show');
+                }).fail(function(xhr) {
+                    // Tangani error jika request gagal
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal mengambil data pengguna!',
+                        footer: 'Silakan coba lagi nanti.'
+                    });
+                    console.error(xhr.responseJSON);
+                });
+            });
+
+            $('#assign-role-form').submit(function(e) {
+                e.preventDefault();
+
+                let userId = $('#user-id').val();
+                let selectedRoles = $('#roles').val();
+                let url = '{{ route('users.assign-role', ':id') }}'.replace(':id', userId);
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        user_id: userId,
+                        roles: selectedRoles
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: response.message
+                        }).then(() => {
+                            $('#assign-role-modal').modal('hide');
+                            table.ajax.reload(); // Refresh DataTable
+                            // location.reload();
+                        });
+                    },
+                    error: function(xhr) {
+                        let errorMessage = xhr.responseJSON?.errors ?
+                            Object.values(xhr.responseJSON.errors).flat().join(', ') :
+                            'An error occurred while saving the data.';
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: errorMessage,
+                        });
+                        console.error(xhr.responseJSON);
+                    }
+                });
+            });
+
 
             // Event listener untuk form submission Add/Edit
             $('#users-form').on('submit', function(e) {

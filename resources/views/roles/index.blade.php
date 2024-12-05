@@ -39,6 +39,11 @@
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
+                $('.js-example-basic-multiple').select2({
+                    theme: "bootstrap-5",
+                    width: "100%",
+                    dropdownParent: $('#assign-permission-modal')
+                });
                 // Initialize DataTable
                 const table = $('#roles-table').DataTable({
                     processing: true,
@@ -174,6 +179,88 @@
                         }
                     });
                 });
+                $('#roles-table').on('click', '.assign-permission-button', function() {
+                    // Ambil ID dari tombol yang diklik
+                    let id = $(this).data('id');
+                    let url = '{{ route('roles.assign-permission.edit', ':id') }}'.replace(':id', id);
+
+                    // Kirim request GET untuk mengambil data
+                    $.get(url, function(response) {
+
+                        let roles = response.roles;
+                        let permissions = response.allPermissions;
+                        let assignedPermissions = response.assignedPermissions;
+                        console.log(permissions);
+
+                        let htmlOptions = permissions.map(function(permission) {
+
+                            return `<option value="${permission}" ${assignedPermissions.includes(permission) ? 'selected' : ''}>${permission.replace(/_/g, ' ').toUpperCase()}</option>`;
+                        }).join('');
+
+                        // Render opsi ke elemen select
+                        $('#permissions').html(htmlOptions);
+
+                        // Perbarui ID pengguna di input hidden
+                        $('#role-id').val(roles.id);
+
+                        // Perbarui teks modal dan buka modal
+                        $('.modal-title').text('Assign Role');
+                        $('#permission-label').text(
+                            `Assign Permission to ${roles.name.replace(/_/g, ' ').toUpperCase()} Role`
+                            );
+                        $('#assign-permission-modal').modal('show');
+                    }).fail(function(xhr) {
+                        // Tangani error jika request gagal
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Gagal mengambil data pengguna!',
+                            footer: 'Silakan coba lagi nanti.'
+                        });
+                        console.error(xhr.responseJSON);
+                    });
+                });
+                $('#assign-permission-form').submit(function(e) {
+                e.preventDefault();
+
+                let rolesId = $('#role-id').val();
+                let selectedPermission = $('#permissions').val();
+                let url = '{{ route('roles.assign-permission', ':id') }}'.replace(':id', rolesId);
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        roles_id: rolesId,
+                        permissions: selectedPermission
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: response.message
+                        }).then(() => {
+                            $('#assign-permission-modal').modal('hide');
+                            table.ajax.reload(); // Refresh DataTable
+                            // location.reload();
+                        });
+                    },
+                    error: function(xhr) {
+                        let errorMessage = xhr.responseJSON?.errors ?
+                            Object.values(xhr.responseJSON.errors).flat().join(', ') :
+                            'An error occurred while saving the data.';
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: errorMessage,
+                        });
+                        console.error(xhr.responseJSON);
+                    }
+                });
+            });
             });
         </script>
     @endpush

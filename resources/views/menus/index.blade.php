@@ -169,6 +169,7 @@
                            $('#icon').val(data.icon);
                            $('#color').val(data.color);
                            $('#is_active').val(data.is_active ? '1' : '0').trigger('change');
+                           $('#order').val(data.order);
                            $('#menuModalLabel').text('Edit Menu');
                            $('#menuModal').modal('show'); // Tampilkan modal
                        },

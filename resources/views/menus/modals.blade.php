@@ -33,6 +33,10 @@
                             <option value="0">Tidak Aktif</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Order</label>
+                        <input type="number" class="form-control" name="order" id="order">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

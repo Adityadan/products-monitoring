@@ -55,7 +55,7 @@
 
                     const url = isChecked ?
                         '{{ route('roles.assign.store') }}' :
-                        '{{ route('roles.remove') }}';
+                        '{{ route('roles.assign.remove') }}';
 
                     const data = {
                         _token: '{{ csrf_token() }}',
