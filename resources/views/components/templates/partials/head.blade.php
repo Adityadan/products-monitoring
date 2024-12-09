@@ -71,6 +71,10 @@
     {{-- SELECT 2 FALCON TEMPLATE --}}
     <link href="{{ asset('dist/vendors/choices/choices.min.css') }}" rel="stylesheet" />
 
+    {{-- DropzoneJS --}}
+    <link href="{{asset('dist/vendors/dropzone/dropzone.min.css')}}" rel="stylesheet" />
+
+
     <!-- Script untuk mengubah arah tampilan dari kanan ke kiri -->
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));

@@ -45,4 +45,9 @@ class Product extends Model
         return $this->belongsTo(Dealer::class, 'kode_dealer', 'kode');
     }
 
+    public function product_images()
+    {
+        return $this->hasMany(ProductImage::class, 'no_part', 'no_part');
+    }
+
 }

@@ -104,6 +104,51 @@
                 });
 
             });
+
+            $('#master-product-form').on('submit', function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this); // Menggunakan FormData untuk menangani file upload
+
+                Swal.fire({
+                    title: 'Saving...',
+                    html: 'Please wait while we save the product image.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
+
+                $.ajax({
+                    url: "{{ route('master-product.store') }}",
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: response.message,
+                        }).then(() => {
+                            $('#add-image-modal').modal('hide'); // Tutup modal
+                            $('#master-product-form')[0].reset(); // Reset form
+                            // Anda dapat memuat ulang data atau melakukan sesuatu sesuai kebutuhan
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: xhr.responseJSON?.message ||
+                                'Failed to save the product image. Please try again.',
+                        });
+                    },
+                });
+            });
         </script>
     @endpush
 </x-templates.default>

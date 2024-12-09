@@ -13,6 +13,9 @@
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 {{-- SELECT 2 FALCON TEMPLATE --}}
 <script src="{{ asset('dist/vendors/choices/choices.min.js') }}"></script>
+{{-- DropzoneJS --}}
+<script src="{{ asset('dist/vendors/dropzone/dropzone.min.js') }}"></script>
+
 
 
 
