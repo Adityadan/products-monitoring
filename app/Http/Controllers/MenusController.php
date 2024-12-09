@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menus;
 use Illuminate\Http\Request;
+use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -69,5 +70,12 @@ class MenusController extends Controller
         $menu = Menus::findOrFail($id);
         $menu->delete();
         return response()->json(['message' => 'Menu deleted successfully']);
+    }
+
+    public function parentMenu()
+    {
+        $parent_menu = Menus::where(['parent_id' => null, 'route' => null])->get();
+        $permission = Permission::all();
+        return response()->json(['parent_menu' => $parent_menu, 'permission' => $permission]);
     }
 }

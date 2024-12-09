@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
+use App\Http\Controllers\MasterProductController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\PermissionAssignmentController;
 use App\Http\Controllers\PermissionController;
@@ -35,6 +36,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/datatable', [DealerProductsController::class, 'datatable'])->name('datatable');
         Route::post('/preview', [DealerProductsController::class, 'preview'])->name('preview');
         Route::post('/import', [DealerProductsController::class, 'import'])->name('import');
+    });
+    Route::prefix('master-product')->name('master-product.')->group(function () {
+        Route::get('/', [MasterProductController::class, 'index'])->name('index');
+        Route::get('/datatable', [MasterProductController::class, 'datatable'])->name('datatable');
     });
     Route::prefix('dealer')->name('dealer.')->group(function () {
         Route::get('/', [DealersController::class, 'index'])->name('index');
@@ -91,6 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('menus')->name('menus.')->group(function () {
         // Route::resource('/', MenusController::class);
         Route::get('/datatable', [MenusController::class, 'datatable'])->name('datatable');
+        Route::get('/parent-menu', [MenusController::class, 'parentMenu'])->name('parent-menu');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

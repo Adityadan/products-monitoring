@@ -35,7 +35,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label" id="permission-label">permission</label>
-                        <select class="form-select js-example-basic-multiple" id="permissions" name="permissions[]"
+                        <select class="form-select multiple-select" id="permissions" name="permissions[]"
                             multiple="multiple"></select>
                     </div>
 

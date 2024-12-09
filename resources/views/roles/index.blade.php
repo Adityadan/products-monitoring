@@ -39,10 +39,10 @@
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('.js-example-basic-multiple').select2({
+                $('.multiple-select').select2({
                     theme: "bootstrap-5",
                     width: "100%",
-                    dropdownParent: $('#assign-permission-modal')
+                    dropdownParent: $('#assign-permission-modal'),
                 });
                 // Initialize DataTable
                 const table = $('#roles-table').DataTable({
@@ -194,7 +194,7 @@
 
                         let htmlOptions = permissions.map(function(permission) {
 
-                            return `<option value="${permission}" ${assignedPermissions.includes(permission) ? 'selected' : ''}>${permission.replace(/_/g, ' ').toUpperCase()}</option>`;
+                            return `<option value="${permission}" ${assignedPermissions.includes(permission) ? 'selected' : ''}>${permission.replace(/_/g, ' ').toLowerCase()}</option>`;
                         }).join('');
 
                         // Render opsi ke elemen select

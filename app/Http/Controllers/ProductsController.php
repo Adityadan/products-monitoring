@@ -11,8 +11,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
+        $no_part = Product::select('no_part')->distinct()->get()->toArray();
         $filters = [
             ['value' => null, 'text' => 'None'],
             ['value' => 'name_asc', 'text' => 'Sort by Name (A-Z)'],
@@ -29,7 +30,7 @@ class ProductsController extends Controller
             ['value' => 'out_of_stock', 'text' => 'Out of Stock']
         ];
 
-        return view('product.index', compact('filters', 'stock_filter'));
+        return view('product.index', compact('filters', 'stock_filter','no_part'));
     }
 
     public function productList(Request $request)
@@ -38,6 +39,7 @@ class ProductsController extends Controller
         $search = $request->get('search'); // Mengambil filter pencarian dari request
         $stock = $request->get('stock'); // Mengambil filter stock dari request
         $products = Product::with('dealer'); // Relasi 'dealer' harus sesuai dengan model Anda
+        $no_part = $request->get('no_part');
         // Filter pencarian
         if ($search) {
             $lowerSearch = strtolower($search);
@@ -75,7 +77,9 @@ class ProductsController extends Controller
                 $products->orderBy('nama_part', 'asc');
                 break;
         }
-
+        if ($no_part) {
+            $products->whereIn('no_part', $no_part);
+        }
         // Pagination
         $products = $products->paginate(9);
 

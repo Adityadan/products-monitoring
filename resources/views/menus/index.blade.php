@@ -92,6 +92,36 @@
 
                 // Modal untuk Tambah/Edit Menu
                 $('#add-menus-button').click(function() {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('menus.parent-menu') }}",
+                        data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            let parent_menu = response.parent_menu;
+                            console.log(parent_menu);
+                            let parent_menu_html = '<option value="" selected>Pilih Parent Menu</option>';
+                            if (parent_menu.length) {
+                                parent_menu_html += parent_menu.map(valueOfElement =>
+                                    `<option value="${valueOfElement.id}" >
+                                        ${valueOfElement.name}
+                                    </option>`
+                                ).join('');
+                            }
+
+                            let permission = response.permission;
+                            let permission_html = '<option value="" selected>Pilih Permission</option>';
+                            if (permission.length) {
+                                permission_html += permission.map(valueOfElement =>
+                                    `<option value="${valueOfElement.name}" >
+                                        ${valueOfElement.name}
+                                    </option>`
+                                ).join('');
+                            }
+                            $('#permission_name').html(permission_html);
+                            $('#parent_id').html(parent_menu_html);
+                        }
+                    });
                     $('#menuForm')[0].reset();
                     $('#menuModalLabel').text('Tambah Menu');
                     $('#menuId').val('');

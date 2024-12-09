@@ -12,25 +12,38 @@
                 <!-- Filter & Sort -->
                 <div class="col-md-6 col-sm-12">
                     <div class="d-flex flex-wrap justify-content-md-end justify-content-start gap-2 align-items-center">
+                        <!-- Filter By Stock -->
+                        {{-- <div class="d-flex align-items-center">
+                            <small class="me-2">Stock:</small>
+                            <select class="form-select form-select-sm multiple-select" id="no_part" name="no_part[]" multiple="multiple">
+                                @foreach ($no_part as $item)
+                                    <option value="{{ $item['no_part'] }}">{{ $item['no_part'] }}</option>
+                                @endforeach
+                            </select>
+                        </div> --}}
                         <!-- Sort by -->
                         <div class="d-flex align-items-center">
                             <small class="me-2">Sort by:</small>
-                            <select class="form-select form-select-sm" aria-label="Sort by" id="sort">
+                            <select class="form-select form-select-sm" aria-label="" id="sort">
                                 @foreach ($filters as $item)
                                     <option value="{{ $item['value'] }}">{{ $item['text'] }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <!-- Filter Stock -->
                         <div class="d-flex align-items-center">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filter-modal">Filter</button>
+                        </div>
+
+                        <!-- Filter Stock -->
+                        {{-- <div class="d-flex align-items-center">
                             <small class="me-2">Stock:</small>
                             <select class="form-select form-select-sm" aria-label="Stock Filter" id="stock">
                                 @foreach ($stock_filter as $item)
                                     <option value="{{ $item['value'] }}">{{ $item['text'] }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -39,31 +52,18 @@
     </div>
 
     <div class="card">
-        <div class="card-header d-flex justify-content-center">
+        {{-- <div class="card-header d-flex justify-content-center">
             <div class="input-group mt-2">
                 <input class="form-control border rounded-pill" type="search" value="" id="search"
                     placeholder="Search Product Here ...">
             </div>
-        </div>
+        </div> --}}
         <div class="card-body">
             <div class="row" id="product-container">
                 <!-- Produk akan dirender di sini oleh jQuery -->
             </div>
         </div>
         <div class="card-footer bg-body-tertiary d-flex justify-content-center">
-            {{-- <div>
-                <button class="btn btn-falcon-default btn-sm me-2" type="button" disabled="disabled"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Prev">
-                    <span class="fas fa-chevron-left"></span></button><a
-                    class="btn btn-sm btn-falcon-default text-primary me-2" href="#!">1</a><a
-                    class="btn btn-sm btn-falcon-default me-2" href="#!">2</a><a
-                    class="btn btn-sm btn-falcon-default me-2" href="#!">
-                    <span class="fas fa-ellipsis-h"></span></a><a class="btn btn-sm btn-falcon-default me-2"
-                    href="#!">35</a><button class="btn btn-falcon-default btn-sm" type="button"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Next">
-                    <span class="fas fa-chevron-right"> </span>
-                </button>
-            </div> --}}
             <nav>
                 <ul class="pagination justify-content-center" id="pagination">
                     <!-- Kontrol pagination akan dirender di sini -->
@@ -72,9 +72,15 @@
         </div>
     </div>
 
+    @include('product.modals')
+
     @push('scripts')
         <script>
             $(document).ready(function() {
+                $('.multiple-select').select2({
+                    theme: "bootstrap-5",
+                });
+
                 // Format angka ke Rupiah
                 function formatRupiah(angka) {
                     return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -86,6 +92,7 @@
                     searchQuery = searchQuery || $('#search').val();
                     sort = sort || $('#sort').val();
                     stock = stock || $('#stock').val();
+                    no_part = $('#no_part').val();
 
                     let url = '{{ route('product.list') }}';
 
@@ -108,6 +115,7 @@
                             search: searchQuery,
                             sort: sort,
                             stock: stock,
+                            no_part: no_part,
                             _token: '{{ csrf_token() }}' // CSRF token
                         },
                         success: function(response) {
@@ -187,6 +195,45 @@
                     });
                 }
 
+
+                // Event untuk pencarian dan pengurutan
+                function debounce(func, delay) {
+                    let timer;
+                    return function(...args) {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => func.apply(this, args), delay);
+                    };
+                }
+
+                // Debounce untuk pencarian
+                const debouncedSearch = debounce(function() {
+                    let searchQuery = $('#search').val();
+                    // loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
+                    loadProducts(1);
+                }, 800); // Delay 300ms
+
+                // Event untuk pencarian dengan debounce
+                $('#search').keyup(function(e) {
+                    e.preventDefault();
+                    debouncedSearch();
+                });
+
+                $('#sort').change(function() {
+                    loadProducts(1);
+                });
+
+                $('#stock').change(function() {
+                    loadProducts(1);
+                });
+
+                $("#no_part").change(function (e) {
+                    e.preventDefault();
+                    loadProducts(1);
+                });
+                // Inisialisasi
+                loadProducts();
+
+
                 // Fungsi untuk merender kontrol paginasi
                 function renderPagination(currentPage, totalPages, searchQuery, sort, stock) {
                     const paginationContainer = $('#pagination');
@@ -243,39 +290,6 @@
                         }
                     });
                 }
-
-                // Event untuk pencarian dan pengurutan
-                function debounce(func, delay) {
-                    let timer;
-                    return function(...args) {
-                        clearTimeout(timer);
-                        timer = setTimeout(() => func.apply(this, args), delay);
-                    };
-                }
-
-                // Debounce untuk pencarian
-                const debouncedSearch = debounce(function() {
-                    let searchQuery = $('#search').val();
-                    // loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
-                    loadProducts(1);
-                }, 800); // Delay 300ms
-
-                // Event untuk pencarian dengan debounce
-                $('#search').keyup(function(e) {
-                    e.preventDefault();
-                    debouncedSearch();
-                });
-
-                $('#sort').change(function() {
-                    loadProducts(1);
-                });
-
-                $('#stock').change(function() {
-                    loadProducts(1);
-                });
-
-                // Inisialisasi
-                loadProducts();
             });
         </script>
     @endpush
