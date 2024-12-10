@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -25,88 +26,71 @@ class MasterProductController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {
-                    return '<button class="btn btn-sm btn-primary" data-id="' . $row->no_part . '" data-bs-toggle="modal" data-bs-target="#add-image-modal"><i class="fas fa-image"></i></button>';
+                    return '<button class="btn btn-sm btn-primary add-image-product" data-id="' . $row->no_part . '" data-bs-toggle="modal" data-bs-target="#add-image-modal"><i class="fas fa-image"></i></button>';
                 })
                 ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
                 ->make(true);
         }
     }
 
-    public function store(Request $request)
+    public function edit($no_part)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
-            // 'description' => 'nullable|string|max:255', // Validasi deskripsi
-        ]);
-        // try {
-            // Proses upload file
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('product-images', 'public'); // Simpan di storage/public/product-images
-            }
-
-            // Simpan data ke database
-            ProductImage::create([
-                'image' => $imagePath ?? null,
-                // 'description' => $request->input('description'),
-            ]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Product image saved successfully!',
-            ], 200);
-        // } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to save product image. Please try again.',
-            ], 500);
-        // }
-    }
-
-    public function edit($id)
-    {
-        $product = Product::findOrFail($id);
-
+        // $product = Product::findOrFail($id);
+        $product = Product::where('no_part', $no_part)->first();
         return response()->json([
             'success' => true,
             'data' => $product,
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function addImage(Request $request, $no_part)
     {
-        // dd($request->all(), $id);
+        // Validasi input
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Gambar wajib diunggah
         ]);
 
         try {
-            $product = Product::findOrFail($id);
+            // Cari data berdasarkan no_part
+            $productImage = ProductImage::firstOrNew(['no_part' => $no_part]);
 
-            // Jika ada file baru
+            // Jika data baru dibuat, tambahkan created_by
+            if ($productImage->wasRecentlyCreated) {
+                $productImage->created_by = auth()->user()->id;
+            }
+
+            // Jika ada file baru yang diunggah
             if ($request->hasFile('image')) {
                 // Hapus file lama jika ada
-                if ($product->image) {
-                    Storage::disk('public')->delete($product->image);
+                if ($productImage->image) {
+                    Storage::disk('public')->delete($productImage->image);
                 }
 
                 // Simpan file baru
                 $imagePath = $request->file('image')->store('product-images', 'public');
-                $product->image = $imagePath;
+                $productImage->image = $imagePath;
             }
 
-            // Update deskripsi
-            $product->description = $request->input('description');
-            $product->save();
+            // Tambahkan updated_by untuk semua operasi update
+            $productImage->updated_by = auth()->user()->id;
+
+            // Simpan data ke database
+            $productImage->save();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Product image updated successfully!',
+                'message' => $productImage->wasRecentlyCreated
+                    ? 'Product image created successfully!'
+                    : 'Product image updated successfully!',
+                'data' => $productImage,
             ], 200);
         } catch (\Exception $e) {
+            // Log error jika terjadi masalah
+            Log::error('Failed to add/update product image: ' . $e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to update product image. Please try again.',
+                'message' => 'Failed to add/update product image. Please try again.',
             ], 500);
         }
     }

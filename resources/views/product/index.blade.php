@@ -32,7 +32,8 @@
                         </div>
 
                         <div class="d-flex align-items-center">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filter-modal">Filter</button>
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#filter-modal">Filter</button>
                         </div>
 
                         <!-- Filter Stock -->
@@ -141,41 +142,55 @@
 
                             // Render produk
                             response.data.forEach(function(product) {
-                                let productHtml = `
-                                <div class="mb-4 col-md-6 col-lg-4">
-                                    <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
-                                        <div class="overflow-hidden">
-                                            <div class="position-relative rounded-top overflow-hidden">
-                                                <a class="d-block" href="#">
-                                                    <img class="img-fluid rounded-top" src="${product.image || '{{ asset('no-image.jpg') }}'}" alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="p-3">
-                                                <h5 class="fs-9">
-                                                    <a class="text-1100" href="#">${product.nama_part}</a>
-                                                </h5>
-                                                <p class="fs-10 mb-3">
-                                                    <a class="text-500" href="#!">${product.group_tobpm || 'Unknown Category'}</a>
-                                                </p>
-                                                <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-3">
-                                                    ${formatRupiah(product.standard_price_moving_avg_price)}
-                                                </h5>
-                                                <p class="fs-10 mb-1">
-                                                    Code Part: <strong>${product.no_part || 'Unknown Code Part'}</strong>
-                                                </p>
-                                                <p class="fs-10 mb-1">
-                                                    Dealers: <strong>${product.dealer.ahass || 'Unknown Dealers'}</strong>
-                                                </p>
-                                                <p class="fs-10 mb-1">
-                                                    Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">${product.oh > 0 ? product.oh : 'Out of Stock'}</strong>
-                                                </p>
+                                // Dapatkan gambar produk atau gunakan gambar default jika tidak ada
+                                const productImage = product.product_images?.[0]?.image ?
+                                    `{{ asset('storage/') }}/${product.product_images[0].image}` :
+                                    `{{ asset('no-image.jpg') }}`;
+
+
+                                // Template HTML produk
+                                const productHtml = `
+                                    <div class="mb-4 col-md-6 col-lg-4">
+                                        <div class="border rounded-1 h-100 d-flex flex-column justify-content-between pb-3">
+                                            <div class="overflow-hidden">
+                                                <div class="position-relative rounded-top overflow-hidden">
+                                                    <a class="d-block" href="#">
+                                                        <img class="img-fluid rounded-top"
+                                                            src="${productImage}"
+                                                            alt="${product.nama_part || 'No Image'}" />
+                                                    </a>
+                                                </div>
+                                                <div class="p-3">
+                                                    <h5 class="fs-9">
+                                                        <a class="text-1100" href="#">${product.nama_part || 'Unknown Part Name'}</a>
+                                                    </h5>
+                                                    <p class="fs-10 mb-3">
+                                                        <a class="text-500" href="#!">${product.group_tobpm || 'Unknown Category'}</a>
+                                                    </p>
+                                                    <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-3">
+                                                        ${formatRupiah(product.standard_price_moving_avg_price) || 'Unknown Price'}
+                                                    </h5>
+                                                    <p class="fs-10 mb-1">
+                                                        Code Part: <strong>${product.no_part || 'Unknown Code Part'}</strong>
+                                                    </p>
+                                                    <p class="fs-10 mb-1">
+                                                        Dealers: <strong>${product.dealer?.ahass || 'Unknown Dealers'}</strong>
+                                                    </p>
+                                                    <p class="fs-10 mb-1">
+                                                        Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">
+                                                            ${product.oh > 0 ? product.oh : 'Out of Stock'}
+                                                        </strong>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
+
+                                // Tambahkan HTML ke container
                                 productContainer.append(productHtml);
                             });
+
 
                             // Render kontrol paginasi
                             renderPagination(response.current_page, response.last_page, searchQuery, sort,
@@ -226,7 +241,7 @@
                     loadProducts(1);
                 });
 
-                $("#no_part").change(function (e) {
+                $("#no_part").change(function(e) {
                     e.preventDefault();
                     loadProducts(1);
                 });

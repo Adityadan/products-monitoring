@@ -105,10 +105,28 @@
 
             });
 
+            $(document).on('click', '.add-image-product', function() {
+                let id = $(this).data('id');
+                let url = `{{ route('master-product.edit', ':id') }}`.replace(':id', id);
+
+                $.get(url, function(data) {
+                    $('#no_part').val(data.data.no_part);
+                });
+            });
+
             $('#master-product-form').on('submit', function(e) {
                 e.preventDefault();
-
                 let formData = new FormData(this); // Menggunakan FormData untuk menangani file upload
+
+                // Periksa apakah input file berisi file
+                if ($('#image').get(0).files.length === 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Please select a file to upload.',
+                    });
+                    return;
+                }
 
                 Swal.fire({
                     title: 'Saving...',
@@ -119,9 +137,10 @@
                     },
                 });
 
+                let url = `{{ route('master-product.addImage', ':id') }}`.replace(':id', $('#no_part').val());
                 $.ajax({
-                    url: "{{ route('master-product.store') }}",
-                    method: 'POST',
+                    url: url,
+                    method: 'POST', // Menggunakan POST untuk pengiriman file
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -143,8 +162,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error!',
-                            text: xhr.responseJSON?.message ||
-                                'Failed to save the product image. Please try again.',
+                            text: xhr.responseJSON?.message || 'Failed to save the product image. Please try again.',
                         });
                     },
                 });

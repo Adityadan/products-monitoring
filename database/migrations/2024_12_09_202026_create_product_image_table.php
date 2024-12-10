@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_image', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_part');
+            $table->string('no_part');
             $table->string('image');
             $table->integer('created_by');
             $table->integer('updated_by');

@@ -40,9 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('master-product')->name('master-product.')->group(function () {
         Route::get('/', [MasterProductController::class, 'index'])->name('index');
         Route::get('/datatable', [MasterProductController::class, 'datatable'])->name('datatable');
-        // Route::post('/store', [MasterProductController::class, 'store'])->name('store');
-        // Route::get('/edit/{id}', [MasterProductController::class, 'edit'])->name('edit');
-        Route::put('/update/{id}', [MasterProductController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [MasterProductController::class, 'edit'])->name('edit');
+        Route::post('/add-image/{id}', [MasterProductController::class, 'addImage'])->name('addImage');
     });
     Route::prefix('dealer')->name('dealer.')->group(function () {
         Route::get('/', [DealersController::class, 'index'])->name('index');

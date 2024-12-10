@@ -38,7 +38,7 @@ class ProductsController extends Controller
         $sort = $request->get('sort'); // Mengambil filter sort dari request
         $search = $request->get('search'); // Mengambil filter pencarian dari request
         $stock = $request->get('stock'); // Mengambil filter stock dari request
-        $products = Product::with('dealer'); // Relasi 'dealer' harus sesuai dengan model Anda
+        $products = Product::with('dealer')->with('product_images'); // Relasi 'dealer' harus sesuai dengan model Anda
         $no_part = $request->get('no_part');
         // Filter pencarian
         if ($search) {
@@ -82,7 +82,6 @@ class ProductsController extends Controller
         }
         // Pagination
         $products = $products->paginate(9);
-
         return response()->json([
             'success' => true,
             'data' => $products->items(),
