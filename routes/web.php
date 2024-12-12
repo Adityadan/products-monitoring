@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
+use App\Http\Controllers\DistanceDealerController;
 use App\Http\Controllers\MasterProductController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\PermissionAssignmentController;
@@ -51,6 +52,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [DealersController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [DealersController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [DealersController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('distance-dealer')->name('distance-dealer.')->group(function () {
+        Route::get('/', [DistanceDealerController::class, 'index'])->name('index');
+        Route::get('/datatable', [DistanceDealerController::class, 'datatable'])->name('datatable');
+        Route::post('/update/{id}', [DistanceDealerController::class, 'update'])->name('update');
     });
     Route::prefix('roles')->name('roles.')->group(function () {
         Route::get('/', [RolesController::class, 'index'])->name('index');

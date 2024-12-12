@@ -18,6 +18,7 @@ class Dealer extends Model
         'status',
         'se_area',
         'group',
+        'order'
     ];
 
     public function products()
