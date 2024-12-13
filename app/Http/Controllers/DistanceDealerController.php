@@ -17,14 +17,14 @@ class DistanceDealerController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group','order'])->orderBy('order', 'asc');
+            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group','order_distance'])->orderBy('order_distance', 'asc');
             return DataTables::of($dealers)
                 ->addIndexColumn()
-                ->addColumn('order', function ($row) {
-                    $value = isset($row->order) ? $row->order : '0';
+                ->addColumn('order_distance', function ($row) {
+                    $value = isset($row->order_distance) ? $row->order_distance : '0';
                     return '<input type="text" class="form-control form-control-sm text-center order-distance" data-id="' . $row->id . '" id="dealer_' . $row->id . '" name="dealer[' . $row->id . ']" value="' . $value . '">';
                 })
-                ->rawColumns(['order']) // Ensure HTML in the order column is not escaped
+                ->rawColumns(['order_distance']) // Ensure HTML in the order_distance column is not escaped
                 ->make(true);
         }
     }
@@ -34,7 +34,7 @@ class DistanceDealerController extends Controller
         $dealer = Dealer::findOrFail($id);
 
         $validatedData = $request->validate([
-            'order' => 'sometimes|required|integer|unique:dealers,order,' . $dealer->id,
+            'order_distance' => 'sometimes|required|integer|unique:dealers,order_distance,' . $dealer->id,
         ]);
 
         $dealer->update($validatedData);

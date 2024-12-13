@@ -46,7 +46,7 @@
                             <th>Status</th>
                             <th>SE Area</th>
                             <th>Group</th>
-                            <th style="width: 50px">Order</th>
+                            <th style="width: 50px">Order Distance</th>
                         </tr>
                     </thead>
                 </table>
@@ -105,8 +105,8 @@
                             name: 'group'
                         },
                         {
-                            data: 'order',
-                            name: 'order',
+                            data: 'order_distance',
+                            name: 'order_distance',
                             orderable: false,
                             searchable: false
                         },
@@ -122,9 +122,9 @@
 
                 $('#dealer-table').on('keyup', '.order-distance', function() {
                     const id = $(this).data('id');
-                    const order = $(this).val();
-                    console.log(`id: ${id} order: ${order}`);
-                    if (order === '') {
+                    const order_distance = $(this).val();
+                    console.log(`id: ${id} order_distance: ${order_distance}`);
+                    if (order_distance === '') {
                         return;
 
                     }
@@ -135,7 +135,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: {
-                            order: order,
+                            order_distance: order_distance,
                             _method: 'POST' // Jika Anda menggunakan metode PUT untuk update
                         },
                         success: function(response) {

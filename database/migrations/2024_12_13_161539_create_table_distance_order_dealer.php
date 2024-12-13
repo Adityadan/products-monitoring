@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('dealers', function (Blueprint $table) {
-            $table->integer('order_distance')->default(0);
+        Schema::create('distance_order_dealer', function (Blueprint $table) {
+            $table->id();
+            $table->integer('dealer_id');
+            $table->integer('order_distance');
+            $table->string('area');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dealers', function (Blueprint $table) {
-            $table->dropColumn('order_distance');
-        });
+        Schema::dropIfExists('distance_order_dealer');
     }
 };
