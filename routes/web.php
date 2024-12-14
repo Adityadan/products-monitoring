@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DistanceDealerController::class, 'index'])->name('index');
         Route::get('/datatable', [DistanceDealerController::class, 'datatable'])->name('datatable');
         Route::post('/update/{id}', [DistanceDealerController::class, 'update'])->name('update');
+        Route::post('/saveArea', [DistanceDealerController::class, 'saveArea'])->name('saveArea');
     });
     Route::prefix('roles')->name('roles.')->group(function () {
         Route::get('/', [RolesController::class, 'index'])->name('index');

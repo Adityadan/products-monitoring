@@ -12,14 +12,14 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
     <script src="{{ asset('dist/assets/js/jquery-3.6.1.min.js') }}"></script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $(".js-select2").select2({
                 theme: "bootstrap-5",
                 width: "100%",
             });
         });
-    </script>
+    </script> --}}
 
     <!-- Swal2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -72,8 +72,7 @@
     <link href="{{ asset('dist/vendors/choices/choices.min.css') }}" rel="stylesheet" />
 
     {{-- DropzoneJS --}}
-    <link href="{{asset('dist/vendors/dropzone/dropzone.min.css')}}" rel="stylesheet" />
-
+    <link href="{{ asset('dist/vendors/dropzone/dropzone.min.css') }}" rel="stylesheet" />
 
     <!-- Script untuk mengubah arah tampilan dari kanan ke kiri -->
     <script>

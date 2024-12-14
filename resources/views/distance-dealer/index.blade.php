@@ -16,8 +16,8 @@
                                         <option value="Refund">Newest</option>
                                         <option value="Delete">Price</option>
                                     </select> --}}
-                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#import-excel-modal">Import Data</button>
+                                    {{-- <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#import-excel-modal">Import Data</button> --}}
 
                                 </div>
                             </form>
@@ -34,24 +34,43 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <div class="table table-responsive">
-                <table class="table table-bordered font-sans-serif" id="dealer-table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Kode</th>
-                            <th>AHASS</th>
-                            <th>Kota/Kab</th>
-                            <th>Kecamatan</th>
-                            <th>Status</th>
-                            <th>SE Area</th>
-                            <th>Group</th>
-                            <th style="width: 50px">Order Distance</th>
-                        </tr>
-                    </thead>
-                </table>
+            <div class="kanban-container scrollbar me-n3">
+                <div class="kanban-column">
+                    <div class="kanban-column-header">
+                        <h5 class="fs-9 mb-0">
+                            Sorted by Dealers Area <span class="text-500">({{ $dealers_area->count() }})</span>
+                        </h5>
+                    </div>
+                    <div class="kanban-body" id="sortable">
+                        @foreach ($dealers_area as $key => $item)
+                            <div class="kanban-items-container scrollbar" data-sortable="data-sortable">
+                                <div class="kanban-item sortable-item-wrapper">
+                                    <div class="card sortable-item kanban-item-card hover-actions-trigger">
+                                        <div class="card-body">
+                                            <div class="position-relative">
+                                            </div>
+                                            <p class="mb-0 fw-medium font-sans-serif stretched-link"
+                                                data-bs-toggle="modal" data-bs-target="#kanban-modal-1">
+                                                <center>
+                                                    <strong>{{ $item->kota_kab }}</strong>
+                                                </center>
+                                            </p>
+                                            <input type="hidden" name="dealer_areas[]" value="{{ $item->kota_kab }}">
+                                            <input type="hidden" name="order_area[]" value="{{ $key + 1 }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="kanban-column-footer">
+                        <button id="saveDataArea"
+                            class="btn btn-link btn-sm d-block w-100 text-decoration-none text-600 save-data" type="button">
+                            <span id="saveIcon" class="fas fa-save me-2"></span>Save Data
+                        </button>
+                    </div>
+                </div>
             </div>
-
         </div>
         <div class="card-footer bg-body-tertiary d-flex justify-content-center">
             <div>
@@ -62,7 +81,14 @@
     {{-- Modal --}}
     @includeIf('dealer.modals')
     @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(function() {
+                $("#sortable").sortable();
+            });
+        </script>
         <script>
             $(document).ready(function() {
                 $('#dealer-table').DataTable({
@@ -113,49 +139,49 @@
                     ],
                 });
 
-                $('#dealer-table').on('input', '.order-distance', function() {
-                    let value = $(this).val();
-                    // Hanya izinkan angka dan batasi panjangnya hingga 3 digit
-                    value = value.replace(/[^0-9]/g, '').slice(0, 3);
-                    $(this).val(value);
-                });
 
-                $('#dealer-table').on('keyup', '.order-distance', function() {
-                    const id = $(this).data('id');
-                    const order_distance = $(this).val();
-                    console.log(`id: ${id} order_distance: ${order_distance}`);
-                    if (order_distance === '') {
-                        return;
-
-                    }
+                $('#saveDataArea').on('click', function() {
+                    // Ubah ikon menjadi ikon loading
+                    $('#saveIcon').removeClass('fa-save').addClass('fa-spinner fa-spin');
+                    // Ambil data urutan
+                    let dealerAreas = [];
+                    $('#sortable .kanban-items-container').each(function() {
+                        let dealerId = $(this).find('input[name="dealer_areas[]"]').val();
+                        dealerAreas.push(dealerId);
+                    });
+                    let orderAreas = [];
+                    $('#sortable .kanban-items-container').each(function() {
+                        let orderArea = $(this).find('input[name="order_area[]"]').val();
+                        orderAreas.push(orderArea);
+                    })
+                    let url = '{{ route('distance-dealer.saveArea') }}';
+                    // Kirim data dengan AJAX
                     $.ajax({
-                        url: `{{ route('distance-dealer.update', ':id') }}`.replace(':id', id),
+                        url: url,
                         method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
                         data: {
-                            order_distance: order_distance,
-                            _method: 'POST' // Jika Anda menggunakan metode PUT untuk update
+                            _token: '{{ csrf_token() }}',
+                            dealer_areas: dealerAreas,
+                            // order_area: orderAreas,
+                            dealer_id: '{{ $dealer_id }}'
                         },
                         success: function(response) {
-                            console.log(response);
                             Swal.fire({
-                                title: 'Success',
-                                text: response.message,
                                 icon: 'success',
-                                confirmButtonText: 'OK'
+                                title: 'Success',
+                                text: 'Data berhasil disimpan',
                             });
-                            $('#dealer-table').DataTable().ajax.reload(); // Uncomment if you need to reload the table
                         },
-                        error: function(xhr) {
-                            let message = xhr.responseJSON?.message || 'Something went wrong';
+                        error: function(xhr, status, error) {
                             Swal.fire({
-                                title: 'Error',
-                                text: message,
                                 icon: 'error',
-                                confirmButtonText: 'OK'
+                                title: 'Error',
+                                text: 'Terjadi kesalahan saat menyimpan data',
                             });
+                        },
+                        complete: function() {
+                            // Kembalikan ikon ke ikon simpan setelah proses selesai
+                            $('#saveIcon').removeClass('fa-spinner fa-spin').addClass('fa-save');
                         }
                     });
                 });

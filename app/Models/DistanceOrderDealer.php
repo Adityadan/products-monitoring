@@ -20,9 +20,8 @@ class DistanceOrderDealer extends Model
         'deleted_at',
     ];
     protected $fillable = [
-        'id',
-        'distance',
-        'order',
         'dealer_id',
+        'order_distance',
+        'area',
     ];
 }
