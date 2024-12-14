@@ -38,12 +38,12 @@
                 <div class="kanban-column">
                     <div class="kanban-column-header">
                         <h5 class="fs-9 mb-0">
-                            Sorted by Dealers Area <span class="text-500">({{ $dealers_area->count() }})</span>
+                            Sorted Area Dealer <span class="text-500">({{ $dealers_area->count() }})</span>
                         </h5>
                     </div>
-                    <div class="kanban-body" id="sortable">
-                        @foreach ($dealers_area as $key => $item)
-                            <div class="kanban-items-container scrollbar" data-sortable="data-sortable">
+                    <div class="kanban-items-container scrollbar" data-sortable="data-sortable">
+                        <div class="" id="sortable">
+                            @foreach ($dealers_area as $key => $item)
                                 <div class="kanban-item sortable-item-wrapper">
                                     <div class="card sortable-item kanban-item-card hover-actions-trigger">
                                         <div class="card-body">
@@ -60,12 +60,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                     <div class="kanban-column-footer">
                         <button id="saveDataArea"
-                            class="btn btn-link btn-sm d-block w-100 text-decoration-none text-600 save-data" type="button">
+                            class="btn btn-link btn-sm d-block w-100 text-decoration-none text-600 save-data"
+                            type="button">
                             <span id="saveIcon" class="fas fa-save me-2"></span>Save Data
                         </button>
                     </div>
