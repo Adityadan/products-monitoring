@@ -72,9 +72,9 @@ class DistanceDealerController extends Controller
         }, $areas, array_keys($areas));
 
         // Gunakan transaksi untuk memastikan konsistensi data
-        DB::transaction(function () use ($dealer_id, $data) {
+        DB::transaction(function () use ($dealer_id, $data, $kode_dealer) {
             // Hapus data lama dealer dari tabel distance_order_dealer
-            DistanceOrderDealer::where('dealer_id', $dealer_id)->where('kode_dealer', $data[0]['kode_dealer'])->where('area', '!=', $data[0]['area'])->whereNotNull('area')->delete();
+            DistanceOrderDealer::where('dealer_id', $dealer_id)->where('kode_dealer', $kode_dealer)->delete();
 
             // Simpan data baru ke database
             DistanceOrderDealer::insert($data);
