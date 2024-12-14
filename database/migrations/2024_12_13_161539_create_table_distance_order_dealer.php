@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('distance_order_dealer', function (Blueprint $table) {
             $table->id();
             $table->integer('dealer_id');
+            $table->string('kode_dealer');
             $table->integer('order_distance');
             $table->string('area');
             $table->softDeletes();

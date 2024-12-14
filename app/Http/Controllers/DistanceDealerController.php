@@ -55,16 +55,15 @@ class DistanceDealerController extends Controller
         // Validasi input
         $request->validate([
             'dealer_areas' => 'required|array',
-            'dealer_id' => 'required|integer|exists:dealers,id',
         ]);
-
         $areas = $request->dealer_areas;
-        $dealer_id = $request->dealer_id;
-
+        $dealer_id = Auth::user()->id;
+        $kode_dealer = Auth::user()->kode_dealer;
         // Siapkan data untuk disimpan
-        $data = array_map(function ($area, $index) use ($dealer_id) {
+        $data = array_map(function ($area, $index) use ($dealer_id,$kode_dealer) {
             return [
                 'dealer_id' => $dealer_id,
+                'kode_dealer' => $kode_dealer,
                 'area' => $area,
                 'order_distance' => $index + 1, // Urutan dimulai dari 1
                 'created_at' => now(),
@@ -75,7 +74,7 @@ class DistanceDealerController extends Controller
         // Gunakan transaksi untuk memastikan konsistensi data
         DB::transaction(function () use ($dealer_id, $data) {
             // Hapus data lama dealer dari tabel distance_order_dealer
-            DistanceOrderDealer::where('dealer_id', $dealer_id)->delete();
+            DistanceOrderDealer::where('dealer_id', $dealer_id)->where('kode_dealer', $data[0]['kode_dealer'])->where('area', '!=', $data[0]['area'])->whereNotNull('area')->delete();
 
             // Simpan data baru ke database
             DistanceOrderDealer::insert($data);

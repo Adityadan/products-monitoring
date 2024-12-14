@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dealer;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,11 +14,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('users.index');
+        $kode_dealer = Dealer::select('kode')->get();
+        return view('users.index', compact('kode_dealer'));
     }
     public function datatable(Request $request)
     {
-        $users = User::select(['id', 'name', 'email', 'username', 'created_at', 'updated_at']);
+        $users = User::select(['id', 'name', 'email', 'username', 'created_at', 'updated_at','kode_dealer']);
 
         return DataTables::of($users)
             ->addIndexColumn()
@@ -46,6 +48,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'username' => 'required|string',
+            'kode_dealer' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -55,6 +58,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
+            'kode_dealer' => $request->kode_dealer,
             'password' => bcrypt($request->password),
         ]);
 
@@ -65,11 +69,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $dealer = Dealer::select('kode')->get();
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        return response()->json(['data' => $user], 200);
+        return response()->json(['data' => $user, 'dealer' => $dealer], 200);
     }
 
     // Update the specified user in storage
@@ -85,14 +89,15 @@ class UserController extends Controller
             'name' => 'sometimes|nullable|string|max:255',
             'email' => 'sometimes|nullable|string|email|max:255|unique:users,email,' . $id,
             // 'password' => 'sometimes|nullable|string|min:8',
-            'username' => 'sometimes|nullable|string|min:8',
+            'username' => 'sometimes|nullable|string',
+            'kode_dealer' => 'sometimes|nullable|string',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $updateFields = $request->only(['name', 'email', /* 'password', */ 'username']);
+        $updateFields = $request->only(['name', 'email', /* 'password', */'kode_dealer', 'username']);
         // if (isset($updateFields['password'])) {
         //     $updateFields['password'] = bcrypt($updateFields['password']);
         // }

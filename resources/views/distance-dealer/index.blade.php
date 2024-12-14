@@ -9,24 +9,10 @@
                     <div class="row gx-2 align-items-center">
                         <div class="col-auto">
                             <form class="row gx-2">
-                                {{-- <div class="col-auto"><small>Sort by:</small></div> --}}
                                 <div class="col-auto">
-                                    {{-- <select class="form-select form-select-sm" aria-label="Bulk actions">
-                                        <option selected="">Best Match</option>
-                                        <option value="Refund">Newest</option>
-                                        <option value="Delete">Price</option>
-                                    </select> --}}
-                                    {{-- <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#import-excel-modal">Import Data</button> --}}
-
                                 </div>
                             </form>
                         </div>
-                        {{-- <div class="col-auto pe-0">
-                            <a class="text-600 px-1" href="../../../app/e-commerce/product/product-list.html"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Product List"><span
-                                    class="fas fa-list-ul"></span></a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -146,16 +132,17 @@
                     $('#saveIcon').removeClass('fa-save').addClass('fa-spinner fa-spin');
                     // Ambil data urutan
                     let dealerAreas = [];
-                    $('#sortable .kanban-items-container').each(function() {
+                    $('#sortable .kanban-item').each(function() {
                         let dealerId = $(this).find('input[name="dealer_areas[]"]').val();
                         dealerAreas.push(dealerId);
                     });
                     let orderAreas = [];
-                    $('#sortable .kanban-items-container').each(function() {
+                    $('#sortable .kanban-item').each(function() {
                         let orderArea = $(this).find('input[name="order_area[]"]').val();
                         orderAreas.push(orderArea);
                     })
                     let url = '{{ route('distance-dealer.saveArea') }}';
+
                     // Kirim data dengan AJAX
                     $.ajax({
                         url: url,
@@ -163,8 +150,6 @@
                         data: {
                             _token: '{{ csrf_token() }}',
                             dealer_areas: dealerAreas,
-                            // order_area: orderAreas,
-                            dealer_id: '{{ $dealer_id }}'
                         },
                         success: function(response) {
                             Swal.fire({

@@ -22,6 +22,15 @@
                         <input type="username" id="username" name="username" class="form-control" required>
                     </div>
                     <div class="mb-3">
+                        <label for="kode_dealer" class="form-label">Kode Dealer</label>
+                        <select class="form-select" name="kode_dealer" id="kode_dealer">
+                            <option value="" selected>Pilih Dealer</option>
+                            @foreach ($kode_dealer as $item)
+                                <option value="{{ $item->kode }}">{{ $item->kode }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="text" id="password" name="password" class="form-control" required>
                     </div>

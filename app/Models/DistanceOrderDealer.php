@@ -21,6 +21,7 @@ class DistanceOrderDealer extends Model
     ];
     protected $fillable = [
         'dealer_id',
+        'kode_dealer',
         'order_distance',
         'area',
     ];

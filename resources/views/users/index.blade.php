@@ -26,6 +26,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Username</th>
+                            <th scope="col">Kode Dealer</th>
                             <th scope="col">Dibuat</th>
                             <th scope="col">Diubah</th>
                             <th scope="col">Action</th>
@@ -38,7 +39,7 @@
         </div>
     </div>
     {{-- Modal --}}
-    @includeIf('users.modals')
+    @includeIf('users.modals', ['kode_dealer' => $kode_dealer])
     @push('scripts')
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
@@ -73,6 +74,10 @@
                             name: 'username'
                         },
                         {
+                            data: 'kode_dealer',
+                            name: 'kode_dealer'
+                        },
+                        {
                             data: 'created_at',
                             name: 'created_at'
                         },
@@ -94,31 +99,43 @@
             $('#add-user-button').on('click', function() {
                 // Reset form modal
                 $('#users-modal .modal-title').text('Add User');
-                $('#edit-dealer-id').val('');
-                $('#name').val('');
-                $('#email').val('');
-                $('#username').val('');
+                // $('#edit-dealer-id').val('');
+                // $('#name').val('');
+                // $('#email').val('');
+                // $('#username').val('');
                 $('#password').val('').parent().show(); // Show the password input and its label
-                $('#users-modal').modal('show');
+                // $('#kode_dealer').val('');
+                // $('#users-modal').modal('show');
+                $('#users-form')[0].reset();
+
             });
 
             // Open modal for Edit User
             // Handle Edit button click
             $('#users-table').on('click', '.edit-user-button', function() {
                 let id = $(this).data('id');
+
                 let url = '{{ route('users.edit', ':id') }}'.replace(':id', id);
 
                 // Fetch data user via AJAX
                 $.get(url, function(response) {
                     let data = response['data'];
+                    let dealer = response['dealer'];
+                    let user_dealer = response['data'].kode_dealer;
+                    let dealer_html = '<option value="" selected>Pilih Dealer</option>';
+                    dealer_html += dealer.map(function(dealer) {
+                        return `<option value="${dealer.kode}" ${dealer.kode == user_dealer ? 'selected' : ''}>${dealer.kode}</option>`;
+                    }).join('');
 
                     // Set data ke form modal
                     $('#users-modal .modal-title').text('Edit User');
-                    $('#edit-dealer-id').val(data.id);
+                    $('#edit-user-id').val(data.id);
                     $('#name').val(data.name);
+                    $('#kode_dealer').html(dealer_html);
                     $('#email').val(data.email);
                     $('#username').val(data.username);
                     $('#password').parent().hide(); // Hide the password input and its label
+                    $('#password').removeAttr('required');
                     $('#users-modal').modal('show');
                 }).fail(function(xhr) {
                     Swal.fire({
@@ -247,7 +264,7 @@
             $('#users-form').on('submit', function(e) {
                 e.preventDefault();
 
-                let id = $('#edit-dealer-id').val();
+                let id = $('#edit-user-id').val();
                 // let url = id ? '/users/' + id : '/users';
                 let url = id ? '{{ route('users.update', ':id') }}'.replace(':id', id) :
                     '{{ route('users.store') }}';
