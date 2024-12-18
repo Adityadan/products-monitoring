@@ -23,7 +23,7 @@
                         </div> --}}
                         <!-- Sort by -->
                         <div class="d-flex align-items-center">
-                            <small class="me-2">Sort by:</small>
+                            <small class="me-2 text-nowrap">Sort by:</small>
                             <select class="form-select form-select-sm" aria-label="" id="sort">
                                 @foreach ($filters as $item)
                                     <option value="{{ $item['value'] }}">{{ $item['text'] }}</option>
@@ -143,8 +143,10 @@
                             // Render produk
                             response.data.forEach(function(product) {
                                 // Dapatkan gambar produk atau gunakan gambar default jika tidak ada
-                                const productImage = product.product_images?.[0]?.image ?
-                                    `{{ asset('storage/') }}/${product.product_images[0].image}` :
+                                console.log(product.product_image);
+
+                                const productImage = product.product_image ?
+                                    `{{ asset('storage/') }}/${product.product_image}` :
                                     `{{ asset('no-image.jpg') }}`;
 
 
@@ -174,7 +176,10 @@
                                                         Code Part: <strong>${product.no_part || 'Unknown Code Part'}</strong>
                                                     </p>
                                                     <p class="fs-10 mb-1">
-                                                        Dealers: <strong>${product.dealer?.ahass || 'Unknown Dealers'}</strong>
+                                                        Dealers: <strong>${product.ahass || 'Unknown Dealers'}</strong>
+                                                    </p>
+                                                    <p class="fs-10 mb-1">
+                                                        Dealers Location: <strong>${product.kota_kab || 'Unknown Dealers'}</strong>
                                                     </p>
                                                     <p class="fs-10 mb-1">
                                                         Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">
@@ -182,6 +187,9 @@
                                                         </strong>
                                                     </p>
                                                 </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end px-3">
+                                                <div><a class="btn btn-sm btn-falcon-default" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart" id="addToCart" value="${product.product_id}"><span class="fas fa-cart-plus"></span></a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -305,6 +313,14 @@
                         }
                     });
                 }
+
+                $('#product-container').on('click', '#addToCart',function (e) {
+                    e.preventDefault();
+
+                    var productId = $(this).attr('value');
+                    console.log(productId);
+
+                });
             });
         </script>
     @endpush

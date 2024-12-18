@@ -13,9 +13,13 @@ class DistanceDealerController extends Controller
 {
     public function index()
     {
-        $dealers_area = Dealer::select('kota_kab')->distinct()->get();
+        $area = Dealer::select('kota_kab')->distinct()->get();
         $dealer_id = Auth::user()->id;
-        return view('distance-dealer.index', compact('dealers_area', 'dealer_id'));
+        $data_dealers_area = DistanceOrderDealer::select('area')->where('dealer_id', $dealer_id)->get();
+        $dealers_area = $data_dealers_area->map(function ($item) {
+            return ['kota_kab' => $item->area];
+        })->toArray();
+        return view('distance-dealer.index', compact('area', 'dealer_id','dealers_area'));
     }
 
     public function datatable(Request $request)

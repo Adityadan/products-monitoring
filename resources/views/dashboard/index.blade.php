@@ -1,15 +1,4 @@
 <x-templates.default>
-    {{-- <div class="card mb-3">
-        <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);"></div> <!--/.bg-holder-->
-        <div class="card-body position-relative">
-          <div class="row">
-            <div class="col-lg-8">
-              <h3>Selamat {{ date('H') < 12 ? 'Pagi' : (date('H') < 18 ? 'Siang' : (date('H') < 21 ? 'Sore' : 'Malam')) }}, {{ Auth::user()->name }}</h3>
-              <p class="mt-2">Selamat datang di <strong>Dashboard</strong> {{ config('app.name') }}</p>
-            </div>
-          </div>
-        </div>
-      </div> --}}
     <div class="row g-3 mb-3">
         <div class="col-xxl-6 col-xl-12">
             <div class="row g-3">
@@ -21,7 +10,9 @@
                             </div><!--/.bg-holder-->
                             <div class="position-relative z-2">
                                 <div>
-                                    <h3 class="text-primary mb-1">Selamat {{ date('H') < 12 ? 'Pagi' : (date('H') < 18 ? 'Siang' : (date('H') < 21 ? 'Sore' : 'Malam')) }}, {{ Auth::user()->name }}!</h3>
+                                    <h3 class="text-primary mb-1">Good
+                                        {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : (date('H') < 21 ? 'Evening' : 'Night')) }},
+                                        User <b>{{ Auth::user()->name }}</b>!</h3>
                                     <p>Here’s what happening with your store today </p>
                                 </div>
                                 <div class="d-flex py-3">
@@ -297,6 +288,236 @@
                     <!-- Find the JS file for the following chart at: src/js/charts/echarts/total-sales-ecommerce.js--><!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/theme.js-->
                     <div class="echart-line-total-sales-ecommerce" data-echart-responsive="true"
                         data-options='{"optionOne":"ecommerceLastMonth","optionTwo":"ecommercePrevYear"}'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card h-lg-100 overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="table-responsive scrollbar">
+                        <table class="table table-dashboard mb-0 table-borderless fs-10 border-200">
+                            <thead class="bg-body-tertiary">
+                                <tr>
+                                    <th class="text-900">Best Selling Products</th>
+                                    <th class="text-900 text-center">Orders(269)</th>
+                                    <th class="text-900 text-center">Order(%)</th>
+                                    <th class="text-900 text-end">Revenue</th>
+                                    <th class="text-900 pe-x1 text-end" style="width: 8rem">Revenue (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-bottom border-200">
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/1.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">iPad Pro 2020
+                                                        11</a></h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Tablet</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">26</td>
+                                    <td class="align-middle text-center fw-semi-bold">31%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$1311</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="41"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 41%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">41%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom border-200">
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/2.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">iPhone XS</a>
+                                                </h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Smartphone</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">18</td>
+                                    <td class="align-middle text-center fw-semi-bold">29%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$1311</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="41"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 41%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">41%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom border-200">
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/3.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">Amazfit Pace
+                                                        (Global)</a></h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Smartwatch</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">16</td>
+                                    <td class="align-middle text-center fw-semi-bold">27%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$539</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="27"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 27%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">27%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom border-200">
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/4.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">Lotto AMF Posh
+                                                        Sports Plus</a></h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Shoes</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">11</td>
+                                    <td class="align-middle text-center fw-semi-bold">21%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$245</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="17"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 17%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">17%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom border-200">
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/5.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">Casual Long
+                                                        Sleeve Hoodie</a></h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Jacket</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">10</td>
+                                    <td class="align-middle text-center fw-semi-bold">19%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$234</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="7"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 7%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">7%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom border-200">
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/6.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">Playstation 4
+                                                        1TB Slim</a></h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Console</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">10</td>
+                                    <td class="align-middle text-center fw-semi-bold">19%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$234</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="7"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 7%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">7%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center position-relative"><img
+                                                class="rounded-1 border border-200"
+                                                src="../assets/img/ecommerce/7.jpg" width="60" alt="" />
+                                            <div class="flex-1 ms-3">
+                                                <h6 class="mb-1 fw-semi-bold text-nowrap"><a
+                                                        class="text-900 stretched-link" href="#!">SUNGAIT
+                                                        Lightweight Sunglass</a></h6>
+                                                <p class="fw-semi-bold mb-0 text-500">Jacket</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center fw-semi-bold">10</td>
+                                    <td class="align-middle text-center fw-semi-bold">19%</td>
+                                    <td class="align-middle text-end fw-semi-bold">$234</td>
+                                    <td class="align-middle pe-x1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress me-3 rounded-3 bg-200"
+                                                style="height: 5px; width:80px" role="progressbar" aria-valuenow="7"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar bg-primary rounded-pill" style="width: 7%;">
+                                                </div>
+                                            </div>
+                                            <div class="fw-semi-bold ms-2">7%</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer bg-body-tertiary py-2">
+                    <div class="row flex-between-center">
+                        <div class="col-auto"><select class="form-select form-select-sm">
+                                <option>Last 7 days</option>
+                                <option>Last Month</option>
+                                <option>Last Year</option>
+                            </select></div>
+                        <div class="col-auto"><a class="btn btn-sm btn-falcon-default" href="#!">View All</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -24,29 +24,52 @@
                 <div class="kanban-column">
                     <div class="kanban-column-header">
                         <h5 class="fs-9 mb-0">
-                            Sorted Area Dealer <span class="text-500">({{ $dealers_area->count() }})</span>
+                            Sorted Area Dealer <span class="text-500">({{ $area->count() }})</span>
                         </h5>
                     </div>
                     <div class="kanban-items-container scrollbar" data-sortable="data-sortable">
                         <div class="" id="sortable">
-                            @foreach ($dealers_area as $key => $item)
-                                <div class="kanban-item sortable-item-wrapper">
-                                    <div class="card sortable-item kanban-item-card hover-actions-trigger">
-                                        <div class="card-body">
-                                            <div class="position-relative">
+                            @if ($dealers_area)
+                                @foreach ($dealers_area as $key => $item)
+                                    <div class="kanban-item sortable-item-wrapper">
+                                        <div class="card sortable-item kanban-item-card hover-actions-trigger">
+                                            <div class="card-body">
+                                                <div class="position-relative">
+                                                </div>
+                                                <p class="mb-0 fw-medium font-sans-serif stretched-link"
+                                                    data-bs-toggle="modal" data-bs-target="#kanban-modal-1">
+                                                    <center>
+                                                        <strong>{{ $item['kota_kab'] }}</strong>
+                                                    </center>
+                                                </p>
+                                                <input type="hidden" name="dealer_areas[]"
+                                                    value="{{ $item['kota_kab'] }}">
+                                                <input type="hidden" name="order_area[]" value="{{ $key + 1 }}">
                                             </div>
-                                            <p class="mb-0 fw-medium font-sans-serif stretched-link"
-                                                data-bs-toggle="modal" data-bs-target="#kanban-modal-1">
-                                                <center>
-                                                    <strong>{{ $item->kota_kab }}</strong>
-                                                </center>
-                                            </p>
-                                            <input type="hidden" name="dealer_areas[]" value="{{ $item->kota_kab }}">
-                                            <input type="hidden" name="order_area[]" value="{{ $key + 1 }}">
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @else
+                                @foreach ($area as $key => $item)
+                                    <div class="kanban-item sortable-item-wrapper">
+                                        <div class="card sortable-item kanban-item-card hover-actions-trigger">
+                                            <div class="card-body">
+                                                <div class="position-relative">
+                                                </div>
+                                                <p class="mb-0 fw-medium font-sans-serif stretched-link"
+                                                    data-bs-toggle="modal" data-bs-target="#kanban-modal-1">
+                                                    <center>
+                                                        <strong>{{ $item->kota_kab }}</strong>
+                                                    </center>
+                                                </p>
+                                                <input type="hidden" name="dealer_areas[]"
+                                                    value="{{ $item->kota_kab }}">
+                                                <input type="hidden" name="order_area[]" value="{{ $key + 1 }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="kanban-column-footer">

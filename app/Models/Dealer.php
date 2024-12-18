@@ -25,4 +25,10 @@ class Dealer extends Model
     {
         return $this->hasMany(Product::class, 'kode_dealer', 'kode');
     }
+
+    public function distance_order()
+    {
+        return $this->hasMany(DistanceOrderDealer::class, 'area', 'kota_kab');
+        // return $this->hasMany(DistanceOrderDealer::class);
+    }
 }

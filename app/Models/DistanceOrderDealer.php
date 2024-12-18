@@ -25,4 +25,10 @@ class DistanceOrderDealer extends Model
         'order_distance',
         'area',
     ];
+
+    public function dealer()
+    {
+        return $this->belongsTo(Dealer::class, 'area', 'kota_kab');
+        // return $this->belongsTo(Dealer::class);
+    }
 }
