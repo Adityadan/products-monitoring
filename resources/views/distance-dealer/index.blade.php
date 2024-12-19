@@ -175,18 +175,21 @@
                             dealer_areas: dealerAreas,
                         },
                         success: function(response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: 'Data berhasil disimpan',
-                            });
-                        },
-                        error: function(xhr, status, error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Terjadi kesalahan saat menyimpan data',
-                            });
+                            console.log(response);
+                            if (response.status == 'success') {
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message,
+                                });
+                            }else{
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message,
+                                });
+                            }
                         },
                         complete: function() {
                             // Kembalikan ikon ke ikon simpan setelah proses selesai
