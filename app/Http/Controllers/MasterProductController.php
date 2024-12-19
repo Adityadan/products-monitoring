@@ -52,10 +52,12 @@ class MasterProductController extends Controller
 
         try {
             // Cari data berdasarkan no_part
-            $productImage = ProductImage::firstOrNew(['no_part' => $no_part]);
+            $productImage = ProductImage::where('no_part', $no_part)->first();
 
-            // Jika data baru dibuat, tambahkan created_by
-            if ($productImage->wasRecentlyCreated) {
+            // Jika data baru dibuat, buat instance baru dan tambahkan created_by
+            if (empty($productImage)) {
+                $productImage = new ProductImage();
+                $productImage->no_part = $no_part;
                 $productImage->created_by = auth()->user()->id;
             }
 

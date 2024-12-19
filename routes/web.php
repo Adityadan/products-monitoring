@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
@@ -107,6 +108,11 @@ Route::middleware('auth')->group(function () {
         // Route::resource('/', MenusController::class);
         Route::get('/datatable', [MenusController::class, 'datatable'])->name('datatable');
         Route::get('/parent-menu', [MenusController::class, 'parentMenu'])->name('parent-menu');
+    });
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add', [CartController::class, 'addToCart'])->name('add');
+        Route::get('/show', [CartController::class, 'showCart'])->name('show');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

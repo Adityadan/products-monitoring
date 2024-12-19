@@ -13,6 +13,13 @@ class ProductImage extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'no_part',
+        'image',
+        'created_by',
+        'updated_by',
+    ];
+
     public $timestamps = false;
 
     public function product()

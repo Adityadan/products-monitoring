@@ -36,15 +36,10 @@
                                 data-bs-target="#filter-modal">Filter</button>
                         </div>
 
-                        <!-- Filter Stock -->
-                        {{-- <div class="d-flex align-items-center">
-                            <small class="me-2">Stock:</small>
-                            <select class="form-select form-select-sm" aria-label="Stock Filter" id="stock">
-                                @foreach ($stock_filter as $item)
-                                    <option value="{{ $item['value'] }}">{{ $item['text'] }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-success btn-cart" data-bs-toggle="modal"
+                                data-bs-target="#cart-modal"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,8 +138,6 @@
                             // Render produk
                             response.data.forEach(function(product) {
                                 // Dapatkan gambar produk atau gunakan gambar default jika tidak ada
-                                console.log(product.product_image);
-
                                 const productImage = product.product_image ?
                                     `{{ asset('storage/') }}/${product.product_image}` :
                                     `{{ asset('no-image.jpg') }}`;
@@ -189,7 +182,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end px-3">
-                                                <div><a class="btn btn-sm btn-falcon-default" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart" id="addToCart" value="${product.product_id}"><span class="fas fa-cart-plus"></span></a></div>
+                                                <div><a class="btn btn-sm btn-falcon-default" href="#!" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart" id="addToCart" data-id="${product.product_id}"><span class="fas fa-cart-plus"></span></a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -314,12 +307,52 @@
                     });
                 }
 
-                $('#product-container').on('click', '#addToCart',function (e) {
+                $('#product-container').on('click', '#addToCart', function(e) {
                     e.preventDefault();
 
-                    var productId = $(this).attr('value');
-                    console.log(productId);
+                    let productId = $(this).data('id');
+                    let quantity = 1;
 
+                    $.ajax({
+                        url: "{{ route('cart.add') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            product_id: productId,
+                            quantity: quantity,
+                        },
+                        success: function(response) {
+                            // console.log(response.cart);
+                            console.log(response);
+                            if (response.status == 'error') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message,
+                                });
+                            }
+
+
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+
+                });
+
+                $('.btn-cart').click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('cart.show') }}",
+                        data: "data",
+                        dataType: "json",
+                        success: function(response) {
+                            let cartContent = response.cart_content;
+                            $('.cart-item').html(cartContent);
+                        }
+                    });
                 });
             });
         </script>
