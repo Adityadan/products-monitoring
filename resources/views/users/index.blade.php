@@ -124,7 +124,7 @@
                     let user_dealer = response['data'].kode_dealer;
                     let dealer_html = '<option value="" selected>Pilih Dealer</option>';
                     dealer_html += dealer.map(function(dealer) {
-                        return `<option value="${dealer.kode}" ${dealer.kode == user_dealer ? 'selected' : ''}>${dealer.kode}</option>`;
+                        return `<option value="${dealer.kode}" ${dealer.kode == user_dealer ? 'selected' : ''}>(${dealer.kode}) ${dealer.ahass}</option>`;
                     }).join('');
 
                     // Set data ke form modal

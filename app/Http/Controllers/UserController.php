@@ -14,9 +14,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $kode_dealer = Dealer::select('kode')->get();
+        $kode_dealer = Dealer::select('kode', 'ahass')->get();
         return view('users.index', compact('kode_dealer'));
     }
+
     public function datatable(Request $request)
     {
         $users = User::select(['id', 'name', 'email', 'username', 'created_at', 'updated_at','kode_dealer']);
@@ -69,7 +70,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $dealer = Dealer::select('kode')->get();
+        $dealer = Dealer::select('kode', 'ahass')->orderBy('ahass')->get();
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
