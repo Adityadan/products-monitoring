@@ -341,19 +341,117 @@
 
                 });
 
+
                 $('.btn-cart').click(function(e) {
                     e.preventDefault();
+                    cartContent();
+                });
+
+                $('#cart-item').on('click', '.qty-minus, .qty-plus', function(e) {
+                    e.preventDefault();
+
+                    let inputType = $(this).data('type');
+                    let productId = $(this).data('id');
+
                     $.ajax({
-                        type: "GET",
-                        url: "{{ route('cart.show') }}",
-                        data: "data",
+                        type: "POST",
+                        url: "{{ route('cart.update') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            product_id: productId,
+                            type: inputType
+                        },
                         dataType: "json",
                         success: function(response) {
-                            let cartContent = response.cart_content;
-                            $('.cart-item').html(cartContent);
+                            if (response.success) {
+                                // Reload cart content
+                                cartContent();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to update cart'
+                            });
+                            console.log(xhr.responseText);
                         }
                     });
                 });
+
+                $('#cart-item').on('click', '#remove-product', function(e) {
+                    e.preventDefault();
+
+                    let productId = $(this).data('id');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('cart.delete') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            product_id: productId
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message
+                                });
+                                // Reload cart content
+                                cartContent();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to update cart'
+                            });
+                            console.log(xhr.responseText);
+                        }
+                    });
+                });
+
+                // Fungsi untuk memuat ulang konten cart
+                function cartContent() {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('cart.show') }}",
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.cart_content) {
+                                $('#cart-item').html(response.cart_content);
+                                $('.btn-lanjut').show();
+                            } else {
+                                $('#cart-item').html('');
+                                $('.btn-lanjut').hide();
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to load cart content'
+                            });
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+
             });
         </script>
     @endpush

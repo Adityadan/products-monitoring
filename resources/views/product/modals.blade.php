@@ -62,7 +62,7 @@
                     </div>
 
                     <!-- Cart Item -->
-                    <div class="cart-item">
+                    <div class="cart-item" id="cart-item">
 
                     </div>
 
@@ -72,7 +72,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     {{-- <button type="button" class="btn btn-primary">Lanjut</button> --}}
-                    <a href="{{ route('cart.index') }}" class="btn btn-primary">Lanjut</a>
+                    <a href="{{ route('cart.index') }}" class="btn btn-primary btn-lanjut">Lanjut</a>
                 </div>
             </form>
         </div>

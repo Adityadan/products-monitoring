@@ -113,6 +113,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
         Route::post('/add', [CartController::class, 'addToCart'])->name('add');
         Route::get('/show', [CartController::class, 'showCart'])->name('show');
+        Route::post('/update', [CartController::class, 'updateQuantity'])->name('update');
+        Route::post('/delete', [CartController::class, 'deleteProduct'])->name('delete');
+
+        Route::get('/load', [CartController::class, 'loadCart'])->name('load');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

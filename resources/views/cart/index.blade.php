@@ -25,22 +25,37 @@
                 <div class="tab-pane preview-tab-pane active" role="tabpanel"
                     aria-labelledby="tab-dom-b0aa3722-fa3d-4cce-b319-5c7f99be1924"
                     id="dom-b0aa3722-fa3d-4cce-b319-5c7f99be1924">
-                    <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">Nama</label><input class="form-control" id="exampleFormControlInput1" type="email"
-                            placeholder="name@example.com" /></div>
+                    <div class="mb-3"><label class="form-label" for="nama">Nama</label><input class="form-control"
+                            id="nama" type="text" placeholder="masukkan nama" /></div>
 
-                    <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">Nomor Telepon</label><input class="form-control" id="exampleFormControlInput1" type="email"
-                        placeholder="name@example.com" /></div>
+                    <div class="mb-3"><label class="form-label" for="no_telp">Nomor Telepon</label><input
+                            class="form-control" id="no_telp" type="number" placeholder="masukkan nomor telepon" />
+                    </div>
 
                     <div class="mb-3"><label class="form-label" for="exampleFormControlTextarea1">Ekspedisi</label>
                         <select class="form-select" aria-label="Default select example">
-                            <option selected="">Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
+                            <option selected="" disabled>Pilih Ekspedisi</option>
+                            <option>J&T Express</option>
+                            <option>JNE</option>
+                            <option>SiCepat</option>
+                            <option>Ninja Xpress</option>
+                            <option>TIKI</option>
+                            <option>Pos Indonesia</option>
+                            <option>Shopee Xpress</option>
+                            <option>Wahana</option>
+                            <option>Lion Parcel</option>
+                            <option>RPX (Rapid Express)</option>
+                            <option>LBC Express</option>
+                            <option>Anteraja</option>
+                            <option>GrabExpress</option>
+                            <option>GoSend</option>
+                            <option>Paxel</option>
+                            <option>SAP Express</option>
+                        </select>
                     </div>
-                    <div class="mb-3"><label class="form-label" for="exampleFormControlTextarea1">Alamat</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="mb-3"><label class="form-label" for="alamat">Alamat</label>
+                        <textarea class="form-control" id="alamat" rows="3" placeholder="masukkan alamat" name="alamat"
+                            id="alamat"></textarea>
                     </div>
                 </div>
             </div>
@@ -61,7 +76,7 @@
         <div class="card-header">
             <div class="row justify-content-between">
                 <div class="col-md-auto">
-                    <h5 class="mb-3 mb-md-0">Shopping Cart (7 Items)</h5>
+                    <h5 class="mb-3 mb-md-0" id="cart-header-total">Shopping Cart (7 Items)</h5>
                 </div>
                 {{-- <div class="col-md-auto">
                     <a class="btn btn-sm btn-outline-secondary border-300 me-2 shadow-none"
@@ -84,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cart_content">
+            <div class="cart_content" id="cart-content">
                 {{-- <div class="row gx-x1 mx-0 align-items-center border-bottom border-200">
                     <div class="col-8 py-3 px-x1">
                         <div class="d-flex align-items-center">
@@ -135,10 +150,10 @@
                 </div>
                 <div class="col px-0">
                     <div class="row gx-x1 mx-0">
-                        <div class="col-md-8 py-2 px-x1 d-none d-md-block text-center">
+                        <div class="col-md-8 py-2 px-x1 d-none d-md-block text-center" id="total-items">
                             7 (items)
                         </div>
-                        <div class="col-12 col-md-4 text-end py-2 px-x1">$8516</div>
+                        <div class="col-12 col-md-4 text-end py-2 px-x1" id="total">$8516</div>
                     </div>
                 </div>
             </div>
@@ -146,10 +161,10 @@
         <div class="card-footer bg-body-tertiary d-flex justify-content-end">
             <form class="me-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control" type="text" placeholder="Promocode" /><button
+                    {{-- <input class="form-control" type="text" placeholder="Promocode" /><button
                         class="btn btn-outline-secondary border-300 btn-sm shadow-none" type="submit">
                         Apply
-                    </button>
+                    </button> --}}
                 </div>
             </form>
             <a class="btn btn-sm btn-primary" href="../../app/e-commerce/checkout.html">Checkout</a>
@@ -157,22 +172,30 @@
     </div>
 
     @push('scripts')
-    <script>
-        $(document).ready(function () {
-
-        });
-        function loadCart() {
-            $.ajax({
-                type: "GET",
-                url: "url",
-                data: "data",
-                dataType: "dataType",
-                success: function (response) {
-
-                }
+        <script>
+            $(document).ready(function() {
+                loadCart();
             });
-        }
-    </script>
+
+            function loadCart() {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('cart.load') }}",
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                        let cart_content = response.cart_content;
+                        let total_items = response.total.total_items;
+                        let total = response.total.total_price;
+
+                        $('#cart-content').html(cart_content);
+                        $('#total-items').text(total_items);
+                        $('#total').text(total);
+                        $('#cart-header-total').text(`Shopping Cart (${total_items} Items)`);
+                    }
+                });
+            }
+        </script>
     @endpush
 
 </x-templates.default>
