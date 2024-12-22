@@ -44,6 +44,27 @@ class ProductsController extends Controller
         $stock = $request->get('stock'); // Filter stok
         $no_part = $request->get('no_part'); // Filter nomor part
         $kodeDealer = Auth::user()->kode_dealer;
+        $cek_data_product_exists = DB::table('products')->exists();
+        $cek_data_dealer_exists = DB::table('dealers')->exists();
+
+        if (!$cek_data_product_exists || !$cek_data_dealer_exists) {
+            $message = '';
+
+            if (!$cek_data_product_exists && !$cek_data_dealer_exists) {
+                $message = 'Data products dan dealers kosong! Silahkan Import Excel Data Products dan Data Dealers.';
+            } elseif (!$cek_data_product_exists) {
+                $message = 'Data products kosong! Silahkan Import Excel Data Products.';
+            } elseif (!$cek_data_dealer_exists) {
+                $message = 'Data dealers kosong! Silahkan Import Excel Data Dealers.';
+            }
+
+            return response()->json([
+                'data' => [],
+                'message' => $message,
+            ]);
+        }
+
+        // Dump hasil data untuk debugging
 
         $products = DB::table('products as p')
             ->leftJoin('dealers as d', 'p.kode_dealer', '=', 'd.kode')

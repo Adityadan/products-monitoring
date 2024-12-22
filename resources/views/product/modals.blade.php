@@ -29,10 +29,10 @@
                             placeholder="Enter product name or code">
                     </div>
                 </div>
-                {{-- <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Apply Filters</button>
-                </div> --}}
+                    <button type="submit" class="btn btn-primary" id="apply-filter">Apply Filters</button>
+                </div>
             </form>
         </div>
     </div>

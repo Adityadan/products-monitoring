@@ -128,9 +128,9 @@
                             paginationContainer.empty();
 
                             // Jika tidak ada produk, tampilkan pesan
-                            if (response.success && response.data.length === 0) {
+                            if (response.data.length === 0) {
                                 productContainer.html(
-                                    '<div class="text-center">No products found.</div>'
+                                    `<div class="text-center">${response.message}</div>`
                                 );
                                 return;
                             }
@@ -221,31 +221,36 @@
                     };
                 }
 
+                $('#apply-filter').click(function (e) {
+                    e.preventDefault();
+                    loadProducts(1);
+                });
+
                 // Debounce untuk pencarian
-                const debouncedSearch = debounce(function() {
-                    let searchQuery = $('#search').val();
-                    // loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
-                    loadProducts(1);
-                }, 800); // Delay 300ms
+                // const debouncedSearch = debounce(function() {
+                //     let searchQuery = $('#search').val();
+                //     // loadProducts(1, 9, searchQuery); // Selalu mulai dari halaman 1 untuk pencarian
+                //     loadProducts(1);
+                // }, 800); // Delay 300ms
 
-                // Event untuk pencarian dengan debounce
-                $('#search').keyup(function(e) {
-                    e.preventDefault();
-                    debouncedSearch();
-                });
+                // // Event untuk pencarian dengan debounce
+                // $('#search').keyup(function(e) {
+                //     e.preventDefault();
+                //     debouncedSearch();
+                // });
 
-                $('#sort').change(function() {
-                    loadProducts(1);
-                });
+                // $('#sort').change(function() {
+                //     loadProducts(1);
+                // });
 
-                $('#stock').change(function() {
-                    loadProducts(1);
-                });
+                // $('#stock').change(function() {
+                //     loadProducts(1);
+                // });
 
-                $("#no_part").change(function(e) {
-                    e.preventDefault();
-                    loadProducts(1);
-                });
+                // $("#no_part").change(function(e) {
+                //     e.preventDefault();
+                //     loadProducts(1);
+                // });
                 // Inisialisasi
                 loadProducts();
 
