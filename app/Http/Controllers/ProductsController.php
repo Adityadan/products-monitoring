@@ -59,6 +59,7 @@ class ProductsController extends Controller
             }
 
             return response()->json([
+                'status' => 'empty',
                 'data' => [],
                 'message' => $message,
             ]);

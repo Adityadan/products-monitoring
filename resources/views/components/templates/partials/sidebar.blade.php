@@ -97,13 +97,20 @@
             </ul> --}}
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 @foreach ($menus->where('parent_id', null) as $menu)
-                    <!-- Cek Permission untuk Menu Utama -->
                     @can($menu->permission_name)
+                        @php
+                            // Periksa apakah ada submenu aktif
+                            $hasActiveSubmenu = $menus
+                                ->where('parent_id', $menu->id)
+                                ->filter(fn($submenu) => request()->routeIs($submenu->route))
+                                ->isNotEmpty();
+                        @endphp
+
                         <li class="nav-item">
                             @if ($menus->where('parent_id', $menu->id)->isNotEmpty())
                                 <!-- Menu Utama dengan Submenu -->
                                 <a class="nav-link dropdown-indicator" href="#submenu-{{ $menu->id }}" role="button"
-                                    data-bs-toggle="collapse" aria-expanded="false"
+                                    data-bs-toggle="collapse" aria-expanded="{{ $hasActiveSubmenu ? 'true' : 'false' }}"
                                     aria-controls="submenu-{{ $menu->id }}">
                                     <div class="d-flex align-items-center">
                                         @if ($menu->icon)
@@ -114,9 +121,9 @@
                                         <span class="nav-link-text ps-1">{{ $menu->name }}</span>
                                     </div>
                                 </a>
-                                <ul class="nav collapse" id="submenu-{{ $menu->id }}">
+                                <ul class="nav collapse {{ $hasActiveSubmenu ? 'show' : '' }}"
+                                    id="submenu-{{ $menu->id }}">
                                     @foreach ($menus->where('parent_id', $menu->id) as $submenu)
-                                        <!-- Cek Permission untuk Submenu -->
                                         @can($submenu->permission_name)
                                             <li class="nav-item">
                                                 <a class="nav-link {{ request()->routeIs($submenu->route) ? 'active' : '' }}"
@@ -138,8 +145,7 @@
                             @else
                                 <!-- Menu Utama Tanpa Submenu -->
                                 <a class="nav-link {{ request()->routeIs($menu->route) ? 'active' : '' }}"
-                                    href="{{ $menu->route ? route($menu->route) : '#' }}" role="button"
-                                    aria-expanded="false">
+                                    href="{{ $menu->route ? route($menu->route) : '#' }}" role="button">
                                     <div class="d-flex align-items-center">
                                         @if ($menu->icon)
                                             <span class="nav-link-icon">
@@ -155,6 +161,7 @@
                     @endcan
                 @endforeach
             </ul>
+
 
         </div>
     </div>

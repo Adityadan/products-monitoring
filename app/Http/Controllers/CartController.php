@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CartHelper;
+use App\Models\Dealer;
+use App\Models\Expeditions;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
     public function index()
     {
-        return view('cart.index');
+        $expeditions = Expeditions::all();
+        return view('cart.index', compact('expeditions'));
     }
     public function addToCart(Request $request)
     {
@@ -90,7 +96,7 @@ class CartController extends Controller
                                         </div>
                                         <!-- Price -->
                                         <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
-                                            Rp.' . number_format($item['total_price'], 0, ',', '.') . '
+                                            Rp.' . number_format($item['subtotal'], 0, ',', '.') . '
                                         </div>
                                     </div>
                                 </div>
@@ -191,40 +197,42 @@ class CartController extends Controller
         $total_price = 0;
         $total_items = 0;
         foreach ($cart as $value) {
-            $total_price += $value['total_price'];
+            $total_price += $value['subtotal'];
             $total_items += $value['quantity'];
             $imageSrc = $value['image'] ? asset('storage/' . $value['image']) : asset('no-image.jpg');
 
             $cart_content .= '<div class="row gx-x1 mx-0 align-items-center border-bottom border-200">
-                        <div class="col-8 py-3 px-x1">
-                            <div class="d-flex align-items-center">
-                                <a href="javascript:void(0);"><img
-                                        class="img-fluid rounded-1 me-3 d-none d-md-block"
-                                        src="' . $imageSrc . '" alt="" width="60" /></a>
-                                <div class="flex-1">
-                                    <h5 class="fs-9">
-                                        <a class="text-900" href="javascript:void(0);">' . $value['name'] . '</a>
-                                    </h5>
-                                    <h6 class="fs-9">
-                                        <a class="text-900" href="javascript:void(0);">' . $value['dealer'] . '</a>
-                                    </h6>
-                                </div>
+                <div class="col-6 py-3 px-x1">
+                    <div class="d-flex align-items-center">
+                        <a href="javascript:void(0);">
+                            <img class="img-fluid rounded-1 me-3 d-none d-md-block" src="' . $imageSrc . '" alt="" width="60" />
+                        </a>
+                        <div class="flex-1">
+                            <h5 class="fs-9">
+                                <a class="text-900" href="javascript:void(0);">' . $value['name'] . '</a>
+                            </h5>
+                            <h6 class="fs-9">
+                                <a class="text-900" href="javascript:void(0);">' . $value['dealer'] . '</a>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 py-3 px-x1">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
+                            <div>
+                                <p>' . $value['quantity'] . '</p>
                             </div>
                         </div>
-                        <div class="col-4 py-3 px-x1">
-                            <div class="row align-items-center">
-                                <div
-                                    class="col-md-8 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
-                                    <div>
-                                        <p>' . $value['quantity'] . '</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
-                                    <p class="mb-0 fs-9">Rp.'  . number_format($value['total_price'], 0, ',', '.') . '</p>
-                                </div>
-                            </div>
+                        <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
+                            <p class="mb-0 fs-9">Rp.' . number_format($value['price'], 0, ',', '.') . '</p>
                         </div>
-                    </div>';
+                        <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
+                            <p class="mb-0 fs-9">Rp.' . number_format($value['subtotal'], 0, ',', '.') . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>';
         }
         $total = [
             'total_price' => 'Rp.' . number_format($total_price, 0, ',', '.'),
@@ -234,5 +242,83 @@ class CartController extends Controller
             'cart_content' => $cart_content,
             'total' => $total
         ]);
+    }
+
+    public function checkout(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:500',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => $validator->errors()->first()]);
+        }
+
+        // Ambil data cart
+        $cart = CartHelper::getCart();
+        if (empty($cart)) {
+            return response()->json(['success' => false, 'message' => 'Cart is empty']);
+        }
+
+        // Data pembeli dari request
+        $buyerName = $request->input('name');
+        $phone = $request->input('phone');
+        $shippingAddress = $request->input('address');
+        $notes = $request->input('notes', null);
+
+        // Hitung total harga dan total item
+        $totalPrice = array_sum(array_column($cart, 'subtotal'));
+        $totalItems = array_sum(array_column($cart, 'quantity'));
+        $buyer_dealer = auth()->user()->kode_dealer;
+        if (empty($buyer_dealer)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kode dealer tidak ditemukan, silahkan mengisi kode dealer terlebih dahulu',
+            ]);
+        }
+        DB::beginTransaction();
+        try {
+            // Simpan setiap item dalam cart ke tabel orders
+            foreach ($cart as $item) {
+                Order::create([
+                    'no_part' => $item['no_part'],
+                    'kode_dealer' => $item['kode_dealer'],
+                    'product_name' => $item['name'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                    'subtotal' => $item['subtotal'],
+                    'total_price' => $totalPrice,
+                    'total_items' => $totalItems,
+                    'buyer_dealer' => $buyer_dealer,
+                    'buyer_name' => $buyerName,
+                    'phone' => $phone,
+                    'shipping_address' => $shippingAddress,
+                    'notes' => $notes,
+                ]);
+            }
+
+            // Hapus cart setelah sukses checkout
+            Session::forget('cart');
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Order placed successfully',
+                'total_price' => $totalPrice,
+                'total_items' => $totalItems,
+            ]);
+        } catch (\Exception $e) {
+            // Rollback jika ada error
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to place order: ' . $e->getMessage(),
+            ]);
+        }
     }
 }

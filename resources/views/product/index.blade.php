@@ -128,7 +128,7 @@
                             paginationContainer.empty();
 
                             // Jika tidak ada produk, tampilkan pesan
-                            if (response.data.length === 0) {
+                            if (response.data.length === 0 && response.status == 'empty') {
                                 productContainer.html(
                                     // `<div class="text-center">${response.message}</div>`
                                     `
@@ -142,6 +142,15 @@
                                 );
                                 return;
                             }
+
+                            // Jika tidak ada produk, tampilkan pesan
+                            if (response.data.length === 0 && response.success == true) {
+                                productContainer.html(
+                                    `<div class="text-center"><i class="fas fa-exclamation-triangle me-2"></i>Produk tidak ditemukan</div>`
+                                );
+                                return;
+                            }
+
 
                             // Render produk
                             response.data.forEach(function(product) {
@@ -232,6 +241,8 @@
                 $('#apply-filter').click(function(e) {
                     e.preventDefault();
                     loadProducts(1);
+                    $('#filter-modal').modal('toggle');
+
                 });
 
                 // Debounce untuk pencarian
@@ -247,9 +258,9 @@
                 //     debouncedSearch();
                 // });
 
-                // $('#sort').change(function() {
-                //     loadProducts(1);
-                // });
+                $('#sort').change(function() {
+                    loadProducts(1);
+                });
 
                 // $('#stock').change(function() {
                 //     loadProducts(1);

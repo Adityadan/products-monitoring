@@ -22,41 +22,20 @@
         </div>
         <div class="card-body bg-body-tertiary">
             <div class="tab-content">
-                <div class="tab-pane preview-tab-pane active" role="tabpanel"
-                    aria-labelledby="tab-dom-b0aa3722-fa3d-4cce-b319-5c7f99be1924"
-                    id="dom-b0aa3722-fa3d-4cce-b319-5c7f99be1924">
-                    <div class="mb-3"><label class="form-label" for="nama">Nama</label><input class="form-control"
-                            id="nama" type="text" placeholder="masukkan nama" /></div>
+                <div class="tab-pane preview-tab-pane active">
+                    <form id="checkout-form">
+                        <div class="mb-3"><label class="form-label" for="nama">Nama</label><input
+                                class="form-control" id="name" name="name" type="text" placeholder="masukkan nama" /></div>
 
-                    <div class="mb-3"><label class="form-label" for="no_telp">Nomor Telepon</label><input
-                            class="form-control" id="no_telp" type="number" placeholder="masukkan nomor telepon" />
-                    </div>
-
-                    <div class="mb-3"><label class="form-label" for="exampleFormControlTextarea1">Ekspedisi</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected="" disabled>Pilih Ekspedisi</option>
-                            <option>J&T Express</option>
-                            <option>JNE</option>
-                            <option>SiCepat</option>
-                            <option>Ninja Xpress</option>
-                            <option>TIKI</option>
-                            <option>Pos Indonesia</option>
-                            <option>Shopee Xpress</option>
-                            <option>Wahana</option>
-                            <option>Lion Parcel</option>
-                            <option>RPX (Rapid Express)</option>
-                            <option>LBC Express</option>
-                            <option>Anteraja</option>
-                            <option>GrabExpress</option>
-                            <option>GoSend</option>
-                            <option>Paxel</option>
-                            <option>SAP Express</option>
-                        </select>
-                    </div>
-                    <div class="mb-3"><label class="form-label" for="alamat">Alamat</label>
-                        <textarea class="form-control" id="alamat" rows="3" placeholder="masukkan alamat" name="alamat"
-                            id="alamat"></textarea>
-                    </div>
+                        <div class="mb-3"><label class="form-label" for="phone">Nomor Telepon</label><input
+                                class="form-control" id="phone" type="number" name="phone"
+                                placeholder="masukkan nomor telepon" />
+                        </div>
+                        <div class="mb-3"><label class="form-label" for="alamat">Alamat</label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="masukkan alamat" name="address"
+                                id="address"></textarea>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -69,7 +48,7 @@
                     </button>
                 </div>
             </form> --}}
-            <a class="btn btn-sm btn-success" href="../../app/e-commerce/checkout.html"><i class="fas fa-check me-1"></i>Simpan</a>
+            <a class="btn btn-sm btn-success" id="btn-checkout"><i class="fas fa-check me-1"></i>Simpan</a>
         </div>
     </div>
     <div class="card">
@@ -88,7 +67,7 @@
             </div>
         </div>
         <div class="card-body p-0">
-            <div class="row gx-x1 mx-0 bg-200 text-900 fs-10 fw-semi-bold">
+            {{-- <div class="row gx-x1 mx-0 bg-200 text-900 fs-10 fw-semi-bold">
                 <div class="col-9 col-md-8 py-2 px-x1">Name</div>
                 <div class="col-3 col-md-4 px-x1">
                     <div class="row">
@@ -98,7 +77,21 @@
                         <div class="col-12 col-md-4 text-end py-2">Price</div>
                     </div>
                 </div>
+            </div> --}}
+
+            <div class="row gx-x1 mx-0 bg-200 text-900 fs-10 fw-semi-bold">
+                <div class="col-6 col-md-6 py-2 px-x1">Name</div>
+                <div class="col-6 col-md-6 px-x1">
+                    <div class="row">
+                        <div class="col-md-4 py-2 d-none d-md-block text-center">
+                            Quantity
+                        </div>
+                        <div class="col-md-4 text-end py-2">Price</div>
+                        <div class="col-md-4 text-end py-2">Sub Total</div>
+                    </div>
+                </div>
             </div>
+
             <div class="cart_content" id="cart-content">
                 {{-- <div class="row gx-x1 mx-0 align-items-center border-bottom border-200">
                     <div class="col-8 py-3 px-x1">
@@ -145,14 +138,15 @@
                 </div> --}}
             </div>
             <div class="row fw-bold gx-x1 mx-0">
-                <div class="col-9 col-md-8 py-2 px-x1 text-end text-900">
+                <div class="col-6 col-md-6 py-2 px-x1 text-end text-900">
                     Total
                 </div>
-                <div class="col px-0">
+                <div class="col-6 col-md-6 px-0">
                     <div class="row gx-x1 mx-0">
-                        <div class="col-md-8 py-2 px-x1 d-none d-md-block text-center" id="total-items">
+                        <div class="col-md-4 py-2 px-x1 d-none d-md-block text-center" id="total-items">
                             7 (items)
                         </div>
+                        <div class="col-12 col-md-4 text-end py-2 px-x1" id="total-price"></div>
                         <div class="col-12 col-md-4 text-end py-2 px-x1" id="total">$8516</div>
                     </div>
                 </div>
@@ -167,7 +161,7 @@
                     </button> --}}
                 </div>
             </form>
-            <a class="btn btn-sm btn-success" href="../../app/e-commerce/checkout.html"><i class="fas fa-check me-1"></i>Simpan</a>
+            {{-- <a class="btn btn-sm btn-success" href="../../app/e-commerce/checkout.html"><i class="fas fa-check me-1"></i>Simpan</a> --}}
         </div>
     </div>
 
@@ -175,6 +169,52 @@
         <script>
             $(document).ready(function() {
                 loadCart();
+                $('#btn-checkout').click(function(e) {
+                    e.preventDefault();
+
+                    let form = $('#checkout-form')[0]; // Mengambil elemen form
+                    let data = new FormData(form);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('cart.checkout') }}",
+                        data: data,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        processData: false, // Jangan proses data
+                        contentType: false, // Jangan tentukan tipe konten
+                        dataType: "json",
+                        success: function(response) {
+                            // Tambahkan logika sukses di sini
+                            if (response.success === true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = "{{ route('product.index') }}";
+                                    }
+                                });
+                            }else
+                            {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Failed to checkout. Please reload the page.',
+                            });
+                        }
+                    });
+                });
             });
 
             function loadCart() {

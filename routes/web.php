@@ -8,6 +8,7 @@ use App\Http\Controllers\DealersController;
 use App\Http\Controllers\DistanceDealerController;
 use App\Http\Controllers\MasterProductController;
 use App\Http\Controllers\MenusController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionAssignmentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductsController;
@@ -115,8 +116,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', [CartController::class, 'showCart'])->name('show');
         Route::post('/update', [CartController::class, 'updateQuantity'])->name('update');
         Route::post('/delete', [CartController::class, 'deleteProduct'])->name('delete');
+        Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
         Route::get('/load', [CartController::class, 'loadCart'])->name('load');
+    });
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/datatable', [OrderController::class, 'datatable'])->name('datatable');
+        Route::get('/detail/{id}', [OrderController::class, 'show'])->name('detail');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

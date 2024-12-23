@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="kode_dealer" class="form-label">Dealer</label>
-                        <select class="form-select" name="kode_dealer" id="kode_dealer">
+                        <select class="form-select" name="kode_dealer" id="kode_dealer" required>
                             <option value="" selected>Pilih Dealer</option>
                             @foreach ($kode_dealer as $item)
                                 <option value="{{ $item->kode }}">{{ '(' . $item->kode . ') ' . $item->ahass }}</option>

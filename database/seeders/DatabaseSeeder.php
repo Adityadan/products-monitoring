@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesSeeder::class,
             MenuSeeder::class,
-            PermissionSeeder::class
+            PermissionSeeder::class,
+            ExpeditionSeeder::class
         ]);
 
     }
