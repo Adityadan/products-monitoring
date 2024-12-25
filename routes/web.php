@@ -123,7 +123,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('order')->name('order.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/datatable', [OrderController::class, 'datatable'])->name('datatable');
-        Route::get('/detail/{id}', [OrderController::class, 'show'])->name('detail');
+        // Route::get('/detail/{id}', [OrderController::class, 'show'])->name('detail');
+        Route::post('/detail', [OrderController::class, 'show'])->name('detail');
+        Route::post('/updateExpedition', [OrderController::class, 'updateExpedition'])->name('updateExpedition');
+        Route::post('/editExpedition', [OrderController::class, 'editExpedition'])->name('editExpedition');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

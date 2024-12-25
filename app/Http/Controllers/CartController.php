@@ -6,6 +6,7 @@ use App\Helpers\CartHelper;
 use App\Models\Dealer;
 use App\Models\Expeditions;
 use App\Models\Order;
+use App\Models\ShippingOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -272,18 +273,29 @@ class CartController extends Controller
         // Hitung total harga dan total item
         $totalPrice = array_sum(array_column($cart, 'subtotal'));
         $totalItems = array_sum(array_column($cart, 'quantity'));
-        $buyer_dealer = auth()->user()->kode_dealer;
-        if (empty($buyer_dealer)) {
+
+        // Ambil kode dealer dari pengguna
+        $buyerDealer = auth()->user()->kode_dealer;
+        if (empty($buyerDealer)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Kode dealer tidak ditemukan, silahkan mengisi kode dealer terlebih dahulu',
             ]);
         }
+
         DB::beginTransaction();
         try {
+            // Buat ShippingOrder
+            $shippingOrder = ShippingOrder::create([
+                'buyer_dealer' => $buyerDealer,
+                'buyer_name' => $buyerName,
+                'phone' => $phone,
+                'shipping_address' => $shippingAddress,
+            ]);
+
             // Simpan setiap item dalam cart ke tabel orders
-            foreach ($cart as $item) {
-                Order::create([
+            $orderData = array_map(function ($item) use ($totalPrice, $totalItems, $shippingOrder, $notes) {
+                return [
                     'no_part' => $item['no_part'],
                     'kode_dealer' => $item['kode_dealer'],
                     'product_name' => $item['name'],
@@ -292,13 +304,14 @@ class CartController extends Controller
                     'subtotal' => $item['subtotal'],
                     'total_price' => $totalPrice,
                     'total_items' => $totalItems,
-                    'buyer_dealer' => $buyer_dealer,
-                    'buyer_name' => $buyerName,
-                    'phone' => $phone,
-                    'shipping_address' => $shippingAddress,
+                    'id_shipping_order' => $shippingOrder->id,
                     'notes' => $notes,
-                ]);
-            }
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }, $cart);
+
+            Order::insert($orderData);
 
             // Hapus cart setelah sukses checkout
             Session::forget('cart');

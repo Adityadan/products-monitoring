@@ -25,11 +25,10 @@ return new class extends Migration
             $table->decimal('subtotal', 10, 2);
             $table->decimal('total_price', 10, 2);
             $table->integer('total_items');
-            $table->string('buyer_dealer');
-            $table->string('buyer_name');
-            $table->string('phone');
-            $table->text('shipping_address');
             $table->text('notes')->nullable();
+            $table->integer('id_shipping_order');
+            $table->string('no_resi')->nullable();
+            $table->integer('id_expedition')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -170,6 +170,19 @@ class MenuSeeder extends Seeder
                 'created_at' => '2024-12-13 08:21:56',
                 'updated_at' => '2024-12-13 08:21:56',
             ],
+            [
+                'id' => 13,
+                'name' => 'List Order',
+                'route' => 'order.index',
+                'parent_id' => null,
+                'icon' => null,
+                'color' => null,
+                'order' => 3,
+                'is_active' => true,
+                'permission_name' => null,
+                'created_at' => '2024-12-13 08:21:56',
+                'updated_at' => '2024-12-13 08:21:56',
+            ],
         ];
 
         // Insert menus into the database

@@ -23,10 +23,9 @@ class Order extends Model
         'subtotal',
         'total_price',
         'total_items',
-        'buyer_dealer',
-        'buyer_name',
-        'phone',
-        'shipping_address',
         'notes',
+        'id_shipping_order',
+        'no_resi',
+        'id_expedition',
     ];
 }
