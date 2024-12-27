@@ -122,23 +122,20 @@
                     type: "POST",
                     url: "{{ route('order.editExpedition') }}",
                     data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'), // Get CSRF token from meta tag
+                        _token: "{{ csrf_token() }}",
                         id: id
                     },
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
-                            // Reset and populate the expedition select box
                             let expeditionSelect = '<option value="">Pilih Ekspedisi</option>';
-                            response.expedition.forEach(element => {
-                                let isSelected = element.id === response.selectedExpedition.id ?
-                                    'selected' : '';
-                                expeditionSelect +=
-                                    `<option value="${element.id}" ${isSelected}>${element.name}</option>`;
-                            });
-                            $('#ekspedisi').html(expeditionSelect);
+                            let selectedExpedition = response.selectedExpedition ?? '';
 
-                            // Set the 'no_resi' value
+                            response.expedition.forEach(element => {
+                                expeditionSelect += `<option value="${element.id}" ${element.id === selectedExpedition.id ? 'selected' : ''}>${element.name}</option>`;
+                            });
+
+                            $('#ekspedisi').html(expeditionSelect);
                             $('#no_resi').val(response.data.no_resi ?? '');
                         } else {
                             Swal.fire({

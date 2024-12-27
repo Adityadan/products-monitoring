@@ -31,8 +31,8 @@ class OrderController extends Controller
                     // $editBtn = '<button class="btn btn-sm btn-primary edit-dealer" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-dealer-modal">Edit</button>';
                     // $deleteBtn = '<button class="btn btn-sm btn-danger delete-dealer" data-id="' . $row->id . '">Delete</button>';
                     // return $editBtn . ' ' . $deleteBtn;
-                    $expeditionBtn = '<button class="btn btn-sm btn-primary btn-expedition" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#expedition-modal">Expedition</button>';
-                    $detailOrderBtn = '<button class="btn btn-sm btn-primary detail-order" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#detail-modal">Detail Order</button>';
+                    $expeditionBtn = '<button class="btn btn-sm btn-primary btn-expedition" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#expedition-modal"><i class="fas fa-truck"></i></button>';
+                    $detailOrderBtn = '<button class="btn btn-sm btn-primary detail-order" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#detail-modal"><i class="fas fa-info-circle"></i></button>';
                     return $expeditionBtn . ' ' . $detailOrderBtn;
                 })
                 ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
