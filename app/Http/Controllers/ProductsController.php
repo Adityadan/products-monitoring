@@ -90,7 +90,8 @@ class ProductsController extends Controller
             $lowerSearch = strtolower($search);
             $products->where(function ($query) use ($lowerSearch) {
                 $query->whereRaw('LOWER(p.nama_part) LIKE ?', ['%' . $lowerSearch . '%'])
-                    ->orWhereRaw('LOWER(p.no_part) LIKE ?', ['%' . $lowerSearch . '%']);
+                    ->orWhereRaw('LOWER(p.no_part) LIKE ?', ['%' . $lowerSearch . '%'])
+                    ->orWhereRaw('LOWER(d.ahass) LIKE ?', ['%' . $lowerSearch . '%']);
             });
         }
 

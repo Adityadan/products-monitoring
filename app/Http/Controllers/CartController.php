@@ -6,6 +6,7 @@ use App\Helpers\CartHelper;
 use App\Models\Dealer;
 use App\Models\Expeditions;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\ShippingOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +24,10 @@ class CartController extends Controller
     {
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
-
         $stock = \App\Models\Product::find($productId)->oh;
-        if ($stock < $quantity) {
+        $product_dealer = Product::find($productId)->kode_dealer;
+        $kode_dealer = auth()->user()->kode_dealer;
+        if (($stock < $quantity) && ($product_dealer != $kode_dealer)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Out of stock',
