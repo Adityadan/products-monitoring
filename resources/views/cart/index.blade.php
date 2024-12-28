@@ -25,7 +25,8 @@
                 <div class="tab-pane preview-tab-pane active">
                     <form id="checkout-form">
                         <div class="mb-3"><label class="form-label" for="nama">Nama</label><input
-                                class="form-control" id="name" name="name" type="text" placeholder="masukkan nama" /></div>
+                                class="form-control" id="name" name="name" type="text"
+                                placeholder="masukkan nama" /></div>
 
                         <div class="mb-3"><label class="form-label" for="phone">Nomor Telepon</label><input
                                 class="form-control" id="phone" type="number" name="phone"
@@ -172,45 +173,57 @@
                 $('#btn-checkout').click(function(e) {
                     e.preventDefault();
 
-                    let form = $('#checkout-form')[0]; // Mengambil elemen form
-                    let data = new FormData(form);
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Do you want to proceed with the checkout?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, checkout!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            let form = $('#checkout-form')[0]; // Mengambil elemen form
+                            let data = new FormData(form);
 
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('cart.checkout') }}",
-                        data: data,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        processData: false, // Jangan proses data
-                        contentType: false, // Jangan tentukan tipe konten
-                        dataType: "json",
-                        success: function(response) {
-                            // Tambahkan logika sukses di sini
-                            if (response.success === true) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success',
-                                    text: response.message
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.href = "{{ route('product.index') }}";
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ route('cart.checkout') }}",
+                                data: data,
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                processData: false, // Jangan proses data
+                                contentType: false, // Jangan tentukan tipe konten
+                                dataType: "json",
+                                success: function(response) {
+                                    // Tambahkan logika sukses di sini
+                                    if (response.success === true) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Success',
+                                            text: response.message
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href =
+                                                    "{{ route('product.index') }}";
+                                            }
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: response.message
+                                        });
                                     }
-                                });
-                            }else
-                            {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: response.message
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Failed to checkout. Please reload the page.',
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Failed to checkout. Please reload the page.',
+                                    });
+                                }
                             });
                         }
                     });
