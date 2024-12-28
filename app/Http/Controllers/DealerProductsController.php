@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ProductImport;
+use App\Models\LogImport;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,7 +47,16 @@ class DealerProductsController extends Controller
             // Buat instance ProductImport dengan tipe 'import'
             $import = new ProductImport('import');
             Excel::import($import, $request->file('file'));
-
+            LogImport::create([
+                'file_name' => $request->file('file')->getClientOriginalName(),
+                'file_type' => 'product',
+                'file_path' => $request->file('file')->store('excel-import'),
+                'status' => 'success',
+                'message' => 'Data imported successfully.',
+                'created_by' => auth()->user()->id,
+                'updated_by' => auth()->user()->id,
+                'created_at' => now(),
+            ]);
             return response()->json([
                 'success' => true,
                 'message' => 'Data imported successfully.',

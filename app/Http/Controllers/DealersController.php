@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\DealersImport;
 use App\Models\Dealer;
+use App\Models\LogImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -103,6 +104,16 @@ class DealersController extends Controller
         try {
             Excel::import(new DealersImport, $request->file('file'));
 
+            LogImport::create([
+                'file_name' => $request->file('file')->getClientOriginalName(),
+                'file_path' => $request->file('file')->store('excel-import'),
+                'file_type' => 'dealers',
+                'status' => 'success',
+                'message' => 'Data Dealer berhasil diimpor.',
+                'created_by' => auth()->id(),
+                'updated_by' => auth()->id(),
+                'created_at' => now(),
+            ]);
             return response()->json([
                 'success' => true,
                 'message' => 'Data Dealer berhasil diimpor.',
