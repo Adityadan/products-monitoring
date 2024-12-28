@@ -19,7 +19,8 @@
 <script src="{{ asset('dist/vendors/toastr/toastr.min.js') }}"></script>
 {{-- DataTable --}}
 <script src="{{ asset('dist/vendors/datatable/jquery.dataTables.min.js') }}"></script>
-
+{{-- Sweet Alert --}}
+<script src="{{ asset('dist/vendors/sweet-alert/sweetalert2@11.min.js') }}"></script>
 
 
 @stack('scripts')

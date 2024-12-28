@@ -21,10 +21,6 @@
         });
     </script> --}}
 
-    <!-- Swal2 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-
     <!-- Favicons -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/img/favicons/favicon.ico') }}">
 
