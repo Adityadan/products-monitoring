@@ -74,6 +74,10 @@
     {{-- DropzoneJS --}}
     <link href="{{ asset('dist/vendors/dropzone/dropzone.min.css') }}" rel="stylesheet" />
 
+    {{-- Toast --}}
+    <link href="{{ asset('dist/vendors/toastr/toastr.min.css') }}" rel="stylesheet" />
+
+
     <!-- Script untuk mengubah arah tampilan dari kanan ke kiri -->
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));

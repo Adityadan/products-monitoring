@@ -15,7 +15,8 @@
 <script src="{{ asset('dist/vendors/choices/choices.min.js') }}"></script>
 {{-- DropzoneJS --}}
 <script src="{{ asset('dist/vendors/dropzone/dropzone.min.js') }}"></script>
-
+<!-- Toastr JS -->
+<script src="{{ asset('dist/vendors/toastr/toastr.min.js') }}"></script>
 
 
 

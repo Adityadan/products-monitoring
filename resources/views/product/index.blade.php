@@ -346,8 +346,9 @@
                             quantity: quantity,
                         },
                         success: function(response) {
-                            // console.log(response.cart);
-                            console.log(response);
+                            if (response.status == 'success') {
+                                toastr.success(response.message, 'Success');
+                            }
                             if (response.status == 'error') {
                                 Swal.fire({
                                     icon: 'error',
