@@ -17,6 +17,8 @@
 <script src="{{ asset('dist/vendors/dropzone/dropzone.min.js') }}"></script>
 <!-- Toastr JS -->
 <script src="{{ asset('dist/vendors/toastr/toastr.min.js') }}"></script>
+{{-- DataTable --}}
+<script src="{{ asset('dist/vendors/datatable/jquery.dataTables.min.js') }}"></script>
 
 
 

@@ -6,7 +6,7 @@
                     <div class="card bg-transparent-50 overflow-hidden">
                         <div class="card-header position-relative">
                             <div class="bg-holder d-none d-md-block bg-card z-1"
-                                style="background-image:url(../assets/img/illustrations/ecommerce-bg.png);background-size:230px;background-position:right bottom;z-index:-1;">
+                                >
                             </div><!--/.bg-holder-->
                             <div class="position-relative z-2">
                                 <div>
@@ -28,7 +28,7 @@
                     <div class="card bg-transparent-50 overflow-hidden">
                         <div class="card-header position-relative">
                             <div class="bg-holder d-none d-md-block bg-card z-1"
-                                style="background-image:url(../assets/img/illustrations/ecommerce-bg.png);background-size:230px;background-position:right bottom;z-index:-1;">
+                                >
                             </div><!--/.bg-holder-->
                             <div class="position-relative z-2">
                                 <div>
