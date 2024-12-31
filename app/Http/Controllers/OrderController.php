@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dealer;
 use App\Models\Expeditions;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\ProductImage;
 use App\Models\ShippingOrder;
 use Illuminate\Http\Request;
@@ -24,16 +25,16 @@ class OrderController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $data = ShippingOrder::all();
+            $data = Order::query();
+            if (!auth()->user()->hasRole('main_dealer')) {
+                $data->where('buyer_dealer', auth()->user()->kode_dealer);
+            }
+            $data->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {
-                    // $editBtn = '<button class="btn btn-sm btn-primary edit-dealer" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-dealer-modal">Edit</button>';
-                    // $deleteBtn = '<button class="btn btn-sm btn-danger delete-dealer" data-id="' . $row->id . '">Delete</button>';
-                    // return $editBtn . ' ' . $deleteBtn;
-                    $expeditionBtn = '<button class="btn btn-sm btn-primary btn-expedition" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#expedition-modal"><i class="fas fa-truck"></i></button>';
                     $detailOrderBtn = '<button class="btn btn-sm btn-primary detail-order" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#detail-modal"><i class="fas fa-info-circle"></i></button>';
-                    return $expeditionBtn . ' ' . $detailOrderBtn;
+                    return $detailOrderBtn;
                 })
                 ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
                 ->make(true);
@@ -71,7 +72,7 @@ class OrderController extends Controller
         $id = $request->id;
 
         // Ambil data pesanan berdasarkan ID shipping order
-        $orders = Order::where('id_shipping_order', $id)->get();
+        $orders = OrderDetail::where('id_order', $id)->get();
 
         if ($orders->isEmpty()) {
             return response()->json([
@@ -148,29 +149,51 @@ class OrderController extends Controller
         ]);
     }
 
-    public function updateExpedition(Request $request)
+    /* public function updateExpedition(Request $request)
     {
         $id = $request->id;
         $id_expedition = $request->id_expedition;
         $no_resi = $request->no_resi;
 
-        Order::where('id_shipping_order', $id)->update([
-            'id_expedition' => $id_expedition,
-            'no_resi' => $no_resi,
-        ]);
+        $order = Order::where('id_detail_order', $id)->first();
+
+        if ($order) {
+            // Update existing expedition data
+            $order->update([
+                'id_expedition' => $id_expedition,
+                'no_resi' => $no_resi,
+            ]);
+            $message = 'Expedition updated successfully';
+        } else {
+            // Insert new expedition data
+            Order::create([
+                'id_detail_order' => $id,
+                'id_expedition' => $id_expedition,
+                'no_resi' => $no_resi,
+            ]);
+            $message = 'Expedition inserted successfully';
+        }
 
         return response()->json([
             'success' => true,
-            'message' => 'Expedition updated successfully'
+            'message' => $message
         ]);
     }
 
     public function editExpedition(Request $request)
     {
         $id = $request->id;
-        $data = Order::where('id_shipping_order', $id)->first();
-        $expedition = Expeditions::all();
+        $data = OrderDetail::with('shippingOrder')->where('id_order', $id)->first();
+
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Order detail not found.',
+            ], 404);
+        }
+
         $selectedExpedition = Expeditions::where('id', $data->id_expedition)->first();
+        $expedition = Expeditions::all();
 
         return response()->json([
             'success' => true,
@@ -178,7 +201,7 @@ class OrderController extends Controller
             'expedition' => $expedition,
             'selectedExpedition' => $selectedExpedition
         ]);
-    }
+    } */
 
     /**
      * Show the form for editing the specified resource.

@@ -43,7 +43,8 @@ class ProductsController extends Controller
         $search = $request->get('search'); // Filter pencarian
         $stock = $request->get('stock'); // Filter stok
         $no_part = $request->get('no_part'); // Filter nomor part
-        $kodeDealer = Auth::user()->kode_dealer;
+        $user = Auth::user();
+        $kodeDealer = $user->kode_dealer;
         $cek_data_product_exists = DB::table('products')->exists();
         $cek_data_dealer_exists = DB::table('dealers')->exists();
 
@@ -64,8 +65,6 @@ class ProductsController extends Controller
                 'message' => $message,
             ]);
         }
-
-        // Dump hasil data untuk debugging
 
         $products = DB::table('products as p')
             ->leftJoin('dealers as d', 'p.kode_dealer', '=', 'd.kode')
@@ -141,6 +140,14 @@ class ProductsController extends Controller
 
         // Pagination
         $products = $products->paginate(9);
+
+        // Modify 'oh' field based on user role
+        $products->getCollection()->transform(function ($product) use ($user) {
+            if (!$user->hasRole('main_dealer')) {
+                $product->oh = $product->oh > 0 ? 'Stock Available' : 'Out Of Stock';
+            }
+            return $product;
+        });
 
         // Menyiapkan data untuk response
         return response()->json([

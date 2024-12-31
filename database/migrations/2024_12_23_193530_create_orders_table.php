@@ -17,18 +17,10 @@ return new class extends Migration
         }); */
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('no_part');
-            $table->string('kode_dealer');
-            $table->string('product_name');
-            $table->integer('quantity');
-            $table->decimal('price', 10, 2);
-            $table->decimal('subtotal', 10, 2);
-            $table->decimal('total_price', 10, 2);
-            $table->integer('total_items');
-            $table->text('notes')->nullable();
-            $table->integer('id_shipping_order');
-            $table->string('no_resi')->nullable();
-            $table->integer('id_expedition')->nullable();
+            $table->string('buyer_dealer');
+            $table->string('buyer_name');
+            $table->string('phone');
+            $table->text('shipping_address');
             $table->timestamps();
             $table->softDeletes();
         });

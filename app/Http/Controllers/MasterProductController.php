@@ -11,6 +11,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MasterProductController extends Controller
 {
+
     public function index()
     {
         return view('master-product.index');
@@ -18,19 +19,37 @@ class MasterProductController extends Controller
 
     public function datatable(Request $request)
     {
-        // Check if the request is an AJAX request
+        $user = auth()->user();
+        $kode_dealer = $user->kode_dealer;
+
+        if (empty($kode_dealer)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kode dealer tidak ditemukan. Silahkan Mengisi Kode Dealer Anda.',
+            ], 500);
+        }
+
         if ($request->ajax()) {
             $data = Product::select('kode_dealer', 'no_part', 'nama_part', 'nama_gudang', 'oh')
-                ->distinct()
-                ->get();
-            return DataTables::of($data)
+                ->distinct();
+
+            if (!$user->hasRole('main_dealer')) {
+                $data->where('kode_dealer', $kode_dealer);
+            }
+
+            return DataTables::of($data->get())
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {
                     return '<button class="btn btn-sm btn-primary add-image-product" data-id="' . $row->no_part . '" data-bs-toggle="modal" data-bs-target="#add-image-modal"><i class="fas fa-image"></i></button>';
                 })
-                ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
+                ->rawColumns(['actions'])
                 ->make(true);
         }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid request.',
+        ], 400);
     }
 
     public function edit($no_part)

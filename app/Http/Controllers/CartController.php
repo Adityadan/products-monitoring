@@ -6,10 +6,12 @@ use App\Helpers\CartHelper;
 use App\Models\Dealer;
 use App\Models\Expeditions;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ShippingOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -254,16 +256,26 @@ class CartController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:500',
+        ], [
+            'name.required' => 'Nama pembeli wajib diisi.',
+            'phone.required' => 'Nomor telepon wajib diisi.',
+            'address.required' => 'Alamat pengiriman wajib diisi.',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'message' => $validator->errors()->first()]);
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
         }
 
         // Ambil data cart
         $cart = CartHelper::getCart();
         if (empty($cart)) {
-            return response()->json(['success' => false, 'message' => 'Cart is empty']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Keranjang belanja kosong.',
+            ]);
         }
 
         // Data pembeli dari request
@@ -281,39 +293,55 @@ class CartController extends Controller
         if (empty($buyerDealer)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Kode dealer tidak ditemukan, silahkan mengisi kode dealer terlebih dahulu',
+                'message' => 'Kode dealer tidak ditemukan. Silakan mengisi kode dealer terlebih dahulu.',
             ]);
         }
 
+        // Ambil kode dealer shipping unik
+        $kodeDealerShipping = array_unique(array_column($cart, 'kode_dealer'));
+        $now = now(); // Waktu global
+
         DB::beginTransaction();
         try {
-            // Buat ShippingOrder
-            $shippingOrder = ShippingOrder::create([
+            // Buat data order
+            $order = Order::create([
                 'buyer_dealer' => $buyerDealer,
                 'buyer_name' => $buyerName,
                 'phone' => $phone,
                 'shipping_address' => $shippingAddress,
             ]);
 
-            // Simpan setiap item dalam cart ke tabel orders
-            $orderData = array_map(function ($item) use ($totalPrice, $totalItems, $shippingOrder, $notes) {
+            // Buat data shipping order
+            $shippingData = array_map(function ($kodeDealer) use ($order, $now) {
+                return [
+                    'kode_dealer' => $kodeDealer,
+                    'id_order' => $order->id,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            }, $kodeDealerShipping);
+
+            ShippingOrder::insert($shippingData);
+
+            // Simpan setiap item dalam cart ke tabel order details
+            $orderDetails = array_map(function ($item) use ($order, $totalPrice, $totalItems, $notes, $now) {
                 return [
                     'no_part' => $item['no_part'],
                     'kode_dealer' => $item['kode_dealer'],
                     'product_name' => $item['name'],
-                    'quantity' => $item['quantity'],
+                    'qty_order' => $item['quantity'],
                     'price' => $item['price'],
                     'subtotal' => $item['subtotal'],
                     'total_price' => $totalPrice,
                     'total_items' => $totalItems,
-                    'id_shipping_order' => $shippingOrder->id,
+                    'id_order' => $order->id,
                     'notes' => $notes,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => $now,
+                    'updated_at' => $now,
                 ];
             }, $cart);
 
-            Order::insert($orderData);
+            OrderDetail::insert($orderDetails);
 
             // Hapus cart setelah sukses checkout
             Session::forget('cart');
@@ -322,17 +350,19 @@ class CartController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Order placed successfully',
+                'message' => 'Order berhasil dilakukan.',
                 'total_price' => $totalPrice,
                 'total_items' => $totalItems,
             ]);
         } catch (\Exception $e) {
-            // Rollback jika ada error
             DB::rollBack();
+
+            // Logging error
+            Log::error('Checkout Error: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to place order: ' . $e->getMessage(),
+                'message' => 'Gagal melakukan pemesanan: ' . $e->getMessage(),
             ]);
         }
     }

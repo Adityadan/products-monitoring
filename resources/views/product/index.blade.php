@@ -192,8 +192,8 @@
                                                         Dealers Location: <strong>${product.kota_kab || 'Unknown Dealers'}</strong>
                                                     </p>
                                                     <p class="fs-10 mb-1">
-                                                        Stock: <strong class="text-${product.oh > 0 ? 'success' : 'danger'}">
-                                                            ${product.oh > 0 ? product.oh : 'Out of Stock'}
+                                                        Stock: <strong class="text-${product.oh > 0 || product.oh === 'Stock Available' ? 'success' : 'danger'}">
+                                                            ${product.oh}
                                                         </strong>
                                                     </p>
                                                 </div>

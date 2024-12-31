@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             MenuSeeder::class,
             PermissionSeeder::class,
-            ExpeditionSeeder::class
+            ExpeditionSeeder::class,
+            DealerSeeder::class,
         ]);
 
     }

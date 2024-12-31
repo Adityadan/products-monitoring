@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'kode_dealer' => '00000',
         ]);
 
         User::create([
@@ -43,5 +44,26 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
+
+        User::create([
+            'name' => 'Admin 00576',
+            'username' => 'admin00576',
+            'email' => '00576@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'kode_dealer' => '00576',
+        ]);
+
+        User::create([
+            'name' => 'Admin 00762',
+            'username' => 'admin00762',
+            'email' => '00762@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'kode_dealer' => '00762',
+        ]);
+
     }
 }

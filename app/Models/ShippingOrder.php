@@ -9,10 +9,5 @@ class ShippingOrder extends Model
     //
     protected $table = 'shipping_order';
 
-    protected $fillable = [
-        'buyer_dealer',
-        'buyer_name',
-        'phone',
-        'shipping_address',
-    ];
+    protected $guarded = [];
 }

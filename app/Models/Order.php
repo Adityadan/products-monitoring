@@ -10,22 +10,12 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes;
 
-    // Nama tabel di database
     protected $table = 'orders';
 
-    // Kolom yang dapat diisi secara mass-assignment
     protected $fillable = [
-        'no_part',
-        'kode_dealer',
-        'product_name',
-        'quantity',
-        'price',
-        'subtotal',
-        'total_price',
-        'total_items',
-        'notes',
-        'id_shipping_order',
-        'no_resi',
-        'id_expedition',
+        'buyer_dealer',
+        'buyer_name',
+        'phone',
+        'shipping_address'
     ];
 }

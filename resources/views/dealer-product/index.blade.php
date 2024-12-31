@@ -63,40 +63,56 @@
                         <div id="preview-container" style="display: none;">
                             <h5 class="mt-4">Preview Data</h5>
                             <div class="table-responsive" style="max-height: 50vh; overflow-y: auto;">
-                                <table class="table table-striped" id="preview-table">
-                                    <thead>
-                                        <tr>
-                                            <td>no</td>
-                                            <td>kode dealer</td>
-                                            <td>kode ba</td>
-                                            <td>customer master sap</td>
-                                            <td>group material</td>
-                                            <td>group tobpm</td>
-                                            <td>no part</td>
-                                            <td>nama part</td>
-                                            <td>rank part</td>
-                                            <td>discontinue</td>
-                                            <td>kode gudang</td>
-                                            <td>nama gudang</td>
-                                            <td>kode lokasi</td>
-                                            <td>int</td>
-                                            <td>oh</td>
-                                            <td>rsv</td>
-                                            <td>blk</td>
-                                            <td>wip</td>
-                                            <td>bok</td>
-                                            <td>total exc int</td>
-                                            <td>stock days month</td>
-                                            <td>avg demand qty</td>
-                                            <td>avg demand amt</td>
-                                            <td>avg sales monthly qty</td>
-                                            <td>avg sales monthly amt</td>
-                                            <td>standard price moving avg price</td>
-                                            <td>invt amt exc int</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                @if (auth()->user()->hasRole('main_dealer'))
+                                    <table class="table table-striped" id="preview-table">
+                                        <thead>
+                                            <tr>
+                                                <td>no</td>
+                                                <td>kode dealer</td>
+                                                <td>no part</td>
+                                                <td>nama part</td>
+                                                <td>oh</td>
+                                                <td>standard price moving avg price</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    @else
+                                        <table class="table table-striped" id="preview-table">
+                                            <thead>
+                                                <tr>
+                                                    <td>no</td>
+                                                    <td>kode dealer</td>
+                                                    <td>kode ba</td>
+                                                    <td>customer master sap</td>
+                                                    <td>group material</td>
+                                                    <td>group tobpm</td>
+                                                    <td>no part</td>
+                                                    <td>nama part</td>
+                                                    <td>rank part</td>
+                                                    <td>discontinue</td>
+                                                    <td>kode gudang</td>
+                                                    <td>nama gudang</td>
+                                                    <td>kode lokasi</td>
+                                                    <td>int</td>
+                                                    <td>oh</td>
+                                                    <td>rsv</td>
+                                                    <td>blk</td>
+                                                    <td>wip</td>
+                                                    <td>bok</td>
+                                                    <td>total exc int</td>
+                                                    <td>stock days month</td>
+                                                    <td>avg demand qty</td>
+                                                    <td>avg demand amt</td>
+                                                    <td>avg sales monthly qty</td>
+                                                    <td>avg sales monthly amt</td>
+                                                    <td>standard price moving avg price</td>
+                                                    <td>invt amt exc int</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -111,8 +127,6 @@
     </div>
 
     @push('scripts')
-
-
         <script>
             $(document).ready(function() {
 
@@ -180,48 +194,66 @@
                         contentType: false,
                         processData: false,
                         success: function(response) {
+                            console.log(response.is_main_dealer);
+
                             // Close the loading screen
                             Swal.close();
-
+                            let is_main_dealer = response.is_main_dealer;
                             // Show preview container
                             $('#preview-container').show();
                             $('#save-btn').show();
 
                             // Populate table with preview data
                             var rows = response.data;
-                            $.each(rows, function(index, row) {
-                                $('#preview-table tbody').append(`
-                                    <tr>
-                                        <td>${index + 1}</td>
-                                        <td>${row.kode_dealer}</td>
-                                        <td>${row.kode_ba}</td>
-                                        <td>${row.customer_master_sap}</td>
-                                        <td>${row.group_material}</td>
-                                        <td>${row.group_tobpm}</td>
-                                        <td>${row.no_part}</td>
-                                        <td>${row.nama_part}</td>
-                                        <td>${row.rank_part}</td>
-                                        <td>${row.discontinue}</td>
-                                        <td>${row.kode_gudang}</td>
-                                        <td>${row.nama_gudang}</td>
-                                        <td>${row.kode_lokasi}</td>
-                                        <td>${row.int}</td>
-                                        <td>${row.oh}</td>
-                                        <td>${row.rsv}</td>
-                                        <td>${row.blk}</td>
-                                        <td>${row.wip}</td>
-                                        <td>${row.bok}</td>
-                                        <td>${row.total_exc_int}</td>
-                                        <td>${row.stock_days_month}</td>
-                                        <td>${row.avg_demand_qty}</td>
-                                        <td>${row.avg_demand_amt}</td>
-                                        <td>${row.avg_sales_monthly_qty}</td>
-                                        <td>${row.avg_sales_monthly_amt}</td>
-                                        <td>${row.standard_price_moving_avg_price}</td>
-                                        <td>${row.invt_amt_exc_int}</td>
-                                    </tr>
-                                `);
-                            });
+                            if (is_main_dealer == true) {
+                                $.each(rows, function(index, row) {
+
+                                    $('#preview-table tbody').append(`
+                                        <tr>
+                                            <td>${index + 1}</td>
+                                            <td>${row.kode_dealer}</td>
+                                            <td>${row.no_part}</td>
+                                            <td>${row.nama_part}</td>
+                                            <td>${row.oh}</td>
+                                            <td>${row.standard_price_moving_avg_price}</td>
+                                        </tr>
+                                    `);
+                                });
+                            } else {
+                                $.each(rows, function(index, row) {
+                                    $('#preview-table tbody').append(`
+                                        <tr>
+                                            <td>${index + 1}</td>
+                                            <td>${row.kode_dealer}</td>
+                                            <td>${row.kode_ba}</td>
+                                            <td>${row.customer_master_sap}</td>
+                                            <td>${row.group_material}</td>
+                                            <td>${row.group_tobpm}</td>
+                                            <td>${row.no_part}</td>
+                                            <td>${row.nama_part}</td>
+                                            <td>${row.rank_part}</td>
+                                            <td>${row.discontinue}</td>
+                                            <td>${row.kode_gudang}</td>
+                                            <td>${row.nama_gudang}</td>
+                                            <td>${row.kode_lokasi}</td>
+                                            <td>${row.int}</td>
+                                            <td>${row.oh}</td>
+                                            <td>${row.rsv}</td>
+                                            <td>${row.blk}</td>
+                                            <td>${row.wip}</td>
+                                            <td>${row.bok}</td>
+                                            <td>${row.total_exc_int}</td>
+                                            <td>${row.stock_days_month}</td>
+                                            <td>${row.avg_demand_qty}</td>
+                                            <td>${row.avg_demand_amt}</td>
+                                            <td>${row.avg_sales_monthly_qty}</td>
+                                            <td>${row.avg_sales_monthly_amt}</td>
+                                            <td>${row.standard_price_moving_avg_price}</td>
+                                            <td>${row.invt_amt_exc_int}</td>
+                                        </tr>
+                                    `);
+                                });
+                            }
                         },
                         error: function(xhr) {
                             // Close the loading screen

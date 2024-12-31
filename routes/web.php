@@ -13,6 +13,7 @@ use App\Http\Controllers\PermissionAssignmentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RequestOrderController;
 use App\Http\Controllers\RoleAssignmentController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\RolesController;
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::post('/list', [ProductsController::class, 'productList'])->name('list');
-        Route::get('/datatable', [ProductsController::class, 'datatable'])->name('datatable');
+        // Route::get('/datatable', [ProductsController::class, 'datatable'])->name('datatable');
     });
     Route::prefix('dealer-product')->name('dealer-product.')->group(function () {
         Route::get('/', [DealerProductsController::class, 'index'])->name('index');
@@ -127,6 +128,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/detail', [OrderController::class, 'show'])->name('detail');
         Route::post('/updateExpedition', [OrderController::class, 'updateExpedition'])->name('updateExpedition');
         Route::post('/editExpedition', [OrderController::class, 'editExpedition'])->name('editExpedition');
+    });
+    Route::prefix('request-order')->name('request-order.')->group(function () {
+        Route::get('/', [RequestOrderController::class, 'index'])->name('index');
+        Route::get('/datatable', [RequestOrderController::class, 'datatable'])->name('datatable');
+        Route::post('/updateExpedition', [RequestOrderController::class, 'updateExpedition'])->name('updateExpedition');
+        Route::post('/editExpedition', [RequestOrderController::class, 'editExpedition'])->name('editExpedition');
+        Route::post('/renderListItem', [RequestOrderController::class, 'renderListItem'])->name('renderListItem');
+        Route::post('/updateShipping', [RequestOrderController::class, 'updateShipping'])->name('updateShipping');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

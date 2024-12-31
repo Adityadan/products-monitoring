@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('shipping_order', function (Blueprint $table) {
             $table->id();
-            $table->string('buyer_dealer');
-            $table->string('buyer_name');
-            $table->string('phone');
-            $table->text('shipping_address');
+            $table->integer('kode_dealer')->comment('Kode Dealer yang dipesan oleh customer');
+            $table->integer('id_order');
+            $table->string('no_resi')->nullable();
+            $table->integer('id_expedition')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shipping');
+        Schema::dropIfExists('shipping_order');
     }
 };
