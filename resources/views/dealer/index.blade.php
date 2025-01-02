@@ -5,30 +5,21 @@
                 <div class="col-sm-auto mb-2 mb-sm-0">
                     <h5 class="mb-0">List Dealer</h5>
                 </div>
-                <div class="col-sm-auto">
-                    <div class="row gx-2 align-items-center">
-                        <div class="col-auto">
-                            <form class="row gx-2">
-                                {{-- <div class="col-auto"><small>Sort by:</small></div> --}}
-                                <div class="col-auto">
-                                    {{-- <select class="form-select form-select-sm" aria-label="Bulk actions">
-                                        <option selected="">Best Match</option>
-                                        <option value="Refund">Newest</option>
-                                        <option value="Delete">Price</option>
-                                    </select> --}}
-                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#import-excel-modal">Import Data</button>
+                @if (auth()->user()->hasRole('main_dealer'))
+                    <div class="col-sm-auto">
+                        <div class="row gx-2 align-items-center">
+                            <div class="col-auto">
+                                <form class="row gx-2">
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#import-excel-modal">Import Data</button>
 
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        {{-- <div class="col-auto pe-0">
-                            <a class="text-600 px-1" href="../../../app/e-commerce/product/product-list.html"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Product List"><span
-                                    class="fas fa-list-ul"></span></a>
-                        </div> --}}
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -62,7 +53,6 @@
     {{-- Modal --}}
     @includeIf('dealer.modals')
     @push('scripts')
-
         <script>
             $(document).ready(function() {
                 $('#import-submit').on('click', function(e) {
