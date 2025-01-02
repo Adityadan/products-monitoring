@@ -110,7 +110,7 @@ class RequestOrderController extends Controller
         }
 
         $selectedExpedition = Expeditions::where('id', $data->id_expedition)->first();
-        $expedition = Expeditions::all();
+        $expedition = Expeditions::orderBy('name')->get();
         return response()->json([
             'success' => true,
             'data' => $data,
