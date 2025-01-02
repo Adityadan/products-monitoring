@@ -72,9 +72,11 @@ class OrderController extends Controller
         $id = $request->id;
 
         // Ambil data pesanan berdasarkan ID shipping order
-        $orders = OrderDetail::where('id_order', $id)->get();
+        $order_detail = OrderDetail::where('id_order', $id)->get();
+        $order = Order::where('id', $id)->first();
 
-        if ($orders->isEmpty()) {
+
+        if ($order_detail->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Order not found',
@@ -82,7 +84,7 @@ class OrderController extends Controller
         }
 
         // Ambil informasi dealer berdasarkan kode dealer dari order pertama
-        $productDealer = Dealer::where('kode', $orders->first()->kode_dealer)->first();
+        $productDealer = Dealer::where('kode', $order_detail->first()->kode_dealer)->first();
 
         if (!$productDealer) {
             return response()->json([
@@ -91,17 +93,20 @@ class OrderController extends Controller
             ]);
         }
 
-        $productImage = ProductImage::where('no_part', $orders->first()->no_part)->first();
+        $productImage = ProductImage::where('no_part', $order_detail->first()->no_part)->first();
 
         // Inisialisasi tampilan HTML untuk daftar pesanan
         $orderList = '';
-        foreach ($orders as $item) {
+        $total_qty_supply = 0;
+        foreach ($order_detail as $item) {
+            $qty_supply = $item->qty_supply ?? 0;
+            $total_qty_supply += $qty_supply;
             $orderList .= '
-            <div class="row gx-x1 mx-0 align-items-center border-bottom border-200">
-                <div class="col-6 py-3 px-x1">
+            <div class="row gx-1 mx-0 align-items-center border-bottom border-200">
+                <div class="col-6 py-3 px-1">
                     <div class="d-flex align-items-center">
                         <a href="javascript:void(0);">
-                            <img class="img-fluid rounded-1 me-3 d-none d-md-block" src="' . ($item->product_image ?? '') . '" alt="" width="60" />
+                            <img class="img-fluid rounded-1 me-3 d-none d-md-block" src="' . ($item->product_image ?? asset('no-image.jpg')) . '" alt="" width="60" />
                         </a>
                         <div class="flex-1">
                             <h5 class="fs-9">
@@ -113,31 +118,33 @@ class OrderController extends Controller
                         </div>
                     </div>
                 </div>
-                <div class="col-6 py-3 px-x1">
+                <div class="col-6 py-3 px-1">
                     <div class="row align-items-center">
-                        <div class="col-md-4 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
-                            <p>' . e($item->quantity) . '</p>
+                        <div class="col-md-3 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
+                            <p>' . e($item->qty_order) . '</p>
                         </div>
-                        <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
+                        <div class="col-md-3 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
+                            <p>' . e($qty_supply) . '</p>
+                        </div>
+                        <div class="col-md-3 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
                             <p class="mb-0 fs-9">Rp' . number_format($item->price, 0, ',', '.') . '</p>
                         </div>
-                        <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
+                        <div class="col-md-3 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
                             <p class="mb-0 fs-9">Rp' . number_format($item->subtotal, 0, ',', '.') . '</p>
                         </div>
                     </div>
                 </div>
             </div>';
         }
-
         // Tambahkan total bagian akhir
         $orderList .= '
-        <div class="row fw-bold gx-x1 mx-0">
-            <div class="col-6 col-md-6 py-2 px-x1 text-end text-900">Total</div>
+        <div class="row fw-bold gx-1 mx-0">
+            <div class="col-6 col-md-6 py-2 px-1 text-end text-900">Total</div>
             <div class="col-6 col-md-6 px-0">
-                <div class="row gx-x1 mx-0">
-                    <div class="col-md-4 py-2 px-x1 d-none d-md-block text-center" id="total-items">' . e($orders->first()->total_items) . '</div>
-                    <div class="col-12 col-md-4 text-end py-2 px-x1"></div>
-                    <div class="col-12 col-md-4 text-end py-2 px-x1" id="total">Rp' . number_format($orders->first()->total_price, 0, ',', '.') . '</div>
+                <div class="row gx-1 mx-0">
+                    <div class="col-md-3 py-2 px-1 d-none d-md-block text-center" id="total-items">' . e($order_detail->first()->total_items) . '</div>
+                    <div class="col-md-3 py-2 px-1 d-none d-md-block text-center" id="total-qty-supply">' . e($total_qty_supply) . '</div>
+                    <div class="col-12 col-md-3 text-end py-2 px-1" id="total">Rp' . number_format($order_detail->first()->total_price, 0, ',', '.') . '</div>
                 </div>
             </div>
         </div>';
@@ -146,6 +153,7 @@ class OrderController extends Controller
         return response()->json([
             'success' => true,
             'orderList' => $orderList,
+            'order' => $order
         ]);
     }
 

@@ -37,7 +37,9 @@
                             <th>Status</th>
                             <th>SE Area</th>
                             <th>Group</th>
-                            <th>Actions</th>
+                            @if (auth()->user()->hasRole('main_dealer'))
+                                <th>Actions</th>
+                            @endif
                         </tr>
                     </thead>
                 </table>
@@ -97,52 +99,57 @@
                         },
                     });
                 });
+                let columns = [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'kode',
+                        name: 'kode'
+                    },
+                    {
+                        data: 'ahass',
+                        name: 'ahass'
+                    },
+                    {
+                        data: 'kota_kab',
+                        name: 'kota_kab'
+                    },
+                    {
+                        data: 'kecamatan',
+                        name: 'kecamatan'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'se_area',
+                        name: 'se_area'
+                    },
+                    {
+                        data: 'group',
+                        name: 'group'
+                    }
+                ];
+
+                @if (auth()->user()->hasRole('main_dealer'))
+                    columns.push({
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    });
+                @endif
+
                 $('#dealer-table').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,
                     ajax: "{{ route('dealer.datatable') }}",
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'kode',
-                            name: 'kode'
-                        },
-                        {
-                            data: 'ahass',
-                            name: 'ahass'
-                        },
-                        {
-                            data: 'kota_kab',
-                            name: 'kota_kab'
-                        },
-                        {
-                            data: 'kecamatan',
-                            name: 'kecamatan'
-                        },
-                        {
-                            data: 'status',
-                            name: 'status'
-                        },
-                        {
-                            data: 'se_area',
-                            name: 'se_area'
-                        },
-                        {
-                            data: 'group',
-                            name: 'group'
-                        },
-                        {
-                            data: 'actions',
-                            name: 'actions',
-                            orderable: false,
-                            searchable: false
-                        },
-                    ],
+                    columns: columns,
                 });
             });
             // Add Dealer

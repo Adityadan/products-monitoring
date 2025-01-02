@@ -22,16 +22,20 @@ class DealersController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group' ]);
+            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group']);
 
-            return DataTables::of($dealers)
-                ->addIndexColumn()
-                ->addColumn('actions', function ($row) {
+            $dataTable = DataTables::of($dealers)
+                ->addIndexColumn();
+
+            if (auth()->user()->hasRole('main_dealer')) {
+                $dataTable->addColumn('actions', function ($row) {
                     $editBtn = '<button class="btn btn-sm btn-primary edit-dealer" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-dealer-modal">Edit</button>';
                     $deleteBtn = '<button class="btn btn-sm btn-danger delete-dealer" data-id="' . $row->id . '">Delete</button>';
                     return $editBtn . ' ' . $deleteBtn;
-                })
-                ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
+                });
+            }
+
+            return $dataTable->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
                 ->make(true);
         }
     }
