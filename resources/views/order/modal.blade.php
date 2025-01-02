@@ -8,16 +8,41 @@
             </div>
             <!-- Modal Body -->
             <div class="modal-body cart-content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="customer" class="form-label" id="buyer_dealer_text">Buyer Dealer: abc</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="customer" class="form-label" id="name_text">Name: abc</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="customer" class="form-label" id="phone_text">Phone: abc</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="customer" class="form-label" id="address_text">Address: abc</label>
+                        </div>
+                    </div>
+                </div>
                 {{-- Table Header --}}
-                <div class="row gx-x1 mx-0 bg-200 text-900 fs-10 fw-semi-bold">
-                    <div class="col-6 col-md-6 py-2 px-x1">Name</div>
-                    <div class="col-6 col-md-6 px-x1">
+                <div class="row gx-1 mx-0 bg-200 text-900 fs-10 fw-semi-bold">
+                    <div class="col-6 col-md-6 py-2 px-1">Name</div>
+                    <div class="col-6 col-md-6 px-1">
                         <div class="row">
-                            <div class="col-md-4 py-2 d-none d-md-block text-center">
-                                Quantity
+                            <div class="col-md-3 py-2 d-none d-md-block text-center">
+                                Quantity Ordered
                             </div>
-                            <div class="col-md-4 text-end py-2">Price</div>
-                            <div class="col-md-4 text-end py-2">Sub Total</div>
+                            <div class="col-md-3 py-2 d-none d-md-block text-center">
+                                Quantity Send
+                            </div>
+                            <div class="col-md-3 text-end py-2">Price</div>
+                            <div class="col-md-3 text-end py-2">Sub Total</div>
                         </div>
                     </div>
                 </div>

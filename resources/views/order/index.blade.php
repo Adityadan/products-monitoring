@@ -41,8 +41,6 @@
     </div>
     @include('order.modal')
     @push('scripts')
-
-
         <script>
             $(document).ready(function() {
                 $('#ordersTable').DataTable({
@@ -93,8 +91,15 @@
                     },
                     dataType: "json",
                     success: function(response) {
+                        let order = response.order;
+                        console.log(order);
+
                         if (response.success == true) {
                             $('#detail-item').html(response.orderList);
+                            $('#buyer_dealer_text').text('Buyer Dealer: ' + order.buyer_dealer);
+                            $('#name_text').text('Name: ' + order.buyer_name);
+                            $('#phone_text').text('Phone: ' + order.phone);
+                            $('#address_text').text('Address: ' + order.shipping_address);
                         } else {
                             $('#detail-item').html('');
                             Swal.fire({
@@ -132,7 +137,8 @@
                             let selectedExpedition = response.selectedExpedition ?? '';
 
                             response.expedition.forEach(element => {
-                                expeditionSelect += `<option value="${element.id}" ${element.id === selectedExpedition.id ? 'selected' : ''}>${element.name}</option>`;
+                                expeditionSelect +=
+                                    `<option value="${element.id}" ${element.id === selectedExpedition.id ? 'selected' : ''}>${element.name}</option>`;
                             });
 
                             $('#ekspedisi').html(expeditionSelect);
