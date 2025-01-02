@@ -28,13 +28,15 @@ class ProductsController extends Controller
             ['value' => 'farthest_dealer', 'text' => 'Farthest Dealer']
         ];
 
+        $dealer = Dealer::select('kode', 'ahass')->get();
+
         $stock_filter = [
             ['value' => null, 'text' => 'All'],
             ['value' => 'in_stock', 'text' => 'In Stock'],
             ['value' => 'out_of_stock', 'text' => 'Out of Stock']
         ];
 
-        return view('product.index', compact('filters', 'stock_filter', 'no_part'));
+        return view('product.index', compact('filters', 'stock_filter', 'no_part','dealer'));
     }
 
     public function productList(Request $request)
@@ -43,6 +45,7 @@ class ProductsController extends Controller
         $search = $request->get('search'); // Filter pencarian
         $stock = $request->get('stock'); // Filter stok
         $no_part = $request->get('no_part'); // Filter nomor part
+        $dealer = $request->get('dealer'); // Filter dealer
         $user = Auth::user();
         $kodeDealer = $user->kode_dealer;
         $cek_data_product_exists = DB::table('products')->exists();
@@ -68,7 +71,8 @@ class ProductsController extends Controller
 
         $products = DB::table('products as p')
             ->leftJoin('dealers as d', 'p.kode_dealer', '=', 'd.kode')
-            ->leftJoin('product_image as pi', 'p.no_part', '=', 'pi.no_part')
+            ->leftJoin('detail_product as pi', 'p.no_part', '=', 'pi.no_part')
+            // ->leftJoin('product_image as pi', 'p.no_part', '=', 'pi.no_part')
             ->select(
                 'p.id as product_id',
                 'p.no_part',
@@ -81,9 +85,13 @@ class ProductsController extends Controller
                 'd.ahass',
                 'd.kota_kab',
                 'd.deleted_at as dealer_deleted_at',
-                'pi.image as product_image'
+                'pi.image as product_image',
+                'pi.functionality'
             );
 
+        if ($dealer) {
+            $products->where('p.kode_dealer', $dealer);
+        }
         // Filter pencarian
         if ($search) {
             $lowerSearch = strtolower($search);
@@ -137,10 +145,8 @@ class ProductsController extends Controller
         if ($no_part) {
             $products->whereIn('p.no_part', $no_part);
         }
-
         // Pagination
         $products = $products->paginate(9);
-
         // Modify 'oh' field based on user role
         $products->getCollection()->transform(function ($product) use ($user) {
             if (!$user->hasRole('main_dealer')) {

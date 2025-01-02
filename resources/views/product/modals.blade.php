@@ -24,6 +24,15 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="stock" class="form-label">Filter By Dealer</label>
+                        <select class="form-select" id="dealer" name="dealer">
+                            <option value="">All</option>
+                            @foreach ($dealer as $item)
+                                <option value="{{ $item['kode'] }}">{{ $item['ahass'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="search" class="form-label">Search Product Name or Code</label>
                         <input type="text" class="form-control" name="search" id="search"
                             placeholder="Enter product name or code">

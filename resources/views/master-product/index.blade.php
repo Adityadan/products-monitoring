@@ -62,7 +62,21 @@
     @include('master-product.modals')
 
     @push('scripts')
+        <script>
+            $('#image').on('change', function(event) {
+                console.log('Change event triggered');
 
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#thumbnail').attr('src', e.target.result).css('display', 'block');
+                        $('#thumbnail-preview').css('display', 'block');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        </script>
 
         <script>
             $(document).ready(function() {
@@ -110,7 +124,36 @@
                 let url = `{{ route('master-product.edit', ':id') }}`.replace(':id', id);
 
                 $.get(url, function(data) {
+                    console.log(data);
+                    let detail_product = data.data.detail_product;
+                    if (detail_product.length > 0) {
+                        detail_product = detail_product[0];
+                        console.log(detail_product.functionality);
+
+                        // Reset the file input
+                        $('#image').val('');
+
+                        // Ensure the image URL is correct
+                        let imageUrl = detail_product.image;
+                        if (!imageUrl.startsWith('/storage/')) {
+                            imageUrl = '/storage/' + imageUrl;
+                        }
+
+                        $('#thumbnail').attr('src', imageUrl);
+                        $('#thumbnail-preview').css('display', 'block');
+                        $('#thumbnail').css('display', 'block');
+                        $('#functionality').text(detail_product.functionality);
+                    } else {
+                        // Reset fields if no detail product found
+                        $('#image').val('');
+                        $('#thumbnail').attr('src', '');
+                        $('#thumbnail-preview').css('display', 'none');
+                        $('#functionality').text('');
+                    }
                     $('#no_part').val(data.data.no_part);
+                }).fail(function() {
+                    // Handle error
+                    console.error('Failed to fetch product details.');
                 });
             });
 
@@ -137,7 +180,7 @@
                     },
                 });
 
-                let url = `{{ route('master-product.addImage', ':id') }}`.replace(':id', $('#no_part').val());
+                let url = `{{ route('master-product.store', ':id') }}`.replace(':id', $('#no_part').val());
                 $.ajax({
                     url: url,
                     method: 'POST', // Menggunakan POST untuk pengiriman file
@@ -162,7 +205,8 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error!',
-                            text: xhr.responseJSON?.message || 'Failed to save the product image. Please try again.',
+                            text: xhr.responseJSON?.message ||
+                                'Failed to save the product image. Please try again.',
                         });
                     },
                 });

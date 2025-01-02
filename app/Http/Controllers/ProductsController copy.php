@@ -42,7 +42,8 @@ class ProductsController1 extends Controller
         $sort = $request->get('sort'); // Mengambil filter sort dari request
         $search = $request->get('search'); // Mengambil filter pencarian dari request
         $stock = $request->get('stock'); // Mengambil filter stock dari request
-        $products = Product::with(['dealer', 'product_images', 'dealer.distance_order']);
+        $products = Product::with(['dealer', 'detail_product', 'dealer.distance_order']);
+        // $products = Product::with(['dealer', 'product_images', 'dealer.distance_order']);
         $kodeDealer = Auth::user()->kode_dealer;
         $no_part = $request->get('no_part');
         // Filter pencarian

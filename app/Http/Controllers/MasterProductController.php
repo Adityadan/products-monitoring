@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -55,27 +56,28 @@ class MasterProductController extends Controller
     public function edit($no_part)
     {
         // $product = Product::findOrFail($id);
-        $product = Product::where('no_part', $no_part)->first();
+        $product = Product::with('detail_product')->where('no_part', $no_part)->first();
         return response()->json([
             'success' => true,
             'data' => $product,
         ]);
     }
 
-    public function addImage(Request $request, $no_part)
+    public function store(Request $request, $no_part)
     {
         // Validasi input
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Gambar wajib diunggah
+            'functionality' => 'string',
         ]);
 
+        $functionality = strip_tags($request->input('functionality'));
         try {
             // Cari data berdasarkan no_part
-            $productImage = ProductImage::where('no_part', $no_part)->first();
-
+            $productImage = DetailProduct::where('no_part', $no_part)->first();
             // Jika data baru dibuat, buat instance baru dan tambahkan created_by
             if (empty($productImage)) {
-                $productImage = new ProductImage();
+                $productImage = new DetailProduct();
                 $productImage->no_part = $no_part;
                 $productImage->created_by = auth()->user()->id;
             }
@@ -95,6 +97,7 @@ class MasterProductController extends Controller
             // Tambahkan updated_by untuk semua operasi update
             $productImage->updated_by = auth()->user()->id;
 
+            $productImage->functionality = $functionality;
             // Simpan data ke database
             $productImage->save();
 

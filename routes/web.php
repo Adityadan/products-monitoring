@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [MasterProductController::class, 'index'])->name('index');
         Route::get('/datatable', [MasterProductController::class, 'datatable'])->name('datatable');
         Route::get('/edit/{id}', [MasterProductController::class, 'edit'])->name('edit');
-        Route::post('/add-image/{id}', [MasterProductController::class, 'addImage'])->name('addImage');
+        Route::post('/store/{id}', [MasterProductController::class, 'store'])->name('store');
     });
     Route::prefix('dealer')->name('dealer.')->group(function () {
         Route::get('/', [DealersController::class, 'index'])->name('index');

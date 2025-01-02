@@ -8,10 +8,18 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="no_part" id="no_part" value="">
+                    <div class="mb-3" id="thumbnail-preview" style="display: none;">
+                        <label for="thumbnail" class="form-label">Thumbnail Preview</label>
+                        <img id="thumbnail" src="#" alt="Image Preview" class="img-thumbnail" style="display: none; max-width: 100px;">
+                    </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image Product</label>
                         <input type="file" id="image" name="image" class="form-control" >
                     </div>
+                    {{-- <div class="mb-3">
+                        <label for="image" class="form-label">Functionality Product</label>
+                        <textarea class="form-control" name="functionality" id="functionality" cols="30" rows="10"></textarea>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

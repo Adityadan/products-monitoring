@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductImage extends Model
+class DetailProduct extends Model
 {
     use HasFactory;
 
-    protected $table = 'product_image';
-
+    protected $table = 'detail_product';
     protected $guarded = [];
-
-
-    public $timestamps = false;
 
     public function product()
     {

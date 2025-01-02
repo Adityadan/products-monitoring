@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dealer;
+use App\Models\DetailProduct;
 use App\Models\Expeditions;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -93,7 +94,7 @@ class OrderController extends Controller
             ]);
         }
 
-        $productImage = ProductImage::where('no_part', $order_detail->first()->no_part)->first();
+        $productImage = DetailProduct::where('no_part', $order_detail->first()->no_part)->first();
 
         // Inisialisasi tampilan HTML untuk daftar pesanan
         $orderList = '';

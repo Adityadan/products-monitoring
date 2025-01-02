@@ -50,4 +50,9 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'no_part', 'no_part');
     }
 
+    public function detail_product()
+    {
+        return $this->hasMany(DetailProduct::class, 'no_part', 'no_part');
+    }
+
 }

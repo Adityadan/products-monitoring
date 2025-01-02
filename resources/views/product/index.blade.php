@@ -89,6 +89,7 @@
                     sort = sort || $('#sort').val();
                     stock = stock || $('#stock').val();
                     no_part = $('#no_part').val();
+                    dealer = $('#dealer').val();
 
                     let url = '{{ route('product.list') }}';
 
@@ -112,6 +113,7 @@
                             sort: sort,
                             stock: stock,
                             no_part: no_part,
+                            dealer: dealer,
                             _token: '{{ csrf_token() }}' // CSRF token
                         },
                         success: function(response) {
@@ -154,6 +156,8 @@
 
                             // Render produk
                             response.data.forEach(function(product) {
+                                console.log(product);
+
                                 // Dapatkan gambar produk atau gunakan gambar default jika tidak ada
                                 const productImage = product.product_image ?
                                     `{{ asset('storage/') }}/${product.product_image}` :
@@ -195,6 +199,9 @@
                                                         Stock: <strong class="text-${product.oh > 0 || product.oh === 'Stock Available' ? 'success' : 'danger'}">
                                                             ${product.oh}
                                                         </strong>
+                                                    </p>
+                                                    <p class="fs-10 mb-1">
+                                                        Product Functionality: <strong>-</strong>
                                                     </p>
                                                 </div>
                                             </div>
