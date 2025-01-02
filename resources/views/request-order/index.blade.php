@@ -22,10 +22,10 @@
                     <thead>
                         <tr>
                             <th scope="col">No.</th>
-                            <th scope="col">Kode Dealer</th>
-                            <th scope="col">Nomor Order</th>
-                            <th scope="col">Nomor Resi</th>
-                            <th scope="col">Ekspedisi</th>
+                            <th scope="col">Dealer Code</th>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Receipt Number</th>
+                            <th scope="col">Expedition</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>

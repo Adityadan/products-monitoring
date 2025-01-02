@@ -132,13 +132,12 @@ class DealerProductsController extends Controller
         }
     }
 
-    public function previewNew(Request $request)
+    public function previewNewOld(Request $request)
     {
         // dd($request->all());
         $user = auth()->user();
         $dealerCode = $user['kode_dealer'];
-        if ($dealerCode != '00000')
-        {
+        if ($dealerCode != '00000') {
             return response()->json([
                 'status' => true
             ]);
@@ -148,11 +147,9 @@ class DealerProductsController extends Controller
         // dd($data);
 
         $listCreate = [];
-        foreach ($data AS $product)
-        {
+        foreach ($data as $product) {
             // checking if header or data from excel (Main Dealer)
-            if ($product[0] == 'No.')
-            {
+            if ($product[0] == 'No.') {
                 continue;
             }
 
@@ -163,9 +160,8 @@ class DealerProductsController extends Controller
             ];
             $isExist = Product::query()
                 ->where($dataWhere)
-                ->count()
-            ;
-            
+                ->count();
+
             $dataProduct = [
                 'kode_dealer' => $dealerCode,
                 'no_part' => $product[1],
@@ -173,12 +169,9 @@ class DealerProductsController extends Controller
                 'oh' => $product[4],
                 'standard_price_moving_avg_price' => $product[5]
             ];
-            if ($isExist)
-            {
+            if ($isExist) {
                 Product::where($dataWhere)->update($dataProduct);
-            }
-            else
-            {
+            } else {
                 $now = date('Y-m-d H:i:s');
                 $dataProduct['created_at'] = $now;
                 $dataProduct['updated_at'] = $now;
@@ -186,8 +179,7 @@ class DealerProductsController extends Controller
             }
         }
 
-        if (count($listCreate) > 0)
-        {
+        if (count($listCreate) > 0) {
             Product::insert($listCreate);
         }
 
@@ -195,6 +187,140 @@ class DealerProductsController extends Controller
             'status' => true,
         ]);
     }
+
+    public function previewNew(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $dealerCode = $user['kode_dealer'];
+            if (!$dealerCode) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Kode dealer tidak ditemukan. Silahkan Mengisi Kode Dealer Anda.'
+                ], 400);
+            }
+
+            $data = json_decode($request->data);
+            if (!is_array($data) || empty($data)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Data tidak valid atau kosong.'
+                ], 400);
+            }
+
+            $isMainDealer = filter_var($request->is_main_dealer, FILTER_VALIDATE_BOOLEAN);
+            $listCreate = [];
+            $timestamp = now();
+
+            foreach ($data as $row) {
+                if ($isMainDealer) {
+                    // Logika untuk main dealer
+                    $dataWhere = [
+                        'kode_dealer' => $dealerCode,
+                        'nama_part' => $row[2] // Gunakan nama_part untuk penggabungan
+                    ];
+                    $existingProduct = Product::query()->where($dataWhere)->first();
+
+                    $dataProduct = [
+                        'kode_dealer' => $dealerCode,
+                        'no_part' => $row[1],
+                        'nama_part' => $row[2],
+                        'oh' => $row[4], // Stok baru
+                        'standard_price_moving_avg_price' => $row[5],
+                        'updated_at' => $timestamp
+                    ];
+
+                    if ($existingProduct) {
+                        // Jika data sudah ada, tambahkan stok (oh)
+                        $dataProduct['oh'] += $existingProduct->oh;
+                        Product::where($dataWhere)->update($dataProduct);
+                    } else {
+                        // Gabungkan stok jika ada data serupa di $listCreate
+                        $index = array_search($row[2], array_column($listCreate, 'nama_part'));
+                        if ($index !== false) {
+                            $listCreate[$index]['oh'] += $row[4];
+                        } else {
+                            $dataProduct['created_at'] = $timestamp;
+                            $listCreate[] = $dataProduct;
+                        }
+                    }
+                } else {
+                    // Jika 'Total' terdeteksi, skip baris ini
+                    if (isset($row[0]) && strtolower($row[0]) === 'total') {
+                        continue;
+                    }
+
+                    // Logika untuk non-main dealer
+                    $dataWhere = [
+                        'kode_dealer' => $row[1],
+                        'nama_part' => $row[7] // Gunakan nama_part untuk penggabungan
+                    ];
+                    $existingProduct = Product::query()->where($dataWhere)->first();
+
+                    $dataProduct = [
+                        'no' => $row[0],
+                        'kode_dealer' => $row[1],
+                        'kode_ba' => $row[2],
+                        'customer_master_sap' => $row[3],
+                        'group_material' => $row[4],
+                        'group_tobpm' => $row[5],
+                        'no_part' => $row[6],
+                        'nama_part' => $row[7],
+                        'rank_part' => $row[8],
+                        'discontinue' => $row[9],
+                        'kode_gudang' => $row[10],
+                        'nama_gudang' => $row[11],
+                        'kode_lokasi' => $row[12],
+                        'int' => $row[13],
+                        'oh' => $row[14], // Stok baru
+                        'rsv' => $row[15],
+                        'blk' => $row[16],
+                        'wip' => $row[17],
+                        'bok' => $row[18],
+                        'total_exc_int' => $row[19],
+                        'stock_days_month' => $row[20],
+                        'avg_demand_qty' => $row[21],
+                        'avg_demand_amt' => $row[22],
+                        'avg_sales_monthly_qty' => $row[23],
+                        'avg_sales_monthly_amt' => $row[24],
+                        'standard_price_moving_avg_price' => $row[25],
+                        'invt_amt_exc_int' => $row[26],
+                        'updated_at' => $timestamp
+                    ];
+
+                    if ($existingProduct) {
+                        // Jika data sudah ada, tambahkan stok (oh)
+                        $dataProduct['oh'] += $existingProduct->oh;
+                        Product::where($dataWhere)->update($dataProduct);
+                    } else {
+                        // Gabungkan stok jika ada data serupa di $listCreate
+                        $index = array_search($row[7], array_column($listCreate, 'nama_part'));
+                        if ($index !== false) {
+                            $listCreate[$index]['oh'] += $row[14];
+                        } else {
+                            $dataProduct['created_at'] = $timestamp;
+                            $listCreate[] = $dataProduct;
+                        }
+                    }
+                }
+            }
+
+            if (!empty($listCreate)) {
+                Product::insert($listCreate);
+            }
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data berhasil diproses.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
 
 
     /**

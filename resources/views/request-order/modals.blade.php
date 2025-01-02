@@ -16,16 +16,16 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="kode" class="form-label" id="alamat_text">Alamat: - </label>
+                        <label for="kode" class="form-label" id="alamat_text">Address: - </label>
                     </div>
                     <div class="mb-3">
-                        <label for="kode" class="form-label">Ekspedisi</label>
+                        <label for="kode" class="form-label">Expedition</label>
                         <select name="id_expedition" id="ekspedisi" class="form-select">
 
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="no_resi" class="form-label">Nomor Resi</label>
+                        <label for="no_resi" class="form-label">Receipt Number</label>
                         <input type="text" id="no_resi" name="no_resi" class="form-control" required>
                     </div>
                 </div>
@@ -34,10 +34,10 @@
                         <table class="table table-hover table-striped overflow-hidden text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nomor Part</th>
-                                    <th scope="col">Kode Dealer</th>
-                                    <th scope="col">Jumlah Yang Dipesan</th>
-                                    <th scope="col">Jumlah Barang Dikirim</th>
+                                    <th scope="col">Part Number</th>
+                                    <th scope="col">Dealer Code</th>
+                                    <th scope="col">Quantity Order</th>
+                                    <th scope="col">Quantity Send</th>
                                 </tr>
                             </thead>
                             <tbody class="table-expedition" id="list-item">

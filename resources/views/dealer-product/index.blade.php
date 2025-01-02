@@ -8,6 +8,8 @@
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
                         <div class="col-auto">
+                            <input type="hidden" name="roles" id="roles"
+                                value="{{ auth()->user()->hasRole('main_dealer') ? 'true' : 'false' }}">
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                                 data-bs-target="#import-excel-modal">Import Data</button>
                         </div>
@@ -61,8 +63,11 @@
                         <!-- Preview Table -->
                         <div id="preview-container" style="display: none">
                             <div class="" id="div_loading" style="display: none">
-                                <div id="pb_loading" class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%">0%</div>
+                                <div id="pb_loading" class="progress" role="progressbar"
+                                    aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                        style="width: 0%">0%</div>
                                 </div>
                                 <div class="text-center mt-1">
                                     <div class="spinner-border text-primary me-2" role="status" style="">
@@ -87,11 +92,11 @@
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    @else
-                                        <table class="table table-striped" id="preview-table">
-                                            <thead>
-                                                <tr>
-                                                    <td>no</td>
+                                @else
+                                    <table class="table table-striped" id="preview-table">
+                                        <thead>
+                                            <tr id="header_preview_table">
+                                                {{--  <td>no</td>
                                                     <td>kode dealer</td>
                                                     <td>kode ba</td>
                                                     <td>customer master sap</td>
@@ -117,11 +122,11 @@
                                                     <td>avg sales monthly qty</td>
                                                     <td>avg sales monthly amt</td>
                                                     <td>standard price moving avg price</td>
-                                                    <td>invt amt exc int</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
+                                                    <td>invt amt exc int</td> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
                                 @endif
                             </div>
                         </div>
@@ -143,6 +148,7 @@
         <script>
             let listProducts = [];
             let page = 0;
+            let isMainDealer = $('#roles').val();
 
             const delay = (delayInms) => {
                 return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -185,145 +191,17 @@
                         },
                     ],
                 });
-                // Handle file upload and preview
-                /*
-                $('#file-input').change(function() {
-                    var formData = new FormData($('#import-form')[0]);
-
-                    // Clear previous preview data
-                    $('#preview-table tbody').empty();
-
-                    // Show loading screen
-                    Swal.fire({
-                        title: 'Loading...',
-                        text: 'Please wait while we process your file.',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-
-                    // Send AJAX request to upload file and get preview data
-                    $.ajax({
-                        url: "{{ route('dealer-product.preview') }}", // Endpoint untuk preview
-                        type: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
-                            console.log(response.is_main_dealer);
-
-                            // Close the loading screen
-                            Swal.close();
-                            let is_main_dealer = response.is_main_dealer;
-                            // Show preview container
-                            $('#preview-container').show();
-                            $('#save-btn').show();
-
-                            // Populate table with preview data
-                            var rows = response.data;
-                            if (is_main_dealer == true) {
-                                $.each(rows, function(index, row) {
-
-                                    $('#preview-table tbody').append(`
-                                        <tr>
-                                            <td>${index + 1}</td>
-                                            <td>${row.kode_dealer}</td>
-                                            <td>${row.no_part}</td>
-                                            <td>${row.nama_part}</td>
-                                            <td>${row.oh}</td>
-                                            <td>${row.standard_price_moving_avg_price}</td>
-                                        </tr>
-                                    `);
-                                });
-                            } else {
-                                $.each(rows, function(index, row) {
-                                    $('#preview-table tbody').append(`
-                                        <tr>
-                                            <td>${index + 1}</td>
-                                            <td>${row.kode_dealer}</td>
-                                            <td>${row.kode_ba}</td>
-                                            <td>${row.customer_master_sap}</td>
-                                            <td>${row.group_material}</td>
-                                            <td>${row.group_tobpm}</td>
-                                            <td>${row.no_part}</td>
-                                            <td>${row.nama_part}</td>
-                                            <td>${row.rank_part}</td>
-                                            <td>${row.discontinue}</td>
-                                            <td>${row.kode_gudang}</td>
-                                            <td>${row.nama_gudang}</td>
-                                            <td>${row.kode_lokasi}</td>
-                                            <td>${row.int}</td>
-                                            <td>${row.oh}</td>
-                                            <td>${row.rsv}</td>
-                                            <td>${row.blk}</td>
-                                            <td>${row.wip}</td>
-                                            <td>${row.bok}</td>
-                                            <td>${row.total_exc_int}</td>
-                                            <td>${row.stock_days_month}</td>
-                                            <td>${row.avg_demand_qty}</td>
-                                            <td>${row.avg_demand_amt}</td>
-                                            <td>${row.avg_sales_monthly_qty}</td>
-                                            <td>${row.avg_sales_monthly_amt}</td>
-                                            <td>${row.standard_price_moving_avg_price}</td>
-                                            <td>${row.invt_amt_exc_int}</td>
-                                        </tr>
-                                    `);
-                                });
-                            }
-                        },
-                        error: function(xhr) {
-                            // Close the loading screen
-                            Swal.close();
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Preview Failed!',
-                                text: xhr.responseJSON.message ||
-                                    'An error occurred while processing the file.',
-                            });
-                        }
-                    });
-                });
-                $("#file-input").on("change", function() {
-                    // Get The File From The Input
-                    var oFile = $(this).prop('files')[0];
-                    var sFilename = oFile.name;
-                    // Create A File Reader HTML5
-                    var reader = new FileReader();
-
-                    console.log(oFile, sFilename);
-
-                    // Ready The Event For When A File Gets Selected
-                    reader.onload = function(e) {
-                        var data = e.target.result;
-                        var cfb = XLS.CFB.read(data, {type: 'binary'});
-                        var wb = XLS.parse_xlscfb(cfb);
-                        // Loop Over Each Sheet
-                        wb.SheetNames.forEach(function(sheetName) {
-                            // Obtain The Current Row As CSV
-                            var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);
-                            var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
-
-                            // $("#my_file_output").html(sCSV);
-                            console.log(sCSV)
-                            console.log(oJS)
-                        });
-                    };
-
-                    // Tell JS To Start Reading The File.. You could delay this if desired
-                    reader.readAsBinaryString(oFile);
-                });
-                */
                 $("#file-input").on("change", function() {
                     let fileUpload = $(this).prop('files')[0];
-                    readXlsxFile(fileUpload).then(async function (data) {
+
+                    readXlsxFile(fileUpload).then(async function(data) {
                         // console.log(data);
                         listProducts = await data;
                         $("#import-excel-modal .modal-dialog").addClass("modal-xl");
                         $("#preview-container").show();
                         $("#preview-table tbody").html("");
-                        $("#preview-table tbody").html(previewData());
+                        $("#preview-table tbody").html(previewData(isMainDealer));
+                        $("#header_preview_table").html(previewHeader(isMainDealer));
                     });
 
                     $("#save-btn").show();
@@ -333,56 +211,6 @@
                     saveData();
                 });
 
-                // Handle save data
-                /*
-                $('#save-btn').click(function() {
-                    var formData = new FormData($('#import-form')[0]);
-
-                    // Show loading screen
-                    Swal.fire({
-                        title: 'Saving...',
-                        text: 'Please wait while we save your data.',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-
-                    $.ajax({
-                        url: "{{ route('dealer-product.import') }}", // Endpoint untuk menyimpan data
-                        type: 'POST',
-                        data: formData,
-                        contentType: false, // Don't set content type
-                        processData: false, // Don't process data
-                        success: function(response) {
-                            // Close the loading screen
-                            Swal.close();
-
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Data Saved!',
-                                text: response.message ||
-                                    'Your data has been successfully saved.',
-                                timer: 2000,
-                                showConfirmButton: false
-                            }).then(() => {
-                                location.reload();
-                            });
-                        },
-                        error: function(xhr) {
-                            // Close the loading screen
-                            Swal.close();
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Save Failed!',
-                                text: xhr.responseJSON.message ||
-                                    'An error occurred while saving the data.',
-                            });
-                        }
-                    });
-                });
-                */
 
                 // Reset form and preview table when the modal is closed
                 $('#import-excel-modal').on('hidden.bs.modal', function() {
@@ -393,28 +221,52 @@
                 });
             });
 
-            function previewData()
-            {
+            function previewHeader(condition) {
+                let htmlHeader = "";
+
+                // Tentukan indeks berdasarkan kondisi
+                let index = condition === "true" ? 0 : 11;
+
+                // Filter out null or empty values dan reindex array
+                listProducts[index] = listProducts[index].filter(item => item !== null && item !== '');
+
+                for (let i = 0; i < listProducts[index].length; i++) {
+                    htmlHeader += `<th>${listProducts[index][i]}</th>`;
+                }
+
+                return htmlHeader;
+            }
+
+            function previewData(condition) {
                 let htmlTable = "";
                 let maxData = 100;
-                for (i = 0; i < listProducts.length; i++)
-                {
+
+                // Tentukan indeks awal berdasarkan kondisi
+                let startIndex = condition === "true" ? 1 : 12;
+
+                for (let i = startIndex; i < listProducts.length; i++) {
+                    // Filter out null or empty values dan reindex array
+                    listProducts[i] = listProducts[i].filter(item => item !== null && item !== '');
+
                     htmlTable += "<tr>";
-                    for (j = 0; j < listProducts[i].length; j++)
-                    {
+                    for (let j = 0; j < listProducts[i].length; j++) {
                         htmlTable += `<td>${listProducts[i][j]}</td>`;
                     }
                     htmlTable += "</tr>";
                 }
+
                 return htmlTable;
             }
 
-            async function saveData()
-            {
+
+            async function saveData(condition) {
                 $("#div_loading").show();
 
-                let maxDataPerRequest = 1000
-                let maxRequest = Math.ceil(listProducts.length / maxDataPerRequest);
+                let maxDataPerRequest = 1000;
+                // Tentukan indeks awal berdasarkan kondisi
+                let startIndex = condition === "true" ? 1 : 12;
+                let maxRequest = Math.ceil((listProducts.length - startIndex) / maxDataPerRequest);
+
                 $("#pb_loading").attr("aria-valuenow", 0);
                 $("#pb_loading").attr("aria-valuemin", 0);
                 $("#pb_loading").attr("aria-valuemax", 100);
@@ -422,16 +274,23 @@
                 $("#pb_loading .progress-bar-animated").css("width", "0%").text("0%");
 
                 let no = 1;
-                for (i = 0; i < listProducts.length; i += maxDataPerRequest) {
+
+                for (let i = startIndex; i < listProducts.length; i += maxDataPerRequest) {
                     let dataStart = i;
-                    let dataEnd = i + maxDataPerRequest - 1 <= listProducts.length ? i + maxDataPerRequest - 1 : listProducts.length;
+                    let dataEnd = i + maxDataPerRequest - 1 < listProducts.length ? i + maxDataPerRequest : listProducts
+                        .length;
 
                     let dataPreview = [];
-                    for (j = dataStart; j < dataEnd; j++) {
+                    for (let j = dataStart; j < dataEnd; j++) {
+                        listProducts[j] = listProducts[j].filter(item => item !== null && item !== '');
+
+                        // Filter null atau nilai kosong hanya untuk data sesuai kondisi
+                        // if (condition === "B") {
+                        //     listProducts[j] = listProducts[j].filter(item => item !== null && item !== '');
+                        // }
                         dataPreview.push(listProducts[j]);
                     }
 
-                    // console.log(dataStart, dataEnd, JSON.stringify(dataPreview));
                     let current = Math.ceil(no * 100 / maxRequest);
                     console.log(`Progress: ${current} ${no} of ${maxRequest}`);
                     $("#lbl_progress").text(`${no} of ${maxRequest} (${current}%)`);
@@ -441,21 +300,35 @@
                     await delay(250);
                     no++;
 
-                    $.ajax({
+                    await $.ajax({
                         url: "{{ route('dealer-product.preview-new') }}",
                         type: "POST",
                         async: false,
                         headers: {
                             "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
                         },
-                        data: {"data": JSON.stringify(dataPreview)},
+                        data: {
+                            "data": JSON.stringify(dataPreview),
+                            'is_main_dealer': isMainDealer
+                        },
                         success: function(data) {
+                            console.log(data);
                         },
                         error: function(error) {
                             console.log(error);
                         }
                     });
                 }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Data saved successfully!',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
             }
         </script>
     @endpush
