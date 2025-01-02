@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DealerProductsController::class, 'index'])->name('index');
         Route::get('/datatable', [DealerProductsController::class, 'datatable'])->name('datatable');
         Route::post('/preview', [DealerProductsController::class, 'preview'])->name('preview');
+        Route::post('/preview-new', [DealerProductsController::class, 'previewNew'])->name('preview-new'); // new method upload when large data
         Route::post('/import', [DealerProductsController::class, 'import'])->name('import');
     });
     Route::prefix('master-product')->name('master-product.')->group(function () {

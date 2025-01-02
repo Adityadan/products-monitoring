@@ -132,6 +132,70 @@ class DealerProductsController extends Controller
         }
     }
 
+    public function previewNew(Request $request)
+    {
+        // dd($request->all());
+        $user = auth()->user();
+        $dealerCode = $user['kode_dealer'];
+        if ($dealerCode != '00000')
+        {
+            return response()->json([
+                'status' => true
+            ]);
+        }
+
+        $data = json_decode($request->data);
+        // dd($data);
+
+        $listCreate = [];
+        foreach ($data AS $product)
+        {
+            // checking if header or data from excel (Main Dealer)
+            if ($product[0] == 'No.')
+            {
+                continue;
+            }
+
+            // checking data in DB
+            $dataWhere = [
+                'kode_dealer' => $dealerCode,
+                'no_part' => $product[1]
+            ];
+            $isExist = Product::query()
+                ->where($dataWhere)
+                ->count()
+            ;
+            
+            $dataProduct = [
+                'kode_dealer' => $dealerCode,
+                'no_part' => $product[1],
+                'nama_part' => $product[2],
+                'oh' => $product[4],
+                'standard_price_moving_avg_price' => $product[5]
+            ];
+            if ($isExist)
+            {
+                Product::where($dataWhere)->update($dataProduct);
+            }
+            else
+            {
+                $now = date('Y-m-d H:i:s');
+                $dataProduct['created_at'] = $now;
+                $dataProduct['updated_at'] = $now;
+                $listCreate[] = $dataProduct;
+            }
+        }
+
+        if (count($listCreate) > 0)
+        {
+            Product::insert($listCreate);
+        }
+
+        return response()->json([
+            'status' => true,
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
