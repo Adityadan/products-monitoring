@@ -39,7 +39,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90%;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content position-relative">
                 <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
                     <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
@@ -61,14 +61,16 @@
 
                         <!-- Preview Table -->
                         <div id="preview-container" style="display: none">
-                            <div id="pb_loading" class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%">0%</div>
-                            </div>
-                            <div class="text-center mt-1">
-                                <div class="spinner-border text-primary me-2" role="status" style="">
-                                    <span class="visually-hidden">Loading...</span>
+                            <div class="" id="div_loading" style="display: none">
+                                <div id="pb_loading" class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%">0%</div>
                                 </div>
-                                <div id="lbl_progress">0 of 100</div>
+                                <div class="text-center mt-1">
+                                    <div class="spinner-border text-primary me-2" role="status" style="">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div id="lbl_progress">0 of 100</div>
+                                </div>
                             </div>
                             <h5 class="mt-4">Preview Data</h5>
                             <div class="table-responsive" style="max-height: 50vh; overflow-y: auto;">
@@ -140,11 +142,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script> --}}
         <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
         <script>
+            let listProducts = [];
+            let page = 0;
+
             const delay = (delayInms) => {
                 return new Promise(resolve => setTimeout(resolve, delayInms));
             };
 
             $(document).ready(function() {
+
                 $('#product-table').DataTable({
                     processing: true,
                     serverSide: true,
@@ -318,69 +324,22 @@
                     let fileUpload = $(this).prop('files')[0];
                     readXlsxFile(fileUpload).then(async function (data) {
                         // console.log(data);
-
+                        listProducts = await data;
+                        $("#import-excel-modal .modal-dialog").addClass("modal-xl");
                         $("#preview-container").show();
-
-                        let maxDataPerRequest = 1000
-                        let maxRequest = Math.ceil(data.length / maxDataPerRequest);
-                        $("#pb_loading").attr("aria-valuenow", 0);
-                        $("#pb_loading").attr("aria-valuemin", 0);
-                        $("#pb_loading").attr("aria-valuemax", 100);
-
-                        $("#pb_loading .progress-bar-animated").css("width", "0%").text("0%");
-
-                        let no = 1;
-                        for (i = 0; i < data.length; i += maxDataPerRequest) {
-                            let dataStart = i;
-                            let dataEnd = i + maxDataPerRequest - 1 <= data.length ? i + maxDataPerRequest - 1 : data.length;
-
-                            let dataPreview = [];
-                            for (j = dataStart; j < dataEnd; j++) {
-                                dataPreview.push(data[j]);
-                            }
-
-                            // console.log(dataStart, dataEnd, JSON.stringify(dataPreview));
-                            let current = Math.ceil(no * 100 / maxRequest);
-                            console.log(current);
-                            $("#lbl_progress").text(`${no} of ${maxRequest} (${current}%)`);
-                            $("#pb_loading").attr("aria-valuenow", current);
-                            $("#pb_loading .progress-bar-animated").css("width", `${current}%`).text(`${current}%`);
-
-                            await delay(250);
-                            no++;
-
-                            $.ajax({
-                                url: "{{ route('dealer-product.preview-new') }}",
-                                type: "POST",
-                                async: false,
-                                headers: {
-                                    "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
-                                },
-                                data: {"data": JSON.stringify(dataPreview)},
-                                success: function(data) {
-                                },
-                                error: function(error) {
-                                    console.log(error);
-                                }
-                            });
-                        }
-                        // const headers = data[0];
-                        // const jsonData = [];
-                        // for (let i = 1; i < data.length; i++) {
-                        //     const temp = {};
-                        //     for (let j = 0; j < headers.length; j++) {
-                        //         // temp[headers[j]] = data[i][j];
-                        //         temp[i][j] = data[i][j];
-                        //     }
-                        //     jsonData.push(temp);
-                        // }
-                        // console.log(jsonData);
-                        // console.log(JSON.stringify(jsonData, null, 2));
+                        $("#preview-table tbody").html("");
+                        $("#preview-table tbody").html(previewData());
                     });
+
+                    $("#save-btn").show();
                 });
 
+                $("#save-btn").on("click", function() {
+                    saveData();
+                });
 
                 // Handle save data
+                /*
                 $('#save-btn').click(function() {
                     var formData = new FormData($('#import-form')[0]);
 
@@ -428,6 +387,7 @@
                         }
                     });
                 });
+                */
 
                 // Reset form and preview table when the modal is closed
                 $('#import-excel-modal').on('hidden.bs.modal', function() {
@@ -437,6 +397,71 @@
                     $('#save-btn').hide();
                 });
             });
+
+            function previewData()
+            {
+                let htmlTable = "";
+                let maxData = 100;
+                for (i = 0; i < listProducts.length; i++)
+                {
+                    htmlTable += "<tr>";
+                    for (j = 0; j < listProducts[i].length; j++)
+                    {
+                        htmlTable += `<td>${listProducts[i][j]}</td>`;
+                    }
+                    htmlTable += "</tr>";
+                }
+                return htmlTable;
+            }
+
+            async function saveData()
+            {
+                $("#div_loading").show();
+
+                let maxDataPerRequest = 1000
+                let maxRequest = Math.ceil(listProducts.length / maxDataPerRequest);
+                $("#pb_loading").attr("aria-valuenow", 0);
+                $("#pb_loading").attr("aria-valuemin", 0);
+                $("#pb_loading").attr("aria-valuemax", 100);
+
+                $("#pb_loading .progress-bar-animated").css("width", "0%").text("0%");
+
+                let no = 1;
+                for (i = 0; i < listProducts.length; i += maxDataPerRequest) {
+                    let dataStart = i;
+                    let dataEnd = i + maxDataPerRequest - 1 <= listProducts.length ? i + maxDataPerRequest - 1 : listProducts.length;
+
+                    let dataPreview = [];
+                    for (j = dataStart; j < dataEnd; j++) {
+                        dataPreview.push(listProducts[j]);
+                    }
+
+                    // console.log(dataStart, dataEnd, JSON.stringify(dataPreview));
+                    let current = Math.ceil(no * 100 / maxRequest);
+                    console.log(`Progress: ${current} ${no} of ${maxRequest}`);
+                    $("#lbl_progress").text(`${no} of ${maxRequest} (${current}%)`);
+                    $("#pb_loading").attr("aria-valuenow", current);
+                    $("#pb_loading .progress-bar-animated").css("width", `${current}%`).text(`${current}%`);
+
+                    await delay(250);
+                    no++;
+
+                    $.ajax({
+                        url: "{{ route('dealer-product.preview-new') }}",
+                        type: "POST",
+                        async: false,
+                        headers: {
+                            "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
+                        },
+                        data: {"data": JSON.stringify(dataPreview)},
+                        success: function(data) {
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            }
         </script>
     @endpush
 </x-templates.default>
