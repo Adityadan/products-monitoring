@@ -27,7 +27,6 @@
                             <th>Kode Dealer</th>
                             <th>Nomor Part</th>
                             <th>Nama Part</th>
-                            <th>Nama Gudang</th>
                             <th>Stock</th>
                             <th>Actions</th>
                         </tr>
@@ -175,10 +174,6 @@
                             name: 'nama_part'
                         },
                         {
-                            data: 'nama_gudang',
-                            name: 'nama_gudang'
-                        },
-                        {
                             data: 'oh',
                             name: 'oh'
                         },
@@ -307,8 +302,8 @@
                         // Loop Over Each Sheet
                         wb.SheetNames.forEach(function(sheetName) {
                             // Obtain The Current Row As CSV
-                            var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);   
-                            var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);   
+                            var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);
+                            var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
 
                             // $("#my_file_output").html(sCSV);
                             console.log(sCSV)

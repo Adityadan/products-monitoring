@@ -32,8 +32,8 @@
                         </div>
 
                         <div class="d-flex align-items-center">
-                            <button class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#filter-modal">Filter</button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filter-modal"
+                                id="filter-button">Filter</button>
                         </div>
 
                         <div class="d-flex align-items-center">
@@ -73,10 +73,71 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('.multiple-select').select2({
-                    theme: "bootstrap-5",
+                // Inisialisasi Select2 dengan tema dan placeholder
+                $('#no_part').select2({
+                    theme: "bootstrap-5", // Pastikan tema bootstrap-5 telah dimuat
+                    placeholder: "Cari No Part...",
+                    ajax: {
+                        url: '{{ route('product.filterNoPart') }}', // Endpoint backend Laravel
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                no_part: params.term // Mengirimkan term pencarian ke backend
+                            };
+                        },
+                        processResults: function(data) {
+                            // Proses hasil dari API untuk Select2
+                            if (data.success) {
+                                return {
+                                    results: data.data.map(function(item) {
+                                        return {
+                                            id: item.no_part, // Value dari option
+                                            text: item.no_part // Text yang ditampilkan
+                                        };
+                                    })
+                                };
+                            }
+                            return {
+                                results: []
+                            }; // Jika tidak ada hasil
+                        },
+                        cache: true
+                    },
+                    minimumInputLength: 1 // Minimal karakter sebelum pencarian dimulai
                 });
-
+                $('#dealer').select2({
+                    theme: "bootstrap-5", // Pastikan tema bootstrap-5 telah dimuat
+                    placeholder: "Cari Dealer...",
+                    ajax: {
+                        url: '{{ route('product.filterDealer') }}', // Endpoint backend Laravel
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                dealer: params.term // Mengirimkan term pencarian ke backend
+                            };
+                        },
+                        processResults: function(data) {
+                            // Proses hasil dari API untuk Select2
+                            if (data.success) {
+                                return {
+                                    results: data.data.map(function(item) {
+                                        return {
+                                            id: item.kode, // Value dari option
+                                            text: item.ahass // Text yang ditampilkan
+                                        };
+                                    })
+                                };
+                            }
+                            return {
+                                results: []
+                            }; // Jika tidak ada hasil
+                        },
+                        cache: true
+                    },
+                    minimumInputLength: 1 // Minimal karakter sebelum pencarian dimulai
+                });
                 // Format angka ke Rupiah
                 function formatRupiah(angka) {
                     return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -156,7 +217,6 @@
 
                             // Render produk
                             response.data.forEach(function(product) {
-                                console.log(product);
 
                                 // Dapatkan gambar produk atau gunakan gambar default jika tidak ada
                                 const productImage = product.product_image ?
@@ -483,7 +543,6 @@
                         }
                     });
                 }
-
             });
         </script>
     @endpush

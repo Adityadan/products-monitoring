@@ -10,9 +10,9 @@
                     <div class="mb-3">
                         <label for="no_part" class="form-label">Filter By No Part</label>
                         <select class="form-select multiple-select" id="no_part" name="no_part[]" multiple>
-                            @foreach ($no_part as $item)
+                            {{-- @foreach ($no_part as $item)
                                 <option value="{{ $item['no_part'] }}">{{ $item['no_part'] }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     <div class="mb-3">
@@ -25,11 +25,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="stock" class="form-label">Filter By Dealer</label>
-                        <select class="form-select" id="dealer" name="dealer">
-                            <option value="">All</option>
-                            @foreach ($dealer as $item)
+                        <select class="form-select multiple-select" id="dealer" name="dealer[]" multiple>
+                            {{-- @foreach ($dealer as $item)
                                 <option value="{{ $item['kode'] }}">{{ $item['ahass'] }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     <div class="mb-3">

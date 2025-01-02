@@ -28,7 +28,6 @@ class ProductsController extends Controller
             ['value' => 'farthest_dealer', 'text' => 'Farthest Dealer']
         ];
 
-        $dealer = Dealer::select('kode', 'ahass')->get();
 
         $stock_filter = [
             ['value' => null, 'text' => 'All'],
@@ -36,7 +35,7 @@ class ProductsController extends Controller
             ['value' => 'out_of_stock', 'text' => 'Out of Stock']
         ];
 
-        return view('product.index', compact('filters', 'stock_filter', 'no_part','dealer'));
+        return view('product.index', compact('filters', 'stock_filter', 'no_part'));
     }
 
     public function productList(Request $request)
@@ -164,6 +163,40 @@ class ProductsController extends Controller
                 min($products->currentPage() * $products->perPage(), $products->total()),
             'last_page' => $products->lastPage(),
             'total' => $products->total(),
+        ]);
+    }
+
+    public function filterNoPart(Request $request)
+    {
+        $no_part = $request->get('no_part');
+        // $no_part = $request->get('no_part');
+        $products = Product::select('no_part');
+
+        if ($no_part) {
+            $products->whereRaw('LOWER(no_part) LIKE ?', ['%' . strtolower($no_part) . '%']);
+        }
+
+        $products = $products->limit(10)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $products,
+        ]);
+    }
+
+    public function filterDealer(Request $request)
+    {
+        $dealer = $request->get('dealer');
+        $data_dealer = Dealer::select('kode', 'ahass');
+
+        if ($dealer) {
+            $data_dealer->whereRaw('LOWER(ahass) LIKE ?', ['%' . strtolower($dealer) . '%'])->orWhereRaw('LOWER(kode) LIKE ?', ['%' . strtolower($dealer) . '%']);
+        }
+
+        $data_dealer = $data_dealer->limit(10)->get();
+        return response()->json([
+            'success' => true,
+            'data' => $data_dealer,
         ]);
     }
 }

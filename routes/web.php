@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::post('/list', [ProductsController::class, 'productList'])->name('list');
+        Route::get('/filter-no-part', [ProductsController::class, 'filterNoPart'])->name('filterNoPart');
+        Route::get('/filter-dealer', [ProductsController::class, 'filterDealer'])->name('filterDealer');
         // Route::get('/datatable', [ProductsController::class, 'datatable'])->name('datatable');
     });
     Route::prefix('dealer-product')->name('dealer-product.')->group(function () {
