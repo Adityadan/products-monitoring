@@ -101,7 +101,9 @@ class DealerProductsController extends Controller
             if (auth()->user()->hasRole('main_dealer')) {
                 $import = new ProductMainDealerImport($importType);
                 $data = Excel::toCollection($import, $file); // Membaca semua data
+
                 $previewData = $data->first()->take($limit)->map(function ($row) {
+                    $row[1] = str_replace('-', '', $row[1]);
                     return [
                         'kode_dealer' => auth()->user()->kode_dealer,
                         'no_part' => $row[1],

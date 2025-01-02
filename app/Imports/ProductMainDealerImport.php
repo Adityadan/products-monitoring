@@ -53,6 +53,7 @@ class ProductMainDealerImport implements ToModel, WithStartRow, WithChunkReading
 
     private function handleImport(array $row)
     {
+        $row[1] = str_replace('-', '', $row[1]);
         $timestamp = now();
         $kodeDealer = Auth::user()->kode_dealer;
 
