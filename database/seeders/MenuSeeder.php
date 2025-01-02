@@ -55,7 +55,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'name' => 'Dealer Products',
+                'name' => 'Import',
                 'route' => 'dealer-product.index',
                 'parent_id' => 2,
                 'icon' => null,
@@ -133,7 +133,7 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 10,
-                'name' => 'Master Product',
+                'name' => 'Master',
                 'route' => 'master-product.index',
                 'parent_id' => 2,
                 'icon' => null,
