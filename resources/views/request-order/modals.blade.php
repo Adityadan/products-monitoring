@@ -10,6 +10,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="kode" class="form-label" id="dealer_text">Dealer: - </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kode" class="form-label" id="alamat_text">Alamat: - </label>
+                    </div>
                     <div class="mb-3">
                         <label for="kode" class="form-label">Ekspedisi</label>
                         <select name="id_expedition" id="ekspedisi" class="form-select">
@@ -29,8 +37,6 @@
                                     <th scope="col">Nomor Part</th>
                                     <th scope="col">Kode Dealer</th>
                                     <th scope="col">Jumlah Yang Dipesan</th>
-                                    <th scope="col">Nama Pembeli</th>
-                                    <th scope="col">Alamat Pengirim</th>
                                     <th scope="col">Jumlah Barang Dikirim</th>
                                 </tr>
                             </thead>

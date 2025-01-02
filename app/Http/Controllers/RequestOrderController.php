@@ -142,15 +142,14 @@ class RequestOrderController extends Controller
                                     <td class="text-nowrap">' . $item->no_part . '</td>
                                     <td class="text-nowrap">' . $item->kode_dealer . '</td>
                                     <td class="text-nowrap">' . $item->qty_order . '</td>
-                                    <td class="text-nowrap">' . $item->buyer_name . '</td>
-                                    <td class="text-nowrap">' . $item->shipping_address . '</td>
                                     <td class="text-nowrap"><input type="number" class="form-control form-control-sm qty_supply" value="' . ($item->qty_supply ?? 0) . '" data-id="' . $item->id . '" id="qty_supply_' . $item->id . '" name="qty_supply[' . $item->id . ']"></td>
                                 </tr>';
         }
 
         return response()->json([
             'success' => true,
-            'render_detail_order' => $render_detail_order
+            'render_detail_order' => $render_detail_order,
+            'detail_order' => $detail_order
         ]);
     }
 

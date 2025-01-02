@@ -209,8 +209,13 @@
                     },
                     dataType: "json",
                     success: function (response) {
+                        let detail_order = response.detail_order[0];
+                        console.log(detail_order);
+
                         if (response.success) {
                             $('#list-item').html(response.render_detail_order);
+                            $('#dealer_text').text('Dealer: ' + detail_order.buyer_name);
+                            $('#alamat_text').text('Alamat: ' + detail_order.shipping_address);
                         } else {
                             $('#list-item').html('');
                             Swal.fire({
