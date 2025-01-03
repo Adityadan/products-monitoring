@@ -214,6 +214,8 @@ class DealerProductsController extends Controller
 
             foreach ($data as $row) {
                 if ($isMainDealer) {
+                    $row[1] = str_replace('-', '', $row[1]);
+
                     // Logika untuk main dealer
                     $dataWhere = [
                         'kode_dealer' => $dealerCode,
