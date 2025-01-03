@@ -86,7 +86,7 @@ class ProductsController extends Controller
                 'd.deleted_at as dealer_deleted_at',
                 'pi.image as product_image',
                 'pi.functionality'
-            );
+            )->whereNull('p.deleted_at');
 
         if ($dealer) {
             $products->where('p.kode_dealer', $dealer);
