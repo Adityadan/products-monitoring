@@ -208,7 +208,7 @@
                 });
 
                 $("#save-btn").on("click", function() {
-                    saveData();
+                    saveData(isMainDealer);
                 });
 
 
@@ -241,12 +241,15 @@
                 let htmlTable = "";
                 let maxData = 100;
 
-                // Tentukan indeks awal berdasarkan kondisi
+
                 let startIndex = condition === "true" ? 1 : 12;
 
                 for (let i = startIndex; i < listProducts.length; i++) {
-                    // Filter out null or empty values dan reindex array
+
                     listProducts[i] = listProducts[i].filter(item => item !== null && item !== '');
+
+
+                    listProducts[i][1] = listProducts[i][1].replace(/-/g, '');
 
                     htmlTable += "<tr>";
                     for (let j = 0; j < listProducts[i].length; j++) {
