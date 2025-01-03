@@ -209,6 +209,19 @@ class MenuSeeder extends Seeder
                 'created_at' => '2025-01-01 14:47:34',
                 'updated_at' => '2025-01-01 14:47:34',
             ],
+            [
+                'id' => 33,
+                'name' => 'Sales',
+                'route' => 'sales.index',
+                'parent_id' => null,
+                'icon' => 'fas fa-chart-line',
+                'color' => null,
+                'order' => 4,
+                'is_active' => true,
+                'permission_name' => null,
+                'created_at' => '2025-01-01 14:47:34',
+                'updated_at' => '2025-01-01 14:47:34',
+            ],
         ]);
 
     }
