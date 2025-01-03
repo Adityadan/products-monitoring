@@ -19,7 +19,8 @@ class AuthenticatedSessionController extends Controller
         if (Auth::check()) {
             return redirect()->route('dashboard.index');
         }
-        return view('auth.login');
+        $title = 'Login';
+        return view('auth.login', compact('title'));
     }
 
     /**

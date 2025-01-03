@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title -->
-    <title>{{ $title ?? 'Login' }} | {{ config('app.name') }}</title>
+    <title>{{ $title ?? 'Untitle' }} </title>
 
     <!-- Jquery CDN -->
     <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"
