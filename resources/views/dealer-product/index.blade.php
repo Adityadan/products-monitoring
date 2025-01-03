@@ -10,6 +10,7 @@
                         <div class="col-auto">
                             <input type="hidden" name="roles" id="roles"
                                 value="{{ auth()->user()->hasRole('main_dealer') ? 'true' : 'false' }}">
+                            <input type="hidden" name="kode_dealer" id="kode_dealer" value="{{ auth()->user()->kode_dealer }}">
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                                 data-bs-target="#import-excel-modal">Import Data</button>
                         </div>
@@ -78,56 +79,14 @@
                             </div>
                             <h5 class="mt-4">Preview Data</h5>
                             <div class="table-responsive" style="max-height: 50vh; overflow-y: auto;">
-                                @if (auth()->user()->hasRole('main_dealer'))
-                                    <table class="table table-striped" id="preview-table">
-                                        <thead>
-                                            <tr>
-                                                <td>no</td>
-                                                <td>kode dealer</td>
-                                                <td>no part</td>
-                                                <td>nama part</td>
-                                                <td>oh</td>
-                                                <td>standard price moving avg price</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                @else
-                                    <table class="table table-striped" id="preview-table">
-                                        <thead>
-                                            <tr id="header_preview_table">
-                                                {{--  <td>no</td>
-                                                    <td>kode dealer</td>
-                                                    <td>kode ba</td>
-                                                    <td>customer master sap</td>
-                                                    <td>group material</td>
-                                                    <td>group tobpm</td>
-                                                    <td>no part</td>
-                                                    <td>nama part</td>
-                                                    <td>rank part</td>
-                                                    <td>discontinue</td>
-                                                    <td>kode gudang</td>
-                                                    <td>nama gudang</td>
-                                                    <td>kode lokasi</td>
-                                                    <td>int</td>
-                                                    <td>oh</td>
-                                                    <td>rsv</td>
-                                                    <td>blk</td>
-                                                    <td>wip</td>
-                                                    <td>bok</td>
-                                                    <td>total exc int</td>
-                                                    <td>stock days month</td>
-                                                    <td>avg demand qty</td>
-                                                    <td>avg demand amt</td>
-                                                    <td>avg sales monthly qty</td>
-                                                    <td>avg sales monthly amt</td>
-                                                    <td>standard price moving avg price</td>
-                                                    <td>invt amt exc int</td> --}}
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                @endif
+                                <table class="table table-striped" id="preview-table">
+                                    <thead>
+                                        <tr id="header_preview_table">
+
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -149,6 +108,7 @@
             let listProducts = [];
             let page = 0;
             let isMainDealer = $('#roles').val();
+            let kode_dealer = $('#kode_dealer').val();
 
             const delay = (delayInms) => {
                 return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -223,6 +183,7 @@
 
             function previewHeader(condition) {
                 let htmlHeader = "";
+                console.log(listProducts);
 
                 // Tentukan indeks berdasarkan kondisi
                 let index = condition === "true" ? 0 : 11;
@@ -312,7 +273,8 @@
                         },
                         data: {
                             "data": JSON.stringify(dataPreview),
-                            'is_main_dealer': isMainDealer
+                            'is_main_dealer': isMainDealer,
+                            'looping': no
                         },
                         success: function(data) {
                             console.log(data);

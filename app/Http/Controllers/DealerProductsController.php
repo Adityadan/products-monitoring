@@ -212,6 +212,20 @@ class DealerProductsController extends Controller
             $listCreate = [];
             $timestamp = now();
 
+            // Jika dealer cabang, pastikan data main dealer sudah ada
+            if (!$isMainDealer) {
+                $mainDealerProducts = Product::where('kode_dealer', '00000')->exists();
+                if (!$mainDealerProducts) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Data produk dari main dealer belum tersedia. Harap main dealer mengimpor data terlebih dahulu.'
+                    ], 400);
+                }
+            }
+            if ($request->looping == 2)
+            {
+                Product::where('kode_dealer', $dealerCode)->delete();
+            }
             foreach ($data as $row) {
                 if ($isMainDealer) {
                     $row[1] = str_replace('-', '', $row[1]);
@@ -247,6 +261,7 @@ class DealerProductsController extends Controller
                         }
                     }
                 } else {
+
                     // Jika 'Total' terdeteksi, skip baris ini
                     if (isset($row[0]) && strtolower($row[0]) === 'total') {
                         continue;
@@ -257,7 +272,17 @@ class DealerProductsController extends Controller
                         'kode_dealer' => $row[1],
                         'nama_part' => $row[7] // Gunakan nama_part untuk penggabungan
                     ];
-                    $existingProduct = Product::query()->where($dataWhere)->first();
+
+                    // Get the price from the main dealer (kode_dealer = 00000)
+                    $mainDealerPrice = Product::query()->where([
+                        'kode_dealer' => '00000', // Main dealer code
+                        'no_part' => $row[6]
+                    ])->value('standard_price_moving_avg_price');
+
+                    // If main dealer price is found, use it
+                    $standardPrice = $mainDealerPrice ?? $row[25]; // Use uploaded price if main dealer price is not found
+
+                    // $existingProduct = Product::query()->where($dataWhere)->first();
 
                     $dataProduct = [
                         'no' => $row[0],
@@ -285,25 +310,25 @@ class DealerProductsController extends Controller
                         'avg_demand_amt' => $row[22],
                         'avg_sales_monthly_qty' => $row[23],
                         'avg_sales_monthly_amt' => $row[24],
-                        'standard_price_moving_avg_price' => $row[25],
+                        'standard_price_moving_avg_price' => $standardPrice, // Set price from main dealer or uploaded price
                         'invt_amt_exc_int' => $row[26],
                         'updated_at' => $timestamp
                     ];
 
-                    if ($existingProduct) {
-                        // Jika data sudah ada, tambahkan stok (oh)
-                        $dataProduct['oh'] += $existingProduct->oh;
-                        Product::where($dataWhere)->update($dataProduct);
+                    // if ($existingProduct) {
+                    //     // Jika data sudah ada, tambahkan stok (oh)
+                    //     $dataProduct['oh'] += $existingProduct->oh;
+                    //     Product::where($dataWhere)->update($dataProduct);
+                    // } else {
+                    // Gabungkan stok jika ada data serupa di $listCreate
+                    $index = array_search($row[7], array_column($listCreate, 'nama_part'));
+                    if ($index !== false) {
+                        $listCreate[$index]['oh'] += $row[14];
                     } else {
-                        // Gabungkan stok jika ada data serupa di $listCreate
-                        $index = array_search($row[7], array_column($listCreate, 'nama_part'));
-                        if ($index !== false) {
-                            $listCreate[$index]['oh'] += $row[14];
-                        } else {
-                            $dataProduct['created_at'] = $timestamp;
-                            $listCreate[] = $dataProduct;
-                        }
+                        $dataProduct['created_at'] = $timestamp;
+                        $listCreate[] = $dataProduct;
                     }
+                    // }
                 }
             }
 
@@ -322,8 +347,6 @@ class DealerProductsController extends Controller
             ], 500);
         }
     }
-
-
 
     /**
      * Show the form for creating a new resource.
