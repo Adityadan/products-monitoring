@@ -73,6 +73,11 @@
     {{-- Toast --}}
     <link href="{{ asset('dist/vendors/toastr/toastr.min.css') }}" rel="stylesheet" />
 
+    {{-- datepicker --}}
+    <link href="{{ asset('dist/vendors/flatpickr/flatpickr2.min.css') }}" rel="stylesheet" />
+
+
+
 
     <!-- Script untuk mengubah arah tampilan dari kanan ke kiri -->
     <script>

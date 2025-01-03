@@ -17,6 +17,7 @@ use App\Http\Controllers\RequestOrderController;
 use App\Http\Controllers\RoleAssignmentController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UserController;
 use App\Models\Dealer;
 use Illuminate\Support\Facades\Auth;
@@ -139,6 +140,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/editExpedition', [RequestOrderController::class, 'editExpedition'])->name('editExpedition');
         Route::post('/renderListItem', [RequestOrderController::class, 'renderListItem'])->name('renderListItem');
         Route::post('/updateShipping', [RequestOrderController::class, 'updateShipping'])->name('updateShipping');
+    });
+    Route::prefix('sales')->name('sales.')->group(function () {
+        Route::get('/', [SalesController::class, 'index'])->name('index');
+        Route::get('/datatable', [SalesController::class, 'datatable'])->name('datatable');
+        Route::post('/import', [SalesController::class, 'import'])->name('import');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');

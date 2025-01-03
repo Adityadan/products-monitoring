@@ -27,9 +27,9 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Kode Dealer</th>
-                            <th>Nomor Part</th>
-                            <th>Nama Part</th>
+                            <th>Dealer Code</th>
+                            <th>Part Number</th>
+                            <th>Part Name</th>
                             <th>Stock</th>
                             <th>Actions</th>
                         </tr>
@@ -248,10 +248,6 @@
                     for (let j = dataStart; j < dataEnd; j++) {
                         listProducts[j] = listProducts[j].filter(item => item !== null && item !== '');
 
-                        // Filter null atau nilai kosong hanya untuk data sesuai kondisi
-                        // if (condition === "B") {
-                        //     listProducts[j] = listProducts[j].filter(item => item !== null && item !== '');
-                        // }
                         dataPreview.push(listProducts[j]);
                     }
 

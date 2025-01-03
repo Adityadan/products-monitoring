@@ -225,6 +225,16 @@ class DealerProductsController extends Controller
             if ($request->looping == 2)
             {
                 Product::where('kode_dealer', $dealerCode)->delete();
+                LogImport::create([
+                    'file_name' => $request->file('file')->getClientOriginalName(),
+                    'file_type' => 'product',
+                    'file_path' => $request->file('file')->store('excel-import'),
+                    'status' => 'success',
+                    'message' => 'Data imported successfully.',
+                    'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
+                    'created_at' => now(),
+                ]);
             }
             foreach ($data as $row) {
                 if ($isMainDealer) {
