@@ -103,7 +103,6 @@
     @push('scripts')
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script> --}}
-        <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
         <script>
             let listProducts = [];
             let page = 0;
@@ -155,7 +154,7 @@
                     let fileUpload = $(this).prop('files')[0];
 
                     readXlsxFile(fileUpload).then(async function(data) {
-                        // console.log(data);
+                        console.log(data);
                         listProducts = await data;
                         $("#import-excel-modal .modal-dialog").addClass("modal-xl");
                         $("#preview-container").show();
@@ -183,7 +182,6 @@
 
             function previewHeader(condition) {
                 let htmlHeader = "";
-                console.log(listProducts);
 
                 // Tentukan indeks berdasarkan kondisi
                 let index = condition === "true" ? 0 : 11;
@@ -231,6 +229,9 @@
                 let startIndex = condition === "true" ? 1 : 12;
                 let maxRequest = Math.ceil((listProducts.length - startIndex) / maxDataPerRequest);
 
+                let fileUpload = $("#file-input").prop('files')[0];
+                let fileName = fileUpload.name;
+
                 $("#pb_loading").attr("aria-valuenow", 0);
                 $("#pb_loading").attr("aria-valuemin", 0);
                 $("#pb_loading").attr("aria-valuemax", 100);
@@ -270,7 +271,8 @@
                         data: {
                             "data": JSON.stringify(dataPreview),
                             'is_main_dealer': isMainDealer,
-                            'looping': no
+                            'looping': no,
+                            'fileName': fileName
                         },
                         success: function(data) {
                             console.log(data);

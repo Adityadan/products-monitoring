@@ -23,6 +23,9 @@
 <script src="{{ asset('dist/vendors/sweet-alert/sweetalert2@11.min.js') }}"></script>
 {{-- datepicker --}}
 <script src="{{ asset('dist/vendors/flatpickr/flatpickr.js') }}"></script>
+{{-- Read Excel File Js --}}
+<script src="{{ asset('dist/vendors/read-excel-file/read-excel-file.min.js') }}"></script>
+
 
 
 

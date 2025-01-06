@@ -58,6 +58,7 @@ class SalesController extends Controller
 
     public function import(Request $request)
     {
+        $fileName = $request->fileName;
         $user = auth()->user();
         $dealerCode = $user['kode_dealer'];
         $timestamp = now();
@@ -107,7 +108,7 @@ class SalesController extends Controller
         }
         // Proses hanya dilakukan jika looping == 1
         if ($request->looping == 1) {
-            $this->handleFileAndLog($request, $kodeDealer, $timestamp);
+            $this->handleFileAndLog($request, $kodeDealer, $timestamp, $fileName);
             if ($user->hasRole('main_dealer')) {
                 Sales::where('kode_dealer', $kodeDealer)->delete();
             }
@@ -147,21 +148,17 @@ class SalesController extends Controller
         ]);
     }
 
-    private function handleFileAndLog(Request $request, $timestamp)
+    private function handleFileAndLog(Request $request, $timestamp, $fileName)
     {
-        if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('excel-import');
-            LogImport::create([
-                'file_name' => $request->file('file')->getClientOriginalName(),
-                'file_type' => 'product',
-                'file_path' => $filePath,
-                'status' => 'success',
-                'message' => 'Data imported successfully.',
-                'created_by' => auth()->id(),
-                'updated_by' => auth()->id(),
-                'created_at' => $timestamp,
-                'updated_at' => $timestamp,
-            ]);
-        }
+        LogImport::create([
+            'file_name' => $fileName,
+            'file_type' => 'product',
+            'status' => 'success',
+            'message' => 'Data imported successfully.',
+            'created_by' => auth()->id(),
+            'updated_by' => auth()->id(),
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp,
+        ]);
     }
 }

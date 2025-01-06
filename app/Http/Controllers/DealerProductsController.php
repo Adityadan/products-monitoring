@@ -191,6 +191,7 @@ class DealerProductsController extends Controller
     public function previewNew(Request $request)
     {
         try {
+            $fileName = $request->fileName;
             $user = auth()->user();
             $dealerCode = $user['kode_dealer'];
             if (!$dealerCode) {
@@ -226,9 +227,8 @@ class DealerProductsController extends Controller
             {
                 Product::where('kode_dealer', $dealerCode)->delete();
                 LogImport::create([
-                    'file_name' => $request->file('file')->getClientOriginalName(),
+                    'file_name' => $fileName,
                     'file_type' => 'product',
-                    'file_path' => $request->file('file')->store('excel-import'),
                     'status' => 'success',
                     'message' => 'Data imported successfully.',
                     'created_by' => auth()->user()->id,

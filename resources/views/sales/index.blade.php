@@ -120,7 +120,6 @@
     </div>
 
     @push('scripts')
-        <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
         <script>
             let listProducts = [];
             let page = 0;
@@ -284,6 +283,9 @@
                 let startIndex = 7; // Indeks awal data yang akan diproses
                 let maxRequest = Math.ceil((listProducts.length - startIndex) / maxDataPerRequest);
 
+                let fileUpload = $("#file-input").prop('files')[0];
+                let fileName = fileUpload.name;
+
                 $("#pb_loading").attr("aria-valuenow", 0);
                 $("#pb_loading").attr("aria-valuemin", 0);
                 $("#pb_loading").attr("aria-valuemax", 100);
@@ -337,7 +339,8 @@
                                     'is_main_dealer': isMainDealer,
                                     'looping': no,
                                     'date_upload': $('#date_upload').val(),
-                                    'kode_dealer': $('#kode_dealer').val()
+                                    'kode_dealer': $('#kode_dealer').val(),
+                                    'file_name': fileName
                                 }
                             });
                         } catch (error) {
