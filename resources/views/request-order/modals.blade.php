@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class= "modal-footer">
-                    <div class="table-responsive scrollbar">
+                    <div class="table-responsive scrollbar w-100">
                         <table class="table table-hover table-striped overflow-hidden text-center">
                             <thead>
                                 <tr>
