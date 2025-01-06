@@ -31,7 +31,6 @@
                             <th>Part Number</th>
                             <th>Part Category</th>
                             <th>Qty</th>
-                            <th>Uploaded By</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -165,10 +164,6 @@
                         {
                             data: 'qty',
                             name: 'qty'
-                        },
-                        {
-                            data: 'created_by',
-                            name: 'created_by'
                         },
                         {
                             data: 'actions',
