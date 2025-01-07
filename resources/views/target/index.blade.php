@@ -133,12 +133,12 @@
                             searchable: false
                         },
                         {
-                            data: 'kode_channel',
-                            name: 'kode_channel'
+                            data: 'kode_customer',
+                            name: 'kode_customer'
                         },
                         {
-                            data: 'nama_customer',
-                            name: 'nama_customer'
+                            data: 'customer_name',
+                            name: 'customer_name'
                         },
                         {
                             data: 'channel',

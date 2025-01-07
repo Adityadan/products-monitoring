@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('target', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_channel')->nullable();
-            $table->string('nama_customer')->nullable();
+            $table->string('kode_customer')->nullable();
+            $table->string('customer_name')->nullable();
             $table->string('channel')->nullable();
             $table->integer('target_part')->nullable();
             $table->integer('target_oli')->nullable();

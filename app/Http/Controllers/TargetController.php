@@ -72,8 +72,8 @@ class TargetController extends Controller
             // Mapping data untuk dimasukkan ke dalam database
             $preparedData = array_map(function ($item) use ($periode) {
                 return [
-                    'kode_channel' => $item[0] ?? null,
-                    'nama_customer' => $item[1] ?? null,
+                    'kode_customer' => $item[0] ?? null,
+                    'customer_name' => $item[1] ?? null,
                     'channel' => $item[2] ?? null,
                     'target_part' => $item[3] ?? null,
                     'target_oli' => $item[4] ?? null,
