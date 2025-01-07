@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h5 class="mb-0">Sales Product</h5>
+                    <h5 class="mb-0">Targets</h5>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
@@ -26,11 +26,12 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Dealer Code</th>
-                            <th>Customer Master SAP</th>
-                            <th>Part Number</th>
-                            <th>Part Category</th>
-                            <th>Qty</th>
+                            <th>Channel Code</th>
+                            <th>Customer Name</th>
+                            <th>Channel</th>
+                            <th>Part Target</th>
+                            <th>Oil Target</th>
+                            <th>App Target</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -49,30 +50,16 @@
                 </div>
                 <div class="modal-body p-0" style="overflow-y: auto;">
                     <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
-                        <h4 class="mb-1" id="modalExampleDemoLabel">Import Product Sales</h4>
+                        <h4 class="mb-1" id="modalExampleDemoLabel">Import Target</h4>
                     </div>
                     <div class="p-4">
                         <!-- Form for file upload -->
                         <form id="import-form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label class="col-form-label" for="file-input">Time Uploaded</label>
-                                <input class="form-control monthpicker" id="periode" name="periode"
-                                    required />
+                                <label class="col-form-label" for="file-input">Period</label>
+                                <input class="form-control monthpicker" id="periode" name="periode" required />
                             </div>
-                            @if (auth()->user()->hasRole('main_dealer'))
-                                <div class="mb-3">
-                                    <label class="col-form-label" for="file-input">Dealer</label>
-                                    <select name="kode_dealer" id="kode_dealer" class="form-select" required>
-                                        <option value="" selected>Pilih Dealer</option>
-                                        @foreach ($dealer as $item)
-                                            <option value="{{ $item->kode }}">
-                                                {{ '(' . $item->kode . ') ' . $item->ahass }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endif
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">Data Excel</label>
                                 <input class="form-control" type="file" name="file" id="file-input" />
@@ -120,7 +107,7 @@
 
     @push('scripts')
         <script>
-            let listProducts = [];
+            let listTargets = [];
             let page = 0;
             let isMainDealer = $('#roles').val();
             let kode_dealer = $('#kode_dealer').val();
@@ -130,12 +117,15 @@
             };
 
             $(document).ready(function() {
+                $(".datepicker").flatpickr({
+                    dateFormat: "d-m-Y",
+                });
 
                 $('#sales-table').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,
-                    ajax: "{{ route('sales.datatable') }}",
+                    ajax: "{{ route('target.datatable') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
@@ -143,24 +133,28 @@
                             searchable: false
                         },
                         {
-                            data: 'kode_dealer',
-                            name: 'kode_dealer'
+                            data: 'kode_channel',
+                            name: 'kode_channel'
                         },
                         {
-                            data: 'no_part',
-                            name: 'no_part'
+                            data: 'nama_customer',
+                            name: 'nama_customer'
                         },
                         {
-                            data: 'customer_master_sap',
-                            name: 'customer_master_sap'
+                            data: 'channel',
+                            name: 'channel'
                         },
                         {
-                            data: 'kategori_part',
-                            name: 'kategori_part'
+                            data: 'target_part',
+                            name: 'target_part'
                         },
                         {
-                            data: 'qty',
-                            name: 'qty'
+                            data: 'target_oli',
+                            name: 'target_oli'
+                        },
+                        {
+                            data: 'target_app',
+                            name: 'target_app'
                         },
                         {
                             data: 'actions',
@@ -174,7 +168,9 @@
                     let fileUpload = $(this).prop('files')[0];
 
                     readXlsxFile(fileUpload).then(async function(data) {
-                        listProducts = await data;
+                        listTargets = await data;
+                        console.log(listTargets);
+
                         $("#import-excel-modal .modal-dialog").addClass("modal-xl");
                         $("#preview-container").show();
                         $("#preview-table tbody").html("");
@@ -203,27 +199,26 @@
                 let htmlHeader = "";
 
                 // Tentukan indeks array yang ingin di-render
-                const index = 5;
+                const index = 1;
 
                 // Pastikan array tidak null dan filter nilai kosong/null
-                if (listProducts[index] && Array.isArray(listProducts[index])) {
-                    listProducts[index] = listProducts[index].filter(item => item !== null && item !== undefined);
+                if (listTargets[index] && Array.isArray(listTargets[index])) {
+                    listTargets[index] = listTargets[index].filter(item => item !== null && item !== undefined);
                 } else {
-                    console.error("Index 5 pada listProducts tidak valid.");
                     return htmlHeader; // Kembalikan header kosong jika data tidak valid
                 }
 
                 // Tentukan indeks elemen yang ingin dirender
-                const elementsToRender = [1, 3, 4, 5, 8];
+                const elementsToRender = [0 ,1, 2];
 
                 elementsToRender.forEach(elementIndex => {
-                    if (listProducts[index][elementIndex] !== undefined) {
-                        htmlHeader += `<th>${listProducts[index][elementIndex]}</th>`;
+                    if (listTargets[index][elementIndex] !== undefined) {
+                        htmlHeader += `<th>${listTargets[index][elementIndex]}</th>`;
                     }
                 });
 
                 // Tambahkan header custom
-                const customHeaders = ['Part Through Service Qty', 'Part Direct QTY'];
+                const customHeaders = ['Target Part', 'Target Oil', 'Target App'];
                 customHeaders.forEach(header => {
                     htmlHeader += `<th>${header}</th>`;
                 });
@@ -235,26 +230,17 @@
             function previewData(condition) {
                 let htmlTable = "";
                 let maxData = 100; // Batas maksimum data yang akan dirender
-                let startIndex = 7; // Indeks awal data yang akan diproses
+                let startIndex = 2; // Indeks awal data yang akan diproses
 
-                // Looping melalui data di listProducts
-                for (let i = startIndex; i < listProducts.length && i < startIndex + maxData; i++) {
-                    // Filter nilai null dari baris data
-                    listProducts[i] = listProducts[i].filter(item => item !== null);
+                // Looping melalui data di listTargets
+                for (let i = startIndex; i < listTargets.length && i < startIndex + maxData; i++) {
 
-                    // Menghapus tanda "-" pada kolom ke-4 (index 4)
-                    if (listProducts[i][4]) {
-                        listProducts[i][4] = listProducts[i][4].replace(/-/g, '');
-                    }
 
-                    // Elemen-elemen yang akan dirender
-                    const elementsToRender = [1, 3, 4, 5, 8, 11, 18];
-
-                    // Membuat baris tabel berdasarkan elemen-elemen yang telah ditentukan
+                    // Render semua elemen dalam baris data
                     htmlTable += "<tr>";
-                    elementsToRender.forEach(index => {
-                        if (listProducts[i][index] !== undefined) {
-                            htmlTable += `<td>${listProducts[i][index]}</td>`;
+                    listTargets[i].forEach(item => {
+                        if (item !== undefined) {
+                            htmlTable += `<td>${item}</td>`;
                         } else {
                             htmlTable += "<td></td>"; // Jika elemen tidak ditemukan, tambahkan kolom kosong
                         }
@@ -268,12 +254,13 @@
 
 
 
+
             async function saveData() {
                 $("#div_loading").show();
 
                 let maxDataPerRequest = 1000; // Jumlah maksimum data per permintaan
                 let startIndex = 7; // Indeks awal data yang akan diproses
-                let maxRequest = Math.ceil((listProducts.length - startIndex) / maxDataPerRequest);
+                let maxRequest = Math.ceil((listTargets.length - startIndex) / maxDataPerRequest);
 
                 let fileUpload = $("#file-input").prop('files')[0];
                 let fileName = fileUpload.name;
@@ -285,27 +272,18 @@
 
                 let no = 1;
 
-                // Array elemen yang akan dikirim, sesuai dengan previewData
-                const elementsToRender = [1, 3, 4, 5, 8, 11, 18];
-
                 try {
-                    for (let i = startIndex; i < listProducts.length; i += maxDataPerRequest) {
+                    for (let i = startIndex; i < listTargets.length; i += maxDataPerRequest) {
                         let dataStart = i;
-                        let dataEnd = i + maxDataPerRequest - 1 < listProducts.length ? i + maxDataPerRequest : listProducts
+                        let dataEnd = i + maxDataPerRequest - 1 < listTargets.length ? i + maxDataPerRequest : listTargets
                             .length;
 
                         let dataPreview = [];
                         for (let j = dataStart; j < dataEnd; j++) {
-                            if (listProducts[j]) {
-                                // Filter elemen null dan hanya ambil elemen yang sesuai dengan elementsToRender
-                                let row = listProducts[j]
-                                    .filter(item => item !== null && item !== '')
-                                    .map((item, index) => (elementsToRender.includes(index) ? item : null))
-                                    .filter(item => item !== null); // Hilangkan elemen null yang tidak di-render
-
-                                if (row.length > 0) {
-                                    dataPreview.push(row);
-                                }
+                            if (listTargets[j]) {
+                                // Ambil semua elemen dari baris tanpa filter
+                                let row = [...listTargets[j]];
+                                dataPreview.push(row);
                             }
                         }
 
@@ -321,7 +299,7 @@
                         // Kirim data ke server
                         try {
                             await $.ajax({
-                                url: "{{ route('sales.import') }}",
+                                url: "{{ route('target.import') }}",
                                 type: "POST",
                                 headers: {
                                     "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
@@ -331,7 +309,6 @@
                                     'is_main_dealer': isMainDealer,
                                     'looping': no,
                                     'periode': $('#periode').val(),
-                                    'kode_dealer': $('#kode_dealer').val(),
                                     'file_name': fileName
                                 }
                             });

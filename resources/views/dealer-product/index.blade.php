@@ -55,6 +55,11 @@
                         <!-- Form for file upload -->
                         <form id="import-form" method="POST" enctype="multipart/form-data">
                             @csrf
+
+                            <div class="mb-3">
+                                <label class="col-form-label" for="file-input">period</label>
+                                <input class="form-control monthpicker" id="periode" name="periode" required/>
+                            </div>
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">Data Excel</label>
                                 <input class="form-control" type="file" name="file" id="file-input" />
@@ -190,6 +195,9 @@
                 listProducts[index] = listProducts[index].filter(item => item !== null && item !== '');
 
                 for (let i = 0; i < listProducts[index].length; i++) {
+                    if (condition === "true" && i === 6) {
+                        continue;
+                    }
                     htmlHeader += `<th>${listProducts[index][i]}</th>`;
                 }
 
@@ -272,7 +280,8 @@
                             "data": JSON.stringify(dataPreview),
                             'is_main_dealer': isMainDealer,
                             'looping': no,
-                            'fileName': fileName
+                            'fileName': fileName,
+                            'periode': $('#periode').val(),
                         },
                         success: function(data) {
                             console.log(data);

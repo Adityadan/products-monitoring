@@ -72,31 +72,30 @@ class SalesController extends Controller
         }
 
         if ($user->hasRole('main_dealer')) {
-
-            // Validasi umum
+            // Validasi untuk main_dealer
             $validator = Validator::make($request->all(), [
                 'kode_dealer' => 'required|string',
-                'date_upload' => 'required|date',
+                'periode' => 'required',
                 'looping' => 'required|integer',
-            ], [
-                'kode_dealer.required' => 'Kode Dealer wajib diisi.',
-                'date_upload.required' => 'Tanggal upload wajib diisi.',
-                'date_upload.date' => 'Tanggal upload harus berupa format tanggal yang valid.',
-                'looping.required' => 'Looping tidak boleh kosong.',
             ]);
+        } else {
+            // Validasi untuk selain main_dealer
+            $validator = Validator::make($request->all(), [
+                'periode' => 'required',
+                'looping' => 'required|integer',
+            ]);
+        }
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Mohon periksa kembali inputan Anda.',
-                    'errors' => $validator->errors(),
-                ], 422);
-            }
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Mohon periksa kembali inputan Anda.',
+                'errors' => $validator->errors(),
+            ], 422);
         }
 
         $kodeDealer = $request->kode_dealer;
-        $dateUpload = $request->date_upload;
-
+        $periode = \Carbon\Carbon::createFromFormat('m-Y', $request->periode)->startOfMonth()->format('Y-m-d');
         // Validasi tambahan untuk pengguna dengan role main_dealer
         if ($user->hasRole('main_dealer')) {
             if ($kodeDealer != $data[0][0]) {
@@ -129,7 +128,7 @@ class SalesController extends Controller
                 'nama_part' => $value[3],
                 'kategori_part' => $value[4],
                 'qty' => ($value[5] ?? 0) + ($value[6] ?? 0),
-                'date_upload' => $dateUpload,
+                'periode' => $periode,
                 'created_by' => $user->id,
                 'updated_by' => $user->id,
                 'created_at' => $timestamp,
@@ -152,7 +151,7 @@ class SalesController extends Controller
     {
         LogImport::create([
             'file_name' => $fileName,
-            'file_type' => 'product',
+            'file_type' => 'sales',
             'status' => 'success',
             'message' => 'Data imported successfully.',
             'created_by' => auth()->id(),

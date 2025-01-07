@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-sm-auto mb-2 mb-sm-0">
-                    <h5 class="mb-0">Sales Product</h5>
+                    <h5 class="mb-0">Rod</h5>
                 </div>
                 <div class="col-sm-auto">
                     <div class="row gx-2 align-items-center">
@@ -26,11 +26,10 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Dealer Code</th>
-                            <th>Customer Master SAP</th>
-                            <th>Part Number</th>
-                            <th>Part Category</th>
-                            <th>Qty</th>
+                            <th>Customer Code</th>
+                            <th>Customer Name</th>
+                            <th>Cost Amount</th>
+                            <th>Mat Type</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -49,30 +48,24 @@
                 </div>
                 <div class="modal-body p-0" style="overflow-y: auto;">
                     <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
-                        <h4 class="mb-1" id="modalExampleDemoLabel">Import Product Sales</h4>
+                        <h4 class="mb-1" id="modalExampleDemoLabel">Import ROD</h4>
                     </div>
                     <div class="p-4">
                         <!-- Form for file upload -->
                         <form id="import-form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label class="col-form-label" for="file-input">Time Uploaded</label>
-                                <input class="form-control monthpicker" id="periode" name="periode"
-                                    required />
+                                <label class="col-form-label" for="file-input">period</label>
+                                <input class="form-control monthpicker" id="periode" name="periode" required />
                             </div>
-                            @if (auth()->user()->hasRole('main_dealer'))
-                                <div class="mb-3">
-                                    <label class="col-form-label" for="file-input">Dealer</label>
-                                    <select name="kode_dealer" id="kode_dealer" class="form-select" required>
-                                        <option value="" selected>Pilih Dealer</option>
-                                        @foreach ($dealer as $item)
-                                            <option value="{{ $item->kode }}">
-                                                {{ '(' . $item->kode . ') ' . $item->ahass }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endif
+
+                            <div class="mb-3">
+                                <label class="col-form-label" for="file-input">Type ROD</label>
+                                <select class="form-select" name="rod_type" id="rod_type" required>
+                                    <option value="non_so">NON SO</option>
+                                    <option value="so">SO</option>
+                                </select>
+                            </div>
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">Data Excel</label>
                                 <input class="form-control" type="file" name="file" id="file-input" />
@@ -120,10 +113,11 @@
 
     @push('scripts')
         <script>
-            let listProducts = [];
+            let listRods = [];
             let page = 0;
             let isMainDealer = $('#roles').val();
             let kode_dealer = $('#kode_dealer').val();
+            let rod_type = $('#rod_type').val();
 
             const delay = (delayInms) => {
                 return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -131,11 +125,16 @@
 
             $(document).ready(function() {
 
+                $('#rod_type').change(function(e) {
+                    e.preventDefault();
+                    rod_type = $(this).val();
+                });
+
                 $('#sales-table').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,
-                    ajax: "{{ route('sales.datatable') }}",
+                    ajax: "{{ route('rod.datatable') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
@@ -143,24 +142,20 @@
                             searchable: false
                         },
                         {
-                            data: 'kode_dealer',
-                            name: 'kode_dealer'
+                            data: 'kode_customer',
+                            name: 'kode_customer'
                         },
                         {
-                            data: 'no_part',
-                            name: 'no_part'
+                            data: 'customer_name',
+                            name: 'customer_name'
                         },
                         {
-                            data: 'customer_master_sap',
-                            name: 'customer_master_sap'
+                            data: 'cost_amount',
+                            name: 'cost_amount'
                         },
                         {
-                            data: 'kategori_part',
-                            name: 'kategori_part'
-                        },
-                        {
-                            data: 'qty',
-                            name: 'qty'
+                            data: 'mat_type',
+                            name: 'mat_type'
                         },
                         {
                             data: 'actions',
@@ -174,7 +169,10 @@
                     let fileUpload = $(this).prop('files')[0];
 
                     readXlsxFile(fileUpload).then(async function(data) {
-                        listProducts = await data;
+                        listRods = await data;
+                        console.log(listRods);
+                        console.log(rod_type);
+
                         $("#import-excel-modal .modal-dialog").addClass("modal-xl");
                         $("#preview-container").show();
                         $("#preview-table tbody").html("");
@@ -202,28 +200,15 @@
             function previewHeader() {
                 let htmlHeader = "";
 
-                // Tentukan indeks array yang ingin di-render
-                const index = 5;
-
-                // Pastikan array tidak null dan filter nilai kosong/null
-                if (listProducts[index] && Array.isArray(listProducts[index])) {
-                    listProducts[index] = listProducts[index].filter(item => item !== null && item !== undefined);
-                } else {
-                    console.error("Index 5 pada listProducts tidak valid.");
-                    return htmlHeader; // Kembalikan header kosong jika data tidak valid
-                }
-
-                // Tentukan indeks elemen yang ingin dirender
-                const elementsToRender = [1, 3, 4, 5, 8];
-
-                elementsToRender.forEach(elementIndex => {
-                    if (listProducts[index][elementIndex] !== undefined) {
-                        htmlHeader += `<th>${listProducts[index][elementIndex]}</th>`;
-                    }
-                });
-
+                let customHeaders = [];
                 // Tambahkan header custom
-                const customHeaders = ['Part Through Service Qty', 'Part Direct QTY'];
+                if (rod_type == 'so') {
+
+                    customHeaders = ['Customer Name', 'Cost Amount', 'Mat Type'];
+                } else {
+
+                    customHeaders = ['Customer Code', 'Customer Name', 'Cost Amount', 'Mat Type'];
+                }
                 customHeaders.forEach(header => {
                     htmlHeader += `<th>${header}</th>`;
                 });
@@ -235,26 +220,28 @@
             function previewData(condition) {
                 let htmlTable = "";
                 let maxData = 100; // Batas maksimum data yang akan dirender
-                let startIndex = 7; // Indeks awal data yang akan diproses
+                let startIndex = 1; // Indeks awal data yang akan diproses
+                let elementsToRender = []
 
-                // Looping melalui data di listProducts
-                for (let i = startIndex; i < listProducts.length && i < startIndex + maxData; i++) {
+                // Looping melalui data di listRods
+                for (let i = startIndex; i < listRods.length && i < startIndex + maxData; i++) {
                     // Filter nilai null dari baris data
-                    listProducts[i] = listProducts[i].filter(item => item !== null);
 
-                    // Menghapus tanda "-" pada kolom ke-4 (index 4)
-                    if (listProducts[i][4]) {
-                        listProducts[i][4] = listProducts[i][4].replace(/-/g, '');
-                    }
 
                     // Elemen-elemen yang akan dirender
-                    const elementsToRender = [1, 3, 4, 5, 8, 11, 18];
+                    if (rod_type == 'so') {
+                        elementsToRender = [3, 11, 12];
+
+                    } else {
+
+                        elementsToRender = [0, 1, 13, 14];
+                    }
 
                     // Membuat baris tabel berdasarkan elemen-elemen yang telah ditentukan
                     htmlTable += "<tr>";
                     elementsToRender.forEach(index => {
-                        if (listProducts[i][index] !== undefined) {
-                            htmlTable += `<td>${listProducts[i][index]}</td>`;
+                        if (listRods[i][index] !== undefined) {
+                            htmlTable += `<td>${listRods[i][index]}</td>`;
                         } else {
                             htmlTable += "<td></td>"; // Jika elemen tidak ditemukan, tambahkan kolom kosong
                         }
@@ -271,12 +258,12 @@
             async function saveData() {
                 $("#div_loading").show();
 
-                let maxDataPerRequest = 1000; // Jumlah maksimum data per permintaan
-                let startIndex = 7; // Indeks awal data yang akan diproses
-                let maxRequest = Math.ceil((listProducts.length - startIndex) / maxDataPerRequest);
+                const maxDataPerRequest = 1000; // Jumlah maksimum data per permintaan
+                const startIndex = 7; // Indeks awal data yang akan diproses
+                const maxRequest = Math.ceil((listRods.length - startIndex) / maxDataPerRequest);
 
-                let fileUpload = $("#file-input").prop('files')[0];
-                let fileName = fileUpload.name;
+                const fileUpload = $("#file-input").prop('files')[0];
+                const fileName = fileUpload.name;
 
                 $("#pb_loading").attr("aria-valuenow", 0);
                 $("#pb_loading").attr("aria-valuemin", 0);
@@ -285,32 +272,26 @@
 
                 let no = 1;
 
-                // Array elemen yang akan dikirim, sesuai dengan previewData
-                const elementsToRender = [1, 3, 4, 5, 8, 11, 18];
+                // Tentukan elemen yang akan dirender berdasarkan `rod_type`
+                const elementsToRender = rod_type == 'so' ? [3, 11, 12] : [0, 1, 13, 14];
 
                 try {
-                    for (let i = startIndex; i < listProducts.length; i += maxDataPerRequest) {
-                        let dataStart = i;
-                        let dataEnd = i + maxDataPerRequest - 1 < listProducts.length ? i + maxDataPerRequest : listProducts
-                            .length;
+                    for (let i = startIndex; i < listRods.length; i += maxDataPerRequest) {
+                        const dataStart = i;
+                        const dataEnd = Math.min(i + maxDataPerRequest, listRods.length);
 
-                        let dataPreview = [];
+                        const dataPreview = [];
+
                         for (let j = dataStart; j < dataEnd; j++) {
-                            if (listProducts[j]) {
-                                // Filter elemen null dan hanya ambil elemen yang sesuai dengan elementsToRender
-                                let row = listProducts[j]
-                                    .filter(item => item !== null && item !== '')
-                                    .map((item, index) => (elementsToRender.includes(index) ? item : null))
-                                    .filter(item => item !== null); // Hilangkan elemen null yang tidak di-render
-
-                                if (row.length > 0) {
-                                    dataPreview.push(row);
-                                }
+                            if (listRods[j]) {
+                                // Filter elemen sesuai dengan `elementsToRender`
+                                const row = elementsToRender.map(index => listRods[j][index] ?? '');
+                                dataPreview.push(row);
                             }
                         }
 
                         // Update progres bar
-                        let current = Math.ceil(no * 100 / maxRequest);
+                        const current = Math.ceil(no * 100 / maxRequest);
                         $("#lbl_progress").text(`${no} of ${maxRequest} (${current}%)`);
                         $("#pb_loading").attr("aria-valuenow", current);
                         $("#pb_loading .progress-bar-animated").css("width", `${current}%`).text(`${current}%`);
@@ -321,7 +302,7 @@
                         // Kirim data ke server
                         try {
                             await $.ajax({
-                                url: "{{ route('sales.import') }}",
+                                url: "{{ route('rod.import') }}",
                                 type: "POST",
                                 headers: {
                                     "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
@@ -331,8 +312,8 @@
                                     'is_main_dealer': isMainDealer,
                                     'looping': no,
                                     'periode': $('#periode').val(),
-                                    'kode_dealer': $('#kode_dealer').val(),
-                                    'file_name': fileName
+                                    'file_name': fileName,
+                                    'rod_type': rod_type
                                 }
                             });
                         } catch (error) {
@@ -357,8 +338,45 @@
                         text: 'Data saved successfully!',
                         timer: 1500,
                         showConfirmButton: false
-                    }).then(() => {
-                        location.reload();
+                    }).then(async () => {
+                        // Tampilkan loading saat proses sumDashboardRod
+                        Swal.fire({
+                            title: 'Processing ROD Data...',
+                            text: 'This process may take some time....',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        try {
+                            // Panggil fungsi pada route sumDashboardRod
+                            const response = await $.ajax({
+                                url: "{{ route('rod.sumDashboardRod') }}",
+                                type: "GET",
+                                headers: {
+                                    "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
+                                }
+                            });
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'ROD data summarized successfully!',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } catch (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.responseJSON?.message ||
+                                    'An error occurred while processing ROD data.',
+                                showConfirmButton: true
+                            });
+                        }
                     });
                 } catch (err) {
                     console.error("Error during import:", err.message);

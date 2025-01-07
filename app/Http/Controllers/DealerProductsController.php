@@ -190,7 +190,15 @@ class DealerProductsController extends Controller
 
     public function previewNew(Request $request)
     {
+        $request->validate([
+            'periode' => 'required|date_format:m-Y',
+            'fileName' => 'required|string',
+            'data' => 'required|json',
+            'looping' => 'required|integer',
+        ]);
+
         try {
+            $periode = \Carbon\Carbon::createFromFormat('m-Y', $request->periode)->startOfMonth()->format('Y-m-d');
             $fileName = $request->fileName;
             $user = auth()->user();
             $dealerCode = $user['kode_dealer'];
@@ -223,9 +231,8 @@ class DealerProductsController extends Controller
                     ], 400);
                 }
             }
-            if ($request->looping == 2)
-            {
-                Product::where('kode_dealer', $dealerCode)->delete();
+            if ($request->looping == 2) {
+                Product::where('kode_dealer', $dealerCode)->where('periode', $periode)->delete();
                 LogImport::create([
                     'file_name' => $fileName,
                     'file_type' => 'product',
@@ -245,7 +252,6 @@ class DealerProductsController extends Controller
                         'kode_dealer' => $dealerCode,
                         'nama_part' => $row[2] // Gunakan nama_part untuk penggabungan
                     ];
-                    $existingProduct = Product::query()->where($dataWhere)->first();
 
                     $dataProduct = [
                         'kode_dealer' => $dealerCode,
@@ -253,22 +259,17 @@ class DealerProductsController extends Controller
                         'nama_part' => $row[2],
                         'oh' => $row[4], // Stok baru
                         'standard_price_moving_avg_price' => $row[5],
-                        'updated_at' => $timestamp
+                        'updated_at' => $timestamp,
+                        'periode' => $periode,
                     ];
 
-                    if ($existingProduct) {
-                        // Jika data sudah ada, tambahkan stok (oh)
-                        $dataProduct['oh'] += $existingProduct->oh;
-                        Product::where($dataWhere)->update($dataProduct);
+                    // Gabungkan stok jika ada data serupa di $listCreate
+                    $index = array_search($row[2], array_column($listCreate, 'nama_part'));
+                    if ($index !== false) {
+                        $listCreate[$index]['oh'] += $row[4];
                     } else {
-                        // Gabungkan stok jika ada data serupa di $listCreate
-                        $index = array_search($row[2], array_column($listCreate, 'nama_part'));
-                        if ($index !== false) {
-                            $listCreate[$index]['oh'] += $row[4];
-                        } else {
-                            $dataProduct['created_at'] = $timestamp;
-                            $listCreate[] = $dataProduct;
-                        }
+                        $dataProduct['created_at'] = $timestamp;
+                        $listCreate[] = $dataProduct;
                     }
                 } else {
 
@@ -292,7 +293,6 @@ class DealerProductsController extends Controller
                     // If main dealer price is found, use it
                     $standardPrice = $mainDealerPrice ?? $row[25]; // Use uploaded price if main dealer price is not found
 
-                    // $existingProduct = Product::query()->where($dataWhere)->first();
 
                     $dataProduct = [
                         'no' => $row[0],
@@ -322,15 +322,10 @@ class DealerProductsController extends Controller
                         'avg_sales_monthly_amt' => $row[24],
                         'standard_price_moving_avg_price' => $standardPrice, // Set price from main dealer or uploaded price
                         'invt_amt_exc_int' => $row[26],
+                        'periode' => $periode,
                         'updated_at' => $timestamp
                     ];
 
-                    // if ($existingProduct) {
-                    //     // Jika data sudah ada, tambahkan stok (oh)
-                    //     $dataProduct['oh'] += $existingProduct->oh;
-                    //     Product::where($dataWhere)->update($dataProduct);
-                    // } else {
-                    // Gabungkan stok jika ada data serupa di $listCreate
                     $index = array_search($row[7], array_column($listCreate, 'nama_part'));
                     if ($index !== false) {
                         $listCreate[$index]['oh'] += $row[14];

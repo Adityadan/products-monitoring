@@ -22,9 +22,33 @@
 {{-- Sweet Alert --}}
 <script src="{{ asset('dist/vendors/sweet-alert/sweetalert2@11.min.js') }}"></script>
 {{-- datepicker --}}
+<script>
+    $(document).ready(function() {
+        $(".datepicker").flatpickr({
+            dateFormat: "d-m-Y",
+        });
+    });
+</script>
 <script src="{{ asset('dist/vendors/flatpickr/flatpickr.js') }}"></script>
 {{-- Read Excel File Js --}}
 <script src="{{ asset('dist/vendors/read-excel-file/read-excel-file.min.js') }}"></script>
+
+{{-- Month Select Plugin --}}
+<script>
+    $(document).ready(function() {
+        $(".monthpicker").flatpickr({
+            dateFormat: "m-Y",
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true, // Menampilkan bulan dalam format singkat (Jan, Feb, dll.)
+                    dateFormat: "m-Y", // Format yang ditampilkan di input
+                    altFormat: "F Y" // Format alternatif yang ditampilkan di kalender
+                })
+            ]
+        });
+    });
+</script>
+<script src="{{ asset('dist/vendors/flatpickr/monthSelect/index.js') }}"></script>
 
 
 

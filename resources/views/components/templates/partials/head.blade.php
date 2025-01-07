@@ -76,6 +76,10 @@
     {{-- datepicker --}}
     <link href="{{ asset('dist/vendors/flatpickr/flatpickr2.min.css') }}" rel="stylesheet" />
 
+    {{-- Month Select Plugin --}}
+    <link href="{{ asset('dist/vendors/flatpickr/monthSelect/style.css') }}" rel="stylesheet" />
+
+
 
 
 

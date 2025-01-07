@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('summary_rod', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_dealer');
-            $table->string('customer_master_sap');
-            $table->string('no_part');
-            $table->string('nama_part');
-            $table->string('kategori_part');
-            $table->integer('qty');
+            $table->string('kode_customer');
+            $table->string('customer_name');
+            $table->integer('total_amount_tire');
+            $table->integer('total_amount_oil');
+            $table->integer('total_amount_app');
             $table->timestamp('periode')->nullable();
-            $table->integer('created_by');
-            $table->integer('updated_by');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('summary_rod');
     }
 };

@@ -40,6 +40,7 @@ return new class extends Migration
             $table->double('avg_sales_monthly_amt')->nullable(); // Avg Sales Monthly Amt
             $table->double('standard_price_moving_avg_price')->nullable(); // Standard Price/Moving Average Price
             $table->double('invt_amt_exc_int')->nullable(); // Invt Amt Exc INT
+            $table->timestamp('periode')->nullable(); // Periode
             $table->timestamps();
         });
     }

@@ -14,10 +14,12 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestOrderController;
+use App\Http\Controllers\RodController;
 use App\Http\Controllers\RoleAssignmentController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TargetController;
 use App\Http\Controllers\UserController;
 use App\Models\Dealer;
 use Illuminate\Support\Facades\Auth;
@@ -145,6 +147,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [SalesController::class, 'index'])->name('index');
         Route::get('/datatable', [SalesController::class, 'datatable'])->name('datatable');
         Route::post('/import', [SalesController::class, 'import'])->name('import');
+    });
+    Route::prefix('target')->name('target.')->group(function () {
+        Route::get('/', [TargetController::class, 'index'])->name('index');
+        Route::get('/datatable', [TargetController::class, 'datatable'])->name('datatable');
+        Route::post('/import', [TargetController::class, 'import'])->name('import');
+    });
+    Route::prefix('rod')->name('rod.')->group(function () {
+        Route::get('/', [RodController::class, 'index'])->name('index');
+        Route::get('/datatable', [RodController::class, 'datatable'])->name('datatable');
+        Route::post('/import', [RodController::class, 'import'])->name('import');
+        Route::get('/sumDashboardRod', [RodController::class, 'sumDashboardRod'])->name('sumDashboardRod');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');
