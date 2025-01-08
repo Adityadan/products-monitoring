@@ -40,7 +40,7 @@ class SalesController extends Controller
                 'kategori_part',
                 'qty',
                 'created_by',
-            ]);
+            ])->where('periode', '>=', now()->subMonths(6)->startOfMonth()->format('Y-m-d'));
             if (!$user->hasRole('main_dealer')) {
                 $data->where('kode_dealer', $kode_dealer);
             }
