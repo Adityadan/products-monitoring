@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_customer');
             $table->string('customer_name');
-            $table->integer('total_amount_tire');
+            $table->integer('total_amount_part');
             $table->integer('total_amount_oil');
             $table->integer('total_amount_app');
             $table->timestamp('periode')->nullable();

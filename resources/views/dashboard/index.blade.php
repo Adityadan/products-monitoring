@@ -21,6 +21,94 @@
             </div>
         </div>
     </div>
+    <div class="row g-3 mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Data Table</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table-target">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Customer Code</th>
+                                    <th>Customer Name</th>
+                                    <th>Period</th>
+                                    <th>Target App</th>
+                                    <th>Total App</th>
+                                    <th>Target Part</th>
+                                    <th>Total Part</th>
+                                    <th>Target Oil</th>
+                                    <th>Total Oil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+    <script>
+        $(document).ready(function() {
+            // $('#table-target').DataTable();
+            $('#table-target').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    responsive: true,
+                    ajax: "{{ route('dashboard.datatable_target') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'kode_customer',
+                            name: 'kode_customer'
+                        },
+                        {
+                            data: 'customer_name',
+                            name: 'customer_name'
+                        },
+                        {
+                            data: 'periode',
+                            name: 'periode'
+                        },
+                        {
+                            data: 'target_app',
+                            name: 'target_app'
+                        },
+                        {
+                            data: 'total_amount_app',
+                            name: 'total_amount_app'
+                        },
+                        {
+                            data: 'target_part',
+                            name: 'target_part'
+                        },
+                        {
+                            data: 'total_amount_part',
+                            name: 'total_amount_part'
+                        },
+                        {
+                            data: 'target_oli',
+                            name: 'target_oli'
+                        },
+                        {
+                            data: 'total_amount_oil',
+                            name: 'total_amount_oil'
+                        },
+                    ],
+                });
+        });
+    </script>
+    @endpush
     {{-- <div class="row g-3 mb-3">
         <div class="col-xxl-6 col-xl-12">
             <div class="row g-3">

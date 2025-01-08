@@ -78,7 +78,7 @@ class RodController extends Controller
         if ($rodType == 'non_so') {
             // Persiapan data untuk dimasukkan ke database
             $insertData = array_filter(array_map(function ($value) use ($periode, $rodType) {
-                if (!in_array($value[3] ?? '', ['OIL', 'TIRE', 'APP'])) {
+                if (!in_array($value[3] ?? '', ['OIL', 'HGP', 'APP'])) {
                     return null;
                 }
                 return [
@@ -96,7 +96,7 @@ class RodController extends Controller
         if ($rodType == 'so') {
             // Persiapan data untuk dimasukkan ke database
             $insertData = array_filter(array_map(function ($value) use ($periode, $rodType) {
-                if (!in_array($value[2] ?? '', ['OIL', 'TIRE', 'APP'])) {
+                if (!in_array($value[2] ?? '', ['OIL', 'HGP', 'APP'])) {
                     return null;
                 }
                 $getCustomerName = Target::select('customer_name')->where('kode_customer', $value[0])
@@ -154,7 +154,7 @@ class RodController extends Controller
                     'kode_customer',
                     'customer_name',
                     'periode',
-                    DB::raw("SUM(CASE WHEN mat_type = 'TIRE' THEN cost_amount ELSE 0 END) AS total_amount_tire"),
+                    DB::raw("SUM(CASE WHEN mat_type = 'HGP' THEN cost_amount ELSE 0 END) AS total_amount_part"),
                     DB::raw("SUM(CASE WHEN mat_type = 'OIL' THEN cost_amount ELSE 0 END) AS total_amount_oil"),
                     DB::raw("SUM(CASE WHEN mat_type = 'APP' THEN cost_amount ELSE 0 END) AS total_amount_app")
                 )
@@ -169,7 +169,7 @@ class RodController extends Controller
                     'kode_customer' => $item->kode_customer,
                     'customer_name' => $item->customer_name,
                     'periode' => $item->periode,
-                    'total_amount_tire' => $item->total_amount_tire,
+                    'total_amount_part' => $item->total_amount_part,
                     'total_amount_oil' => $item->total_amount_oil,
                     'total_amount_app' => $item->total_amount_app,
                     'created_at' => now(),
