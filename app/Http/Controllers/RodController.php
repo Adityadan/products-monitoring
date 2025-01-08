@@ -99,9 +99,9 @@ class RodController extends Controller
                 if (!in_array($value[2] ?? '', ['OIL', 'TIRE', 'APP'])) {
                     return null;
                 }
-                $getCustomerName = Target::select('nama_customer')->where('kode_channel', $value[0])
+                $getCustomerName = Target::select('customer_name')->where('kode_customer', $value[0])
                     ->first();
-                $getCustomerName = $getCustomerName['nama_customer'];
+                $getCustomerName = $getCustomerName['customer_name'];
                 return [
                     'kode_customer' => $value[0] ?? null,
                     'customer_name' => $getCustomerName ?? null,
