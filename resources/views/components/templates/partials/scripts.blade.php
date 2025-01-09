@@ -50,6 +50,9 @@
 </script>
 <script src="{{ asset('dist/vendors/flatpickr/monthSelect/index.js') }}"></script>
 
+{{-- ApexChart --}}
+<script src="{{ asset('dist/vendors/apexcharts/apexcharts.js') }}"></script>
+
 
 
 
