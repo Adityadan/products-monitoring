@@ -22,7 +22,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table table-responsive">
-                <table class="table table-bordered font-sans-serif" id="sales-table">
+                <table class="table table-bordered font-sans-serif" id="target-table">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -32,7 +32,6 @@
                             <th>Part Target</th>
                             <th>Oil Target</th>
                             <th>App Target</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -121,7 +120,7 @@
                     dateFormat: "d-m-Y",
                 });
 
-                $('#sales-table').DataTable({
+                $('#target-table').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,
@@ -155,12 +154,6 @@
                         {
                             data: 'target_app',
                             name: 'target_app'
-                        },
-                        {
-                            data: 'actions',
-                            name: 'actions',
-                            orderable: false,
-                            searchable: false
                         },
                     ],
                 });

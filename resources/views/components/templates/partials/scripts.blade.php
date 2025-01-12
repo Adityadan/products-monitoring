@@ -53,6 +53,9 @@
 {{-- ApexChart --}}
 <script src="{{ asset('dist/vendors/apexcharts/apexcharts.js') }}"></script>
 
+{{-- Chart.js --}}
+<script src="{{ asset('dist/vendors/chart-js/chart.js') }}"></script>
+
 
 
 

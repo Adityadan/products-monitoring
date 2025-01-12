@@ -31,7 +31,6 @@
                             <th>Part Number</th>
                             <th>Part Category</th>
                             <th>Qty</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -161,12 +160,6 @@
                         {
                             data: 'qty',
                             name: 'qty'
-                        },
-                        {
-                            data: 'actions',
-                            name: 'actions',
-                            orderable: false,
-                            searchable: false
                         },
                     ],
                 });

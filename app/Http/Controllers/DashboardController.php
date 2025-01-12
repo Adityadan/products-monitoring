@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sales;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -73,5 +74,19 @@ class DashboardController extends Controller
             ];
         }
         return response()->json($result);
+    }
+
+    public function chartSales(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $data = Sales::select('periode', DB::raw('SUM(qty) as total_quantity'))
+            ->whereNull('deleted_at')
+            ->where('periode', '>=', $sixMonthsAgo)
+            ->groupBy('periode')
+            ->get()
+            ->toArray();
+
+        return response()->json($data);
     }
 }

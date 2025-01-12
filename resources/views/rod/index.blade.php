@@ -30,7 +30,6 @@
                             <th>Customer Name</th>
                             <th>Cost Amount</th>
                             <th>Mat Type</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                 </table>
@@ -156,12 +155,6 @@
                         {
                             data: 'mat_type',
                             name: 'mat_type'
-                        },
-                        {
-                            data: 'actions',
-                            name: 'actions',
-                            orderable: false,
-                            searchable: false
                         },
                     ],
                 });

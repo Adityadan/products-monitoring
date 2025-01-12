@@ -20,50 +20,16 @@
                 </div>
             </div>
         </div>
-        <div class="row g-3 mb-3">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Dashboard Targets</h5>
-                    </div>
-                    <div class="card-body">
+        @include('dashboard.target-rod')
 
-                        <div id="chart_target" class="apex-charts mb-4"></div>
-                        {{-- <canvas id="chart_target" width="400" height="200"></canvas> --}}
-
-                        <!-- Custom Divider Style -->
-                        <hr style="border-top: 2px solid #bbb; margin-top: 3rem; margin-bottom: 3rem;">
-
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="table-target">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Customer Code</th>
-                                        <th>Customer Name</th>
-                                        <th>Period</th>
-                                        <th>Target App</th>
-                                        <th>Total App</th>
-                                        <th>Target Part</th>
-                                        <th>Total Part</th>
-                                        <th>Target Oil</th>
-                                        <th>Total Oil</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('dashboard.sales')
 
         @push('scripts')
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
                 $(document).ready(function() {
                     chartTargets();
+                    chartSales();
                     $('#table-target').DataTable({
                         processing: true,
                         serverSide: true,
@@ -134,6 +100,46 @@
                         ],
                     });
 
+                    $('#sales-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    responsive: true,
+                    ajax: "{{ route('sales.datatable') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'kode_dealer',
+                            name: 'kode_dealer'
+                        },
+                        {
+                            data: 'no_part',
+                            name: 'no_part'
+                        },
+                        {
+                            data: 'customer_master_sap',
+                            name: 'customer_master_sap'
+                        },
+                        {
+                            data: 'kategori_part',
+                            name: 'kategori_part'
+                        },
+                        {
+                            data: 'qty',
+                            name: 'qty'
+                        },
+                        {
+                            data: 'actions',
+                            name: 'actions',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                });
+
                     // Fungsi untuk memformat angka menjadi rupiah
                     function formatRupiah(angka) {
                         if (!angka) return '-';
@@ -160,84 +166,108 @@
                         url: "{{ route('dashboard.chartTarget') }}",
                         dataType: "json",
                         success: function(response) {
-                            let data = response;
-
-                            if (!data || !Array.isArray(data)) {
+                            // Validasi data
+                            if (!response || !Array.isArray(response)) {
                                 console.error("Invalid data received");
                                 return;
                             }
 
-                            let chartData = data.flatMap(item => [
-                                {
+                            // Proses data untuk chart
+                            const chartData = response.flatMap(item => [{
                                     x: item.customer_name,
-                                    y: item.pendapatan.app,
+                                    y: item.pendapatan.app || 0, // Default to 0 if data is missing
+                                    name: 'Pendapatan App',
                                     goals: [{
                                         name: 'Target App',
-                                        value: item.target.app,
+                                        value: item.target.app || 0, // Default to 0 if data is missing
                                         strokeColor: '#775DD0'
                                     }],
-                                    fillColor: '#54a0ff'
+                                    fillColor: '#54a0ff' // Warna untuk pendapatan App
                                 },
                                 {
                                     x: item.customer_name,
-                                    y: item.pendapatan.part,
+                                    y: item.pendapatan.part || 0,
+                                    name: 'Pendapatan Part',
                                     goals: [{
                                         name: 'Target Part',
-                                        value: item.target.part,
+                                        value: item.target.part || 0,
                                         strokeColor: '#775DD0'
                                     }],
-                                    fillColor: '#1dd1a1'
+                                    fillColor: '#1dd1a1' // Warna untuk pendapatan Part
                                 },
                                 {
                                     x: item.customer_name,
-                                    y: item.pendapatan.oli,
+                                    y: item.pendapatan.oli || 0,
+                                    name: 'Pendapatan Oil',
                                     goals: [{
                                         name: 'Target Oil',
-                                        value: item.target.oli,
+                                        value: item.target.oli || 0,
                                         strokeColor: '#775DD0'
                                     }],
-                                    fillColor: '#ff6b6b'
+                                    fillColor: '#ff6b6b' // Warna untuk pendapatan Oil
                                 }
-                            ]);    let options = {
+                            ]);
+
+                            // Konfigurasi chart
+                            const options = {
                                 chart: {
                                     type: 'bar',
                                     height: 350,
-                                    zoom: {
-                                        enabled: true
+                                    width: "100%",
+                                    toolbar: {
+                                        show: true
                                     }
                                 },
                                 series: [{
+                                    name: 'Pendapatan',
                                     data: chartData
                                 }],
                                 dataLabels: {
                                     enabled: false
                                 },
+                                plotOptions: {
+                                    bar: {
+                                        horizontal: false,
+                                        columnWidth: '70%'
+                                    }
+                                },
                                 xaxis: {
                                     type: 'category',
+                                    title: {
+                                        text: 'Customer Name'
+                                    },
                                     labels: {
                                         rotate: -45
                                     }
                                 },
                                 yaxis: {
                                     labels: {
-                                        formatter: function (value) {
-                                            return 'Rp' + value.toLocaleString('id-ID');
+                                        formatter: function(value) {
+                                            return 'Rp ' + value.toLocaleString('id-ID');
                                         }
                                     }
                                 },
                                 tooltip: {
                                     y: {
-                                        formatter: function (value) {
-                                            return 'Rp' + value.toLocaleString('id-ID');
+                                        formatter: function(value) {
+                                            return 'Rp ' + value.toLocaleString('id-ID');
                                         }
+                                    }
+                                },
+                                legend: {
+                                    show: true,
+                                    customLegendItems: ['Pendapatan App', 'Pendapatan Part', 'Pendapatan Oil',
+                                        'Target'
+                                    ],
+                                    markers: {
+                                        fillColors: ['#54a0ff', '#1dd1a1', '#ff6b6b', '#775DD0']
                                     }
                                 }
                             };
 
-                            var chart = new ApexCharts(document.querySelector("#chart_target"), options);
-
+                            // Render chart
+                            const chart = new ApexCharts(document.querySelector("#chart_target"), options);
                             chart.render();
-
                         },
                         error: function(error) {
                             console.error("Failed to fetch data", error);
@@ -245,123 +275,81 @@
                     });
                 }
 
-                function chartTargets1() {
+                function chartSales() {
                     $.ajax({
                         type: "get",
-                        url: "{{ route('dashboard.chartTarget') }}",
+                        url: "{{ route('dashboard.chartSales') }}",
                         dataType: "json",
                         success: function(response) {
-                            let data = response;
-
-                            if (!data || !Array.isArray(data)) {
+                            // Validasi data
+                            if (!response || !Array.isArray(response)) {
                                 console.error("Invalid data received");
                                 return;
                             }
 
-                            // Extract data from response
-                            const labels = data.map(item => item.periode);
-                            const totalApp = data.map(item => item.pendapatan.app);
-                            const totalPart = data.map(item => item.pendapatan.part);
-                            const totalOli = data.map(item => item.pendapatan.oli);
-                            const targetApp = data.map(item => item.target.app);
-                            const targetPart = data.map(item => item.target.part);
-                            const targetOli = data.map(item => item.target.oli);
-                            const customerName = data.map(item => item.customer_name);
+                            // Proses data untuk chart
+                            const chartData = response.map(item => ({
+                                x: new Date(item.periode).toLocaleString('default', {
+                                    month: 'long',
+                                    year: 'numeric'
+                                }),
+                                y: item.total_quantity || 0 // Default to 0 if data is missing
+                            }));
 
-                            // Chart configuration
+                            // Konfigurasi chart
                             const options = {
-                                responsive: true,
-                                plugins: {
+                                chart: {
+                                    type: 'bar',
+                                    height: 350,
+                                    width: "100%",
+                                    toolbar: {
+                                        show: true
+                                    }
+                                },
+                                series: [{
+                                    name: 'Total Quantity',
+                                    data: chartData
+                                }],
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                plotOptions: {
+                                    bar: {
+                                        horizontal: false,
+                                        columnWidth: '70%'
+                                    }
+                                },
+                                xaxis: {
+                                    type: 'category',
                                     title: {
-                                        display: true,
-                                        text: `Pendapatan & Target Periode ${labels[0]}`,
-                                        font: {
-                                            size: 16
-                                        }
+                                        text: 'Periode'
                                     },
-                                    legend: {
-                                        display: true,
-                                        position: 'top'
-                                    },
-                                    tooltip: {
-                                        callbacks: {
-                                            label: function(context) {
-                                                return 'Rp ' + context.raw.toLocaleString('id-ID');
-                                            }
+                                    labels: {
+                                        rotate: -45
+                                    }
+                                },
+                                yaxis: {
+                                    labels: {
+                                        formatter: function(value) {
+                                            return value.toLocaleString('id-ID');
                                         }
                                     }
                                 },
-                                scales: {
+                                tooltip: {
                                     y: {
-                                        beginAtZero: true,
-                                        ticks: {
-                                            callback: function(value) {
-                                                return 'Rp ' + value.toLocaleString('id-ID');
-                                            }
+                                        formatter: function(value) {
+                                            return value.toLocaleString('id-ID');
                                         }
                                     }
+                                },
+                                legend: {
+                                    show: true
                                 }
                             };
 
-                            // Create chart
-                            const ctx = document.getElementById('chart_target').getContext('2d');
-                            new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: customerName,
-                                    datasets: [{
-                                            label: 'Pendapatan App',
-                                            data: totalApp,
-                                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                                            borderColor: 'rgba(54, 162, 235, 1)',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Target App',
-                                            data: targetApp,
-                                            type: 'scatter',
-                                            backgroundColor: 'rgba(54, 162, 235, 1)',
-                                            borderColor: 'rgba(54, 162, 235, 1)',
-                                            pointRadius: 1,
-                                            showLine: false
-                                        },
-                                        {
-                                            label: 'Pendapatan Part',
-                                            data: totalPart,
-                                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                                            borderColor: 'rgba(75, 192, 192, 1)',
-                                            borderWidth: 1
-                                        },
-
-                                        {
-                                            label: 'Target Part',
-                                            data: targetPart,
-                                            type: 'scatter',
-                                            backgroundColor: 'rgba(75, 192, 192, 1)',
-                                            borderColor: 'rgba(75, 192, 192, 1)',
-                                            pointRadius: 1,
-                                            showLine: false
-                                        },
-                                        {
-                                            label: 'Pendapatan Oil',
-                                            data: totalOli,
-                                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                            borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Target Oil',
-                                            data: targetOli,
-                                            type: 'scatter',
-                                            backgroundColor: 'rgba(255, 99, 132, 1)',
-                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                            pointRadius: 1,
-                                            showLine: false
-                                        }
-                                    ]
-                                },
-                                options
-                            });
+                            // Render chart
+                            const chart = new ApexCharts(document.querySelector("#chart_sales"), options);
+                            chart.render();
                         },
                         error: function(error) {
                             console.error("Failed to fetch data", error);

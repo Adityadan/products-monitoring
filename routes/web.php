@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::get('/datatable_target', [DashboardController::class, 'datatable_target'])->name('datatable_target');
         Route::get('/chartTarget', [DashboardController::class, 'chartTarget'])->name('chartTarget');
+        Route::get('/chartSales', [DashboardController::class, 'chartSales'])->name('chartSales');
     });
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
