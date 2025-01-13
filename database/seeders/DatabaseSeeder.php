@@ -36,6 +36,10 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             ExpeditionSeeder::class,
             DealerSeeder::class,
+            SalesSeeder::class,
+            TargetSeeder::class,
+            RODSeeder::class,
+            SummaryRodSeeder::class
         ]);
 
     }
