@@ -55,9 +55,8 @@
                         <form id="import-form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
-                                <label class="col-form-label" for="file-input">Time Uploaded</label>
-                                <input class="form-control monthpicker" id="periode" name="periode"
-                                    required />
+                                <label class="col-form-label" for="file-input">Period</label>
+                                <input class="form-control monthpicker" id="periode" name="periode" value="{{ \Carbon\Carbon::now()->format('m-Y') }}" required />
                             </div>
                             @if (auth()->user()->hasRole('main_dealer'))
                                 <div class="mb-3">

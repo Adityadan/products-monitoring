@@ -58,7 +58,7 @@
 
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">period</label>
-                                <input class="form-control monthpicker" id="periode" name="periode" required/>
+                                <input class="form-control monthpicker" id="periode" name="periode" value="{{ \Carbon\Carbon::now()->format('m-Y') }}" required/>
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">Data Excel</label>
@@ -159,7 +159,6 @@
                     let fileUpload = $(this).prop('files')[0];
 
                     readXlsxFile(fileUpload).then(async function(data) {
-                        console.log(data);
                         listProducts = await data;
                         $("#import-excel-modal .modal-dialog").addClass("modal-xl");
                         $("#preview-container").show();

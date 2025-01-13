@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DealerProductsController;
 use App\Http\Controllers\DealersController;
 use App\Http\Controllers\DistanceDealerController;
+use App\Http\Controllers\HistoryImportController;
 use App\Http\Controllers\MasterProductController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\OrderController;
@@ -161,6 +162,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/datatable', [RodController::class, 'datatable'])->name('datatable');
         Route::post('/import', [RodController::class, 'import'])->name('import');
         Route::get('/sumDashboardRod', [RodController::class, 'sumDashboardRod'])->name('sumDashboardRod');
+    });
+    Route::prefix('history-import')->name('history-import.')->group(function () {
+        Route::get('/', [HistoryImportController::class, 'index'])->name('index');
+        Route::get('/datatable', [HistoryImportController::class, 'datatable'])->name('datatable');
     });
     Route::resource('menus', MenusController::class);
     // Route::get('/menus/datatable', [MenusController::class, 'datatable'])->name('menus.datatable');
