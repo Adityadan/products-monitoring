@@ -10,8 +10,10 @@
                         <div class="col-auto">
                             <input type="hidden" name="roles" id="roles"
                                 value="{{ auth()->user()->hasRole('main_dealer') ? 'true' : 'false' }}">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                data-bs-target="#import-excel-modal">Import Data</button>
+                                @if (auth()->user()->hasRole('main_dealer'))
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#import-excel-modal">Import Data</button>
+                                @endif
                         </div>
                     </div>
                 </div>

@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dealer;
 use App\Models\LogImport;
 use App\Models\Target;
 use Illuminate\Http\Request;
 
 class TargetController extends Controller
 {
+
+    protected $kode_customer;
+
+    public function __construct()
+    {
+        $this->kode_customer = Dealer::where('kode', auth()->user()->kode_dealer)->first()->kode_customer;
+    }
+
     public function index()
     {
         return view('target.index');
@@ -15,7 +24,12 @@ class TargetController extends Controller
 
     public function datatable()
     {
-        $data = Target::all();
+        $query = Target::query();
+        if (!auth()->user()->hasRole('main_dealer')) {
+            $query->where('kode_customer', $this->kode_customer);
+        }
+        $data = $query->get();
+
         return datatables()->of($data)
             ->addIndexColumn()
             ->editColumn('target_part', function ($data) {
