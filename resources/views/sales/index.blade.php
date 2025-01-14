@@ -118,8 +118,6 @@
 
     @push('scripts')
         <script>
-            let listProducts = [];
-            let page = 0;
             let isMainDealer = $('#roles').val();
             let kode_dealer = $('#kode_dealer').val();
 
@@ -256,9 +254,6 @@
 
                 return htmlTable;
             }
-
-
-
 
             async function saveData() {
                 $("#div_loading").show();

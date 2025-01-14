@@ -57,49 +57,48 @@
     @includeIf('dealer.modals')
     @push('scripts')
         <script>
+            let listProducts = [];
+            let page = 0;
+            let isMainDealer = $('#roles').val();
+            let kode_dealer = $('#kode_dealer').val();
+
+            const delay = (delayInms) => {
+                return new Promise(resolve => setTimeout(resolve, delayInms));
+            };
+
+
             $(document).ready(function() {
-                $('#import-submit').on('click', function(e) {
-                    e.preventDefault();
+                $("#file-input").on("change", function() {
+                    let fileUpload = $(this).prop('files')[0];
 
-                    // Ambil file dari form
-                    let formData = new FormData($('#import-form')[0]);
+                    readXlsxFile(fileUpload).then(async function(data) {
+                        listProducts = await data;
+                        console.log(listProducts);
 
-                    $.ajax({
-                        url: "{{ route('dealer.import') }}", // Route untuk import dealer
-                        method: "POST",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function() {
-                            // Tampilkan loading atau disable tombol
-                            $('#import-submit').attr('disabled', true).text('Importing...');
-                        },
-                        success: function(response) {
-                            // Tampilkan SweetAlert jika sukses
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Berhasil',
-                                text: response.message,
-                            }).then(() => {
-                                // Reload halaman atau tutup modal
-                                location.reload();
-                            });
-                        },
-                        error: function(xhr) {
-                            // Tampilkan SweetAlert jika ada error
-                            let errorMessage = xhr.responseJSON?.message || "Terjadi kesalahan!";
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                text: errorMessage,
-                            });
-                        },
-                        complete: function() {
-                            // Enable kembali tombol
-                            $('#import-submit').attr('disabled', false).text('Import Data');
-                        },
+                        $("#import-excel-modal .modal-dialog").addClass("modal-xl");
+                        $("#preview-container").show();
+                        $("#preview-table tbody").html("");
+                        $("#preview-table tbody").html(previewData());
+                        $("#header_preview_table").html(previewHeader());
                     });
+
+                    $("#save-btn").show();
                 });
+
+                $("#save-btn").on("click", function() {
+                    saveData();
+                });
+
+
+                // Reset form and preview table when the modal is closed
+                $('#import-excel-modal').on('hidden.bs.modal', function() {
+                    $('#import-form')[0].reset();
+                    $('#preview-table tbody').empty();
+                    $('#preview-container').hide();
+                    $('#save-btn').hide();
+                });
+
+
                 let columns = [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -258,6 +257,142 @@
                     }
                 });
             });
+
+            function previewHeader() {
+                let htmlHeader = "";
+
+                // Tentukan indeks array yang ingin di-render
+                const index = 1;
+
+                // Pastikan array tidak null dan filter nilai kosong/null
+                if (listProducts[index] && Array.isArray(listProducts[index])) {
+                    listProducts[index] = listProducts[index].filter(item => item !== null && item !== undefined);
+                } else {
+                    console.error("Index 5 pada listProducts tidak valid.");
+                    return htmlHeader; // Kembalikan header kosong jika data tidak valid
+                }
+
+                // Render semua elemen yang ada di listProducts[index]
+                listProducts[index].forEach(element => {
+                    htmlHeader += `<th>${element}</th>`;
+                });
+
+                return htmlHeader;
+            }
+
+
+            function previewData(condition) {
+                let htmlTable = "";
+                let maxData = 100; // Batas maksimum data yang akan dirender
+                let startIndex = 2; // Indeks awal data yang akan diproses
+
+                // Looping melalui data di listProducts
+                for (let i = startIndex; i < listProducts.length && i < startIndex + maxData; i++) {
+                    // Filter nilai null dari baris data
+                    listProducts[i] = listProducts[i].filter(item => item !== null);
+
+
+                    // Membuat baris tabel berdasarkan semua elemen
+                    htmlTable += "<tr>";
+                    listProducts[i].forEach(item => {
+                        htmlTable += `<td>${item}</td>`;
+                    });
+                    htmlTable += "</tr>";
+                }
+
+                return htmlTable;
+            }
+
+            async function saveData() {
+                $("#div_loading").show();
+
+                let maxDataPerRequest = 1000; // Jumlah maksimum data per permintaan
+                let startIndex = 2; // Indeks awal data yang akan diproses
+                let maxRequest = Math.ceil((listProducts.length - startIndex) / maxDataPerRequest);
+
+                let fileUpload = $("#file-input").prop('files')[0];
+                let fileName = fileUpload.name;
+
+                $("#pb_loading").attr("aria-valuenow", 0);
+                $("#pb_loading").attr("aria-valuemin", 0);
+                $("#pb_loading").attr("aria-valuemax", 100);
+                $("#pb_loading .progress-bar-animated").css("width", "0%").text("0%");
+
+                let no = 1;
+
+                try {
+                    for (let i = startIndex; i < listProducts.length; i += maxDataPerRequest) {
+                        let dataStart = i;
+                        let dataEnd = i + maxDataPerRequest - 1 < listProducts.length ? i + maxDataPerRequest : listProducts.length;
+
+                        let dataPreview = [];
+                        for (let j = dataStart; j < dataEnd; j++) {
+                            if (listProducts[j]) {
+                                // Filter elemen null
+                                let row = listProducts[j].filter(item => item !== null && item !== '');
+
+                                if (row.length > 0) {
+                                    dataPreview.push(row);
+                                }
+                            }
+                        }
+
+                        // Update progres bar
+                        let current = Math.ceil(no * 100 / maxRequest);
+                        $("#lbl_progress").text(`${no} of ${maxRequest} (${current}%)`);
+                        $("#pb_loading").attr("aria-valuenow", current);
+                        $("#pb_loading .progress-bar-animated").css("width", `${current}%`).text(`${current}%`);
+
+                        // Tunggu sebelum mengirim permintaan berikutnya
+                        await delay(250);
+
+                        // Kirim data ke server
+                        try {
+                            await $.ajax({
+                                url: "{{ route('dealer.import') }}",
+                                type: "POST",
+                                headers: {
+                                    "X-CSRF-TOKEN": $(`meta[name="csrf-token"]`).attr("content")
+                                },
+                                data: {
+                                    "data": JSON.stringify(dataPreview),
+                                    'is_main_dealer': isMainDealer,
+                                    'looping': no,
+                                    'periode': $('#periode').val(),
+                                    'kode_dealer': $('#kode_dealer').val(),
+                                    'file_name': fileName
+                                }
+                            });
+                        } catch (error) {
+                            // Tangani error dan tampilkan Swal.fire
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.responseJSON?.message ||
+                                    'An error occurred during the data import process.',
+                                showConfirmButton: true
+                            });
+                            // Hentikan looping jika terjadi error
+                            throw new Error("Data import process halted due to an error.");
+                        }
+
+                        no++;
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Data saved successfully!',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        location.reload();
+                    });
+                } catch (err) {
+                    console.error("Error during import:", err.message);
+                    $("#div_loading").hide();
+                }
+            }
         </script>
     @endpush
 </x-templates.default>

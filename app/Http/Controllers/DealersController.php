@@ -22,7 +22,7 @@ class DealersController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group','kode_customer']);
+            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group', 'kode_customer']);
 
             $dataTable = DataTables::of($dealers)
                 ->addIndexColumn();
@@ -101,7 +101,7 @@ class DealersController extends Controller
         return response()->json(['message' => 'Dealer berhasil dihapus.']);
     }
 
-    public function importExcel(Request $request)
+    public function importExcelOld(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
@@ -131,5 +131,59 @@ class DealersController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function importExcel(Request $request)
+    {
+        $data = json_decode($request->data);
+        $fileName = $request->file_name;
+
+        try {
+
+            foreach ($data as $value) {
+                $kode = str_pad($value[0], 5, '0', STR_PAD_LEFT);
+                $dealerData = [
+                    'kode' => $kode,
+                    'kode_customer' => $value[1],
+                    'ahass' => $value[2],
+                    'kota_kab' => $value[3],
+                    'kecamatan' => $value[4],
+                    'status' => $value[5],
+                    'se_area' => $value[6],
+                    'group' => $value[7],
+                ];
+
+                // Update or insert dealer based on 'kode'
+                Dealer::updateOrCreate(
+                    ['kode' => $kode],
+                    $dealerData
+                );
+            }
+
+            $this->logImport($fileName, 'success', 'Data Dealer berhasil diimpor.');
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Dealer berhasil diimpor.',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengimpor data Dealer.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    private function logImport ($fileName, $status, $message) {
+        LogImport::create([
+            'file_name' => $fileName,
+            'file_type' => 'dealers',
+            'status' => $status,
+            'message' => $message,
+            'created_by' => auth()->id(),
+            'updated_by' => auth()->id(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

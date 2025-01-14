@@ -1,28 +1,59 @@
 {{-- Modal Import --}}
 <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content position-relative">
             <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
                 <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
                     data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-0">
+            <div class="modal-body p-0" style="overflow-y: auto;">
                 <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
-                    <h4 class="mb-1" id="modalExampleDemoLabel">Import Excel Data Dealer</h4>
+                    <h4 class="mb-1" id="modalExampleDemoLabel">Import Product Sales</h4>
                 </div>
-                <div class="p-4 pb-0">
-                    <form id="import-form" enctype="multipart/form-data">
+                <div class="p-4">
+                    <!-- Form for file upload -->
+                    <form id="import-form" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label class="col-form-label" for="file">Data Excel</label>
-                            <input class="form-control" type="file" name="file" id="file" required />
+                            <label class="col-form-label" for="file-input">Data Excel</label>
+                            <input class="form-control" type="file" name="file" id="file-input" />
                         </div>
                     </form>
+
+                    <!-- Preview Table -->
+                    <div id="preview-container" style="display: none">
+                        <div class="" id="div_loading" style="display: none">
+                            <div id="pb_loading" class="progress" role="progressbar"
+                                aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%">
+                                    0%</div>
+                            </div>
+                            <div class="text-center mt-1">
+                                <div class="spinner-border text-primary me-2" role="status" style="">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div id="lbl_progress">0 of 100</div>
+                            </div>
+                        </div>
+                        <h5 class="mt-4">Preview Data</h5>
+                        <div class="table-responsive" style="max-height: 50vh; overflow-y: auto;">
+                            <table class="table table-striped" id="preview-table">
+                                <thead>
+                                    <tr id="header_preview_table">
+
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="import-submit" type="button">Import Data</button>
+                <button class="btn btn-success" type="button" id="save-btn" style="display: none;">Save
+                    Data</button>
             </div>
         </div>
     </div>
