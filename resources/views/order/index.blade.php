@@ -92,14 +92,15 @@
                     dataType: "json",
                     success: function(response) {
                         let order = response.order;
-                        console.log(order);
+                        let shipping = response.shipping;
 
                         if (response.success == true) {
                             $('#detail-item').html(response.orderList);
-                            $('#buyer_dealer_text').text('Buyer Dealer: ' + order.buyer_dealer);
                             $('#name_text').text('Name: ' + order.buyer_name);
                             $('#phone_text').text('Phone: ' + order.phone);
                             $('#address_text').text('Address: ' + order.shipping_address);
+                            $('#expedition_text').text('Expedition: ' + shipping.name);
+                            $('#no_resi_text').text('Receipt Number: ' + shipping.no_resi);
                         } else {
                             $('#detail-item').html('');
                             Swal.fire({

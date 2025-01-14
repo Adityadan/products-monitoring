@@ -37,6 +37,7 @@
                             <th>Status</th>
                             <th>SE Area</th>
                             <th>Group</th>
+                            <th>Kode Customer</th>
                             @if (auth()->user()->hasRole('main_dealer'))
                                 <th>Actions</th>
                             @endif
@@ -132,6 +133,10 @@
                     {
                         data: 'group',
                         name: 'group'
+                    },
+                    {
+                        data: 'kode_customer',
+                        name: 'kode_customer'
                     }
                 ];
 
@@ -219,6 +224,7 @@
                     $('#edit-dealer-form #status').val(data.status);
                     $('#edit-dealer-form #se_area').val(data.se_area);
                     $('#edit-dealer-form #group').val(data.group);
+                    $('#edit-dealer-form #kode_customer').val(data.kode_customer);
                 });
             });
 

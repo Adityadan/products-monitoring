@@ -10,16 +10,7 @@ class Dealer extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = [
-        'kode',
-        'ahass',
-        'kota_kab',
-        'kecamatan',
-        'status',
-        'se_area',
-        'group',
-        'order'
-    ];
+    protected $guarded = [];
 
     public function products()
     {

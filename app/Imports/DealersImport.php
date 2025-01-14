@@ -40,16 +40,16 @@ class DealersImport implements ToCollection
             if (isset($filteredRow[0]) && strlen($filteredRow[0]) < 5) {
                 $filteredRow[0] = str_pad($filteredRow[0], 5, '0', STR_PAD_LEFT);
             }
-
             // Update atau buat record baru di tabel Dealer
             Dealer::updateOrCreate(
                 [
                     'kode' => $filteredRow[0], // Kolom B
                 ],
                 [
-                    'ahass' => $filteredRow[1],  // Kolom C
-                    'kota_kab' => $filteredRow[2], // Kolom D
-                    'kecamatan' => $filteredRow[3], // Kolom E
+                    'kode_customer' => $filteredRow[1],
+                    'ahass' => $filteredRow[2],  // Kolom C
+                    'kota_kab' => $filteredRow[3], // Kolom D
+                    'kecamatan' => $filteredRow[4], // Kolom E
                     'status' => $filteredRow[4], // Kolom F
                     'se_area' => $filteredRow[5], // Kolom G
                     'group' => $filteredRow[6], // Kolom H

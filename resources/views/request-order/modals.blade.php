@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Part Number</th>
-                                    <th scope="col">Dealer Code</th>
+                                    <th scope="col">Product Name</th>
                                     <th scope="col">Quantity Order</th>
                                     <th scope="col">Quantity Send</th>
                                 </tr>

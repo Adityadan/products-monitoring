@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status'); // Status
             $table->string('se_area'); // SE Area
             $table->string('group'); // Group
+            $table->string('kode_customer')->nullable();
             $table->timestamps();
         });
     }

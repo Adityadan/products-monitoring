@@ -71,10 +71,10 @@ class OrderController extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-
         // Ambil data pesanan berdasarkan ID shipping order
         $order_detail = OrderDetail::where('id_order', $id)->get();
         $order = Order::where('id', $id)->first();
+        $shipping = ShippingOrder::LeftJoin('expeditions as e', 'shipping_order.id_expedition', '=', 'e.id')->where('id_order', $id)->first();
 
 
         if ($order_detail->isEmpty()) {
@@ -149,12 +149,12 @@ class OrderController extends Controller
                 </div>
             </div>
         </div>';
-
         // Kembalikan response JSON
         return response()->json([
             'success' => true,
             'orderList' => $orderList,
-            'order' => $order
+            'order' => $order,
+            'shipping' => $shipping
         ]);
     }
 

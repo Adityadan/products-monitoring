@@ -22,7 +22,7 @@ class DealersController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group']);
+            $dealers = Dealer::select(['id', 'kode', 'ahass', 'kota_kab', 'kecamatan', 'status', 'se_area', 'group','kode_customer']);
 
             $dataTable = DataTables::of($dealers)
                 ->addIndexColumn();
@@ -50,6 +50,7 @@ class DealersController extends Controller
             'status' => 'required|string|max:20',
             'se_area' => 'nullable|string|max:50',
             'group' => 'nullable|string|max:50',
+            'kode_customer' => 'nullable|string|max:50',
         ]);
 
         if ($validator->fails()) {
@@ -80,6 +81,7 @@ class DealersController extends Controller
             'status' => 'required|string|max:20',
             'se_area' => 'nullable|string|max:50',
             'group' => 'nullable|string|max:50',
+            'kode_customer' => 'nullable|string|max:50',
         ]);
 
         if ($validator->fails()) {

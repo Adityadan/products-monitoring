@@ -117,6 +117,10 @@
                         <label for="group" class="form-label">Group</label>
                         <input type="text" id="group" name="group" class="form-control">
                     </div>
+                    <div class="mb-3">
+                        <label for="group" class="form-label">Kode Customer</label>
+                        <input type="text" id="kode_customer" name="kode_customer" class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

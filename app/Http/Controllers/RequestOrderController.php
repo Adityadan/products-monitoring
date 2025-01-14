@@ -121,28 +121,36 @@ class RequestOrderController extends Controller
 
     public function renderListItem(Request $request)
     {
-        $detail_order = DB::table('order_detail as od')
+        $query = DB::table('order_detail as od')
             ->leftJoin('orders as o', 'od.id_order', '=', 'o.id')
+            ->leftJoin('dealers as d', 'o.buyer_dealer', '=', 'd.kode') // Tambahkan join dengan tabel dealers
             ->select([
                 'od.id',
                 'od.no_part',
                 'od.kode_dealer',
                 'od.qty_order',
                 'od.qty_supply',
+                'od.product_name',
                 'o.buyer_name',
-                'o.shipping_address'
+                'o.shipping_address',
+                'o.buyer_dealer',
+                'd.ahass as dealer_name' // Ambil kolom dealer_name dari tabel dealers
             ])
-            ->where('od.id_order', $request->id)
-            ->where('od.kode_dealer', auth()->user()->kode_dealer)
-            ->get();
+            ->where('od.id_order', $request->id);
+
+        if (!auth()->user()->hasRole('main_dealer')) {
+            $query->where('od.kode_dealer', auth()->user()->kode_dealer);
+        }
+
+        $detail_order = $query->get();
 
         $render_detail_order = '';
         foreach ($detail_order as $item) {
             $render_detail_order .= '<tr>
-                                    <td class="text-nowrap">' . $item->no_part . '</td>
-                                    <td class="text-nowrap">' . $item->kode_dealer . '</td>
-                                    <td class="text-nowrap">' . $item->qty_order . '</td>
-                                    <td class="text-nowrap"><input type="number" class="form-control form-control-sm qty_supply" value="' . ($item->qty_supply ?? 0) . '" data-id="' . $item->id . '" id="qty_supply_' . $item->id . '" name="qty_supply[' . $item->id . ']"></td>
+                                    <td class="text-nowrap text-start">' . $item->no_part . '</td>
+                                    <td class="text-nowrap text-start">' . $item->product_name . '</td>
+                                    <td class="text-nowrap text-end">' . $item->qty_order . '</td>
+                                    <td class="text-nowrap"><input type="number" class="form-control form-control-sm qty_supply text-end" value="' . ($item->qty_supply ?? 0) . '" data-id="' . $item->id . '" id="qty_supply_' . $item->id . '" name="qty_supply[' . $item->id . ']"></td>
                                 </tr>';
         }
 

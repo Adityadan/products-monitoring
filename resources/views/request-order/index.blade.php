@@ -214,7 +214,7 @@
 
                         if (response.success) {
                             $('#list-item').html(response.render_detail_order);
-                            $('#dealer_text').text('Dealer: ' + detail_order.buyer_name);
+                            $('#dealer_text').text('Dealer: ' + detail_order.dealer_name);
                             $('#alamat_text').text('Alamat: ' + detail_order.shipping_address);
                         } else {
                             $('#list-item').html('');

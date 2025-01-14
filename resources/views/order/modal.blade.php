@@ -11,22 +11,28 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="customer" class="form-label" id="buyer_dealer_text">Buyer Dealer: abc</label>
+                            <label for="customer" class="form-label" id="name_text">Name: -</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="customer" class="form-label" id="name_text">Name: abc</label>
+                            <label for="customer" class="form-label" id="phone_text">Phone: -</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="customer" class="form-label" id="phone_text">Phone: abc</label>
+                            <label for="customer" class="form-label" id="address_text">Address: -</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="customer" class="form-label" id="address_text">Address: abc</label>
+                            <label for="customer" class="form-label" id="expedition_text">Expedition: -</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="customer" class="form-label" id="no_resi_text">receipt number: -</label>
                         </div>
                     </div>
                 </div>
@@ -78,7 +84,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="no_resi" class="form-label">Nomor Resi</label>
+                        <label for="no_resi" class="form-label">receipt number</label>
                         <input type="text" id="no_resi" name="no_resi" class="form-control" required>
                     </div>
                 </div>

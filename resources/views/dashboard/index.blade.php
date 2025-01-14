@@ -101,44 +101,44 @@
                     });
 
                     $('#sales-table').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    responsive: true,
-                    ajax: "{{ route('sales.datatable') }}",
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'kode_dealer',
-                            name: 'kode_dealer'
-                        },
-                        {
-                            data: 'no_part',
-                            name: 'no_part'
-                        },
-                        {
-                            data: 'customer_master_sap',
-                            name: 'customer_master_sap'
-                        },
-                        {
-                            data: 'kategori_part',
-                            name: 'kategori_part'
-                        },
-                        {
-                            data: 'qty',
-                            name: 'qty'
-                        },
-                        {
-                            data: 'actions',
-                            name: 'actions',
-                            orderable: false,
-                            searchable: false
-                        },
-                    ],
-                });
+                        processing: true,
+                        serverSide: true,
+                        responsive: true,
+                        ajax: "{{ route('sales.datatable') }}",
+                        columns: [{
+                                data: 'DT_RowIndex',
+                                name: 'DT_RowIndex',
+                                orderable: false,
+                                searchable: false
+                            },
+                            {
+                                data: 'kode_dealer',
+                                name: 'kode_dealer'
+                            },
+                            {
+                                data: 'no_part',
+                                name: 'no_part'
+                            },
+                            {
+                                data: 'customer_master_sap',
+                                name: 'customer_master_sap'
+                            },
+                            {
+                                data: 'kategori_part',
+                                name: 'kategori_part'
+                            },
+                            {
+                                data: 'qty',
+                                name: 'qty'
+                            },
+                            {
+                                data: 'actions',
+                                name: 'actions',
+                                orderable: false,
+                                searchable: false
+                            },
+                        ],
+                    });
 
                     // Fungsi untuk memformat angka menjadi rupiah
                     function formatRupiah(angka) {
@@ -173,40 +173,46 @@
                             }
 
                             // Proses data untuk chart
-                            const chartData = response.flatMap(item => [{
-                                    x: item.customer_name,
-                                    y: item.pendapatan.app || 0, // Default to 0 if data is missing
+                            const chartData = [{
                                     name: 'Pendapatan App',
-                                    goals: [{
-                                        name: 'Target App',
-                                        value: item.target.app || 0, // Default to 0 if data is missing
-                                        strokeColor: '#775DD0'
-                                    }],
-                                    fillColor: '#54a0ff' // Warna untuk pendapatan App
+                                    data: response.map(item => ({
+                                        x: item.customer_name,
+                                        y: item.pendapatan.app || 0,
+                                        goals: [{
+                                            name: 'Target App',
+                                            value: item.target.app || 0,
+                                            strokeColor: '#775DD0'
+                                        }]
+                                    })),
+                                    color: '#54a0ff' // Warna untuk pendapatan App
                                 },
                                 {
-                                    x: item.customer_name,
-                                    y: item.pendapatan.part || 0,
                                     name: 'Pendapatan Part',
-                                    goals: [{
-                                        name: 'Target Part',
-                                        value: item.target.part || 0,
-                                        strokeColor: '#775DD0'
-                                    }],
-                                    fillColor: '#1dd1a1' // Warna untuk pendapatan Part
+                                    data: response.map(item => ({
+                                        x: item.customer_name,
+                                        y: item.pendapatan.part || 0,
+                                        goals: [{
+                                            name: 'Target Part',
+                                            value: item.target.part || 0,
+                                            strokeColor: '#775DD0'
+                                        }]
+                                    })),
+                                    color: '#1dd1a1' // Warna untuk pendapatan Part
                                 },
                                 {
-                                    x: item.customer_name,
-                                    y: item.pendapatan.oli || 0,
                                     name: 'Pendapatan Oil',
-                                    goals: [{
-                                        name: 'Target Oil',
-                                        value: item.target.oli || 0,
-                                        strokeColor: '#775DD0'
-                                    }],
-                                    fillColor: '#ff6b6b' // Warna untuk pendapatan Oil
+                                    data: response.map(item => ({
+                                        x: item.customer_name,
+                                        y: item.pendapatan.oli || 0,
+                                        goals: [{
+                                            name: 'Target Oil',
+                                            value: item.target.oli || 0,
+                                            strokeColor: '#775DD0'
+                                        }]
+                                    })),
+                                    color: '#ff6b6b' // Warna untuk pendapatan Oil
                                 }
-                            ]);
+                            ];
 
                             // Konfigurasi chart
                             const options = {
@@ -218,10 +224,7 @@
                                         show: true
                                     }
                                 },
-                                series: [{
-                                    name: 'Pendapatan',
-                                    data: chartData
-                                }],
+                                series: chartData,
                                 dataLabels: {
                                     enabled: false
                                 },
@@ -233,11 +236,11 @@
                                 },
                                 xaxis: {
                                     type: 'category',
-                                    title: {
-                                        text: 'Customer Name'
-                                    },
                                     labels: {
-                                        rotate: -45
+                                        rotate: -50,
+                                        style:{
+                                            fontSize: '10px',
+                                        }
                                     }
                                 },
                                 yaxis: {
@@ -256,12 +259,7 @@
                                 },
                                 legend: {
                                     show: true,
-                                    customLegendItems: ['Pendapatan App', 'Pendapatan Part', 'Pendapatan Oil',
-                                        'Target'
-                                    ],
-                                    markers: {
-                                        fillColors: ['#54a0ff', '#1dd1a1', '#ff6b6b', '#775DD0']
-                                    }
+                                    position: 'top'
                                 }
                             };
 
@@ -274,6 +272,7 @@
                         }
                     });
                 }
+
 
                 function chartSales() {
                     $.ajax({
