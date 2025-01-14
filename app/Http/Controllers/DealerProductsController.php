@@ -191,14 +191,14 @@ class DealerProductsController extends Controller
     public function previewNew(Request $request)
     {
         $request->validate([
-            'periode' => 'required|date_format:m-Y',
+            'periode' => 'required',
             'fileName' => 'required|string',
             'data' => 'required|json',
             'looping' => 'required|integer',
         ]);
 
         try {
-            $periode = \Carbon\Carbon::createFromFormat('m-Y', $request->periode)->startOfMonth()->format('Y-m-d');
+            $periode = $request->periode;
             $fileName = $request->fileName;
             $user = auth()->user();
             $dealerCode = $user['kode_dealer'];
