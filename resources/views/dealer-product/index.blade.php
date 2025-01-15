@@ -58,7 +58,7 @@
 
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">period</label>
-                                <input class="form-control datepicker" id="periode" name="periode" value="{{ \Carbon\Carbon::now()->format('m-Y') }}" required/>
+                                <input class="form-control datepicker" id="periode" name="periode" value="{{ \Carbon\Carbon::now()->format('d-m-Y') }}" required/>
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">Data Excel</label>
