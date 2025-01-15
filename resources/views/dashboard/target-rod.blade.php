@@ -21,11 +21,11 @@
                                 <th>Customer Name</th>
                                 <th>Period</th>
                                 <th>Target App</th>
-                                <th>Total App</th>
+                                <th>Supply App</th>
                                 <th>Target Part</th>
-                                <th>Total Part</th>
+                                <th>Supply Part</th>
                                 <th>Target Oil</th>
-                                <th>Total Oil</th>
+                                <th>Supply Oil</th>
                             </tr>
                         </thead>
                         <tbody>

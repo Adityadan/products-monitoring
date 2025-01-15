@@ -9,9 +9,9 @@
                 <div id="chart_sales" class="apex-charts mb-4"></div>
 
                 <!-- Custom Divider Style -->
-                <hr style="border-top: 2px solid #bbb; margin-top: 3rem; margin-bottom: 3rem;">
+                {{-- <hr style="border-top: 2px solid #bbb; margin-top: 3rem; margin-bottom: 3rem;"> --}}
 
-                <div class="table table-responsive">
+                {{-- <div class="table table-responsive">
                     <table class="table table-bordered font-sans-serif" id="sales-table">
                         <thead>
                             <tr>
@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                     </table>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

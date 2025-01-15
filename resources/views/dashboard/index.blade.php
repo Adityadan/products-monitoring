@@ -99,7 +99,7 @@
                         ],
                     });
 
-                    $('#sales-table').DataTable({
+                    /* $('#sales-table').DataTable({
                         processing: true,
                         serverSide: true,
                         responsive: true,
@@ -137,7 +137,7 @@
                                 searchable: false
                             },
                         ],
-                    });
+                    }); */
 
                     // Fungsi untuk memformat angka menjadi rupiah
                     function formatRupiah(angka) {
