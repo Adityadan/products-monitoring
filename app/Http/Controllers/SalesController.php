@@ -7,6 +7,7 @@ use App\Models\LogImport;
 use App\Models\Product;
 use App\Models\Sales;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -32,26 +33,38 @@ class SalesController extends Controller
 
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $data = Sales::select([
-                'id',
-                'kode_dealer',
-                'customer_master_sap',
-                'no_part',
-                'kategori_part',
-                'qty',
-                'created_by',
-            ])->where('periode', '>=', now()->subMonths(6)->startOfMonth()->format('Y-m-d'));
-            if (!$user->hasRole('main_dealer')) {
-                $data->where('kode_dealer', $kode_dealer);
-            }
+            $query = DB::table('sales as s')
+                ->rightJoin('products as p', function ($join) {
+                    $join->on('s.kode_dealer', '=', 'p.kode_dealer')
+                        ->on('s.no_part', '=', 'p.no_part');
+                })
+                ->leftJoin('dealers as d', 's.kode_dealer', '=', 'd.kode')
+                ->select(
+                    'd.ahass as item',
+                    'p.nama_part as item_name',
+                    DB::raw("COALESCE(SUM(CASE WHEN TO_CHAR(s.periode, 'YYYY-MM') = TO_CHAR((CURRENT_DATE - INTERVAL '5 MONTH'), 'YYYY-MM') THEN s.qty END), 0) AS month_1"),
+                    DB::raw("COALESCE(SUM(CASE WHEN TO_CHAR(s.periode, 'YYYY-MM') = TO_CHAR((CURRENT_DATE - INTERVAL '4 MONTH'), 'YYYY-MM') THEN s.qty END), 0) AS month_2"),
+                    DB::raw("COALESCE(SUM(CASE WHEN TO_CHAR(s.periode, 'YYYY-MM') = TO_CHAR((CURRENT_DATE - INTERVAL '3 MONTH'), 'YYYY-MM') THEN s.qty END), 0) AS month_3"),
+                    DB::raw("COALESCE(SUM(CASE WHEN TO_CHAR(s.periode, 'YYYY-MM') = TO_CHAR((CURRENT_DATE - INTERVAL '2 MONTH'), 'YYYY-MM') THEN s.qty END), 0) AS month_4"),
+                    DB::raw("COALESCE(SUM(CASE WHEN TO_CHAR(s.periode, 'YYYY-MM') = TO_CHAR((CURRENT_DATE - INTERVAL '1 MONTH'), 'YYYY-MM') THEN s.qty END), 0) AS month_5"),
+                    DB::raw("COALESCE(SUM(CASE WHEN TO_CHAR(s.periode, 'YYYY-MM') = TO_CHAR(CURRENT_DATE, 'YYYY-MM') THEN s.qty END), 0) AS month_6"),
+                    DB::raw("COALESCE(ROUND(AVG(s.qty), 2), 0) AS average_sales"),
+                    DB::raw("COALESCE(SUM(p.oh), 0) AS stock")
+                )
+                ->whereNull('s.deleted_at')
+                ->whereNull('p.deleted_at')
+                ->where(DB::raw("TO_CHAR(s.periode, 'YYYY-MM')"), '>=', DB::raw("TO_CHAR((CURRENT_DATE - INTERVAL '5 MONTH'), 'YYYY-MM')"))
+                ->where(DB::raw("TO_CHAR(s.periode, 'YYYY-MM')"), '<=', DB::raw("TO_CHAR(CURRENT_DATE, 'YYYY-MM')"));
+                if (!auth()->user()->hasRole('main_dealer')) {
+                    $query->where('s.kode_dealer', $kode_dealer);
+                }
+                $query->groupBy('p.no_part', 'p.nama_part', 'd.ahass')
+                ->orderBy('p.no_part')
+                ->get();
+
+            $data = $query->get()->toArray();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('actions', function ($row) {
-                    // $editBtn = '<button class="btn btn-sm btn-primary edit-product" data-id="' . $row->id . '" data-bs-toggle="modal" data-bs-target="#edit-product-modal">Edit</button>';
-                    $deleteBtn = '<button class="btn btn-sm btn-danger delete-product" data-id="' . $row->id . '">Delete</button>';
-                    return /* $editBtn . ' ' . */ $deleteBtn;
-                })
-                ->rawColumns(['actions']) // Ensure HTML in the actions column is not escaped
                 ->make(true);
         }
     }

@@ -22,15 +22,23 @@
     <div class="card">
         <div class="card-body">
             <div class="table table-responsive">
-                <table class="table table-bordered font-sans-serif" id="sales-table">
+                <table class="table table-bordered font-sans-serif text" id="sales-table">
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>Dealer Code</th>
-                            <th>Customer Master SAP</th>
-                            <th>Part Number</th>
-                            <th>Part Category</th>
-                            <th>Qty</th>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2">Item</th>
+                            <th rowspan="2">Item Name</th>
+                            <th colspan="7" class="text-center">Sales</th>
+                            <th rowspan="2">Stock</th>
+                        </tr>
+                        <tr>
+                            <th>Month 1</th>
+                            <th>Month 2</th>
+                            <th>Month 3</th>
+                            <th>Month 4</th>
+                            <th>Month 5</th>
+                            <th>Month 6</th>
+                            <th>Average</th>
                         </tr>
                     </thead>
                 </table>
@@ -139,25 +147,48 @@
                             searchable: false
                         },
                         {
-                            data: 'kode_dealer',
-                            name: 'kode_dealer'
+                            data: 'item',
+                            name: 'item'
                         },
                         {
-                            data: 'no_part',
-                            name: 'no_part'
+                            data: 'item_name',
+                            name: 'item_name'
                         },
                         {
-                            data: 'customer_master_sap',
-                            name: 'customer_master_sap'
+                            data: 'month_1',
+                            name: 'month_1'
                         },
                         {
-                            data: 'kategori_part',
-                            name: 'kategori_part'
+                            data: 'month_2',
+                            name: 'month_2'
                         },
                         {
-                            data: 'qty',
-                            name: 'qty'
+                            data: 'month_3',
+                            name: 'month_3'
                         },
+                        {
+                            data: 'month_4',
+                            name: 'month_4'
+                        },
+                        {
+                            data: 'month_5',
+                            name: 'month_5'
+                        },
+                        {
+                            data: 'month_6',
+                            name: 'month_6'
+                        },
+                        {
+                            data: 'average_sales',
+                            name: 'average_sales'
+                        },
+                        {
+                            data: 'stock',
+                            name: 'stock'
+                        },
+                    ],
+                    columnDefs: [
+                        {"targets": "_all", "className": "text-center"}
                     ],
                 });
                 $("#file-input").on("change", function() {
