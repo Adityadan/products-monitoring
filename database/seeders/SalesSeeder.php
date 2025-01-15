@@ -15,7 +15,7 @@ class SalesSeeder extends Seeder
     {
         $data = [
             [
-                "id" => 126,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401K18900",
@@ -30,7 +30,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 127,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401K45NA0",
@@ -45,7 +45,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 128,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401K84900",
@@ -60,7 +60,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 129,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401KEH900",
@@ -75,7 +75,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 130,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401KEV881",
@@ -90,7 +90,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 131,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401KTL700",
@@ -105,7 +105,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 132,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401KWW900",
@@ -120,7 +120,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 133,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06401KYZ900",
@@ -135,7 +135,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 134,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06430K44V80",
@@ -150,7 +150,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 135,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06435K97N01",
@@ -165,7 +165,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 136,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06435KPP901",
@@ -180,7 +180,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 137,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455K59A71",
@@ -195,7 +195,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 138,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455K84902",
@@ -210,7 +210,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 139,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455KPPN01",
@@ -225,7 +225,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 140,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455KPPN02",
@@ -240,7 +240,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 141,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455KR3404",
@@ -255,7 +255,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 142,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455KREK02",
@@ -270,7 +270,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 143,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "06455KWB601",
@@ -285,7 +285,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 144,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082322MAK0LN9",
@@ -300,7 +300,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 145,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082322MAK8LN9",
@@ -315,7 +315,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 146,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082322MAU0JN3",
@@ -330,7 +330,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 147,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082322MAU1JN3",
@@ -345,7 +345,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 148,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082322MBK6LN9",
@@ -360,7 +360,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 149,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08232M99K1JN9",
@@ -375,7 +375,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 150,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08232M99K8JN9",
@@ -390,7 +390,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 151,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08233M99K1JN9",
@@ -405,7 +405,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 152,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08233M99K8JN9",
@@ -420,7 +420,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 153,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082342MAK8LN9",
@@ -435,7 +435,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 154,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082342MBK0LZ0",
@@ -450,7 +450,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 155,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082342MBK0LZ9",
@@ -465,7 +465,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 156,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082342MBK8JN0",
@@ -480,7 +480,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 157,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "082342MBK8LZ0",
@@ -495,7 +495,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 158,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08264M99Z0BN9",
@@ -510,7 +510,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 159,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08294M99K0NL0",
@@ -525,7 +525,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 160,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08294M99K8LN9",
@@ -540,7 +540,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 161,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "08CLAH50500A",
@@ -555,7 +555,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 162,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "11103KVB930",
@@ -570,7 +570,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 163,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "11203KVB901",
@@ -585,7 +585,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 164,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12010KVLN00",
@@ -600,7 +600,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 165,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12209GB4682",
@@ -615,7 +615,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 166,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12251GGC901",
@@ -630,7 +630,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 167,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12251KZY701",
@@ -645,7 +645,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 168,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12391GGC900",
@@ -660,7 +660,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 169,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12391KWWA80",
@@ -675,7 +675,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 170,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "12391KZR600",
@@ -690,7 +690,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 171,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "13000K59A70",
@@ -705,7 +705,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 172,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "131A1K97P00",
@@ -720,7 +720,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 173,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "131A1KPH881",
@@ -735,7 +735,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 174,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "131A2K97P00",
@@ -750,7 +750,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 175,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "131A3KPH881",
@@ -765,7 +765,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 176,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "131A3KWB920",
@@ -780,7 +780,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 177,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "131A3KZL305",
@@ -795,7 +795,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 178,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "14401KPH901",
@@ -810,7 +810,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 179,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "14520K46N21",
@@ -825,7 +825,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 180,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "14550KCT690",
@@ -840,7 +840,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 181,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "147A1KPH900",
@@ -855,7 +855,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 182,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "147A1KVY900",
@@ -870,7 +870,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 183,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "15651KPH880",
@@ -885,7 +885,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 184,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16111KVB903",
@@ -900,7 +900,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 185,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16450K03N31",
@@ -915,7 +915,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 186,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16450K15901",
@@ -930,7 +930,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 187,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16450KVBS51",
@@ -945,7 +945,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 188,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16450KZR601",
@@ -960,7 +960,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 189,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700K03H01",
@@ -975,7 +975,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 190,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700K16305",
@@ -990,7 +990,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 191,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700K46N02",
@@ -1005,7 +1005,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 192,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700K81N00",
@@ -1020,7 +1020,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 193,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700K84901",
@@ -1035,7 +1035,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 194,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700KZL931",
@@ -1050,7 +1050,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 195,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700KZR305",
@@ -1065,7 +1065,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 196,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "16700KZRC01",
@@ -1080,7 +1080,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 197,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K0JN00",
@@ -1095,7 +1095,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 198,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K16900",
@@ -1110,7 +1110,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 199,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K1AN00",
@@ -1125,7 +1125,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 200,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K1ZN20",
@@ -1140,7 +1140,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 201,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K59A70",
@@ -1155,7 +1155,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 202,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K93N00",
@@ -1170,7 +1170,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 203,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210K97N00",
@@ -1185,7 +1185,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 204,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210KVB930",
@@ -1200,7 +1200,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 205,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210KVY960",
@@ -1215,7 +1215,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 206,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17210KZLA00",
@@ -1230,7 +1230,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 207,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17211K84900",
@@ -1245,7 +1245,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 208,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17220K2SN00",
@@ -1260,7 +1260,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 209,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17220KZR600",
@@ -1275,7 +1275,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 210,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17572GGLJ00",
@@ -1290,7 +1290,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 211,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "17572K15900",
@@ -1305,7 +1305,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 212,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "19200KWN901",
@@ -1320,7 +1320,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 213,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "19610KZL930",
@@ -1335,7 +1335,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 214,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22011K1AN00",
@@ -1350,7 +1350,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 215,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22011K1NV01",
@@ -1365,7 +1365,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 216,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22011K81N00",
@@ -1380,7 +1380,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 217,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22011KWN900",
@@ -1395,7 +1395,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 218,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22102K0JN00",
@@ -1410,7 +1410,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 219,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22102K44V00",
@@ -1425,7 +1425,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 220,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22105K0JN00",
@@ -1440,7 +1440,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 221,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22105K44V00",
@@ -1455,7 +1455,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 222,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22105KZLC00",
@@ -1470,7 +1470,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 223,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22110GFM960",
@@ -1485,7 +1485,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 224,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22110K0JN00",
@@ -1500,7 +1500,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 225,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22110K44V00",
@@ -1515,7 +1515,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 226,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22110KVB900",
@@ -1530,7 +1530,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 227,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22123K0JN00",
@@ -1545,7 +1545,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 228,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22123K0SV00",
@@ -1560,7 +1560,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 229,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22123K1AN00",
@@ -1575,7 +1575,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 230,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22123K2SN00",
@@ -1590,7 +1590,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 231,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "2212AK44V00",
@@ -1605,7 +1605,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 232,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22131K0JN00",
@@ -1620,7 +1620,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 233,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22131KVB900",
@@ -1635,7 +1635,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 234,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22131KVY900",
@@ -1650,7 +1650,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 235,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22201107001",
@@ -1665,7 +1665,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 236,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22201166001",
@@ -1680,7 +1680,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 237,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22361K44V01",
@@ -1695,7 +1695,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 238,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "2251725017NR00",
@@ -1710,7 +1710,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 239,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22530KPH900",
@@ -1725,7 +1725,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 240,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22535K16A40",
@@ -1740,7 +1740,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 241,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22535K1AN10",
@@ -1755,7 +1755,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 242,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22535K1NV00",
@@ -1770,7 +1770,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 243,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22535KWN901",
@@ -1785,7 +1785,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 244,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22535KZLA00",
@@ -1800,7 +1800,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 245,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22660KYZ901",
@@ -1815,7 +1815,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 246,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22804GB2880",
@@ -1830,7 +1830,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 247,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "22870K15920",
@@ -1845,7 +1845,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 248,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100K1ABA0",
@@ -1860,7 +1860,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 249,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100K1ZN21",
@@ -1875,7 +1875,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 250,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100K2SN01",
@@ -1890,7 +1890,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 251,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100K35BA0",
@@ -1905,7 +1905,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 252,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100K36BA0",
@@ -1920,7 +1920,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 253,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100K44BA0",
@@ -1935,7 +1935,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 254,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100KVBBA0",
@@ -1950,7 +1950,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 255,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100KVYBA1",
@@ -1965,7 +1965,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 256,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23100KZLBA0",
@@ -1980,7 +1980,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 257,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23411K0JN00",
@@ -1995,7 +1995,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 258,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "23422KZL930",
@@ -2010,7 +2010,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 259,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "24651KSP910",
@@ -2025,7 +2025,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 260,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "2751700000NR00",
@@ -2040,7 +2040,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 261,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "30400K1AN03",
@@ -2055,7 +2055,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 262,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "30400K25600C1",
@@ -2070,7 +2070,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 263,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "30400K81N02",
@@ -2085,7 +2085,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 264,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "30510K16A41",
@@ -2100,7 +2100,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 265,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "30700K81N01",
@@ -2115,7 +2115,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 266,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "30700KPH881",
@@ -2130,7 +2130,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 267,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31120K41N01",
@@ -2145,7 +2145,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 268,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31200K84901",
@@ -2160,7 +2160,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 269,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31201KPH881",
@@ -2175,7 +2175,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 270,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31210KVB902",
@@ -2190,7 +2190,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 271,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31220K81N01",
@@ -2205,7 +2205,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 272,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31500KWWA01",
@@ -2220,7 +2220,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 273,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31500KZR602",
@@ -2235,7 +2235,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 274,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31600K41N21",
@@ -2250,7 +2250,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 275,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31919K25602",
@@ -2265,7 +2265,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 276,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31926KRM842",
@@ -2280,7 +2280,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 277,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31926KYT901",
@@ -2295,7 +2295,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 278,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "31928MFFD01",
@@ -2310,7 +2310,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 279,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "32101GW3780",
@@ -2325,7 +2325,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 280,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "32102K81N00",
@@ -2340,7 +2340,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 281,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "33100K1AN01",
@@ -2355,7 +2355,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 282,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "33110K81N01",
@@ -2370,7 +2370,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 283,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "33130GN5831",
@@ -2385,7 +2385,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 284,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "33130KEV950",
@@ -2400,7 +2400,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 285,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "34901K25600",
@@ -2415,7 +2415,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 286,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "34901KFVB51",
@@ -2430,7 +2430,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 287,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "34901KPH881",
@@ -2445,7 +2445,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 288,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "34906GB6921",
@@ -2460,7 +2460,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 289,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "34908GA7701",
@@ -2475,7 +2475,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 290,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "3501AKZR600",
@@ -2490,7 +2490,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 291,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35170KYZ901",
@@ -2505,7 +2505,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 292,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35180K03N31",
@@ -2520,7 +2520,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 293,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35180KPH881",
@@ -2535,7 +2535,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 294,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35180KWWA01",
@@ -2550,7 +2550,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 295,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35200K03N31",
@@ -2565,7 +2565,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 296,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35200KPH901",
@@ -2580,7 +2580,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 297,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "35340KWB601",
@@ -2595,7 +2595,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 298,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "37100K2FN81",
@@ -2610,7 +2610,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 299,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "38110KTM851",
@@ -2625,7 +2625,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 300,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "38300KPH881",
@@ -2640,7 +2640,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 301,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "3850AKVB930",
@@ -2655,7 +2655,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 302,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "41241KFL851",
@@ -2670,7 +2670,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 303,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711K1ZN21",
@@ -2685,7 +2685,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 304,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711K45N00TB",
@@ -2700,7 +2700,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 305,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711K59A12",
@@ -2715,7 +2715,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 306,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711K59A72",
@@ -2730,7 +2730,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 307,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711K84901",
@@ -2745,7 +2745,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 308,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711K93N02",
@@ -2760,7 +2760,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 309,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "42711KTM850",
@@ -2775,7 +2775,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 310,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "43125KPH903",
@@ -2790,7 +2790,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 311,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "43130KZL930",
@@ -2805,7 +2805,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 312,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "43151329001",
@@ -2820,7 +2820,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 313,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44711K59A12",
@@ -2835,7 +2835,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 314,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44711K59A72",
@@ -2850,7 +2850,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 315,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44711K84901",
@@ -2865,7 +2865,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 316,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44711K93N02",
@@ -2880,7 +2880,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 317,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44711K97N02",
@@ -2895,7 +2895,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 318,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44711KTM850",
@@ -2910,7 +2910,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 319,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44800K25900",
@@ -2925,7 +2925,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 320,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "44830KVY721",
@@ -2940,7 +2940,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 321,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "45120001011",
@@ -2955,7 +2955,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 322,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "45351K81N31",
@@ -2970,7 +2970,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 323,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "45530K59A71",
@@ -2985,7 +2985,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 324,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "45530KET920",
@@ -3000,7 +3000,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 325,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "45530KVY911",
@@ -3015,7 +3015,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 326,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "50500K0JN00",
@@ -3030,7 +3030,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 327,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "50503K0JN00",
@@ -3045,7 +3045,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 328,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "50503K97N00",
@@ -3060,7 +3060,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 329,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "5050AK25900",
@@ -3075,7 +3075,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 330,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "50610KEV880",
@@ -3090,7 +3090,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 331,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "51410K93N02",
@@ -3105,7 +3105,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 332,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "51410KVB901",
@@ -3120,7 +3120,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 333,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "51410KZLA01",
@@ -3135,7 +3135,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 334,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "51490KGH902",
@@ -3150,7 +3150,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 335,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "52400K25901",
@@ -3165,7 +3165,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 336,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "52400K93N02",
@@ -3180,7 +3180,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 337,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "5240AKEV882",
@@ -3195,7 +3195,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 338,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "5240AKTM850ZB",
@@ -3210,7 +3210,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 339,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53175K81N31",
@@ -3225,7 +3225,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 340,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53175K81N51",
@@ -3240,7 +3240,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 341,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53175KVB930",
@@ -3255,7 +3255,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 342,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53178K0JN00",
@@ -3270,7 +3270,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 343,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53178K25910",
@@ -3285,7 +3285,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 344,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53178K81N30",
@@ -3300,7 +3300,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 345,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53178KEH601",
@@ -3315,7 +3315,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 346,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53178KVB930",
@@ -3330,7 +3330,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 347,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53178KYT900",
@@ -3345,7 +3345,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 348,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "53199KVG910",
@@ -3360,7 +3360,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 349,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "61100K0JN00MGB",
@@ -3375,7 +3375,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 350,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "61100K1AN00FMB",
@@ -3390,7 +3390,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 351,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "61100K25900ZG",
@@ -3405,7 +3405,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 352,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "61100K2FN00ZK",
@@ -3420,7 +3420,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 353,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "61100K93N00ZP",
@@ -3435,7 +3435,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 354,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64223K2FN00",
@@ -3450,7 +3450,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 355,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64301K0JN00MGB",
@@ -3465,7 +3465,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 356,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64301K2FN00ZK",
@@ -3480,7 +3480,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 357,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64301K93N00ZN",
@@ -3495,7 +3495,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 358,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64308K2SN00ZA",
@@ -3510,7 +3510,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 359,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64310K2SN00ZA",
@@ -3525,7 +3525,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 360,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64310K93N00ZB",
@@ -3540,7 +3540,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 361,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64310K93N00ZC",
@@ -3555,7 +3555,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 362,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64340K59A70ZB",
@@ -3570,7 +3570,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 363,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "64340K93N00ZB",
@@ -3585,7 +3585,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 364,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "80105K2FN00",
@@ -3600,7 +3600,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 365,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "80105K93N00",
@@ -3615,7 +3615,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 366,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "8010CK81N00",
@@ -3630,7 +3630,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 367,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "81110H02BLA",
@@ -3645,7 +3645,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 368,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "81141K0JN00ZC",
@@ -3660,7 +3660,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 369,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "81141K2FN80ZD",
@@ -3675,7 +3675,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 370,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "81141K2SN00ZA",
@@ -3690,7 +3690,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 371,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "81141K93N00ZY",
@@ -3705,7 +3705,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 372,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "88110KZR600",
@@ -3720,7 +3720,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 373,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "88120KTM780FMB",
@@ -3735,7 +3735,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 374,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "88211K93N00ZF",
@@ -3750,7 +3750,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 375,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91002KYE901",
@@ -3765,7 +3765,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 376,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91002KZR602",
@@ -3780,7 +3780,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 377,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91009KVY961",
@@ -3795,7 +3795,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 378,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91109KVY901",
@@ -3810,7 +3810,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 379,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91201GCC771",
@@ -3825,7 +3825,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 380,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91202K0JN01",
@@ -3840,7 +3840,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 381,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91202KJ9003",
@@ -3855,7 +3855,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 382,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91202KVB901",
@@ -3870,7 +3870,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 383,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91202KWN901",
@@ -3885,7 +3885,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 384,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "91372KPH900",
@@ -3900,7 +3900,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 385,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "9501161000",
@@ -3915,7 +3915,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 386,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "9805657713",
@@ -3930,7 +3930,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 387,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "9805657723",
@@ -3945,7 +3945,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 388,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "9806786881",
@@ -3960,7 +3960,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 389,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "ACG10GR",
@@ -3975,7 +3975,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 390,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "AHB6201RS",
@@ -3990,7 +3990,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 391,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "AMICCIC250",
@@ -4005,7 +4005,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 392,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "AMICENF35",
@@ -4020,7 +4020,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 393,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "AMICENF50",
@@ -4035,7 +4035,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 394,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "HB6201RS",
@@ -4050,7 +4050,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 395,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "HBF50ML",
@@ -4065,7 +4065,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 396,
+                
                 "kode_dealer" => "00762",
                 "customer_master_sap" => "5200020006",
                 "no_part" => "SS8175ML",
@@ -4080,7 +4080,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 1,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06141KRS505",
@@ -4095,7 +4095,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 2,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06401K45NA0",
@@ -4110,7 +4110,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 3,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06401KYZ900",
@@ -4125,7 +4125,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 4,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06430K44V80",
@@ -4140,7 +4140,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 5,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06435K56N01",
@@ -4155,7 +4155,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 6,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06435K97N01",
@@ -4170,7 +4170,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 7,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06435KSPB01",
@@ -4185,7 +4185,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 8,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455K59A71",
@@ -4200,7 +4200,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 9,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455K84902",
@@ -4215,7 +4215,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 10,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KPPN02",
@@ -4230,7 +4230,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 11,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KREK02",
@@ -4245,7 +4245,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 12,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KVBT01",
@@ -4260,7 +4260,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 13,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KWB601",
@@ -4275,7 +4275,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 14,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06535GN5505",
@@ -4290,7 +4290,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 15,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK0LN9",
@@ -4305,7 +4305,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 16,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK1LN9",
@@ -4320,7 +4320,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 17,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK1LZ0",
@@ -4335,7 +4335,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 18,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK8LN9",
@@ -4350,7 +4350,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 19,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MBK2LN9",
@@ -4365,7 +4365,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 20,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MBK6LN9",
@@ -4380,7 +4380,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 21,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082342MBK0LZ0",
@@ -4395,7 +4395,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 22,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082342MBK0LZ9",
@@ -4410,7 +4410,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 23,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K0LN9",
@@ -4425,7 +4425,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 24,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K1LN9",
@@ -4440,7 +4440,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 25,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K8LN9",
@@ -4455,7 +4455,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 26,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K8LZ0",
@@ -4470,7 +4470,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 27,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08CLAH50500A",
@@ -4485,7 +4485,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 28,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "11203KVB901",
@@ -4500,7 +4500,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 29,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "11340K25600",
@@ -4515,7 +4515,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 30,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12191KWB920",
@@ -4530,7 +4530,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 31,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12209GB4682",
@@ -4545,7 +4545,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 32,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12391K25601",
@@ -4560,7 +4560,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 33,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12391KZR600",
@@ -4575,7 +4575,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 34,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "131A1KWB920",
@@ -4590,7 +4590,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 35,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16400K25601",
@@ -4605,7 +4605,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 36,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16450K25901",
@@ -4620,7 +4620,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 37,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16700K16305",
@@ -4635,7 +4635,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 38,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16700K81N01",
@@ -4650,7 +4650,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 39,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16700KZRC01",
@@ -4665,7 +4665,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 40,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K0JN00",
@@ -4680,7 +4680,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 41,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K16900",
@@ -4695,7 +4695,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 42,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K1AN00",
@@ -4710,7 +4710,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 43,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K1ZN20",
@@ -4725,7 +4725,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 44,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K56N00",
@@ -4740,7 +4740,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 45,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210KZLA00",
@@ -4755,7 +4755,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 46,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17220KZR600",
@@ -4770,7 +4770,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 47,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17572GGLJ00",
@@ -4785,7 +4785,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 48,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22011K81N00",
@@ -4800,7 +4800,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 49,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22100K25900",
@@ -4815,7 +4815,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 50,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22100KWN900",
@@ -4830,7 +4830,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 51,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22102K0JN00",
@@ -4845,7 +4845,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 52,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22102K44V00",
@@ -4860,7 +4860,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 53,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22105K0JN00",
@@ -4875,7 +4875,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 54,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K0JN00",
@@ -4890,7 +4890,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 55,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K2SN00",
@@ -4905,7 +4905,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 56,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K36A00",
@@ -4920,7 +4920,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 57,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K44V00",
@@ -4935,7 +4935,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 58,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22535K16A40",
@@ -4950,7 +4950,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 59,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22535KWN901",
@@ -4965,7 +4965,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 60,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22870KEH600",
@@ -4980,7 +4980,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 61,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K0JBA0",
@@ -4995,7 +4995,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 62,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K1ZN21",
@@ -5010,7 +5010,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 63,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K2SN01",
@@ -5025,7 +5025,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 64,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K36BA0",
@@ -5040,7 +5040,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 65,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K44BA0",
@@ -5055,7 +5055,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 66,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K97BA0",
@@ -5070,7 +5070,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 67,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100KVYBA1",
@@ -5085,7 +5085,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 68,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "30510K16A41",
@@ -5100,7 +5100,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 69,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "30700KPH881",
@@ -5115,7 +5115,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 70,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31220K59A11",
@@ -5130,7 +5130,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 71,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31500KPH881",
@@ -5145,7 +5145,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 72,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31500KWWA01",
@@ -5160,7 +5160,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 73,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31500KZR602",
@@ -5175,7 +5175,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 74,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31600KVBN51",
@@ -5190,7 +5190,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 75,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31916KRM841",
@@ -5205,7 +5205,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 76,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31917K0RV01",
@@ -5220,7 +5220,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 77,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31918K97T01",
@@ -5235,7 +5235,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 78,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31919K25601",
@@ -5250,7 +5250,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 79,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31919K25602",
@@ -5265,7 +5265,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 80,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "33130KEV950",
@@ -5280,7 +5280,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 81,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34901KFVB51",
@@ -5295,7 +5295,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 82,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34901KPH881",
@@ -5310,7 +5310,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 83,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34906GB6921",
@@ -5325,7 +5325,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 84,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34908GA7701",
@@ -5340,7 +5340,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 85,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "42711K59A12",
@@ -5355,7 +5355,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 86,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "42711K93N02",
@@ -5370,7 +5370,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 87,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "42711KWW010",
@@ -5385,7 +5385,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 88,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "43130KZL930",
@@ -5400,7 +5400,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 89,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "43450KVY900",
@@ -5415,7 +5415,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 90,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44711K59A12",
@@ -5430,7 +5430,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 91,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44711K59A72",
@@ -5445,7 +5445,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 92,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44711KTM850",
@@ -5460,7 +5460,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 93,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44830KVY721",
@@ -5475,7 +5475,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 94,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "45530KET920",
@@ -5490,7 +5490,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 95,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "45530KVY911",
@@ -5505,7 +5505,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 96,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "51490GN5305",
@@ -5520,7 +5520,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 97,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K16A01",
@@ -5535,7 +5535,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 98,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K59A11",
@@ -5550,7 +5550,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 99,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K81N01",
@@ -5565,7 +5565,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 100,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K93N02",
@@ -5580,7 +5580,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 101,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53175K81N31",
@@ -5595,7 +5595,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 102,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53178K81N30",
@@ -5610,7 +5610,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 103,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53205K2FN00MGB",
@@ -5625,7 +5625,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 104,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53206K2FN00ZK",
@@ -5640,7 +5640,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 105,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "80105K2FN00",
@@ -5655,7 +5655,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 106,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "80151K2FN00ZL",
@@ -5670,7 +5670,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 107,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "81134K2FN00ZK",
@@ -5685,7 +5685,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 108,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "81141K2FN00ZN",
@@ -5700,7 +5700,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 109,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "83500K93N00ZL",
@@ -5715,7 +5715,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 110,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "83600K93N00ZL",
@@ -5730,7 +5730,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 111,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91005KVBN50",
@@ -5745,7 +5745,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 112,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91202K0JN01",
@@ -5760,7 +5760,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 113,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91202KVB901",
@@ -5775,7 +5775,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 114,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91255KVB902",
@@ -5790,7 +5790,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 115,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "9410912000",
@@ -5805,7 +5805,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 116,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "9806786871",
@@ -5820,7 +5820,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 117,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "9806786881",
@@ -5835,7 +5835,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 118,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "ACG10GR",
@@ -5850,7 +5850,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 119,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "AHB6201RS",
@@ -5865,7 +5865,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 120,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "AMICCIC250",
@@ -5880,7 +5880,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 121,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "AMICENF35",
@@ -5895,7 +5895,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 122,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "HB6301RS",
@@ -5910,7 +5910,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 123,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "HBF50ML",
@@ -5925,7 +5925,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 124,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "SS8175ML",
@@ -5940,7 +5940,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 125,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "TBC500ML",
@@ -5955,7 +5955,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:29:12",
             ],
             [
-                "id" => 397,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06141KRS505",
@@ -5970,7 +5970,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 398,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06401K45NA0",
@@ -5985,7 +5985,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 399,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06401KYZ900",
@@ -6000,7 +6000,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 400,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06430K44V80",
@@ -6015,7 +6015,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 401,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06435K56N01",
@@ -6030,7 +6030,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 402,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06435K97N01",
@@ -6045,7 +6045,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 403,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06435KSPB01",
@@ -6060,7 +6060,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 404,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455K59A71",
@@ -6075,7 +6075,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 405,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455K84902",
@@ -6090,7 +6090,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 406,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KPPN02",
@@ -6105,7 +6105,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 407,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KREK02",
@@ -6120,7 +6120,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 408,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KVBT01",
@@ -6135,7 +6135,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 409,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06455KWB601",
@@ -6150,7 +6150,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 410,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "06535GN5505",
@@ -6165,7 +6165,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 411,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK0LN9",
@@ -6180,7 +6180,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 412,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK1LN9",
@@ -6195,7 +6195,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 413,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK1LZ0",
@@ -6210,7 +6210,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 414,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MAK8LN9",
@@ -6225,7 +6225,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 415,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MBK2LN9",
@@ -6240,7 +6240,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 416,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082322MBK6LN9",
@@ -6255,7 +6255,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 417,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082342MBK0LZ0",
@@ -6270,7 +6270,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 418,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "082342MBK0LZ9",
@@ -6285,7 +6285,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 419,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K0LN9",
@@ -6300,7 +6300,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 420,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K1LN9",
@@ -6315,7 +6315,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 421,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K8LN9",
@@ -6330,7 +6330,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 422,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08234M99K8LZ0",
@@ -6345,7 +6345,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 423,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "08CLAH50500A",
@@ -6360,7 +6360,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 424,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "11203KVB901",
@@ -6375,7 +6375,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 425,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "11340K25600",
@@ -6390,7 +6390,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 426,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12191KWB920",
@@ -6405,7 +6405,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 427,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12209GB4682",
@@ -6420,7 +6420,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 428,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12391K25601",
@@ -6435,7 +6435,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 429,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "12391KZR600",
@@ -6450,7 +6450,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 430,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "131A1KWB920",
@@ -6465,7 +6465,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 431,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16400K25601",
@@ -6480,7 +6480,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 432,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16450K25901",
@@ -6495,7 +6495,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 433,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16700K16305",
@@ -6510,7 +6510,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 434,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16700K81N01",
@@ -6525,7 +6525,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 435,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "16700KZRC01",
@@ -6540,7 +6540,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 436,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K0JN00",
@@ -6555,7 +6555,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 437,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K16900",
@@ -6570,7 +6570,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 438,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K1AN00",
@@ -6585,7 +6585,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 439,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K1ZN20",
@@ -6600,7 +6600,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 440,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210K56N00",
@@ -6615,7 +6615,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 441,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17210KZLA00",
@@ -6630,7 +6630,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 442,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17220KZR600",
@@ -6645,7 +6645,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 443,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "17572GGLJ00",
@@ -6660,7 +6660,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 444,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22011K81N00",
@@ -6675,7 +6675,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 445,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22100K25900",
@@ -6690,7 +6690,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 446,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22100KWN900",
@@ -6705,7 +6705,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 447,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22102K0JN00",
@@ -6720,7 +6720,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 448,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22102K44V00",
@@ -6735,7 +6735,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 449,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22105K0JN00",
@@ -6750,7 +6750,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 450,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K0JN00",
@@ -6765,7 +6765,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 451,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K2SN00",
@@ -6780,7 +6780,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 452,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K36A00",
@@ -6795,7 +6795,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 453,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22110K44V00",
@@ -6810,7 +6810,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 454,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22535K16A40",
@@ -6825,7 +6825,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 455,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22535KWN901",
@@ -6840,7 +6840,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 456,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "22870KEH600",
@@ -6855,7 +6855,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 457,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K0JBA0",
@@ -6870,7 +6870,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 458,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K1ZN21",
@@ -6885,7 +6885,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 459,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K2SN01",
@@ -6900,7 +6900,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 460,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K36BA0",
@@ -6915,7 +6915,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 461,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K44BA0",
@@ -6930,7 +6930,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 462,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100K97BA0",
@@ -6945,7 +6945,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 463,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "23100KVYBA1",
@@ -6960,7 +6960,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 464,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "30510K16A41",
@@ -6975,7 +6975,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 465,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "30700KPH881",
@@ -6990,7 +6990,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 466,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31220K59A11",
@@ -7005,7 +7005,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 467,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31500KPH881",
@@ -7020,7 +7020,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 468,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31500KWWA01",
@@ -7035,7 +7035,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 469,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31500KZR602",
@@ -7050,7 +7050,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 470,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31600KVBN51",
@@ -7065,7 +7065,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 471,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31916KRM841",
@@ -7080,7 +7080,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 472,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31917K0RV01",
@@ -7095,7 +7095,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 473,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31918K97T01",
@@ -7110,7 +7110,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 474,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31919K25601",
@@ -7125,7 +7125,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 475,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "31919K25602",
@@ -7140,7 +7140,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 476,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "33130KEV950",
@@ -7155,7 +7155,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 477,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34901KFVB51",
@@ -7170,7 +7170,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 478,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34901KPH881",
@@ -7185,7 +7185,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 479,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34906GB6921",
@@ -7200,7 +7200,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 480,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "34908GA7701",
@@ -7215,7 +7215,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 481,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "42711K59A12",
@@ -7230,7 +7230,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 482,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "42711K93N02",
@@ -7245,7 +7245,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 483,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "42711KWW010",
@@ -7260,7 +7260,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 484,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "43130KZL930",
@@ -7275,7 +7275,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 485,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "43450KVY900",
@@ -7290,7 +7290,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 486,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44711K59A12",
@@ -7305,7 +7305,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 487,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44711K59A72",
@@ -7320,7 +7320,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 488,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44711KTM850",
@@ -7335,7 +7335,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 489,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "44830KVY721",
@@ -7350,7 +7350,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 490,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "45530KET920",
@@ -7365,7 +7365,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 491,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "45530KVY911",
@@ -7380,7 +7380,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 492,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "51490GN5305",
@@ -7395,7 +7395,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 493,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K16A01",
@@ -7410,7 +7410,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 494,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K59A11",
@@ -7425,7 +7425,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 495,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K81N01",
@@ -7440,7 +7440,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 496,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "52400K93N02",
@@ -7455,7 +7455,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 497,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53175K81N31",
@@ -7470,7 +7470,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 498,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53178K81N30",
@@ -7485,7 +7485,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 499,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53205K2FN00MGB",
@@ -7500,7 +7500,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 500,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "53206K2FN00ZK",
@@ -7515,7 +7515,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 501,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "80105K2FN00",
@@ -7530,7 +7530,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 502,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "80151K2FN00ZL",
@@ -7545,7 +7545,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 503,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "81134K2FN00ZK",
@@ -7560,7 +7560,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 504,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "81141K2FN00ZN",
@@ -7575,7 +7575,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 505,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "83500K93N00ZL",
@@ -7590,7 +7590,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 506,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "83600K93N00ZL",
@@ -7605,7 +7605,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 507,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91005KVBN50",
@@ -7620,7 +7620,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 508,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91202K0JN01",
@@ -7635,7 +7635,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 509,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91202KVB901",
@@ -7650,7 +7650,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 510,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "91255KVB902",
@@ -7665,7 +7665,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 511,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "9410912000",
@@ -7680,7 +7680,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 512,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "9806786871",
@@ -7695,7 +7695,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 513,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "9806786881",
@@ -7710,7 +7710,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 514,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "ACG10GR",
@@ -7725,7 +7725,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 515,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "AHB6201RS",
@@ -7740,7 +7740,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 516,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "AMICCIC250",
@@ -7755,7 +7755,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 517,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "AMICENF35",
@@ -7770,7 +7770,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 518,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "HB6301RS",
@@ -7785,7 +7785,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 519,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "HBF50ML",
@@ -7800,7 +7800,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 520,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "SS8175ML",
@@ -7815,7 +7815,7 @@ class SalesSeeder extends Seeder
                 "deleted_at" => null,
             ],
             [
-                "id" => 521,
+                
                 "kode_dealer" => "00576",
                 "customer_master_sap" => "5200022542",
                 "no_part" => "TBC500ML",

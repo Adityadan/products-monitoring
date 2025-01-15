@@ -16,7 +16,6 @@ class SummaryRodSeeder extends Seeder
 
         $data = [
             [
-                "id" => 106,
                 "kode_customer" => "2100005036",
                 "customer_name" => "PT TUNAS DWIPA MATRA",
                 "total_amount_part" => 32685746,
@@ -28,7 +27,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 107,
                 "kode_customer" => "2100005037",
                 "customer_name" => "PT TUNAS DWIPA MATRA",
                 "total_amount_part" => 26321405,
@@ -40,7 +38,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 108,
                 "kode_customer" => "5200009964",
                 "customer_name" => "CV DAYA MAKMUR MANDIRI",
                 "total_amount_part" => 17990400,
@@ -52,7 +49,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 109,
                 "kode_customer" => "5200009972",
                 "customer_name" => "PT DAYA ANUGRAH MANDIRI",
                 "total_amount_part" => 10695774,
@@ -64,7 +60,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 110,
                 "kode_customer" => "5200009973",
                 "customer_name" => "PT DAYA ANUGRAH MANDIRI",
                 "total_amount_part" => 5096400,
@@ -76,7 +71,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 111,
                 "kode_customer" => "5200009974",
                 "customer_name" => "PT NUSANTARA SURYA SAKTI",
                 "total_amount_part" => 3840942,
@@ -88,7 +82,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 112,
                 "kode_customer" => "5200010034",
                 "customer_name" => "ROMAN MOTOR",
                 "total_amount_part" => 27371897,
@@ -100,7 +93,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 113,
                 "kode_customer" => "5200010450",
                 "customer_name" => "Wirawan Motor",
                 "total_amount_part" => 34339020,
@@ -112,7 +104,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 114,
                 "kode_customer" => "5200017940",
                 "customer_name" => "RIZKI MOTOR / TUTUT SRI SUSWATI",
                 "total_amount_part" => 41874972,
@@ -124,7 +115,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 115,
                 "kode_customer" => "5200019476",
                 "customer_name" => "CV DELAPAN JAYA",
                 "total_amount_part" => 0,
@@ -136,7 +126,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 116,
                 "kode_customer" => "5200019477",
                 "customer_name" => "PT MOTOR MEGA TANO",
                 "total_amount_part" => 24204066,
@@ -148,7 +137,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 117,
                 "kode_customer" => "5200019480",
                 "customer_name" => "CV SUMBER JAYA ABADI",
                 "total_amount_part" => 52660260,
@@ -160,7 +148,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 118,
                 "kode_customer" => "5200019573",
                 "customer_name" => "INDRA MOTOR / HENDRY PRANATA",
                 "total_amount_part" => 81940416,
@@ -172,7 +159,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 119,
                 "kode_customer" => "5200020001",
                 "customer_name" => "PT NUSANTARA SURYA SAKTI",
                 "total_amount_part" => 4323330,
@@ -184,7 +170,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 120,
                 "kode_customer" => "5200020006",
                 "customer_name" => "UD AHASS CITRA JAYA MOTOR /COKRO UN",
                 "total_amount_part" => 80160570,
@@ -196,7 +181,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 121,
                 "kode_customer" => "5200022411",
                 "customer_name" => "RIZKI KILO / TUTUT SRI SUSWATI",
                 "total_amount_part" => 46461614,
@@ -208,7 +192,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 122,
                 "kode_customer" => "5200022541",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 96876805,
@@ -220,7 +203,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 123,
                 "kode_customer" => "5200022542",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 36543710,
@@ -232,7 +214,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 124,
                 "kode_customer" => "5200022543",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 23165400,
@@ -244,7 +225,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 125,
                 "kode_customer" => "5200022714",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 36307490,
@@ -256,7 +236,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 126,
                 "kode_customer" => "5200022726",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR / HARRY SUD",
                 "total_amount_part" => 21442460,
@@ -268,7 +247,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 127,
                 "kode_customer" => "5200023920",
                 "customer_name" => "ELVIA JAYA / DEASY TUNGERAPAN",
                 "total_amount_part" => 9061520,
@@ -280,7 +258,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 128,
                 "kode_customer" => "IC00000004",
                 "customer_name" => "INTERNAL MEMO - ADVERTISING & PROMO",
                 "total_amount_part" => 0,
@@ -292,7 +269,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 129,
                 "kode_customer" => "IC00000011",
                 "customer_name" => "INTERNAL MEMO - Campaign Free Gift",
                 "total_amount_part" => 23680740,
@@ -304,7 +280,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 130,
                 "kode_customer" => "IC00000013",
                 "customer_name" => "INTERNAL MEMO - FREE GIFT",
                 "total_amount_part" => 0,
@@ -316,7 +291,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => "2025/1/13 08:14:34"
             ],
             [
-                "id" => 131,
                 "kode_customer" => "2100005036",
                 "customer_name" => "PT TUNAS DWIPA MATRA",
                 "total_amount_part" => 32685746,
@@ -328,7 +302,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 132,
                 "kode_customer" => "2100005037",
                 "customer_name" => "PT TUNAS DWIPA MATRA",
                 "total_amount_part" => 26321405,
@@ -340,7 +313,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 133,
                 "kode_customer" => "5200009964",
                 "customer_name" => "CV DAYA MAKMUR MANDIRI",
                 "total_amount_part" => 17990400,
@@ -352,7 +324,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 134,
                 "kode_customer" => "5200009972",
                 "customer_name" => "PT DAYA ANUGRAH MANDIRI",
                 "total_amount_part" => 10695774,
@@ -364,7 +335,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 135,
                 "kode_customer" => "5200009973",
                 "customer_name" => "PT DAYA ANUGRAH MANDIRI",
                 "total_amount_part" => 5096400,
@@ -376,7 +346,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 136,
                 "kode_customer" => "5200009974",
                 "customer_name" => "PT NUSANTARA SURYA SAKTI",
                 "total_amount_part" => 3840942,
@@ -388,7 +357,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 137,
                 "kode_customer" => "5200010034",
                 "customer_name" => "ROMAN MOTOR",
                 "total_amount_part" => 27371897,
@@ -400,7 +368,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 138,
                 "kode_customer" => "5200010450",
                 "customer_name" => "Wirawan Motor",
                 "total_amount_part" => 34339020,
@@ -412,7 +379,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 139,
                 "kode_customer" => "5200017940",
                 "customer_name" => "RIZKI MOTOR / TUTUT SRI SUSWATI",
                 "total_amount_part" => 41874972,
@@ -424,7 +390,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 140,
                 "kode_customer" => "5200019476",
                 "customer_name" => "CV DELAPAN JAYA",
                 "total_amount_part" => 0,
@@ -436,7 +401,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 141,
                 "kode_customer" => "5200019477",
                 "customer_name" => "PT MOTOR MEGA TANO",
                 "total_amount_part" => 24204066,
@@ -448,7 +412,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 142,
                 "kode_customer" => "5200019480",
                 "customer_name" => "CV SUMBER JAYA ABADI",
                 "total_amount_part" => 52660260,
@@ -460,7 +423,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 143,
                 "kode_customer" => "5200019573",
                 "customer_name" => "INDRA MOTOR / HENDRY PRANATA",
                 "total_amount_part" => 81940416,
@@ -472,7 +434,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 144,
                 "kode_customer" => "5200020001",
                 "customer_name" => "PT NUSANTARA SURYA SAKTI",
                 "total_amount_part" => 4323330,
@@ -484,7 +445,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 145,
                 "kode_customer" => "5200020006",
                 "customer_name" => "UD AHASS CITRA JAYA MOTOR /COKRO UN",
                 "total_amount_part" => 80160570,
@@ -496,7 +456,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 146,
                 "kode_customer" => "5200022411",
                 "customer_name" => "RIZKI KILO / TUTUT SRI SUSWATI",
                 "total_amount_part" => 46461614,
@@ -508,7 +467,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 147,
                 "kode_customer" => "5200022541",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 96876805,
@@ -520,7 +478,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 148,
                 "kode_customer" => "5200022542",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 36543710,
@@ -532,7 +489,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 149,
                 "kode_customer" => "5200022543",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 23165400,
@@ -544,7 +500,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 150,
                 "kode_customer" => "5200022714",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR",
                 "total_amount_part" => 36307490,
@@ -556,7 +511,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 151,
                 "kode_customer" => "5200022726",
                 "customer_name" => "PT HARAPAN UTAMA MAKMUR / HARRY SUD",
                 "total_amount_part" => 21442460,
@@ -568,7 +522,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 152,
                 "kode_customer" => "5200023920",
                 "customer_name" => "ELVIA JAYA / DEASY TUNGERAPAN",
                 "total_amount_part" => 9061520,
@@ -580,7 +533,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 153,
                 "kode_customer" => "H701",
                 "customer_name" => "SO MT HARYONO",
                 "total_amount_part" => 72834863,
@@ -592,7 +544,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 154,
                 "kode_customer" => "H702",
                 "customer_name" => "SO GROGOT",
                 "total_amount_part" => 67119325,
@@ -604,7 +555,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 155,
                 "kode_customer" => "H703",
                 "customer_name" => "SO SUDIRMAN",
                 "total_amount_part" => 15580105,
@@ -616,7 +566,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 156,
                 "kode_customer" => "H704",
                 "customer_name" => "SO PENAJAM",
                 "total_amount_part" => 12608150,
@@ -628,7 +577,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 157,
                 "kode_customer" => "H705",
                 "customer_name" => "SO KILO",
                 "total_amount_part" => 35645054,
@@ -640,7 +588,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 158,
                 "kode_customer" => "H706",
                 "customer_name" => "SO SEPINGGAN",
                 "total_amount_part" => 18829810,
@@ -652,7 +599,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 159,
                 "kode_customer" => "H707",
                 "customer_name" => "SO SIMPANG PAIT",
                 "total_amount_part" => 23508479,
@@ -664,7 +610,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 160,
                 "kode_customer" => "H712",
                 "customer_name" => "SO TARAKAN",
                 "total_amount_part" => 69326217,
@@ -676,7 +621,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 161,
                 "kode_customer" => "H713",
                 "customer_name" => "SO BERAU",
                 "total_amount_part" => 31996310,
@@ -688,7 +632,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 162,
                 "kode_customer" => "H715",
                 "customer_name" => "SO TANJUNG SELOR",
                 "total_amount_part" => 117556310,
@@ -700,7 +643,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 163,
                 "kode_customer" => "IC00000004",
                 "customer_name" => "INTERNAL MEMO - ADVERTISING & PROMO",
                 "total_amount_part" => 0,
@@ -712,7 +654,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 164,
                 "kode_customer" => "IC00000011",
                 "customer_name" => "INTERNAL MEMO - Campaign Free Gift",
                 "total_amount_part" => 23680740,
@@ -724,7 +665,6 @@ class SummaryRodSeeder extends Seeder
                 "deleted_at" => null
             ],
             [
-                "id" => 165,
                 "kode_customer" => "IC00000013",
                 "customer_name" => "INTERNAL MEMO - FREE GIFT",
                 "total_amount_part" => 0,

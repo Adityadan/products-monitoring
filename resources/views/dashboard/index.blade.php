@@ -10,8 +10,7 @@
                                 <div class="position-relative z-2">
                                     <div>
                                         <h3 class="text-primary mb-1">Good
-                                            {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : (date('H') < 21 ? 'Evening' : 'Night')) }},
-                                            User <b>{{ Auth::user()->name }}</b>!</h3>
+                                            {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : (date('H') < 21 ? 'Evening' : 'Night')) }}, <b>{{ App\Models\Dealer::select('ahass')->where('kode', auth()->user()->kode_dealer)->first()->ahass  }}</b>!</h3>
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +173,7 @@
 
                             // Proses data untuk chart
                             const chartData = [{
-                                    name: 'Pendapatan App',
+                                    name: 'Supply App',
                                     data: response.map(item => ({
                                         x: item.customer_name,
                                         y: item.pendapatan.app || 0,
@@ -187,7 +186,7 @@
                                     color: '#54a0ff' // Warna untuk pendapatan App
                                 },
                                 {
-                                    name: 'Pendapatan Part',
+                                    name: 'Supply Part',
                                     data: response.map(item => ({
                                         x: item.customer_name,
                                         y: item.pendapatan.part || 0,
@@ -200,7 +199,7 @@
                                     color: '#1dd1a1' // Warna untuk pendapatan Part
                                 },
                                 {
-                                    name: 'Pendapatan Oil',
+                                    name: 'Supply Oil',
                                     data: response.map(item => ({
                                         x: item.customer_name,
                                         y: item.pendapatan.oli || 0,
