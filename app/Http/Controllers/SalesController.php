@@ -109,9 +109,9 @@ class SalesController extends Controller
         if ($request->looping == 1) {
             $this->handleFileAndLog($request, $kodeDealer, $timestamp, $fileName);
             if ($user->hasRole('main_dealer')) {
-                Sales::where('kode_dealer', $kodeDealer)->delete();
+                Sales::where('kode_dealer', $kodeDealer)->where('periode', $periode)->delete();
             }
-            Sales::where('kode_dealer',  $dealerCode)->delete();
+            Sales::where('kode_dealer',  $dealerCode)->where('periode', $periode)->delete();
         }
         // Persiapan data untuk batch insert
         $listCreate = [];

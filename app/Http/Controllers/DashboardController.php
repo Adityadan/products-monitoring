@@ -104,14 +104,18 @@ class DashboardController extends Controller
     public function chartSales()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $now = Carbon::now();
 
         $query = Sales::select('periode', DB::raw('SUM(qty) as total_quantity'))
             ->whereNull('deleted_at')
-            ->where('periode', '>=', $sixMonthsAgo)
-            ->groupBy('periode');
+            ->whereBetween('periode', [$sixMonthsAgo, $now])
+            ->groupBy('periode')
+            ->orderBy('periode');
+
         if (!auth()->user()->hasRole('main_dealer')) {
             $query->where('kode_dealer', auth()->user()->kode_dealer);
         }
+
         $data = $query->get()->toArray();
         return response()->json($data);
     }
