@@ -20,6 +20,15 @@
     </div>
 
     <div class="card">
+        <div class="card-header">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading fw-semi-bold">Informasi Penting!</h4>
+                <p>Data penjualan dihasilkan dari pemrosesan data produk, dealer, dan penjualan yang telah diinput ke dalam sistem.</p>
+                <hr />
+                <p class="mb-0">Pastikan data yang Anda input sudah benar dan lengkap.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
         <div class="card-body">
             <div class="table table-responsive">
                 <table class="table table-bordered font-sans-serif text" id="sales-table">

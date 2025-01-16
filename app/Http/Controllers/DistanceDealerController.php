@@ -63,7 +63,7 @@ class DistanceDealerController extends Controller
         $areas = $request->dealer_areas;
         $dealer_id = Auth::user()->id;
         $kode_dealer = Auth::user()->kode_dealer;
-        if (empty($kode_dealer)) {
+        if (empty($kode_dealer) && !$user->hasRole('superadmin')) {
             return response()->json(['status' => 'error','message' => 'Kode dealer tidak ditemukan, Silahkan Mengisi Kode Dealer Terlebih Dahulu']);
         }
         // Siapkan data untuk disimpan

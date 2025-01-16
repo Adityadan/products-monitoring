@@ -23,7 +23,7 @@ class MasterProductController extends Controller
         $user = auth()->user();
         $kode_dealer = $user->kode_dealer;
 
-        if (empty($kode_dealer)) {
+        if (empty($kode_dealer) && !$user->hasRole('superadmin')) {
             return response()->json([
                 'success' => false,
                 'message' => 'Kode dealer tidak ditemukan. Silahkan Mengisi Kode Dealer Anda.',

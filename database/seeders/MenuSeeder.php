@@ -65,7 +65,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "Import",
                 "route" => "dealer-product.index",
-                "parent_id" => 2,
+                "parent_id" => 1,
                 "icon" => null,
                 "color" => null,
                 "order" => 2,
@@ -77,7 +77,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "Master",
                 "route" => "master-product.index",
-                "parent_id" => 2,
+                "parent_id" => 1,
                 "icon" => null,
                 "color" => null,
                 "order" => 3,
@@ -101,7 +101,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "Awaiting Order",
                 "route" => "request-order.index",
-                "parent_id" => 8,
+                "parent_id" => 3,
                 "icon" => null,
                 "color" => null,
                 "order" => 2,
@@ -113,7 +113,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "Distance Sorting Dealer",
                 "route" => "distance-dealer.index",
-                "parent_id" => 7,
+                "parent_id" => 2,
                 "icon" => null,
                 "color" => null,
                 "order" => 1,
@@ -125,7 +125,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "List Dealer",
                 "route" => "dealer.index",
-                "parent_id" => 7,
+                "parent_id" => 2,
                 "icon" => null,
                 "color" => null,
                 "order" => 2,
@@ -137,7 +137,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "List Products",
                 "route" => "product.index",
-                "parent_id" => 2,
+                "parent_id" => 1,
                 "icon" => null,
                 "color" => null,
                 "order" => 1,
@@ -161,7 +161,7 @@ class MenuSeeder extends Seeder
             [
                 "name" => "List Order",
                 "route" => "order.index",
-                "parent_id" => 8,
+                "parent_id" => 3,
                 "icon" => null,
                 "color" => null,
                 "order" => 1,
@@ -243,6 +243,7 @@ class MenuSeeder extends Seeder
                 "updated_at" => "2025/1/16 19:17:29",
             ],
         ];
+
 
         DB::table('menus')->insert($data);
     }
