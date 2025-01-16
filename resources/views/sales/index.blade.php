@@ -157,35 +157,43 @@
                         },
                         {
                             data: 'month_1',
-                            name: 'month_1'
+                            name: 'month_1',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'month_2',
-                            name: 'month_2'
+                            name: 'month_2',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'month_3',
-                            name: 'month_3'
+                            name: 'month_3',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'month_4',
-                            name: 'month_4'
+                            name: 'month_4',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'month_5',
-                            name: 'month_5'
+                            name: 'month_5',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'month_6',
-                            name: 'month_6'
+                            name: 'month_6',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'average_sales',
-                            name: 'average_sales'
+                            name: 'average_sales',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                         {
                             data: 'stock',
-                            name: 'stock'
+                            name: 'stock',
+                            render: $.fn.dataTable.render.number(',', '.', 0)
                         },
                     ],
                     columnDefs: [{
