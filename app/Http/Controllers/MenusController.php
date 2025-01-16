@@ -18,7 +18,7 @@ class MenusController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $data = Menus::with('parent')->select(['id', 'name', 'route', 'parent_id', 'icon', 'is_active','order']);
+            $data = Menus::with('parent')->select(['id', 'name', 'route', 'parent_id', 'icon', 'is_active','order'])->orderBy('order', 'asc');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('parent_name', function ($row) {
