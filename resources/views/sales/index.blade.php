@@ -31,7 +31,7 @@
                             <th colspan="7" class="text-center">Sales</th>
                             <th rowspan="2">Stock</th>
                         </tr>
-                        <tr>
+                        <tr id="dynamic-months">
                             <th>Month 1</th>
                             <th>Month 2</th>
                             <th>Month 3</th>
@@ -64,7 +64,8 @@
                             @csrf
                             <div class="mb-3">
                                 <label class="col-form-label" for="file-input">Period</label>
-                                <input class="form-control monthpicker" id="periode" name="periode" value="{{ \Carbon\Carbon::now()->format('m-Y') }}" required />
+                                <input class="form-control monthpicker" id="periode" name="periode"
+                                    value="{{ \Carbon\Carbon::now()->format('m-Y') }}" required />
                             </div>
                             @if (auth()->user()->hasRole('main_dealer'))
                                 <div class="mb-3">
@@ -134,7 +135,7 @@
             };
 
             $(document).ready(function() {
-
+                dynamicMonth();
                 $('#sales-table').DataTable({
                     processing: true,
                     serverSide: true,
@@ -187,9 +188,10 @@
                             name: 'stock'
                         },
                     ],
-                    columnDefs: [
-                        {"targets": "_all", "className": "text-center"}
-                    ],
+                    columnDefs: [{
+                        "targets": "_all",
+                        "className": "text-center"
+                    }],
                 });
                 $("#file-input").on("change", function() {
                     let fileUpload = $(this).prop('files')[0];
@@ -382,6 +384,25 @@
                     console.error("Error during import:", err.message);
                     $("#div_loading").hide();
                 }
+            }
+
+            function dynamicMonth() {
+                const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                ];
+
+                let currentDate = new Date();
+                let dynamicMonths = '';
+
+                for (let i = 5; i >= 0; i--) {
+                    let date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
+                    let monthYear = monthNames[date.getMonth()] + ' ' + date.getFullYear();
+                    dynamicMonths += `<th>${monthYear}</th>`;
+                }
+
+                dynamicMonths += '<th>Average</th>';
+
+                $('#dynamic-months').html(dynamicMonths);
             }
         </script>
     @endpush
