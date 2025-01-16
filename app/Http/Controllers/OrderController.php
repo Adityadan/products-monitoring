@@ -28,11 +28,11 @@ class OrderController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $data = Order::query();
+            $query = Order::leftJoin('dealers as d', 'orders.buyer_dealer', '=', 'd.kode');
             if (!auth()->user()->hasRole('main_dealer')) {
-                $data->where('buyer_dealer', auth()->user()->kode_dealer);
+                $query->where('buyer_dealer', auth()->user()->kode_dealer);
             }
-            $data->get();
+            $data = $query->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($row) {

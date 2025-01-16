@@ -44,9 +44,11 @@ class RequestOrderController extends Controller
                 'shipping_order.id_order',
                 'shipping_order.id as id_shipping_order',
                 'shipping_order.no_resi',
-                'e.name as expedition', // Alias for clarity
+                'e.name as expedition',
+                'd.ahass as dealer',
             ])
-                ->leftJoin('expeditions as e', 'shipping_order.id_expedition', '=', 'e.id');
+                ->leftJoin('expeditions as e', 'shipping_order.id_expedition', '=', 'e.id')
+                ->leftJoin('dealers as d', 'shipping_order.kode_dealer', '=', 'd.kode');
 
             if (!$user->hasRole('main_dealer')) {
                 $data->where('shipping_order.kode_dealer', $kode_dealer);

@@ -62,8 +62,8 @@
                             searchable: false
                         },
                         {
-                            data: 'buyer_dealer',
-                            name: 'buyer_dealer'
+                            data: 'ahass',
+                            name: 'ahass'
                         },
                         {
                             data: 'buyer_name',

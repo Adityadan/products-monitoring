@@ -29,7 +29,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No.</th>
-                            <th scope="col">Dealer Code</th>
+                            <th scope="col">Dealer</th>
                             <th scope="col">Order ID</th>
                             <th scope="col">Receipt Number</th>
                             <th scope="col">Expedition</th>
@@ -63,8 +63,8 @@
                             searchable: false
                         },
                         {
-                            data: 'kode_dealer',
-                            name: 'kode_dealer'
+                            data: 'dealer',
+                            name: 'dealer'
                         },
                         {
                             data: 'id_order',
