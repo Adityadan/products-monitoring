@@ -18,7 +18,7 @@ class MenusController extends Controller
     {
         // Check if the request is an AJAX request
         if ($request->ajax()) {
-            $data = Menus::with('parent')->select(['id', 'name', 'route', 'parent_id', 'icon', 'is_active','order'])->orderBy('order', 'asc');
+            $data = Menus::with('parent')->select(['id', 'name', 'route', 'parent_id', 'icon', 'is_active', 'order'])->orderBy('order', 'asc');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('parent_name', function ($row) {
@@ -37,11 +37,70 @@ class MenusController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        try {
+            $menu = Menus::findOrFail($id);
+
+            $request->validate([
+                'order' => [
+                    'required',
+                    'integer',
+                    function ($attribute, $value, $fail) use ($request, $menu) {
+                        $parentId = $request->input('parent_id');
+                        $existing = Menus::where('order', $value)
+                            ->where('parent_id', $parentId)
+                            ->where('id', '!=', $menu->id)
+                            ->exists();
+
+                        if ($existing) {
+                            $fail("The $attribute value is already used for the same parent.");
+                        }
+                    },
+                ],
+            ]);
+
+            $menu->update($request->all());
+
+            return response()->json(['message' => 'Menu updated successfully']);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
     public function store(Request $request)
     {
-        Menus::create($request->all());
-        return response()->json(['message' => 'Menu created successfully']);
+        try {
+            $request->validate([
+                'order' => [
+                    'required',
+                    'integer',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $parentId = $request->input('parent_id');
+                        $existing = Menus::where('order', $value)
+                            ->where('parent_id', $parentId)
+                            ->exists();
+
+                        if ($existing) {
+                            $fail("The $attribute value is already used for the same parent.");
+                        }
+                    },
+                ],
+            ]);
+
+            Menus::create($request->all());
+
+            return response()->json(['message' => 'Menu created successfully']);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+
 
     public function edit($id)
     {
@@ -49,7 +108,7 @@ class MenusController extends Controller
 
         $menu = Menus::findOrFail($id);
         $permission = Permission::all();
-        return response()->json(['menu' => $menu, 'parent_menu'=>$parent_menu, 'permission' => $permission]);
+        return response()->json(['menu' => $menu, 'parent_menu' => $parent_menu, 'permission' => $permission]);
     }
 
     public function show($id)
@@ -58,12 +117,7 @@ class MenusController extends Controller
         return response()->json($menu);
     }
 
-    public function update(Request $request, $id)
-    {
-        $menu = Menus::findOrFail($id);
-        $menu->update($request->all());
-        return response()->json(['message' => 'Menu updated successfully']);
-    }
+
 
     public function destroy($id)
     {

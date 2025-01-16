@@ -42,8 +42,6 @@
     {{-- @include('menus.modals') --}}
     @includeIf('menus.modals')
     @push('scripts')
-
-
         <script>
             $(document).ready(function() {
                 var table = $('#menuTable').DataTable({
@@ -97,10 +95,11 @@
                         url: "{{ route('menus.parent-menu') }}",
                         data: "data",
                         dataType: "json",
-                        success: function (response) {
+                        success: function(response) {
                             let parent_menu = response.parent_menu;
                             console.log(parent_menu);
-                            let parent_menu_html = '<option value="" selected>Pilih Parent Menu</option>';
+                            let parent_menu_html =
+                                '<option value="" selected>Pilih Parent Menu</option>';
                             if (parent_menu.length) {
                                 parent_menu_html += parent_menu.map(valueOfElement =>
                                     `<option value="${valueOfElement.id}" >
@@ -110,7 +109,8 @@
                             }
 
                             let permission = response.permission;
-                            let permission_html = '<option value="" selected>Pilih Permission</option>';
+                            let permission_html =
+                                '<option value="" selected>Pilih Permission</option>';
                             if (permission.length) {
                                 permission_html += permission.map(valueOfElement =>
                                     `<option value="${valueOfElement.name}" >
@@ -151,6 +151,7 @@
                         },
                         success: function(data) {
                             // table.ajax.reload(); // Reload data table setelah operasi selesai
+
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Menu berhasil disimpan!',
@@ -163,10 +164,18 @@
                             });
                         },
                         error: function(error) {
+                            let errorMessage = 'Terjadi kesalahan!';
+                            if (error.responseJSON && error.responseJSON.errors) {
+                                errorMessage = Object.values(error.responseJSON.errors).map(err =>
+                                    err.join('<br>')).join('<br>');
+                            } else if (error.responseJSON && error.responseJSON.message) {
+                                errorMessage = error.responseJSON.message;
+                            }
+
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Terjadi kesalahan!',
-                                text: 'Gagal menyimpan data menu.',
+                                html: errorMessage,
                             });
                         }
                     });
