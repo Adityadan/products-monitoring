@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrderExport;
 use App\Models\Dealer;
 use App\Models\DetailProduct;
 use App\Models\Expeditions;
@@ -10,6 +11,7 @@ use App\Models\OrderDetail;
 use App\Models\ProductImage;
 use App\Models\ShippingOrder;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
@@ -42,13 +44,40 @@ class OrderController extends Controller
         }
     }
 
-    // public function showDetail (Request $request) {
-    //     $id = $request->id;
-    //     $order = Order::find($id);
-    //     return response()->json([
-    //         'order' => $order
-    //     ]);
-    // }
+    public function exportExcel(Request $request)
+    {
+        try {
+            $data = Order::query();
+
+            if (!auth()->user()->hasRole('main_dealer')) {
+                $data->where('buyer_dealer', auth()->user()->kode_dealer);
+            }
+
+            $data = $data->get();
+
+            $exportData = $data->map(function ($order, $index) {
+                return [
+                    'No' => $index + 1,
+                    'Buyer Dealer' => $order->buyer_dealer,
+                    'Buyer Name' => $order->buyer_name,
+                    'Phone' => $order->phone,
+                    'Shipping Address' => $order->shipping_address,
+                    'Order Date' => $order->created_at->format('Y-m-d H:i:s'),
+                ];
+            });
+
+            $filename = 'orders_' . now()->format('Ymd_His') . '.xlsx';
+
+            return Excel::download(new OrderExport($exportData), $filename);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Export failed: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

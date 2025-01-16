@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ShippingOrderExport;
 use App\Models\Expeditions;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\ShippingOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class RequestOrderController extends Controller
@@ -65,7 +67,44 @@ class RequestOrderController extends Controller
         }
     }
 
+    public function exportExcel(Request $request)
+    {
+        $user = auth()->user();
+        $kode_dealer = $user->kode_dealer;
+        try {
+            $data = ShippingOrder::select([
+                'shipping_order.kode_dealer',
+                'shipping_order.id_order',
+                'shipping_order.id as id_shipping_order',
+                'shipping_order.no_resi',
+                'shipping_order.created_at',
+                'e.name as expedition', // Alias for clarity
+            ])
+                ->leftJoin('expeditions as e', 'shipping_order.id_expedition', '=', 'e.id');
+                if (!$user->hasRole('main_dealer')) {
+                    $data->where('shipping_order.kode_dealer', $kode_dealer);
+                }
 
+            $data = $data->get();
+            $exportData = $data->map(function ($order, $index) {
+                return [
+                    'No' => $index + 1,
+                    'Kode Dealer' => $order->kode_dealer,
+                    'Receipt Number' => $order->no_resi,
+                    'Expedition' => $order->expedition,
+                    'Order Date' => $order->created_at->format('Y-m-d H:i:s'),
+                ];
+            });
+            $filename = 'awating_orders_' . now()->format('Ymd_His') . '.xlsx';
+
+            return Excel::download(new ShippingOrderExport($exportData), $filename);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Export failed: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 
     public function updateExpedition(Request $request)
     {

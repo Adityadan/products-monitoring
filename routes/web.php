@@ -138,6 +138,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/detail', [OrderController::class, 'show'])->name('detail');
         Route::post('/updateExpedition', [OrderController::class, 'updateExpedition'])->name('updateExpedition');
         Route::post('/editExpedition', [OrderController::class, 'editExpedition'])->name('editExpedition');
+        Route::post('/exportToExcel', [OrderController::class, 'exportExcel'])->name('exportExcel');
     });
     Route::prefix('request-order')->name('request-order.')->group(function () {
         Route::get('/', [RequestOrderController::class, 'index'])->name('index');
@@ -146,6 +147,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/editExpedition', [RequestOrderController::class, 'editExpedition'])->name('editExpedition');
         Route::post('/renderListItem', [RequestOrderController::class, 'renderListItem'])->name('renderListItem');
         Route::post('/updateShipping', [RequestOrderController::class, 'updateShipping'])->name('updateShipping');
+        Route::post('/exportToExcel', [RequestOrderController::class, 'exportExcel'])->name('exportExcel');
+
     });
     Route::prefix('sales')->name('sales.')->group(function () {
         Route::get('/', [SalesController::class, 'index'])->name('index');

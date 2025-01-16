@@ -16,6 +16,13 @@
         </div>
     </div>
     <div class="card">
+        <div class="card-header position-relative d-flex justify-content-end">
+            <div class="col-auto">
+                <a href="javascript:void(0);" class="btn btn-success" id="export-to-excel">
+                    <i class="fas fa-file-excel"></i> Export to Excel
+                </a>
+            </div>
+        </div>
         <div class="card-body">
             <div class="table-responsive scrollbar">
                 <table class="table table-hover table-striped overflow-hidden" id="ordersTable">
@@ -42,8 +49,6 @@
     @include('request-order.modals')
 
     @push('scripts')
-
-
         <script>
             $(document).ready(function() {
                 $('#ordersTable').DataTable({
@@ -80,6 +85,68 @@
                             searchable: false
                         },
                     ],
+                });
+            });
+
+
+
+            $('#export-to-excel').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Exporting...',
+                    text: 'Please wait while the data is being exported.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('request-order.exportExcel') }}", // Pastikan route ini mengarah ke method controller yang mengembalikan file Excel
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    xhrFields: {
+                        responseType: 'blob' // Tangkap response sebagai binary data
+                    },
+                    success: function(blob, status, xhr) {
+                        Swal.close();
+
+                        // Buat link unduhan untuk file
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+
+                        // Ambil filename dari header "Content-Disposition" jika ada
+                        const disposition = xhr.getResponseHeader('Content-Disposition');
+                        const filename = disposition && disposition.match(
+                            /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/)[1] || 'export.xlsx';
+
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+
+                        // Revoke URL untuk membersihkan resource
+                        window.URL.revokeObjectURL(url);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data exported successfully!',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+                    },
+                    error: function(jqXHR) {
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: jqXHR.responseJSON ? jqXHR.responseJSON.message : 'Server Error'
+                        });
+                    }
                 });
             });
 
@@ -136,7 +203,8 @@
                             let selectedExpedition = response.selectedExpedition ?? '';
 
                             response.expedition.forEach(element => {
-                                expeditionSelect += `<option value="${element.id}" ${element.id === selectedExpedition.id ? 'selected' : ''}>${element.name}</option>`;
+                                expeditionSelect +=
+                                    `<option value="${element.id}" ${element.id === selectedExpedition.id ? 'selected' : ''}>${element.name}</option>`;
                             });
 
                             $('#ekspedisi').html(expeditionSelect);
@@ -208,7 +276,7 @@
                         id: id
                     },
                     dataType: "json",
-                    success: function (response) {
+                    success: function(response) {
                         let detail_order = response.detail_order[0];
                         console.log(detail_order);
 
