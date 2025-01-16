@@ -29,7 +29,7 @@ class OrderController extends Controller
         // Check if the request is an AJAX request
         if ($request->ajax()) {
             $query = Order::leftJoin('dealers as d', 'orders.buyer_dealer', '=', 'd.kode');
-            if (!auth()->user()->hasRole('main_dealer')) {
+            if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
                 $query->where('buyer_dealer', auth()->user()->kode_dealer);
             }
             $data = $query->get();
@@ -49,7 +49,7 @@ class OrderController extends Controller
         try {
             $data = Order::query();
 
-            if (!auth()->user()->hasRole('main_dealer')) {
+            if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
                 $data->where('buyer_dealer', auth()->user()->kode_dealer);
             }
 

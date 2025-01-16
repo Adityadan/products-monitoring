@@ -16,7 +16,12 @@ class RodController extends Controller
 
     public function __construct()
     {
-        $this->kode_customer = Dealer::where('kode', auth()->user()->kode_dealer)->first()->kode_customer;
+        $user = auth()->user();
+        if ($user && $user->kode_dealer) {
+            $this->kode_customer = Dealer::where('kode', $user->kode_dealer)->first()->kode_customer;
+        } else {
+            $this->kode_customer = null;
+        }
     }
     public function index()
     {

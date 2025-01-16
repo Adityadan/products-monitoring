@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             SalesSeeder::class,
             TargetSeeder::class,
             RODSeeder::class,
-            SummaryRodSeeder::class
+            SummaryRodSeeder::class,
         ]);
 
     }

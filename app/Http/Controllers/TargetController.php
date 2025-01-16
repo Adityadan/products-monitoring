@@ -14,7 +14,12 @@ class TargetController extends Controller
 
     public function __construct()
     {
-        $this->kode_customer = Dealer::where('kode', auth()->user()->kode_dealer)->first()->kode_customer;
+        $user = auth()->user();
+        if ($user && $user->kode_dealer) {
+            $this->kode_customer = Dealer::where('kode', $user->kode_dealer)->first()->kode_customer;
+        } else {
+            $this->kode_customer = null;
+        }
     }
 
     public function index()
@@ -25,7 +30,7 @@ class TargetController extends Controller
     public function datatable()
     {
         $query = Target::query();
-        if (!auth()->user()->hasRole('main_dealer')) {
+        if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
             $query->where('kode_customer', $this->kode_customer);
         }
         $data = $query->get();

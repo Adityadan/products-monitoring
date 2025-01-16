@@ -15,7 +15,12 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->kode_customer = Dealer::where('kode', auth()->user()->kode_dealer)->first()->kode_customer;
+        $user = auth()->user();
+        if ($user && $user->kode_dealer) {
+            $this->kode_customer = Dealer::where('kode', $user->kode_dealer)->first()->kode_customer;
+        } else {
+            $this->kode_customer = null;
+        }
     }
     public function index()
     {
@@ -36,7 +41,7 @@ class DashboardController extends Controller
             );
 
         // Filter berdasarkan nama dealer jika bukan main_dealer
-        if (!auth()->user()->hasRole('main_dealer')) {
+        if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
             $query->where('summary_rod.kode_customer', $this->kode_customer);
         }
 
@@ -71,7 +76,7 @@ class DashboardController extends Controller
             );
 
         // Filter berdasarkan nama dealer jika bukan main_dealer
-        if (!auth()->user()->hasRole('main_dealer')) {
+        if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
             $query->where('summary_rod.kode_customer', $this->kode_customer);
         }
 
@@ -112,7 +117,7 @@ class DashboardController extends Controller
             ->groupBy('periode')
             ->orderBy('periode');
 
-        if (!auth()->user()->hasRole('main_dealer')) {
+        if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
             $query->where('kode_dealer', auth()->user()->kode_dealer);
         }
 

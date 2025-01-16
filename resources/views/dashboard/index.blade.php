@@ -10,7 +10,15 @@
                                 <div class="position-relative z-2">
                                     <div>
                                         <h3 class="text-primary mb-1">Good
-                                            {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : (date('H') < 21 ? 'Evening' : 'Night')) }}, <b>{{ App\Models\Dealer::select('ahass')->where('kode', auth()->user()->kode_dealer)->first()->ahass  }}</b>!</h3>
+                                                {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : (date('H') < 21 ? 'Evening' : 'Night')) }},
+                                                <b>
+                                                    @if(auth()->user()->hasRole('superadmin'))
+                                                        Admin
+                                                    @else
+                                                        {{ App\Models\Dealer::select('ahass')->where('kode', auth()->user()->kode_dealer)->first()->ahass }}
+                                                    @endif
+                                                </b>!
+                                            </h3>
                                     </div>
                                 </div>
                             </div>

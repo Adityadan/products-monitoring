@@ -55,7 +55,7 @@ class SalesController extends Controller
                 ->whereNull('p.deleted_at')
                 ->where(DB::raw("TO_CHAR(s.periode, 'YYYY-MM')"), '>=', DB::raw("TO_CHAR((CURRENT_DATE - INTERVAL '5 MONTH'), 'YYYY-MM')"))
                 ->where(DB::raw("TO_CHAR(s.periode, 'YYYY-MM')"), '<=', DB::raw("TO_CHAR(CURRENT_DATE, 'YYYY-MM')"));
-                if (!auth()->user()->hasRole('main_dealer')) {
+                if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
                     $query->where('s.kode_dealer', $kode_dealer);
                 }
                 $query->groupBy('p.no_part', 'p.nama_part', 'd.ahass')

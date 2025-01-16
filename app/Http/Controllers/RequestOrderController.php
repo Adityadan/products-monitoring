@@ -179,7 +179,7 @@ class RequestOrderController extends Controller
             ])
             ->where('od.id_order', $request->id);
 
-        if (!auth()->user()->hasRole('main_dealer')) {
+        if (!auth()->user()->hasRole('main_dealer') && !auth()->user()->hasRole('superadmin')) {
             $query->where('od.kode_dealer', auth()->user()->kode_dealer);
         }
 

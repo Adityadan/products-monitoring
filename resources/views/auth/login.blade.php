@@ -62,7 +62,6 @@
             $(document).ready(function() {
                 $('#loginBtn').click(function(e) {
                     e.preventDefault(); // Mencegah form untuk dikirim
-                    console.log('Login button clicked');
 
                     // Ambil data dari form
                     let formData = {
