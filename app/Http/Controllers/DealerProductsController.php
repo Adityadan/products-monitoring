@@ -198,7 +198,7 @@ class DealerProductsController extends Controller
         ]);
 
         try {
-            $periode = $request->periode;
+            $periode = \Carbon\Carbon::createFromFormat('d-m-Y', $request->periode)->format('Y-m-d');
             $fileName = $request->fileName;
             $user = auth()->user();
             $dealerCode = $user['kode_dealer'];
