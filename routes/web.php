@@ -120,6 +120,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('history-import')->name('history-import.')->group(function () {
         Route::get('/', [HistoryImportController::class, 'index'])->name('index');
         Route::get('/datatable', [HistoryImportController::class, 'datatable'])->name('datatable');
+        Route::post('/export' , [HistoryImportController::class, 'exportExcel'])->name('exportExcel');
     });
 
 
