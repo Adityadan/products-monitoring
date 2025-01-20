@@ -35,7 +35,7 @@
                     <thead>
                         <tr>
                             <th rowspan="2">No.</th>
-                            <th rowspan="2">Item</th>
+                            <th rowspan="2">AHASS</th>
                             <th rowspan="2">Item Name</th>
                             <th colspan="7" class="text-center">Sales</th>
                             <th rowspan="2">Stock</th>
