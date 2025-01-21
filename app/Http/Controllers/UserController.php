@@ -20,8 +20,11 @@ class UserController extends Controller
 
     public function datatable(Request $request)
     {
-        $users = User::select(['id', 'name', 'email', 'username', 'created_at', 'updated_at','kode_dealer']);
-
+        $query = User::select(['id', 'name', 'email', 'username', 'created_at', 'updated_at', 'kode_dealer']);
+        if (!auth()->user()->hasRole('superadmin')) {
+            $query->where('id', '!=', 1);
+        }
+        $users = $query->get();
         return DataTables::of($users)
             ->addIndexColumn()
             ->editColumn('created_at', function ($user) {

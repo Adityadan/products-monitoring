@@ -17,17 +17,16 @@ class RoleMiddleware
     public function handle($request, Closure $next, $roles)
     {
         // Pastikan user sudah login
-        if (!auth()->check()) {
-            // return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
-            abort(403, 'Unauthorized access');
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
 
-        $user = auth()->user();
-
+        $user = Auth::user();
+        // Jika role yang diberikan berupa string dan mengandung koma, pecah menjadi array
+        $rolesArray = explode('|', $roles);
         // Cek apakah user memiliki salah satu role yang diizinkan
-        if (!$user->hasAnyRole($roles)) {
-            // return response()->json(['message' => 'Forbidden'], Response::HTTP_FORBIDDEN);
-            abort(403, 'Forbidden access');
+        if (!$user->hasAnyRole($rolesArray)) {
+            return redirect()->route('404');
         }
 
         return $next($request);

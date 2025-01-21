@@ -123,10 +123,22 @@ Route::middleware('auth')->group(function () {
         Route::post('/export' , [HistoryImportController::class, 'exportExcel'])->name('exportExcel');
     });
 
+    Route::group(['middleware' => ['role:superadmin|main_dealer']], function() {
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('/datatable', [UserController::class, 'datatable'])->name('datatable');
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
+
+            Route::post('/assign-role', [UserController::class, 'assignRole'])->name('assign-role');
+            Route::get('/assign-role/edit/{user}', [UserController::class, 'editAssignedRoles'])->name('assign-role.edit');
+        });
+    });
 
     Route::middleware('role:superadmin')->group(function () {
-        Route::resource('menus', MenusController::class);
-
         Route::prefix('roles')->name('roles.')->group(function () {
             Route::get('/', [RolesController::class, 'index'])->name('index');
             Route::get('/datatable', [RolesController::class, 'datatable'])->name('datatable');
@@ -149,23 +161,25 @@ Route::middleware('auth')->group(function () {
             Route::put('/update/{id}', [PermissionController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [PermissionController::class, 'destroy'])->name('destroy');
         });
-        Route::prefix('users')->name('users.')->group(function () {
-            Route::get('/', [UserController::class, 'index'])->name('index');
-            Route::get('/datatable', [UserController::class, 'datatable'])->name('datatable');
-            Route::get('/create', [UserController::class, 'create'])->name('create');
-            Route::post('/store', [UserController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-            Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
-            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
 
-            Route::post('/assign-role', [UserController::class, 'assignRole'])->name('assign-role');
-            Route::get('/assign-role/edit/{user}', [UserController::class, 'editAssignedRoles'])->name('assign-role.edit');
-        });
+
         Route::prefix('menus')->name('menus.')->group(function () {
             Route::get('/datatable', [MenusController::class, 'datatable'])->name('datatable');
             Route::get('/parent-menu', [MenusController::class, 'parentMenu'])->name('parent-menu');
+            Route::get('/', [MenusController::class, 'index'])->name('index');
+            Route::get('/create', [MenusController::class, 'create'])->name('create');
+            Route::post('/store', [MenusController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [MenusController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [MenusController::class, 'update'])->name('update');
+            Route::delete('/delete/{id}', [MenusController::class, 'destroy'])->name('destroy');
         });
+
     });
 });
+
+Route::get('/404', function () {
+    return view('404');
+})->name('404');
+
 
 require __DIR__ . '/auth.php';
