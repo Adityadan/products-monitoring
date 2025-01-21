@@ -26,7 +26,8 @@ class RoleMiddleware
         $rolesArray = explode('|', $roles);
         // Cek apakah user memiliki salah satu role yang diizinkan
         if (!$user->hasAnyRole($rolesArray)) {
-            return redirect()->route('404');
+            // return redirect()->route('404');
+            abort(403);
         }
 
         return $next($request);
