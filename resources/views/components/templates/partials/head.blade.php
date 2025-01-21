@@ -22,18 +22,18 @@
     </script> --}}
 
     <!-- Favicons -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/img/favicons/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/img/logo-astra.png') }}">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('dist/assets/img/icons/logo-sby.svg') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('dist/assets/img/favicons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('dist/assets/img/logo-astra.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('dist/assets/img/logo-astra.png') }}">
     <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('dist/assets/img/favicons/favicon-32x32.png') }}">
+        href="{{ asset('dist/assets/img/logo-astra.png') }}">
     <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('dist/assets/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/img/favicons/favicon.ico') }}">
+        href="{{ asset('dist/assets/img/logo-astra.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/img/logo-astra.png') }}">
     {{-- <link rel="manifest" href="{{ asset('dist/assets/img/favicons/manifest.json') }}"> --}}
-    <meta name="msapplication-TileImage" content="{{ asset('dist/assets/img/icons/logo-sby.svg') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('dist/assets/img/logo-astra.png') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('dist/assets/js/config.js') }}"></script>
     <script src="{{ asset('dist/vendors/overlayscrollbars/OverlayScrollbars.min.js') }}"></script>
