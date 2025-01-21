@@ -18,11 +18,10 @@
                 }
             </script>
             <div class="row flex-center min-vh-100 py-6">
-                <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4"><a class="d-flex flex-center mb-4"
-                        href="{{ url('/') }}">{{-- <img class="me-2"
-                            src="../../../assets/img/icons/spot-illustrations/falcon.png" alt=""
-                            width="58" /> --}}<span
-                            class="font-sans-serif text-primary fw-bolder fs-4 d-inline-block">{{ env('APP_NAME') }}</span></a>
+                <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                    <div class="d-flex flex-center mb-4">
+                        <img class="" src="{{ asset('dist/assets/img/logo-astra.png') }}" alt="" width="70%" />
+                    </div>
                     <div class="card">
                         <div class="card-body p-4 p-sm-5">
                             <div class="row flex-center mb-3">
@@ -34,8 +33,8 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="username">Username</label>
-                                    <input class="form-control" type="username" name="username"
-                                        placeholder="username" required />
+                                    <input class="form-control" type="username" name="username" placeholder="username"
+                                        required />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="password">Password</label>
@@ -74,7 +73,7 @@
                     var $loginBtn = $(this);
                     $loginBtn.html(
                         '<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div> Logging in...'
-                        );
+                    );
                     $loginBtn.prop("disabled", true); // Menonaktifkan tombol selama proses login
 
                     // Kirim data dengan AJAX
@@ -93,7 +92,7 @@
                             }).then(() => {
                                 // Redirect setelah notifikasi
                                 window.location.href =
-                                '{{ route('dashboard.index') }}'; // Ganti dengan halaman tujuan setelah login
+                                    '{{ route('dashboard.index') }}'; // Ganti dengan halaman tujuan setelah login
                             });
                         },
                         error: function(xhr) {
